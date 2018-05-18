@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Arch Linux 内核更新 修复无线模块rtl8821ce编译失败的问题]]></title>
+    <url>%2Fkernel-upgrade-fix-rtl8821ce%2F</url>
+    <content type="text"><![CDATA[最近更新系统，内核从4.15 更新到了 4.16.9发现原来的无线模块编译不通过，找不到头文件stdarg.h查看无线驱动信息通过ip l可以看到只有有线网卡123451: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:002: enp3s0: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc fq_codel state DOWN mode DEFAULT group default qlen 1000 link/ether 8c:16:45:3f:68:0d brd ff:ff:ff:ff:ff:ff查看无线网卡驱动，找到相应的驱动去下载就好了123lspci | grep -i &apos;newwork&apos;Network controller: Realtek Semiconductor Co., Ltd. RTL8821CE 802.11ac PCIe Wireless Network Adapter下载无线驱动源码1git clone https://github.com/endlessm/linux由于这个项目特别的大，这里只需要下载drivers/net/wireless/rtl8821ce编译修改Makefile这里需要修改Makefile中TopDIR变量的值为当前路径，否则会提示错误退出12cd drivers/net/wireless/rtl8821cesed -i &apos;s/export TopDIR ?=/export TopDIR ?= $(shell pwd)/g&apos; Makefile执行make在最新的内核版本（4.16.9-1-ARCH）下编译失败，提示如下：12345678910111213graz@graz ~/Source/driver_net_wireless/rtl8821ce % make/usr/bin/make ARCH=x86_64 CROSS_COMPILE= -C /lib/modules/4.16.9-1-ARCH/build M=/home/graz/Source/driver_net_wireless/rtl8821ce modulesmake[1]: Entering directory &apos;/usr/lib/modules/4.16.9-1-ARCH/build&apos; CC [M] /home/graz/Source/driver_net_wireless/rtl8821ce/core/rtw_cmd.oIn file included from ./include/linux/list.h:9, from ./include/linux/module.h:9, from /home/graz/Source/driver_net_wireless/rtl8821ce/include/basic_types.h:81, from /home/graz/Source/driver_net_wireless/rtl8821ce/include/drv_types.h:31, from /home/graz/Source/driver_net_wireless/rtl8821ce/core/rtw_cmd.c:22:./include/linux/kernel.h:6:10: fatal error: stdarg.h: No such file or directory #include &lt;stdarg.h&gt; ^~~~~~~~~~compilation terminated.通过locate stdarg.h找到头文件 “/usr/lib/gcc/x86_64-pc-linux-gnu/8.1.0/include/stdarg.h”1ln -s /usr/lib/gcc/x86_64-pc-linux-gnu/8.1.0/include/stdarg.h include/软链接创建好后，就可以执行make编译成功安装12sudo make installmodprobe 8821ce最后，没有报错的话，通过ip l 就可以找到这个无线网卡了1234561: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:002: enp3s0: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc fq_codel state DOWN mode DEFAULT group default qlen 1000 link/ether 8c:16:45:3f:68:0d brd ff:ff:ff:ff:ff:ff3: wlp5s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP mode DORMANT group default qlen 1000 link/ether 70:c9:4e:d8:6d:01 brd ff:ff:ff:ff:ff:ff]]></content>
+      <tags>
+        <tag>linux</tag>
+        <tag>rtl8821ce</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[博客系统从ghost 迁移hexo 安装与配置]]></title>
     <url>%2Fhexo-install%2F</url>
     <content type="text"><![CDATA[备份Ghost后台export，导出后是一个JSON，包含所有文章以及一些元数据：修改日期、Tags 等等图片等资源，可以到 assets 文件夹下，打包下载12cd /data/www/ghosttar -zcvf images.tag assets/content安装hexo安装依赖1pacman -S npm安装123456npm install hexo-cli -gcd /data/www/hexo init hcaijin.comcd hcaijin.comhexo installhexo server迁移导入Ghost数据12345## 安装数据转换插件npm install hexo-migrator-ghost --save## 导入数据hexo migrate ghost ghost-export.json导入图片123cp images.tag /data/www/hcaijin.com/source/cd /data/www/hcaijin.com/source/tar -zxvf images.tag最后，做一些必要的配置基本配置Hexo 配置NexT 配置NexT 高级配置安装其他插件12345npm install hexo-generator-searchdb --save npm install hexo-generator-sitemap --save npm install hexo-generator-feed --save npm install hexo-pwa --save npm install hexo-all-minifier --save]]></content>
@@ -179,8 +188,8 @@
     <url>%2Farch-linuxjiang-ji-an-zhuang-ruan-jian-bao-yu-jin-zhi-sheng-ji-bu-xiang-sheng-ji-de-bao-de-fang-fa%2F</url>
     <content type="text"><![CDATA[由于 Arch Linux 采用滚动更新，最近php7.0也开始更新升级了，但是这会导致目前项目还是采用的mysql模块的程序来说真真是不适合升级的。所以，这里在网上查了一下降级安装的方法分享这里。通过备份软件包降级安装找到相应的php备份包，如果你最近没有执行 pacman -Scc以清空包缓存的话，应该在那儿)1ls -l /var/cache/pacman/pkg | grep php如果在，你可以执行pacman -U ×××.pkg.tar.gz来安装旧版本。如果pacman提示文件冲突的话，你可以通过加上-f参数以强制执行，即1pacman -U --force ×××.pkg.tar.gz这个过程会移除现有的包，仔细的计算所有依赖的改变，然后安装你选择的旧版本的软件包以及合适的依赖。通过downgrade程序来自动化降级安装软件包在 AUR 中有一个包叫做downgradeAUR。它是一个简单的 Bash 脚本，它会从你的缓存中寻找旧版本的包，如果没有的话它会搜索 A.R.M.。你可以选择一个旧包来安装。它基本上自动化了上面所述的过程。查看 downgrade –help 获取使用方法的信息。123sudo yaourt -S downgradedowngrade -s php ##搜索相关包版本downgrade php ##降级安装包如何恢复所有包到指定日期如果想恢复所有包到指定日期（比如2014年3月30日），你必须如下例所示编辑 /etc/pacman.conf，从而让 pacman 保持在这个时间点并且直接使用指定的服务器：1234567891011[core]SigLevel = PackageRequiredServer=http://ala.seblu.net/repos/2014/03/30/$repo/os/$arch[extra]SigLevel = PackageRequiredServer=http://ala.seblu.net/repos/2014/03/30/$repo/os/$arch[community]SigLevel = PackageRequiredServer=http://ala.seblu.net/repos/2014/03/30/$repo/os/$arch或者如下例编辑 /etc/pacman.d/mirrorlist：12345## ## Arch Linux repository mirrorlist ## Generated on 2042-01-01 ##Server=http://ala.seblu.net/repos/2014/03/30/$repo/os/$arch然后同步包数据库以强制降级：1# pacman -Syyuu禁止指定包自动升级的方法==注意: 如果你改变了操作系统的一个基本的组件包，你也许需要降级许多包。这些软件包可能在过程中被删除，需要手动一点一点的安装回来；同时，后续升级时要小心，不要重新安装不想要的软件包版本。==1sudo vim /etc/rc.conf添加行IgnorePkg = php php-cgi php-gd这样子,我们就可以禁止上面的三个包自动升级了.如果有其它的包想禁止,直接添加就可以了,记住分隔符要用空格哦.参考文档1)参考文档2)引用]]></content>
       <tags>
-        <tag>archlinux</tag>
         <tag>linux</tag>
+        <tag>archlinux</tag>
         <tag>pacman</tag>
       </tags>
   </entry>
@@ -346,8 +355,8 @@
     <url>%2Fbao-chi-wen-jian-yuan-lai-pai-xu-qu-chu-zhong-fu-xing%2F</url>
     <content type="text"><![CDATA[通常如果我们想获取一个文件里不重复的行的时候，我们可以直接通过 sort -u 命令，先把文件排序，然后去掉连续的重复行就行。可是，如果我们去掉重复行之后，还想保留文件原有的顺序，该怎么办呢？虽然 Linux 下有个看上去似乎很有用的命令叫 uniq，但事实上 uniq 命令仅仅只对连续的重复行有效。譬如我们有这样一个文件：123456789$ cat file3AAAAFFFFBBBBBBBBCCCCAAAAFFFFDDDD如果不排序，直接使用 uniq 命令是没有用的：12345678$ uniq file3AAAAFFFFBBBBCCCCAAAAFFFFDDDD使用 sort -u 的话，我们就丢失了文件原有的行的顺序了：123456$ sort -u file3AAAABBBBCCCCDDDDFFFFsort 和 uniq 一起用，和 sort -u 效果是一样的：123456$ sort file3 | uniqAAAABBBBCCCCDDDDFFFF一个终极的解决方案是使用 awk：123456$ awk &apos; !x[$0]++&apos; file3AAAAFFFFBBBBCCCCDDDD简要解释一下，awk 的基本执行流程是，对文件的每一行，做一个指定的逻辑判断，如果逻辑判断成立，则执行指定的命令；如果逻辑判断不成立，则直接跳过这一行。我们这里写的 awk 命令是 !x[$0]++，意思是，首先创建一个 map 叫 x，然后用当前行的全文 $0 作为 map 的 key，到 map 中查找相应的 value，如果没找到，则整个表达式的值为真，可以执行之后的语句；如果找到了，则表达式的值为假，跳过这一行。由于表达式之后有 ++，因此如果某个 key 找不到对应的 value，该 ++ 操作会先把对应的 value 设成 0，然后再自增成 1，这样下次再遇到重复的行的时候，对应的 key 就能找到一个非 0 的 value 了。我们前面说过，awk 的流程是先判断表达式，表达式为真的时候就执行语句，可是我们前面写的这个 awk 命令里只有表达式，没有语句，那我们执行什么呢？原来，当语句被省略的时候，awk 就执行默认的语句，即打印整个完整的当前行。就这样，我们通过这个非常简短的 awk 命令实现了去除重复行并保留原有文件顺序的功能。引用本文部分翻译来自 Jadu Saikia 的博客，这个博客上有很多非常有用的小技巧，有空可以多看看。]]></content>
       <tags>
-        <tag>sed</tag>
         <tag>linux</tag>
+        <tag>sed</tag>
         <tag>bash</tag>
         <tag>awk</tag>
         <tag>sort</tag>
@@ -359,8 +368,8 @@
     <url>%2Fan-zhuang-pei-zhi-arch-linux-xiang-guan%2F</url>
     <content type="text"><![CDATA[安装 linux-lts 软件包小贴士: 强烈推荐安装linux-lts作为备用内核，因为默认安装的linux内核比较新，容易与其它软件发生冲突linux-lts 是 Arch 官方提供的基于 Linux kernel 3.0 的长期支持内核。内核上游开发者针对此版本提供了长期支持，包括安全补丁和功能 backports。适用于需要长期支持的服务器环境用户，也可以将此内核作为新内核升级的后备内核。$ sudo pacman -S linux-lts配置启动需要编辑 GRUB2 或 LILO 的启动加载项。以 GRUB2 为例：为了编辑/更新启动加载项，需要安装os-prober.安装后,再执行$ sudo grub-mkconfig -o /boot/grub/grub.cfg]]></content>
       <tags>
-        <tag>archlinux</tag>
         <tag>linux</tag>
+        <tag>archlinux</tag>
         <tag>grub</tag>
       </tags>
   </entry>
@@ -387,8 +396,8 @@
     <url>%2Fan-zhuang-ghostxiang-guan-zong-jie%2F</url>
     <content type="text"><![CDATA[下载安装安装node.js 下载最新node.js 编译安装需要一段时间。$ wget http://nodejs.org/dist/node-latest.tar.gz $ tar -xzf node-latest.tar.gz $ cd node-v $ ./configure $ make $ sudo make install 安装Ghost安装扩展$ yum install gcc-c++ghost下载，安装$ sudo mkdir -p /data/www/ $ cd /data/www/ $ wget https://ghost.org/zip/ghost-latest.zip $ unzip -d ghost ghost-latest.zip $ cd /var/www/ghost $ sudo npm install --production 安装完成后用 npm start 命令启动开发者模式下的 Ghost，用于检查有没有安装成功。 成功了，Ghost会运行在本地局域网内 127.0.0.1:2368。如果是在电脑上安装的，用浏览器访问此地址即可预览 Ghost。安装pm2安装强大的进程守护程序“PM2”保证应用在开机以后自动启动进入到/data/www/ghost，执行命令安装PM2：$ sudo npm install pm2 -g设置环境变量为“production”生产模式，“index.js”是程序启动的入口。最后给这个PM2的进程命名为”ghost” 执行下面的命令：$ NODE_ENV=production pm2 start index.js --name &quot;ghost&quot;设置开机自动运行网站：$ pm2 startup centos $ pm2 save可以执行 pm2 help 查看帮助。配置nginx配置 Nginx 的反向代理：新建一个 Nginx 代理配置文件,并将代理指向到本地的Ghost端口:$ sudo vim /etc/nginx/conf.d/ghost.conf` server { listen 80; server_name My-Ghost-Blog.com; location / { proxy_set_header X-Real-IP $remote_addr; proxy_set_header Host $http_host; proxy_pass http://127.0.0.1:2368; } } 重新启动 Nginx 服务器.$ sudo service nginx restart注意事项修改服务器时间，这样新增的文章才能显示正常的本地时间 。$ sudo yun install -y ntp $ sudo cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime]]></content>
       <tags>
-        <tag>ghost</tag>
         <tag>linux</tag>
+        <tag>ghost</tag>
         <tag>nodejs</tag>
       </tags>
   </entry>

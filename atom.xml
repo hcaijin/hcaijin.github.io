@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hcaijin.com/"/>
-  <updated>2018-05-06T16:13:00.132Z</updated>
+  <updated>2018-05-18T19:49:43.774Z</updated>
   <id>http://hcaijin.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Arch Linux 内核更新 修复无线模块rtl8821ce编译失败的问题</title>
+    <link href="http://hcaijin.com/kernel-upgrade-fix-rtl8821ce/"/>
+    <id>http://hcaijin.com/kernel-upgrade-fix-rtl8821ce/</id>
+    <published>2018-05-18T17:36:07.000Z</published>
+    <updated>2018-05-18T19:49:43.774Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>最近更新系统，内核从4.15 更新到了 4.16.9发现原来的无线模块编译不通过，找不到头文件stdarg.h</p></blockquote><h1 id="查看无线驱动信息"><a href="#查看无线驱动信息" class="headerlink" title="查看无线驱动信息"></a>查看无线驱动信息</h1><p>通过<code>ip l</code>可以看到只有有线网卡<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">2: enp3s0: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc fq_codel state DOWN mode DEFAULT group default qlen 1000</span><br><span class="line">    link/ether 8c:16:45:3f:68:0d brd ff:ff:ff:ff:ff:ff</span><br></pre></td></tr></table></figure><p></p><p>查看无线网卡驱动，找到相应的驱动去下载就好了<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lspci | grep -i &apos;newwork&apos;</span><br><span class="line"></span><br><span class="line">Network controller: Realtek Semiconductor Co., Ltd. RTL8821CE 802.11ac PCIe Wireless Network Adapter</span><br></pre></td></tr></table></figure><p></p><h1 id="下载无线驱动源码"><a href="#下载无线驱动源码" class="headerlink" title="下载无线驱动源码"></a>下载无线驱动源码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/endlessm/linux</span><br></pre></td></tr></table></figure><p>由于这个项目特别的大，这里只需要下载drivers/net/wireless/rtl8821ce</p><h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><h2 id="修改Makefile"><a href="#修改Makefile" class="headerlink" title="修改Makefile"></a>修改Makefile</h2><p>这里需要修改Makefile中TopDIR变量的值为当前路径，否则会提示错误退出<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd drivers/net/wireless/rtl8821ce</span><br><span class="line">sed -i &apos;s/export TopDIR ?=/export TopDIR ?= $(shell pwd)/g&apos; Makefile</span><br></pre></td></tr></table></figure><p></p><h2 id="执行make"><a href="#执行make" class="headerlink" title="执行make"></a>执行<code>make</code></h2><p>在最新的内核版本（4.16.9-1-ARCH）下编译失败，提示如下：<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">graz@graz ~/Source/driver_net_wireless/rtl8821ce % make</span><br><span class="line">/usr/bin/make ARCH=x86_64 CROSS_COMPILE= -C /lib/modules/4.16.9-1-ARCH/build M=/home/graz/Source/driver_net_wireless/rtl8821ce  modules</span><br><span class="line">make[1]: Entering directory &apos;/usr/lib/modules/4.16.9-1-ARCH/build&apos;</span><br><span class="line">  CC [M]  /home/graz/Source/driver_net_wireless/rtl8821ce/core/rtw_cmd.o</span><br><span class="line">In file included from ./include/linux/list.h:9,</span><br><span class="line">                 from ./include/linux/module.h:9,</span><br><span class="line">                 from /home/graz/Source/driver_net_wireless/rtl8821ce/include/basic_types.h:81,</span><br><span class="line">                 from /home/graz/Source/driver_net_wireless/rtl8821ce/include/drv_types.h:31,</span><br><span class="line">                 from /home/graz/Source/driver_net_wireless/rtl8821ce/core/rtw_cmd.c:22:</span><br><span class="line">./include/linux/kernel.h:6:10: fatal error: stdarg.h: No such file or directory</span><br><span class="line"> #include &lt;stdarg.h&gt;</span><br><span class="line">          ^~~~~~~~~~</span><br><span class="line">compilation terminated.</span><br></pre></td></tr></table></figure><p></p><p>通过<code>locate stdarg.h</code>找到头文件 “/usr/lib/gcc/x86_64-pc-linux-gnu/8.1.0/include/stdarg.h”<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/lib/gcc/x86_64-pc-linux-gnu/8.1.0/include/stdarg.h include/</span><br></pre></td></tr></table></figure><p></p><p>软链接创建好后，就可以执行<code>make</code>编译成功</p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo make install</span><br><span class="line">modprobe 8821ce</span><br></pre></td></tr></table></figure><p>最后，没有报错的话，通过<code>ip l</code> 就可以找到这个无线网卡了<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">2: enp3s0: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc fq_codel state DOWN mode DEFAULT group default qlen 1000</span><br><span class="line">    link/ether 8c:16:45:3f:68:0d brd ff:ff:ff:ff:ff:ff</span><br><span class="line">3: wlp5s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP mode DORMANT group default qlen 1000</span><br><span class="line">    link/ether 70:c9:4e:d8:6d:01 brd ff:ff:ff:ff:ff:ff</span><br></pre></td></tr></table></figure><p></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;&lt;p&gt;最近更新系统，内核从4.15 更新到了 4.16.9发现原来的无线模块编译不通过，找不到头文件stdarg.h&lt;/p&gt;&lt;/blockquote&gt;&lt;h1 id=&quot;查看无线驱动信息&quot;&gt;&lt;a href=&quot;#查看无线驱动信息&quot; class=&quot;headerli
+      
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="http://hcaijin.com/tags/linux/"/>
+    
+      <category term="rtl8821ce" scheme="http://hcaijin.com/tags/rtl8821ce/"/>
+    
+  </entry>
   
   <entry>
     <title>博客系统从ghost 迁移hexo 安装与配置</title>
@@ -498,33 +523,6 @@
       <category term="linux" scheme="http://hcaijin.com/tags/linux/"/>
     
       <category term="bash" scheme="http://hcaijin.com/tags/bash/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Arch Linux 降级安装软件包与禁止自动升级指定软件包</title>
-    <link href="http://hcaijin.com/arch-linuxjiang-ji-an-zhuang-ruan-jian-bao-yu-jin-zhi-sheng-ji-bu-xiang-sheng-ji-de-bao-de-fang-fa/"/>
-    <id>http://hcaijin.com/arch-linuxjiang-ji-an-zhuang-ruan-jian-bao-yu-jin-zhi-sheng-ji-bu-xiang-sheng-ji-de-bao-de-fang-fa/</id>
-    <published>2016-01-07T16:21:47.000Z</published>
-    <updated>2016-01-07T18:06:56.000Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>由于 Arch Linux 采用滚动更新，最近php7.0也开始更新升级了，但是这会导致目前项目还是采用的mysql模块的程序来说真真是不适合升级的。所以，这里在网上查了一下降级安装的方法分享这里。</p></blockquote><h3 id="通过备份软件包降级安装"><a href="#通过备份软件包降级安装" class="headerlink" title="通过备份软件包降级安装"></a>通过备份软件包降级安装</h3><p>找到相应的php备份包，如果你最近没有执行 pacman -Scc以清空包缓存的话，应该在那儿)</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /var/cache/pacman/pkg | grep php</span><br></pre></td></tr></table></figure><p>如果在，你可以执行pacman -U ×××.pkg.tar.gz来安装旧版本。如果pacman提示文件冲突的话，你可以通过加上-f参数以强制执行，即<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -U --force ×××.pkg.tar.gz</span><br></pre></td></tr></table></figure><p></p><p>这个过程会移除现有的包，仔细的计算所有依赖的改变，然后安装你选择的旧版本的软件包以及合适的依赖。</p><h3 id="通过downgrade程序来自动化降级安装软件包"><a href="#通过downgrade程序来自动化降级安装软件包" class="headerlink" title="通过downgrade程序来自动化降级安装软件包"></a>通过downgrade程序来自动化降级安装软件包</h3><p><em>在 AUR 中有一个包叫做downgradeAUR。它是一个简单的 Bash 脚本，它会从你的缓存中寻找旧版本的包，如果没有的话它会搜索 A.R.M.。你可以选择一个旧包来安装。它基本上自动化了上面所述的过程。查看 downgrade –help 获取使用方法的信息。</em><br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yaourt -S downgrade</span><br><span class="line">downgrade -s php              ##搜索相关包版本</span><br><span class="line">downgrade php                 ##降级安装包</span><br></pre></td></tr></table></figure><p></p><h3 id="如何恢复所有包到指定日期"><a href="#如何恢复所有包到指定日期" class="headerlink" title="如何恢复所有包到指定日期"></a>如何恢复所有包到指定日期</h3><p>如果想恢复所有包到指定日期（比如2014年3月30日），你必须如下例所示编辑 /etc/pacman.conf，从而让 pacman 保持在这个时间点并且直接使用指定的服务器：<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[core]</span><br><span class="line">SigLevel = PackageRequired</span><br><span class="line">Server=http://ala.seblu.net/repos/2014/03/30/$repo/os/$arch</span><br><span class="line"></span><br><span class="line">[extra]</span><br><span class="line">SigLevel = PackageRequired</span><br><span class="line">Server=http://ala.seblu.net/repos/2014/03/30/$repo/os/$arch</span><br><span class="line"></span><br><span class="line">[community]</span><br><span class="line">SigLevel = PackageRequired</span><br><span class="line">Server=http://ala.seblu.net/repos/2014/03/30/$repo/os/$arch</span><br></pre></td></tr></table></figure><p></p><p>或者如下例编辑 /etc/pacman.d/mirrorlist：<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">##                                                                              </span><br><span class="line">## Arch Linux repository mirrorlist                                             </span><br><span class="line">## Generated on 2042-01-01                                                      </span><br><span class="line">##</span><br><span class="line">Server=http://ala.seblu.net/repos/2014/03/30/$repo/os/$arch</span><br></pre></td></tr></table></figure><p></p><p>然后同步包数据库以强制降级：<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pacman -Syyuu</span><br></pre></td></tr></table></figure><p></p><h3 id="禁止指定包自动升级的方法"><a href="#禁止指定包自动升级的方法" class="headerlink" title="禁止指定包自动升级的方法"></a>禁止指定包自动升级的方法</h3><p>==注意: 如果你改变了操作系统的一个基本的组件包，你也许需要降级许多包。这些软件包可能在过程中被删除，需要手动一点一点的安装回来；同时，后续升级时要小心，不要重新安装不想要的软件包版本。==</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/rc.conf</span><br></pre></td></tr></table></figure><p>添加行</p><p>IgnorePkg = php php-cgi php-gd</p><p>这样子,我们就可以禁止上面的三个包自动升级了.如果有其它的包想禁止,直接添加就可以了,记住分隔符要用空格哦.</p><p><a href="https://wiki.archlinux.org/index.php/Downgrading_packages_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87" target="_blank" rel="noopener">参考文档1</a>)<br><a href="https://wiki.archlinux.org/index.php/Arch_Linux_Archive_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87" target="_blank" rel="noopener">参考文档2</a>)<br><a href="http://www.nenew.net/arch-linux-downgrade-install-packages-prevent-packages-update.html" target="_blank" rel="noopener">引用</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;&lt;p&gt;由于 Arch Linux 采用滚动更新，最近php7.0也开始更新升级了，但是这会导致目前项目还是采用的mysql模块的程序来说真真是不适合升级的。所以，这里在网上查了一下降级安装的方法分享这里。&lt;/p&gt;&lt;/blockquote&gt;&lt;h3 id=&quot;通
-      
-    
-    </summary>
-    
-    
-      <category term="archlinux" scheme="http://hcaijin.com/tags/archlinux/"/>
-    
-      <category term="linux" scheme="http://hcaijin.com/tags/linux/"/>
-    
-      <category term="pacman" scheme="http://hcaijin.com/tags/pacman/"/>
     
   </entry>
   

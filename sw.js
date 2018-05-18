@@ -24,13 +24,13 @@ var precacheUrls = [];
 
   precacheUrls.push('/');
 
-  precacheUrls.push('/linuxxi-tong-gua-zai-ntfsyi-dong-ying-pan/');
-
-  precacheUrls.push('/shu-mei-pai-an-zhuang-gentoo-linux/');
-
-  precacheUrls.push('/arch-linuxjiang-ji-an-zhuang-ruan-jian-bao-yu-jin-zhi-sheng-ji-bu-xiang-sheng-ji-de-bao-de-fang-fa/');
+  precacheUrls.push('/mysql-she-zhi-da-xiao-xie-min-gan/');
 
   precacheUrls.push('/10ge-hen-you-yong-de-git-ming-ling-zhuan/');
+
+  precacheUrls.push('/ssh-fu-wu-duan-pei-zhi/');
+
+  precacheUrls.push('/gentoo-upan-an-zhuang-zhi-nan/');
 
   precacheUrls.push('/an-zhuang-rtl8723bewu-xian-wang-qia-qu-dong/');
 
