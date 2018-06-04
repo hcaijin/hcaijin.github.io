@@ -26,13 +26,13 @@ var precacheUrls = [];
 
   precacheUrls.push('/mysql-she-zhi-da-xiao-xie-min-gan/');
 
+  precacheUrls.push('/shu-mei-pai-an-zhuang-gentoo-linux/');
+
   precacheUrls.push('/10ge-hen-you-yong-de-git-ming-ling-zhuan/');
 
-  precacheUrls.push('/ssh-fu-wu-duan-pei-zhi/');
+  precacheUrls.push('/arch-linuxjiang-ji-an-zhuang-ruan-jian-bao-yu-jin-zhi-sheng-ji-bu-xiang-sheng-ji-de-bao-de-fang-fa/');
 
-  precacheUrls.push('/gentoo-upan-an-zhuang-zhi-nan/');
-
-  precacheUrls.push('/an-zhuang-rtl8723bewu-xian-wang-qia-qu-dong/');
+  precacheUrls.push('/ghostbo-ke-shougong-xiu-gai-mi-ma/');
 
 toolbox.precache(precacheUrls);
 toolbox.options = {"networkTimeoutSeconds":5};
