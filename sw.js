@@ -24,15 +24,15 @@ var precacheUrls = [];
 
   precacheUrls.push('/');
 
-  precacheUrls.push('/mysql-she-zhi-da-xiao-xie-min-gan/');
+  precacheUrls.push('/archlinux-uefi-bootloader/');
 
-  precacheUrls.push('/shu-mei-pai-an-zhuang-gentoo-linux/');
+  precacheUrls.push('/an-zhuang-rtl8723bewu-xian-wang-qia-qu-dong/');
 
-  precacheUrls.push('/10ge-hen-you-yong-de-git-ming-ling-zhuan/');
+  precacheUrls.push('/kernel-upgrade-fix-rtl8821ce/');
 
-  precacheUrls.push('/arch-linuxjiang-ji-an-zhuang-ruan-jian-bao-yu-jin-zhi-sheng-ji-bu-xiang-sheng-ji-de-bao-de-fang-fa/');
+  precacheUrls.push('/hexo-install/');
 
-  precacheUrls.push('/ghostbo-ke-shougong-xiu-gai-mi-ma/');
+  precacheUrls.push('/idea-tomcat-qi-dong-webying-yong-yi-chang-chu-li/');
 
 toolbox.precache(precacheUrls);
 toolbox.options = {"networkTimeoutSeconds":5};

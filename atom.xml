@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hcaijin.com/"/>
-  <updated>2018-06-04T16:45:47.250Z</updated>
+  <updated>2018-06-09T18:51:23.783Z</updated>
   <id>http://hcaijin.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>UEFI+GPT安装Archlinux与Win10双系统教程</title>
+    <link href="http://hcaijin.com/archlinux-uefi-bootloader/"/>
+    <id>http://hcaijin.com/archlinux-uefi-bootloader/</id>
+    <published>2018-06-09T16:42:24.000Z</published>
+    <updated>2018-06-09T18:51:23.783Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote><p>最近新入手一台Thinkpad,使用UEFI+GPT预安装好了Win10操作系统，准备开始安装Archlinux。</p></blockquote><p>如果你准备在一块新硬盘上安装双系统，那么应该先安装windows。<br>如果你安装的是Win10，那么它应该默认就是按UEFI+GPT方式安装的，可以按Win+X键打开磁盘管理，如果是UEFI安装的，那么应该有一个EFI分区，可能是250M。<br>其它还有Windows的恢复分区和基本数据分区。不用管恢复分区，如果现在磁盘上没有剩余空间，可以右键点击基本数据分区，点击压缩卷，给Arch的安装腾出空间。用右键点击磁盘，查看属性，可以知道自己是否采用了GPT分区方式。</p><p>在安装之前，请在电源计划中关掉Windows的快速启动，并在BIOS中关掉Secure Boot，可以很容易搜到对应自己电脑的具体方法。<br>如果上面有哪一条没有满足，请只看一看我遇到的问题，具体安装请再参考其它教程</p><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="安装之前"><a href="#安装之前" class="headerlink" title="安装之前"></a>安装之前</h2><ul><li>准备一个大于4G的U盘</li><li>安装镜像，可以从Arch Linux的<a href="www.archlinux.org">官方网站</a>下载</li></ul><h2 id="制作U盘启动盘"><a href="#制作U盘启动盘" class="headerlink" title="制作U盘启动盘"></a>制作U盘启动盘</h2><p>这里我只介绍linux系统下使用<code>dd</code>的方式，windows下面的方法可以看一下这个<a href="https://github.com/mytbk/Linux_Notes/blob/master/install/install-archlinux.md" target="_blank" rel="noopener">安装教程</a></p><p>插入U盘，查看U盘设备名,不需求挂载<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsblk</span><br><span class="line">sudo dd if=archlinux-2018.06.01-x86_64.iso of=/dev/sdb</span><br></pre></td></tr></table></figure><p></p><p>这样，就制作好了U盘启动了，把U盘插入要安装的机子，配置BIOS通过U盘启动，就可以进入光盘引导的临时系统。</p><h2 id="选择镜像源"><a href="#选择镜像源" class="headerlink" title="选择镜像源"></a>选择镜像源</h2><p>Arch Linux是通过网络进行安装的，为了以更快的速度下载软件包，建议先配置镜像源。配置镜像源的方法是编辑/etc/pacman.d/mirrorlist这个文件，将想用的镜像源的放到第一个非井号开头的行即可。如下可将中科大镜像源作为首选镜像源。<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># /etc/pacman.d/mirrorlist</span><br><span class="line"># This is the USTC mirror</span><br><span class="line">Server = http://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch</span><br><span class="line"></span><br><span class="line"># and other mirrors</span><br><span class="line">## Score: 4.6, China</span><br><span class="line">Server = http://mirrors.163.com/archlinux/$repo/os/$arch</span><br><span class="line">#</span><br></pre></td></tr></table></figure><p></p><p>配置完成后可以执行pacman -Syy试一下，可以看一下pacman从镜像站下载文件的速度。</p><h2 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h2><blockquote><p>我们前面提过已经默认有安装的Win10系统,使用<code>fdisk</code>可以看到已经有一个EFI分区为250M大小。因此不要单独为Linux分出EFI分区，因为要双系统启动的话应该把Win10的EFI分区挂载到/boot上。</p></blockquote><p>以下是我的硬盘分区情况,因为我还有一块硬盘用来挂载/home，所以我只要创建根分区和swap分区<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Device             Start       End   Sectors  Size Type</span><br><span class="line">/dev/nvme0n1p1      2048    534527    532480  260M EFI System</span><br><span class="line">/dev/nvme0n1p2    534528    567295     32768   16M Microsoft reserved</span><br><span class="line">/dev/nvme0n1p3    567296 254337023 253769728  121G Microsoft basic data</span><br><span class="line">/dev/nvme0n1p4 254337024 485023743 230686720  110G Linux filesystem</span><br><span class="line">/dev/nvme0n1p5 498069504 500117503   2048000 1000M Windows recovery environment</span><br><span class="line">/dev/nvme0n1p6 485023744 497606655  12582912    6G Linux swap</span><br></pre></td></tr></table></figure><p></p><h2 id="格式化"><a href="#格式化" class="headerlink" title="格式化"></a>格式化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext4 /dev/nvme0n1p4</span><br><span class="line"></span><br><span class="line">mkswap /dev/nvme0n1p6</span><br><span class="line">swapon /dev/nvme0n1p6</span><br></pre></td></tr></table></figure><h2 id="挂载分区"><a href="#挂载分区" class="headerlink" title="挂载分区"></a>挂载分区</h2><p>首先，一定是先挂载/分区，再挂载其它分区。因为要使用双系统启动，所以即使没有分/boot分区，还是应该把windows的EFI分区挂载到/上。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/nvme0n1p4 /mnt/</span><br><span class="line">mkdir -p /mnt/boot</span><br><span class="line">mount /dev/nvme0n1p1 /mnt/boot</span><br></pre></td></tr></table></figure><h2 id="基本软件安装"><a href="#基本软件安装" class="headerlink" title="基本软件安装"></a>基本软件安装</h2><p>安装Arch Linux的软件很简单，执行下面这条命令就行了：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacstrap /mnt base base-devel</span><br></pre></td></tr></table></figure><h1 id="配置系统"><a href="#配置系统" class="headerlink" title="配置系统"></a>配置系统</h1><h2 id="创建fstab"><a href="#创建fstab" class="headerlink" title="创建fstab"></a>创建fstab</h2><p>生成一个fstab文件（使用-U或-L分别由UUID或标签定义）：<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br></pre></td></tr></table></figure><p></p><h2 id="切换新系统"><a href="#切换新系统" class="headerlink" title="切换新系统"></a>切换新系统</h2><p>现在我们执行<code>arch-chroot /mnt</code>，这样就以chroot的方式进入了新的系统。</p><h2 id="配置时间"><a href="#配置时间" class="headerlink" title="配置时间"></a>配置时间</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">hwclock --systohc</span><br></pre></td></tr></table></figure><h2 id="配置本地化"><a href="#配置本地化" class="headerlink" title="配置本地化"></a>配置本地化</h2><p>在/etc/locale.gen中取消注释en_US.UTF-8 UTF-8和其他所需的本地化，并使用<code>local-gen</code>更新本地语言编码</p><h2 id="设置主机名"><a href="#设置主机名" class="headerlink" title="设置主机名"></a>设置主机名</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &apos;hcaijin.com&apos; &gt; /etc/hostname</span><br></pre></td></tr></table></figure><h2 id="设置root密码"><a href="#设置root密码" class="headerlink" title="设置root密码"></a>设置root密码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure><h2 id="设置启动"><a href="#设置启动" class="headerlink" title="设置启动"></a>设置启动</h2><p>按照上面的步骤，efi分区应该被挂载到了/boot目录下。这时，我们使用<code>bootctl install</code>命令，安装bootloader，然后用<code>cp /usr/share/systemd/bootctl/arch.conf /boot/loader/entries/</code>把示例文件复制过来，只要修改它的options部分就可以了。<br>以我的/boot分区为例，用<code>blkid -s PARTUUID -o value /dev/nvme0n1p1</code>就可以生成所需要的PARTUUID，最后加上rw就行了。</p><p>格式大概为：<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title       Arch Linux</span><br><span class="line">linux       /vmlinuz-linux</span><br><span class="line">initrd      /initramfs-linux.img</span><br><span class="line">options     root=UUID=6278bd34-44cd-41b9-9bdd-239d9ce4020a rw</span><br></pre></td></tr></table></figure><p></p><p>意思是创建一个标题为Arch Linux的启动项，它用bootloader所在分区(/dev/sda1)根目录下的vmlinuz-linux作为Linux内核，initramfs-linux.img作为initramfs镜像(可以认为是一个临时rootfs镜像)，并且用root=/dev/sda2 ro作为内核参数。</p><p>再编辑/boot/loader/loader.conf.<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">timeout 3</span><br><span class="line">default arch</span><br></pre></td></tr></table></figure><p></p><p>意思是默认用arch.conf的配置启动，等待3秒没有键盘操作即使用默认配置启动。</p><h2 id="新系统的网络"><a href="#新系统的网络" class="headerlink" title="新系统的网络"></a>新系统的网络</h2><p>启动盘中默认配置好了有关网络的软件，但新的系统中却没有。<br>如果你只是使用单一且固定的有线网络，使用<code>systemctl enable dhcpcd@interface.service</code>就可以了（interface是你的网络接口名，可以使用ip link查看，类似enp3s0）。<br>如果要使用无线网络，那么就要使用<code>pacman -S iw wpa_supplicant dialog</code>命令安装这些软件包。如果失败，可能要安装固件。</p><p>至此，新系统的配置就完成了。</p><p>使用exit命令退出chroot环境，umount -R /mnt卸载挂载的分区，然后使用reboot重启一下就好了。</p><h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>可能会启动失败，解决方法是进入BIOS里的设置把UEFI作为唯一的启动方式。然后保存退出，就可以看到有三个启动项（分别是Arch Linux, Windows Manage, Default），选择你要进入的系统就可以了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;blockquote&gt;&lt;p&gt;最近新入手一台Thinkpad,使用UEFI+GPT预安装好了Win10操作系统，准备开始安装Archlinux。&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="archlinux" scheme="http://hcaijin.com/tags/archlinux/"/>
+    
+      <category term="windows" scheme="http://hcaijin.com/tags/windows/"/>
+    
+      <category term="uefi" scheme="http://hcaijin.com/tags/uefi/"/>
+    
+  </entry>
   
   <entry>
     <title>Chromium OS源码编译、U盘安装及使用笔记</title>
@@ -496,33 +523,6 @@
       <category term="java" scheme="http://hcaijin.com/tags/java/"/>
     
       <category term="maven" scheme="http://hcaijin.com/tags/maven/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux 终端下发送消息命令</title>
-    <link href="http://hcaijin.com/linux-zhong-duan-xia-fa-song-xiao-xi-ming-ling/"/>
-    <id>http://hcaijin.com/linux-zhong-duan-xia-fa-song-xiao-xi-ming-ling/</id>
-    <published>2016-01-12T19:58:19.000Z</published>
-    <updated>2016-01-18T13:41:22.000Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>这里分享一个Linux服务器终端下发送消息的命令。由于平时工作中，必免不了与运维同事之间的信息交换，想到我们都是链的同一台服务器，这样就可以通过以下两个命令来发送消息。</p></blockquote><h3 id="给指定用户发送消息"><a href="#给指定用户发送消息" class="headerlink" title="给指定用户发送消息"></a>给指定用户发送消息</h3><p>首先，可使用w或who命令查看当前登录的用户信息；<br>然后，使用write命令将信息发送到用户的终端上，用法步骤如下：<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ w</span><br><span class="line"> 17:17:53 up 19 days, 57 min,  3 users,  load average: 0.00, 0.01, 0.05</span><br><span class="line">USER     TTY        LOGIN@   IDLE   JCPU   PCPU WHAT</span><br><span class="line">zq       pts/0     14:19    1:50   0.08s  0.02s -bash</span><br><span class="line">hcaijin  pts/1     10:30   55.00s  7:05   0.23s -bash</span><br><span class="line">hcaijin  pts/2     17:17    1.00s  0.01s  0.00s w</span><br><span class="line"></span><br><span class="line">$ write hcaijin pts/1</span><br><span class="line">Test send message.</span><br></pre></td></tr></table></figure><p></p><p>然后使用hcaijin账号登录，且tty号为pts/1的登录用户终端会收到如下消息：<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Message from hcaijin@hcj-arch on pts/2 at 17:18 ...</span><br><span class="line">Test send message.</span><br></pre></td></tr></table></figure><p></p><h3 id="给当前所有用户发送消息"><a href="#给当前所有用户发送消息" class="headerlink" title="给当前所有用户发送消息"></a>给当前所有用户发送消息</h3><p>给当前登录所有用户发送消息（需要root权限），使用wall（write all的缩写）</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wall &apos;Test send message to all user.&apos;</span><br></pre></td></tr></table></figure><p>执行wall命令，所有登录到该机器的控制台(console)界面上都会收到如上所示的消息。</p><p><a href="http://www.cnblogs.com/gaojun/p/3387427.html" target="_blank" rel="noopener">引用</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;&lt;p&gt;这里分享一个Linux服务器终端下发送消息的命令。由于平时工作中，必免不了与运维同事之间的信息交换，想到我们都是链的同一台服务器，这样就可以通过以下两个命令来发送消息。&lt;/p&gt;&lt;/blockquote&gt;&lt;h3 id=&quot;给指定用户发送消息&quot;&gt;&lt;a hr
-      
-    
-    </summary>
-    
-    
-      <category term="linux" scheme="http://hcaijin.com/tags/linux/"/>
-    
-      <category term="write" scheme="http://hcaijin.com/tags/write/"/>
-    
-      <category term="wall" scheme="http://hcaijin.com/tags/wall/"/>
     
   </entry>
   
