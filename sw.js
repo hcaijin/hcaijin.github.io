@@ -24,15 +24,15 @@ var precacheUrls = [];
 
   precacheUrls.push('/');
 
-  precacheUrls.push('/di-ci-pei-zhi-java-webfu-wu/');
+  precacheUrls.push('/10ge-hen-you-yong-de-git-ming-ling-zhuan/');
 
-  precacheUrls.push('/ssh-fu-wu-duan-pei-zhi/');
+  precacheUrls.push('/arch-linuxjiang-ji-an-zhuang-ruan-jian-bao-yu-jin-zhi-sheng-ji-bu-xiang-sheng-ji-de-bao-de-fang-fa/');
+
+  precacheUrls.push('/arch-linux-pei-zhi-bluetooth/');
 
   precacheUrls.push('/an-zhuang-rtl8723bewu-xian-wang-qia-qu-dong/');
 
-  precacheUrls.push('/gentoo-upan-an-zhuang-zhi-nan/');
-
-  precacheUrls.push('/openwrt-wireshark-setting/');
+  precacheUrls.push('/ghost-jia-zai-man-wen-ti-fen-xi/');
 
 toolbox.precache(precacheUrls);
 toolbox.options = {"networkTimeoutSeconds":5};
