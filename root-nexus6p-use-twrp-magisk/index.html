@@ -1,0 +1,317 @@
+<!DOCTYPE html><html class="theme-next mist use-motion" lang="zh-Hans"><head><link rel="manifest" href="/manifest.json"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><link rel="stylesheet" href="/lib/needmoreshare/needsharebutton.min.css"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/images/ilogo-180x180.png?v=6.3.0"><link rel="icon" type="image/png" sizes="32x32" href="/images/ilogo-32x32.png?v=6.3.0"><link rel="icon" type="image/png" sizes="16x16" href="/images/ilogo-16x16.png?v=6.3.0"><link rel="mask-icon" href="/images/ilogo.svg?v=6.3.0" color="#222"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Mist",version:"6.3.0",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!1,fastclick:!1,lazyload:!1,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><meta name="description" content="Android 10.0也出来一段时间了，想着给自己的手机刷一下。所以就有了这个攻略，记录一下过程。准备工作确保设备电池电量超过50%备份当前的文件和数据在手机上启用USB调试和OEM解锁下载ADB驱动程序，安装到你的PC机里去这里下载符合nexus6p的TWRP，这里我下载了3.3.1版本的去magisk官网下载最新版本应用包括manage下载刷机的固件PixelExperience 10使用A"><meta name="keywords" content="android,nexus6p,twrp,magisk"><meta property="og:type" content="article"><meta property="og:title" content="Nexus6p Root提权以及刷机攻略"><meta property="og:url" content="http://hcaijin.com/root-nexus6p-use-twrp-magisk/index.html"><meta property="og:site_name" content="hcaijin.com"><meta property="og:description" content="Android 10.0也出来一段时间了，想着给自己的手机刷一下。所以就有了这个攻略，记录一下过程。准备工作确保设备电池电量超过50%备份当前的文件和数据在手机上启用USB调试和OEM解锁下载ADB驱动程序，安装到你的PC机里去这里下载符合nexus6p的TWRP，这里我下载了3.3.1版本的去magisk官网下载最新版本应用包括manage下载刷机的固件PixelExperience 10使用A"><meta property="og:locale" content="zh-Hans"><meta property="og:updated_time" content="2020-03-25T12:06:21.542Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Nexus6p Root提权以及刷机攻略"><meta name="twitter:description" content="Android 10.0也出来一段时间了，想着给自己的手机刷一下。所以就有了这个攻略，记录一下过程。准备工作确保设备电池电量超过50%备份当前的文件和数据在手机上启用USB调试和OEM解锁下载ADB驱动程序，安装到你的PC机里去这里下载符合nexus6p的TWRP，这里我下载了3.3.1版本的去magisk官网下载最新版本应用包括manage下载刷机的固件PixelExperience 10使用A"><link rel="alternate" href="/atom.xml" title="hcaijin.com" type="application/atom+xml"><link rel="canonical" href="http://hcaijin.com/root-nexus6p-use-twrp-magisk/"><script type="text/javascript" id="page.configurations">CONFIG.page={sidebar:""}</script><title>Nexus6p Root提权以及刷机攻略 | hcaijin.com</title><noscript><style type="text/css">.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.logo-line-after i{right:initial}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">hcaijin.com</span> <span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle">Graz's Blog</p></div><div class="site-nav-toggle"><button aria-label="Toggle navigation bar"><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>Archives</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>Search</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i> </span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"><input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><a href="https://github.com/hcaijin" class="github-corner" target="_blank" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#222;color:#fff;position:absolute;top:0;border:0;right:0" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="http://hcaijin.com/root-nexus6p-use-twrp-magisk/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="Graz"><meta itemprop="description" content="linux,java,php"><meta itemprop="image" content="/images/avatar.gif"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="hcaijin.com"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Nexus6p Root提权以及刷机攻略</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">Posted on</span> <time title="Created: 2020-03-25 18:00:20 / Modified: 20:06:21" itemprop="dateCreated datePublished" datetime="2020-03-25T18:00:20+08:00">2020-03-25</time> </span><span class="post-comments-count"><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-comment-o"></i> </span><a href="/root-nexus6p-use-twrp-magisk/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="root-nexus6p-use-twrp-magisk/" itemprop="commentCount"></span></a></span></div></header><div class="post-body" itemprop="articleBody"><blockquote><p>Android 10.0也出来一段时间了，想着给自己的手机刷一下。所以就有了这个攻略，记录一下过程。</p></blockquote><h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul><li>确保设备电池电量超过50%</li><li>备份当前的文件和数据</li><li>在手机上启用USB调试和OEM解锁</li><li>下载ADB驱动程序，安装到你的PC机里</li><li>去这里<a href="https://twrp.me/Devices/" target="_blank" rel="noopener">下载</a>符合nexus6p的TWRP，这里我下载了3.3.1版本的</li><li>去magisk官网下载最新版本应用包括manage</li><li>下载刷机的固件<a href="https://download.pixelexperience.org/angler" target="_blank" rel="noopener">PixelExperience 10</a></li></ul><h1 id="使用ADB和Fastboot解锁Bootloader"><a href="#使用ADB和Fastboot解锁Bootloader" class="headerlink" title="使用ADB和Fastboot解锁Bootloader"></a>使用ADB和Fastboot解锁Bootloader</h1><p>打开终端运行如下命令重启手机到fastboot模式，<a href="https://developers.google.com/android/images" target="_blank" rel="noopener">参考</a><br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb reboot bootloader</span><br><span class="line">fastboot flashing unlock</span><br></pre></td></tr></table></figure><p></p><p>完成以后，就成功解锁了Bootloader，再次检查以启用“开发人员选项”，然后转到“开发人员选项”并启用USB调试模式OEM解锁。有时，他们在启动后会自行禁用。</p><h1 id="安装TWRP"><a href="#安装TWRP" class="headerlink" title="安装TWRP"></a>安装TWRP</h1><p>还是一样先进到启动模式，把TWRP镜像刷进recovery,如下<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb reboot bootloader</span><br><span class="line">fastboot flash recovery twrp-3.3.1-0-angler.img</span><br></pre></td></tr></table></figure><p></p><blockquote><p>完成上面两个准备刷机的步骤基本上就不用担心手机变砖了，下面开始刷机</p></blockquote><h1 id="刷PixelExperience-10-到Nexus6p"><a href="#刷PixelExperience-10-到Nexus6p" class="headerlink" title="刷PixelExperience 10 到Nexus6p"></a>刷PixelExperience 10 到Nexus6p</h1><p>首先确保Nexus6p没有刷过其他第三方Rom，如果刷过，要先通过官方Rom还原到指定<a href="https://developers.google.com/android/images#angler" target="_blank" rel="noopener">版本</a><br>这里我们需要下载8.1.0 (OPM7.181205.001, Dec 2018)版本，解压进入文件夹执行shell就可以还原了。当然首先还得USB链接成功。</p><h2 id="刷入Pixel-10固件"><a href="#刷入Pixel-10固件" class="headerlink" title="刷入Pixel 10固件"></a>刷入Pixel 10固件</h2><p>确保nexus6p是最新版本8.1.0以后，我们就可以通过TWRP刷入Pixel这个最新的固件了</p><p>重启手机，进入手机端的TWRP界面，点选Advanced选项，然后在手机界面里点选ADB sideload选项，然后滑动下面的滑块确认选择，等待电脑端执行adb sideload 刷机包名.zip命令</p><p>这里有一点要注意，下载固件的时候要把版本10的两个文件都下载了，因为最新的那版本指纹，锁屏功能有问题。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">unzip -x PixelExperience_angler-10.0-20191231-1607-OFFICIAL.zip -d piexl2019</span><br><span class="line">unzip -x PixelExperience_angler-10.0-20200101-0925-OFFICIAL.zip -d piexl2020</span><br><span class="line">cp piexl2019/boot.img piexl2020</span><br><span class="line">cd piexl2020</span><br><span class="line">zip -r -v -o pixel20200101.zip .</span><br></pre></td></tr></table></figure><p>完成以上，生成我们要刷入的pixel20200101.zip这个固件包了，可以进入TWRP界面三清数据以后线刷就OK了<br>这里的三清指的是擦除system &amp; data &amp; cache 这三个分区，还有格式化data分区<br>最后执行以下，重启就能进入新系统了<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb sideload pixel20200101.zip</span><br></pre></td></tr></table></figure><p></p><p>到这里，如果不需要Root手机的话就不用看下面的了</p><h1 id="Root提权"><a href="#Root提权" class="headerlink" title="Root提权"></a>Root提权</h1><p><a href="https://www.youtube.com/watch?v=3pxOeiIBrHI&amp;t=582s" target="_blank" rel="noopener">参考</a><br>首先进到新系统（别忘了还是要先开启开发者选项）安装magisk manager这个app,把上一步解压出来的boot.img复制到手机里<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb push boot.img /sdcard/</span><br></pre></td></tr></table></figure><p></p><p>操作magisk manager安装magisk的补丁，生成magisk_patched.img<br>把补丁下载回PC<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb pull /sdcard/Download/magisk_patched.img .</span><br></pre></td></tr></table></figure><p></p><p>重启手机进入快速启动模式,把补丁刷入boot<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fastboot flash boot magisk_patched.img</span><br></pre></td></tr></table></figure><p></p><p>最后重启手机，进入magisk manager检查root权限。</p><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul><li><a href="https://forum.xda-developers.com/nexus-6p/development/rom-pixel-experience-t3970525" target="_blank" rel="noopener">PixelExperience for Google Nexus 6P 【angler】</a></li><li><a href="https://forum.xda-developers.com/nexus-6p/orig-development/rom-lineageos-17-0-nexus-6p-angler-t4012099" target="_blank" rel="noopener">【ROM】【UNOFFICIAL】LineageOS 17.1 for Nexus 6P (angler)</a></li><li><a href="https://mikey2008.github.io/2019/12/31/%E3%80%90%E6%95%99%E7%A8%8B%E3%80%91%E4%B8%80%E5%8A%A05%E5%88%B7LineageOS%E5%85%A8%E8%BF%87%E7%A8%8B/" target="_blank" rel="noopener">【教程】一加5刷LineageOS全过程</a></li></ul></div><footer class="post-footer"><div class="post-tags"><a href="/tags/android/" rel="tag"><i class="fa fa-tag"></i> android</a> <a href="/tags/nexus6p/" rel="tag"><i class="fa fa-tag"></i> nexus6p</a> <a href="/tags/twrp/" rel="tag"><i class="fa fa-tag"></i> twrp</a> <a href="/tags/magisk/" rel="tag"><i class="fa fa-tag"></i> magisk</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/openwrt-raspberry/" rel="next" title="树莓派安装配置软路由"><i class="fa fa-chevron-left"></i> 树莓派安装配置软路由</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"></div></div></footer></div></article><div class="post-spread"></div></div></div><div class="comments" id="comments"><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">Table of Contents</li><li class="sidebar-nav-overview" data-target="site-overview-wrap">Overview</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><p class="site-author-name" itemprop="name">Graz</p><p class="site-description motion-element" itemprop="description">linux,java,php</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">47</span> <span class="site-state-item-name">posts</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/index.html"><span class="site-state-item-count">72</span> <span class="site-state-item-name">tags</span></a></div></nav><div class="feed-link motion-element"><a href="/atom.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/hcaijin" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a> </span><span class="links-of-author-item"><a href="mailto:hcjonline@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a> </span><span class="links-of-author-item"><a href="https://twitter.com/GrazGunn" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a></span></div><div class="links-of-blogroll motion-element links-of-blogroll-block"><div class="links-of-blogroll-title"><i class="fa fa-fw fa-link"></i> Links</div><ul class="links-of-blogroll-list"><li class="links-of-blogroll-item"><a href="https://groups.google.com/forum" title="Google 网上论坛" target="_blank">Google 网上论坛</a></li><li class="links-of-blogroll-item"><a href="http://programgo.com" title="软件开发程序员博客文章收藏网" target="_blank">软件开发程序员博客文章收藏网</a></li><li class="links-of-blogroll-item"><a href="http://bbs.chinaunix.net" title="论坛-ChinaUnix.net" target="_blank">论坛-ChinaUnix.net</a></li><li class="links-of-blogroll-item"><a href="http://bbs.pediy.com" title="看雪安全论坛" target="_blank">看雪安全论坛</a></li><li class="links-of-blogroll-item"><a href="http://www.ibm.com/developerworks/cn" title="IBM developerWorks 中国" target="_blank">IBM developerWorks 中国</a></li><li class="links-of-blogroll-item"><a href="http://www.wooyun.org" title="WooYun.org" target="_blank">WooYun.org</a></li><li class="links-of-blogroll-item"><a href="http://wiki.backbox.org" title="BackBox Wiki" target="_blank">BackBox Wiki</a></li><li class="links-of-blogroll-item"><a href="http://www.freebuf.com" title="关注黑客与极客" target="_blank">关注黑客与极客</a></li><li class="links-of-blogroll-item"><a href="http://mcs.une.edu.au/doc" title="Linux 在线学习文档" target="_blank">Linux 在线学习文档</a></li><li class="links-of-blogroll-item"><a href="http://stackoverflow.com" title="程序设计领域的问答网站" target="_blank">程序设计领域的问答网站</a></li><li class="links-of-blogroll-item"><a href="http://linuxfromscratch.org" title="Linux 从零开始" target="_blank">Linux 从零开始</a></li></ul></div></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用ADB和Fastboot解锁Bootloader"><span class="nav-number">2.</span> <span class="nav-text">使用ADB和Fastboot解锁Bootloader</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装TWRP"><span class="nav-number">3.</span> <span class="nav-text">安装TWRP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#刷PixelExperience-10-到Nexus6p"><span class="nav-number">4.</span> <span class="nav-text">刷PixelExperience 10 到Nexus6p</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#刷入Pixel-10固件"><span class="nav-number">4.1.</span> <span class="nav-text">刷入Pixel 10固件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Root提权"><span class="nav-number">5.</span> <span class="nav-text">Root提权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2020</span> <span class="with-love" id="animate"><i class="fa fa-user"></i> </span><span class="author" itemprop="copyrightHolder">Graz</span></div><div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div><span class="post-meta-divider">|</span><div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.3.0</div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div><div id="needsharebutton-float"><span class="btn"><i class="fa fa-share-alt" aria-hidden="true"></i></span></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script><script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script><script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script><script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script><script id="dsq-count-scr" src="https://graz.disqus.com/count.js" async></script><script type="text/javascript">var disqus_config=function(){this.page.url="http://hcaijin.com/root-nexus6p-use-twrp-magisk/",this.page.identifier="root-nexus6p-use-twrp-magisk/",this.page.title="Nexus6p Root提权以及刷机攻略"};function loadComments(){var t=document,o=t.createElement("script");o.src="https://graz.disqus.com/embed.js",o.setAttribute("data-timestamp",""+ +new Date),(t.head||t.body).appendChild(o)}$(function(){var o=$("#comments").offset().top-$(window).height();o<=0?loadComments():$(window).on("scroll.disqus_scroll",function(){var t=document.documentElement.scrollTop;o<=t&&($(window).off(".disqus_scroll"),loadComments())})})</script><script type="text/javascript">// Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });</script><script src="/lib/needmoreshare/needsharebutton.min.js"></script><script>flOptions={iconStyle:"box",boxForm:"horizontal",position:"middleRight",networks:"Weibo,Wechat,GooglePlus,Twitter,Facebook"},new needShareButton("#needsharebutton-float",flOptions)</script><script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/sw.js?t=1585138075891").then(function(){console.log("ServiceWorker Register Successfully.")}).catch(function(e){console.error(e)})</script></body></html>

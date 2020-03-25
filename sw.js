@@ -30,9 +30,9 @@ var precacheUrls = [];
 
   precacheUrls.push('/arch-linux-pei-zhi-bluetooth/');
 
-  precacheUrls.push('/an-zhuang-rtl8723bewu-xian-wang-qia-qu-dong/');
-
   precacheUrls.push('/ghost-jia-zai-man-wen-ti-fen-xi/');
+
+  precacheUrls.push('/java-xue-xi-bi-ji/');
 
 toolbox.precache(precacheUrls);
 toolbox.options = {"networkTimeoutSeconds":5};
