@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/ipfs/content/images/ilogo-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/ipfs/content/images/ilogo-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/ipfs/content/images/ilogo-16x16.png">
+  <link rel="mask-icon" href="/ipfs/content/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/ipfs/css/main.css">
+
+
+<link rel="stylesheet" href="/ipfs/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hcaijin.com","root":"/ipfs/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="首先，以前是写php的，从未接触java的开发。最近公司项目重组，被安排说去做java开发，而且要快速上手,安排培训，可是，培训的都是windows下的IDE开发配置。没办法，Google呗。这样就有了这篇东拼西奏的文章，也有自己的一些经验总结，没少碰壁，不过这里还是感谢同事的帮忙，让我对java的运行有了清晰的认识。  了解java包运行原理java是编译型语言，自然少不了打包，链接，当然这些">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux服务器配置java web服务总结">
+<meta property="og:url" content="http://hcaijin.com/di-ci-pei-zhi-java-webfu-wu/index.html">
+<meta property="og:site_name" content="hcaijin.com">
+<meta property="og:description" content="首先，以前是写php的，从未接触java的开发。最近公司项目重组，被安排说去做java开发，而且要快速上手,安排培训，可是，培训的都是windows下的IDE开发配置。没办法，Google呗。这样就有了这篇东拼西奏的文章，也有自己的一些经验总结，没少碰壁，不过这里还是感谢同事的帮忙，让我对java的运行有了清晰的认识。  了解java包运行原理java是编译型语言，自然少不了打包，链接，当然这些">
+<meta property="og:image" content="http://hcaijin.com/content/images/2016/01/--_2016-01-25_17-47-28.png">
+<meta property="og:image" content="http://hcaijin.com/content/images/2016/01/--_2016-01-25_18-48-50.png">
+<meta property="og:image" content="http://hcaijin.com/content/images/2016/01/--_2016-01-25_18-49-35.png">
+<meta property="article:published_time" content="2016-01-24T19:14:16.000Z">
+<meta property="article:modified_time" content="2016-01-25T16:06:30.000Z">
+<meta property="article:author" content="Graz">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="tomcat">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hcaijin.com/content/images/2016/01/--_2016-01-25_17-47-28.png">
+
+<link rel="canonical" href="http://hcaijin.com/di-ci-pei-zhi-java-webfu-wu/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Linux服务器配置java web服务总结 | hcaijin.com</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/ipfs/atom.xml" title="hcaijin.com" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/ipfs/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hcaijin.com</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Graz's Blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/ipfs/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/ipfs/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/ipfs/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/ipfs/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://hcaijin.com/di-ci-pei-zhi-java-webfu-wu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ipfs/images/avatar.gif">
+      <meta itemprop="name" content="Graz">
+      <meta itemprop="description" content="linux,java,php">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hcaijin.com">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux服务器配置java web服务总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-01-25 03:14:16" itemprop="dateCreated datePublished" datetime="2016-01-25T03:14:16+08:00">2016-01-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2016-01-26 00:06:30" itemprop="dateModified" datetime="2016-01-26T00:06:30+08:00">2016-01-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>首先，以前是写php的，从未接触java的开发。最近公司项目重组，被安排说去做java开发，而且要快速上手,安排培训，可是，培训的都是windows下的IDE开发配置。没办法，Google呗。这样就有了这篇东拼西奏的文章，也有自己的一些经验总结，没少碰壁，不过这里还是感谢同事的帮忙，让我对java的运行有了清晰的认识。</p>
+</blockquote>
+<h2 id="了解java包运行原理"><a href="#了解java包运行原理" class="headerlink" title="了解java包运行原理"></a>了解java包运行原理</h2><p>java是编译型语言，自然少不了打包，链接，当然这些都可以用maven来管理。用maven打包，链接生成的安装包就是可以直接使用java来运行的，我们这里主要说web服务的配置，所以少不了tomcat。使用tomcat来运行web项目包，就可以在浏览器端访问，java应用服务，这就是大致的过程。</p>
+<h2 id="安装必要的软件包"><a href="#安装必要的软件包" class="headerlink" title="安装必要的软件包"></a>安装必要的软件包</h2><h3 id="安装jdk-至于安装哪个版本，视情况而定"><a href="#安装jdk-至于安装哪个版本，视情况而定" class="headerlink" title="安装jdk,至于安装哪个版本，视情况而定"></a>安装jdk,至于安装哪个版本，视情况而定</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S jdk8-openjdk</span><br></pre></td></tr></table></figure>
+<p>可以搜索一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Ss java</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装maven"><a href="#安装maven" class="headerlink" title="安装maven"></a>安装maven</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S maven</span><br></pre></td></tr></table></figure>
+
+<p>以上安装成功了以后，我们就可以使用<code>java, mvn</code> 的命令了，由于我们使用的是pacman安装方法，必要的环境变量都已经默认好了，可以不需要配置，具体可以看我以前写的 <a href="http://www.hcaijin.com/java-xue-xi-bi-ji/" target="_blank" rel="noopener">Java 学习笔记1</a></p>
+<h3 id="安装tomcat，同样的源里也有多个版本，视情况安装相应的版本"><a href="#安装tomcat，同样的源里也有多个版本，视情况安装相应的版本" class="headerlink" title="安装tomcat，同样的源里也有多个版本，视情况安装相应的版本"></a>安装tomcat，同样的源里也有多个版本，视情况安装相应的版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S tomcat7</span><br></pre></td></tr></table></figure>
+
+<h2 id="tomcat-主要配置详解"><a href="#tomcat-主要配置详解" class="headerlink" title="tomcat 主要配置详解"></a>tomcat 主要配置详解</h2><h3 id="主要目录功能"><a href="#主要目录功能" class="headerlink" title="主要目录功能"></a>主要目录功能</h3><p>默认情況 tomcat7 安装路径为 /usr/share/tomcat7，这里罗列一下主要目录的作用：</p>
+<ul>
+<li>/usr/share/tomcat7： 程序的主目录，也是变量 $CATALINA_HOME 所指向的位置，在单 tomcat 实例的情況下，也是变量 $CATALINA_BASE 所指向的位置。</li>
+<li>/usr/share/tomcat7/bin： 程序的执行脚本目录</li>
+<li>conf -&gt; /etc/tomcat7： 配置文档目录，存放主要是配置信息。</li>
+<li>lib -&gt; /usr/share/java/tomcat7： 共用jar包目录，这些包即给 tomcat 使用，也能给 web 应用程序所调用。</li>
+<li>logs -&gt; /var/log/tomcat7： 日志目录，对于查找错误以及查看访问记录很有用。</li>
+<li>webapps -&gt; /var/lib/tomcat7/webapps： 默认的 web 应用程序目录，tomcat7 自带了几个示例应用。</li>
+</ul>
+<h3 id="启动关闭脚本"><a href="#启动关闭脚本" class="headerlink" title="启动关闭脚本"></a>启动关闭脚本</h3><p>我们进入程序执行脚本目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;share&#x2F;tomcat7 </span><br><span class="line">sudo .&#x2F;startup.sh</span><br></pre></td></tr></table></figure>
+<p>以上，tomcat服务就启动成功了，可以在浏览器中访问<code>http://localhost:8080</code> ，如果看到 tomcat 猫即说明服务已经安装成功并且能正常运行了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo .&#x2F;shutdown.sh</span><br></pre></td></tr></table></figure>
+<p>这两个脚本都是通过调用 catalina.sh 来执行的，具体自己看脚本代码。</p>
+<h2 id="实例讲解tomcat启动java应用"><a href="#实例讲解tomcat启动java应用" class="headerlink" title="实例讲解tomcat启动java应用"></a>实例讲解tomcat启动java应用</h2><p>这里我犯了一个错误，总以为java应用之前总得有个相互调用的关系，没想到其实都已经在maven打包，安装到本地就行了，web应用配置好相应的pom.xml就可以调用maven打包，安装好的后台java应用。</p>
+<p>然后，我们开始说明代码部署过程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;data&#x2F;app&#x2F;                             ###进入工程主目录</span><br><span class="line">git clone git@erp:ecerp-saas              ###从erp服务器拉代码到本地</span><br><span class="line">cd &#x2F;data&#x2F;app&#x2F;ecerp-saas&#x2F;                  ###进入代码目录</span><br><span class="line">git pull                                  ###这个是同步服务器代码</span><br><span class="line">cd &#x2F;data&#x2F;app&#x2F;ecerp-saas&#x2F;Sources&#x2F;ecerp     ###进到主要工程目录</span><br><span class="line">mvn  clean install -Dmaven.test.skip&#x3D;true ###打包安装工程目录下相应的程序，这样就会编译好应用到本地用户目录下&#96;~&#x2F;.m2&#x2F;&#96;</span><br></pre></td></tr></table></figure>
+<p>在web目录下新建目录erp.hcj.com</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;data&#x2F;www&#x2F;</span><br><span class="line">mkdir erp.hcj.com&#x2F;</span><br><span class="line">cd erp.hcj.com&#x2F;</span><br></pre></td></tr></table></figure>
+<p>web应用java环境变量配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">touch webconfig</span><br><span class="line">cat webconfig</span><br></pre></td></tr></table></figure>
+<p><img data-src="/content/images/2016/01/--_2016-01-25_17-47-28.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;data&#x2F;www&#x2F;erp.hcj.com&#x2F;webconfig     ###使用环境变量生效</span><br></pre></td></tr></table></figure>
+<p>创建备份目录,当然这个不是必要的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">theday&#x3D;$(date +%Y%m%d)</span><br><span class="line">releaseDir&#x3D;&quot;&#x2F;data&#x2F;deployment&#x2F;packages&#x2F;$&#123;theday&#125;&quot;</span><br><span class="line">if [ ! -e $releaseDir ]</span><br><span class="line">then</span><br><span class="line">       mkdir -p $releaseDir</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>然后，我们就可以到java应用安装目录下找packagename，把它移到备份目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -fp &#96;find ~&#x2F;.m2&#x2F;repository&#x2F; -name $packagename&#96; $releaseDir&#x2F;$packagename</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#备份数据</span><br><span class="line">bktime&#x3D;$(date +%y%m%d%H%M)</span><br><span class="line">backupdir&#x3D;&quot;&#x2F;data&#x2F;deployment&#x2F;release-backup&#x2F;$bktime&#x2F;$(basename $srvdir)&quot;</span><br><span class="line">if [ ! -e $backupdir ]</span><br><span class="line">then</span><br><span class="line">    mkdir -p $backupdir</span><br><span class="line">fi</span><br><span class="line">rootdir&#x3D;&#x2F;data&#x2F;www&#x2F;erp.hcj.com&#x2F;webroot</span><br><span class="line">for files in $(ls $rootdir)</span><br><span class="line">do</span><br><span class="line">    if [ $files &#x3D;&#x3D; &quot;upload&quot; ]; then</span><br><span class="line">    ¦   echo $files not backup</span><br><span class="line">    else</span><br><span class="line">    ¦   &#x2F;bin&#x2F;cp -rfp $rootdir&#x2F;$files $backupdir</span><br><span class="line">    fi  </span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">### 删除旧应用</span><br><span class="line">rm -rf $rootdir&#x2F;WEB-INF&#x2F;*</span><br><span class="line">### 解压文件，在web主目录下生成webroot</span><br><span class="line">packagefile&#x3D;$releaseDir&#x2F;$packagename</span><br><span class="line">tar zxf $packagefile -C &#x2F;data&#x2F;www&#x2F;erp.hcj.com</span><br><span class="line">### 修改webroot的权限</span><br><span class="line">chown tomcat7.tomcat7 -R &#x2F;data&#x2F;www&#x2F;erp.hcj.com&#x2F;webroot</span><br></pre></td></tr></table></figure>
+<p>以上就基本是把java打包的应用程序，安装到了tomcat的webroot目录下了，但是要使这个应用启动成功，还需要配置多实例的tomcat的配置文件server.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;data&#x2F;www&#x2F;erp.hcj.com</span><br><span class="line">mkdir -p tomcat&#x2F;&#123;conf,logs,tmp,work,&#125;</span><br><span class="line">cp -r &#x2F;etc&#x2F;tomcat7&#x2F;* tomcat&#x2F;conf&#x2F;</span><br><span class="line">sudo chown -R tomcat7.tomcat7 tomcat&#x2F;</span><br><span class="line">vi server.xml</span><br></pre></td></tr></table></figure>
+<p>主要修改如下配置：<br><img data-src="/content/images/2016/01/--_2016-01-25_18-48-50.png" alt=""><br><img data-src="/content/images/2016/01/--_2016-01-25_18-49-35.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">### 设置tomcat环境变量</span><br><span class="line">export CATALINA_HOME&#x3D;&quot;&#x2F;usr&#x2F;share&#x2F;tomcat7&quot;</span><br><span class="line">export DUSER&#x3D;&quot;tomcat7&quot;</span><br><span class="line">export CATALINA_BASE&#x3D;&quot;&#x2F;data&#x2F;www&#x2F;erp.hcj.com&#x2F;tomcat&quot;</span><br><span class="line">export CATALINA_PID&#x3D;&quot;$CATALINA_BASE&#x2F;tomcat.pid&quot;</span><br><span class="line">export CATALINA_TMPDIR&#x3D;&quot;$CATALINA_BASE&#x2F;tmp&quot;</span><br><span class="line">export CATALINA_OUT&#x3D;&quot;$CATALINA_BASE&#x2F;logs&#x2F;catalina.out&quot;                                                                                                                                                                            </span><br><span class="line">export LOCKFILE&#x3D;&quot;$CATALINA_BASE&#x2F;tomcat.lock&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">### 启动服务</span><br><span class="line">&#x2F;bin&#x2F;bash $CATALINA_HOME&#x2F;bin&#x2F;startup.sh</span><br><span class="line">### 关闭服务</span><br><span class="line">&#x2F;bin&#x2F;bash $CATALINA_HOME&#x2F;bin&#x2F;shutdown.sh</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://ufaw0116.erufa.com/wordpress/?p=1254&ckattempt=3" target="_blank" rel="noopener">参考</a></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>授人以渔，是否得人予鱼</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/ipfs/content/images/wechatpay.png" alt="Graz WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/ipfs/content/images/ali_pay.jpg" alt="Graz Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/ipfs/content/images/paypal.png" alt="Graz PayPal">
+        <p>PayPal</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/lunome">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/content/images/wechat_channel.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/ipfs/tags/linux/" rel="tag"># linux</a>
+              <a href="/ipfs/tags/java/" rel="tag"># java</a>
+              <a href="/ipfs/tags/tomcat/" rel="tag"># tomcat</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/ipfs/java-xue-xi-bi-ji-2-2/" rel="prev" title="Java 学习笔记2">
+      <i class="fa fa-chevron-left"></i> Java 学习笔记2
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/ipfs/10ge-hen-you-yong-de-git-ming-ling-zhuan/" rel="next" title="10个很有用的 Git 命令（转）">
+      10个很有用的 Git 命令（转） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#了解java包运行原理"><span class="nav-number">1.</span> <span class="nav-text">了解java包运行原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装必要的软件包"><span class="nav-number">2.</span> <span class="nav-text">安装必要的软件包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装jdk-至于安装哪个版本，视情况而定"><span class="nav-number">2.1.</span> <span class="nav-text">安装jdk,至于安装哪个版本，视情况而定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装maven"><span class="nav-number">2.2.</span> <span class="nav-text">安装maven</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装tomcat，同样的源里也有多个版本，视情况安装相应的版本"><span class="nav-number">2.3.</span> <span class="nav-text">安装tomcat，同样的源里也有多个版本，视情况安装相应的版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tomcat-主要配置详解"><span class="nav-number">3.</span> <span class="nav-text">tomcat 主要配置详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主要目录功能"><span class="nav-number">3.1.</span> <span class="nav-text">主要目录功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动关闭脚本"><span class="nav-number">3.2.</span> <span class="nav-text">启动关闭脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例讲解tomcat启动java应用"><span class="nav-number">4.</span> <span class="nav-text">实例讲解tomcat启动java应用</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Graz</p>
+  <div class="site-description" itemprop="description">linux,java,php</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/ipfs/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/ipfs/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hcaijin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hcaijin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hcjonline@gmail.com" title="E-Mail → mailto:hcjonline@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://groups.google.com/forum" title="https:&#x2F;&#x2F;groups.google.com&#x2F;forum" rel="noopener" target="_blank">Google 网上论坛</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://programgo.com/" title="http:&#x2F;&#x2F;programgo.com" rel="noopener" target="_blank">软件开发程序员博客文章收藏网</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://bbs.chinaunix.net/" title="http:&#x2F;&#x2F;bbs.chinaunix.net" rel="noopener" target="_blank">论坛-ChinaUnix.net</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://bbs.pediy.com/" title="http:&#x2F;&#x2F;bbs.pediy.com" rel="noopener" target="_blank">看雪安全论坛</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.ibm.com/developerworks/cn" title="http:&#x2F;&#x2F;www.ibm.com&#x2F;developerworks&#x2F;cn" rel="noopener" target="_blank">IBM developerWorks 中国</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.wooyun.org/" title="http:&#x2F;&#x2F;www.wooyun.org" rel="noopener" target="_blank">WooYun.org</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://wiki.backbox.org/" title="http:&#x2F;&#x2F;wiki.backbox.org" rel="noopener" target="_blank">BackBox Wiki</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.freebuf.com/" title="http:&#x2F;&#x2F;www.freebuf.com" rel="noopener" target="_blank">关注黑客与极客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://mcs.une.edu.au/doc" title="http:&#x2F;&#x2F;mcs.une.edu.au&#x2F;doc" rel="noopener" target="_blank">Linux 在线学习文档</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://stackoverflow.com/" title="http:&#x2F;&#x2F;stackoverflow.com" rel="noopener" target="_blank">程序设计领域的问答网站</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://linuxfromscratch.org/" title="http:&#x2F;&#x2F;linuxfromscratch.org" rel="noopener" target="_blank">Linux 从零开始</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Graz</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/ipfs/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/ipfs/lib/velocity/velocity.min.js"></script>
+  <script src="/ipfs/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/ipfs/js/utils.js"></script>
+
+<script src="/ipfs/js/motion.js"></script>
+
+
+<script src="/ipfs/js/schemes/muse.js"></script>
+
+
+<script src="/ipfs/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/ipfs/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

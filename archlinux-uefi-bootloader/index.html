@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/ipfs/content/images/ilogo-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/ipfs/content/images/ilogo-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/ipfs/content/images/ilogo-16x16.png">
+  <link rel="mask-icon" href="/ipfs/content/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/ipfs/css/main.css">
+
+
+<link rel="stylesheet" href="/ipfs/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hcaijin.com","root":"/ipfs/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言 最近新入手一台Thinkpad,使用UEFI+GPT预安装好了Win10操作系统，准备开始安装Archlinux。  如果你准备在一块新硬盘上安装双系统，那么应该先安装windows。如果你安装的是Win10，那么它应该默认就是按UEFI+GPT方式安装的，可以按Win+X键打开磁盘管理，如果是UEFI安装的，那么应该有一个EFI分区，可能是250M。其它还有Windows的恢复分区和基本数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UEFI+GPT安装Archlinux与Win10双系统教程">
+<meta property="og:url" content="http://hcaijin.com/archlinux-uefi-bootloader/index.html">
+<meta property="og:site_name" content="hcaijin.com">
+<meta property="og:description" content="前言 最近新入手一台Thinkpad,使用UEFI+GPT预安装好了Win10操作系统，准备开始安装Archlinux。  如果你准备在一块新硬盘上安装双系统，那么应该先安装windows。如果你安装的是Win10，那么它应该默认就是按UEFI+GPT方式安装的，可以按Win+X键打开磁盘管理，如果是UEFI安装的，那么应该有一个EFI分区，可能是250M。其它还有Windows的恢复分区和基本数">
+<meta property="article:published_time" content="2018-06-09T16:42:24.000Z">
+<meta property="article:modified_time" content="2020-05-06T19:05:11.192Z">
+<meta property="article:author" content="Graz">
+<meta property="article:tag" content="archlinux">
+<meta property="article:tag" content="windows">
+<meta property="article:tag" content="uefi">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://hcaijin.com/archlinux-uefi-bootloader/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>UEFI+GPT安装Archlinux与Win10双系统教程 | hcaijin.com</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/ipfs/atom.xml" title="hcaijin.com" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/ipfs/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hcaijin.com</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Graz's Blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/ipfs/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/ipfs/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/ipfs/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/ipfs/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://hcaijin.com/archlinux-uefi-bootloader/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ipfs/images/avatar.gif">
+      <meta itemprop="name" content="Graz">
+      <meta itemprop="description" content="linux,java,php">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hcaijin.com">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UEFI+GPT安装Archlinux与Win10双系统教程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-06-10 00:42:24" itemprop="dateCreated datePublished" datetime="2018-06-10T00:42:24+08:00">2018-06-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-07 03:05:11" itemprop="dateModified" datetime="2020-05-07T03:05:11+08:00">2020-05-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p>最近新入手一台Thinkpad,使用UEFI+GPT预安装好了Win10操作系统，准备开始安装Archlinux。</p>
+</blockquote>
+<p>如果你准备在一块新硬盘上安装双系统，那么应该先安装windows。<br>如果你安装的是Win10，那么它应该默认就是按UEFI+GPT方式安装的，可以按Win+X键打开磁盘管理，如果是UEFI安装的，那么应该有一个EFI分区，可能是250M。<br>其它还有Windows的恢复分区和基本数据分区。不用管恢复分区，如果现在磁盘上没有剩余空间，可以右键点击基本数据分区，点击压缩卷，给Arch的安装腾出空间。用右键点击磁盘，查看属性，可以知道自己是否采用了GPT分区方式。</p>
+<p>在安装之前，请在电源计划中关掉Windows的快速启动，并在BIOS中关掉Secure Boot，可以很容易搜到对应自己电脑的具体方法。<br>如果上面有哪一条没有满足，请只看一看我遇到的问题，具体安装请再参考其它教程</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="安装之前"><a href="#安装之前" class="headerlink" title="安装之前"></a>安装之前</h2><ul>
+<li>准备一个大于4G的U盘</li>
+<li>安装镜像，可以从Arch Linux的<a href="www.archlinux.org">官方网站</a>下载</li>
+</ul>
+<h2 id="制作U盘启动盘"><a href="#制作U盘启动盘" class="headerlink" title="制作U盘启动盘"></a>制作U盘启动盘</h2><p>这里我只介绍linux系统下使用<code>dd</code>的方式，windows下面的方法可以看一下这个<a href="https://github.com/mytbk/Linux_Notes/blob/master/install/install-archlinux.md" target="_blank" rel="noopener">安装教程</a></p>
+<p>插入U盘，查看U盘设备名,不需求挂载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsblk</span><br><span class="line">sudo dd if&#x3D;archlinux-2018.06.01-x86_64.iso of&#x3D;&#x2F;dev&#x2F;sdb</span><br></pre></td></tr></table></figure>
+<p>这样，就制作好了U盘启动了，把U盘插入要安装的机子，配置BIOS通过U盘启动，就可以进入光盘引导的临时系统。</p>
+<h2 id="选择镜像源"><a href="#选择镜像源" class="headerlink" title="选择镜像源"></a>选择镜像源</h2><p>Arch Linux是通过网络进行安装的，为了以更快的速度下载软件包，建议先配置镜像源。配置镜像源的方法是编辑/etc/pacman.d/mirrorlist这个文件，将想用的镜像源的放到第一个非井号开头的行即可。如下可将中科大镜像源作为首选镜像源。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># &#x2F;etc&#x2F;pacman.d&#x2F;mirrorlist</span><br><span class="line"># This is the USTC mirror</span><br><span class="line">Server &#x3D; http:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;archlinux&#x2F;$repo&#x2F;os&#x2F;$arch</span><br><span class="line"></span><br><span class="line"># and other mirrors</span><br><span class="line">## Score: 4.6, China</span><br><span class="line">Server &#x3D; http:&#x2F;&#x2F;mirrors.163.com&#x2F;archlinux&#x2F;$repo&#x2F;os&#x2F;$arch</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+<p>配置完成后可以执行pacman -Syy试一下，可以看一下pacman从镜像站下载文件的速度。</p>
+<h2 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h2><blockquote>
+<p>我们前面提过已经默认有安装的Win10系统,使用<code>fdisk</code>可以看到已经有一个EFI分区为250M大小。因此不要单独为Linux分出EFI分区，因为要双系统启动的话应该把Win10的EFI分区挂载到/boot上。</p>
+</blockquote>
+<p>以下是我的硬盘分区情况,因为我还有一块硬盘用来挂载/home，所以我只要创建根分区和swap分区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Device             Start       End   Sectors  Size Type</span><br><span class="line">&#x2F;dev&#x2F;nvme0n1p1      2048    534527    532480  260M EFI System</span><br><span class="line">&#x2F;dev&#x2F;nvme0n1p2    534528    567295     32768   16M Microsoft reserved</span><br><span class="line">&#x2F;dev&#x2F;nvme0n1p3    567296 254337023 253769728  121G Microsoft basic data</span><br><span class="line">&#x2F;dev&#x2F;nvme0n1p4 254337024 485023743 230686720  110G Linux filesystem</span><br><span class="line">&#x2F;dev&#x2F;nvme0n1p5 498069504 500117503   2048000 1000M Windows recovery environment</span><br><span class="line">&#x2F;dev&#x2F;nvme0n1p6 485023744 497606655  12582912    6G Linux swap</span><br></pre></td></tr></table></figure>
+
+<h2 id="格式化"><a href="#格式化" class="headerlink" title="格式化"></a>格式化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext4 &#x2F;dev&#x2F;nvme0n1p4</span><br><span class="line"></span><br><span class="line">mkswap &#x2F;dev&#x2F;nvme0n1p6</span><br><span class="line">swapon &#x2F;dev&#x2F;nvme0n1p6</span><br></pre></td></tr></table></figure>
+
+<h2 id="挂载分区"><a href="#挂载分区" class="headerlink" title="挂载分区"></a>挂载分区</h2><p>首先，一定是先挂载/分区，再挂载其它分区。因为要使用双系统启动，所以即使没有分/boot分区，还是应该把windows的EFI分区挂载到/上。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount &#x2F;dev&#x2F;nvme0n1p4 &#x2F;mnt&#x2F;</span><br><span class="line">mkdir -p &#x2F;mnt&#x2F;boot</span><br><span class="line">mount &#x2F;dev&#x2F;nvme0n1p1 &#x2F;mnt&#x2F;boot</span><br></pre></td></tr></table></figure>
+
+<h2 id="基本软件安装"><a href="#基本软件安装" class="headerlink" title="基本软件安装"></a>基本软件安装</h2><p>安装Arch Linux的软件很简单，执行下面这条命令就行了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacstrap &#x2F;mnt base base-devel</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置系统"><a href="#配置系统" class="headerlink" title="配置系统"></a>配置系统</h1><h2 id="创建fstab"><a href="#创建fstab" class="headerlink" title="创建fstab"></a>创建fstab</h2><p>生成一个fstab文件（使用-U或-L分别由UUID或标签定义）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">genfstab -U &#x2F;mnt &gt;&gt; &#x2F;mnt&#x2F;etc&#x2F;fstab</span><br></pre></td></tr></table></figure>
+<h2 id="切换新系统"><a href="#切换新系统" class="headerlink" title="切换新系统"></a>切换新系统</h2><p>现在我们执行<code>arch-chroot /mnt</code>，这样就以chroot的方式进入了新的系统。</p>
+<h2 id="配置时间"><a href="#配置时间" class="headerlink" title="配置时间"></a>配置时间</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -sf &#x2F;usr&#x2F;share&#x2F;zoneinfo&#x2F;Asia&#x2F;Shanghai &#x2F;etc&#x2F;localtime</span><br><span class="line">hwclock --systohc</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置本地化"><a href="#配置本地化" class="headerlink" title="配置本地化"></a>配置本地化</h2><p>在/etc/locale.gen中取消注释en_US.UTF-8 UTF-8和其他所需的本地化，并使用<code>local-gen</code>更新本地语言编码</p>
+<h2 id="设置主机名"><a href="#设置主机名" class="headerlink" title="设置主机名"></a>设置主机名</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &#39;hcaijin.com&#39; &gt; &#x2F;etc&#x2F;hostname</span><br></pre></td></tr></table></figure>
+<h2 id="设置root密码"><a href="#设置root密码" class="headerlink" title="设置root密码"></a>设置root密码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>
+<h2 id="设置启动"><a href="#设置启动" class="headerlink" title="设置启动"></a>设置启动</h2><p>按照上面的步骤，efi分区应该被挂载到了/boot目录下。这时，我们使用<code>bootctl install</code>命令，安装bootloader，然后用<code>cp /usr/share/systemd/bootctl/arch.conf /boot/loader/entries/</code>把示例文件复制过来，只要修改它的options部分就可以了。<br>以我的/boot分区为例，用<code>blkid -s PARTUUID -o value /dev/nvme0n1p1</code>就可以生成所需要的PARTUUID，最后加上rw就行了。 </p>
+<p>格式大概为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title       Arch Linux</span><br><span class="line">linux       &#x2F;vmlinuz-linux</span><br><span class="line">initrd      &#x2F;initramfs-linux.img</span><br><span class="line">options     root&#x3D;UUID&#x3D;6278bd34-44cd-41b9-9bdd-239d9ce4020a rw</span><br></pre></td></tr></table></figure>
+<p>意思是创建一个标题为Arch Linux的启动项，它用bootloader所在分区(/dev/sda1)根目录下的vmlinuz-linux作为Linux内核，initramfs-linux.img作为initramfs镜像(可以认为是一个临时rootfs镜像)，并且用root=/dev/sda2 ro作为内核参数。</p>
+<p>再编辑/boot/loader/loader.conf.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">timeout 3</span><br><span class="line">default arch</span><br></pre></td></tr></table></figure>
+<p>意思是默认用arch.conf的配置启动，等待3秒没有键盘操作即使用默认配置启动。</p>
+<h2 id="新系统的网络"><a href="#新系统的网络" class="headerlink" title="新系统的网络"></a>新系统的网络</h2><p>启动盘中默认配置好了有关网络的软件，但新的系统中却没有。<br>如果你只是使用单一且固定的有线网络，使用<code>systemctl enable dhcpcd@interface.service</code>就可以了（interface是你的网络接口名，可以使用ip link查看，类似enp3s0）。<br>如果要使用无线网络，那么就要使用<code>pacman -S iw wpa_supplicant dialog</code>命令安装这些软件包。如果失败，可能要安装固件。</p>
+<p>至此，新系统的配置就完成了。</p>
+<p>使用exit命令退出chroot环境，umount -R /mnt卸载挂载的分区，然后使用reboot重启一下就好了。</p>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>可能会启动失败，解决方法是进入BIOS里的设置把UEFI作为唯一的启动方式。然后保存退出，就可以看到有三个启动项（分别是Arch Linux, Windows Manage, Default），选择你要进入的系统就可以了。</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>授人以渔，是否得人予鱼</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/ipfs/content/images/wechatpay.png" alt="Graz WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/ipfs/content/images/ali_pay.jpg" alt="Graz Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/ipfs/content/images/paypal.png" alt="Graz PayPal">
+        <p>PayPal</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/lunome">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/content/images/wechat_channel.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/ipfs/tags/archlinux/" rel="tag"># archlinux</a>
+              <a href="/ipfs/tags/windows/" rel="tag"># windows</a>
+              <a href="/ipfs/tags/uefi/" rel="tag"># uefi</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/ipfs/chromium-os-install/" rel="prev" title="Chromium OS源码编译、U盘安装及使用笔记">
+      <i class="fa fa-chevron-left"></i> Chromium OS源码编译、U盘安装及使用笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/ipfs/openwrt-wireshark-setting/" rel="next" title="用OPENWRT路由器抓包网络流量笔记">
+      用OPENWRT路由器抓包网络流量笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装之前"><span class="nav-number">2.1.</span> <span class="nav-text">安装之前</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#制作U盘启动盘"><span class="nav-number">2.2.</span> <span class="nav-text">制作U盘启动盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择镜像源"><span class="nav-number">2.3.</span> <span class="nav-text">选择镜像源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分区"><span class="nav-number">2.4.</span> <span class="nav-text">分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化"><span class="nav-number">2.5.</span> <span class="nav-text">格式化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载分区"><span class="nav-number">2.6.</span> <span class="nav-text">挂载分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本软件安装"><span class="nav-number">2.7.</span> <span class="nav-text">基本软件安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置系统"><span class="nav-number">3.</span> <span class="nav-text">配置系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建fstab"><span class="nav-number">3.1.</span> <span class="nav-text">创建fstab</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切换新系统"><span class="nav-number">3.2.</span> <span class="nav-text">切换新系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置时间"><span class="nav-number">3.3.</span> <span class="nav-text">配置时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置本地化"><span class="nav-number">3.4.</span> <span class="nav-text">配置本地化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置主机名"><span class="nav-number">3.5.</span> <span class="nav-text">设置主机名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置root密码"><span class="nav-number">3.6.</span> <span class="nav-text">设置root密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置启动"><span class="nav-number">3.7.</span> <span class="nav-text">设置启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新系统的网络"><span class="nav-number">3.8.</span> <span class="nav-text">新系统的网络</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后"><span class="nav-number">4.</span> <span class="nav-text">最后</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Graz</p>
+  <div class="site-description" itemprop="description">linux,java,php</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/ipfs/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/ipfs/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hcaijin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hcaijin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hcjonline@gmail.com" title="E-Mail → mailto:hcjonline@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://groups.google.com/forum" title="https:&#x2F;&#x2F;groups.google.com&#x2F;forum" rel="noopener" target="_blank">Google 网上论坛</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://programgo.com/" title="http:&#x2F;&#x2F;programgo.com" rel="noopener" target="_blank">软件开发程序员博客文章收藏网</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://bbs.chinaunix.net/" title="http:&#x2F;&#x2F;bbs.chinaunix.net" rel="noopener" target="_blank">论坛-ChinaUnix.net</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://bbs.pediy.com/" title="http:&#x2F;&#x2F;bbs.pediy.com" rel="noopener" target="_blank">看雪安全论坛</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.ibm.com/developerworks/cn" title="http:&#x2F;&#x2F;www.ibm.com&#x2F;developerworks&#x2F;cn" rel="noopener" target="_blank">IBM developerWorks 中国</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.wooyun.org/" title="http:&#x2F;&#x2F;www.wooyun.org" rel="noopener" target="_blank">WooYun.org</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://wiki.backbox.org/" title="http:&#x2F;&#x2F;wiki.backbox.org" rel="noopener" target="_blank">BackBox Wiki</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.freebuf.com/" title="http:&#x2F;&#x2F;www.freebuf.com" rel="noopener" target="_blank">关注黑客与极客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://mcs.une.edu.au/doc" title="http:&#x2F;&#x2F;mcs.une.edu.au&#x2F;doc" rel="noopener" target="_blank">Linux 在线学习文档</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://stackoverflow.com/" title="http:&#x2F;&#x2F;stackoverflow.com" rel="noopener" target="_blank">程序设计领域的问答网站</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://linuxfromscratch.org/" title="http:&#x2F;&#x2F;linuxfromscratch.org" rel="noopener" target="_blank">Linux 从零开始</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Graz</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/ipfs/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/ipfs/lib/velocity/velocity.min.js"></script>
+  <script src="/ipfs/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/ipfs/js/utils.js"></script>
+
+<script src="/ipfs/js/motion.js"></script>
+
+
+<script src="/ipfs/js/schemes/muse.js"></script>
+
+
+<script src="/ipfs/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/ipfs/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/ipfs/content/images/ilogo-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/ipfs/content/images/ilogo-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/ipfs/content/images/ilogo-16x16.png">
+  <link rel="mask-icon" href="/ipfs/content/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/ipfs/css/main.css">
+
+
+<link rel="stylesheet" href="/ipfs/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hcaijin.com","root":"/ipfs/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="linux,java,php">
+<meta property="og:type" content="website">
+<meta property="og:title" content="hcaijin.com">
+<meta property="og:url" content="http://hcaijin.com/page/5/index.html">
+<meta property="og:site_name" content="hcaijin.com">
+<meta property="og:description" content="linux,java,php">
+<meta property="article:author" content="Graz">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://hcaijin.com/page/5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>hcaijin.com</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/ipfs/atom.xml" title="hcaijin.com" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/ipfs/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hcaijin.com</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Graz's Blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/ipfs/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/ipfs/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/ipfs/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/ipfs/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://hcaijin.com/di-ci-pei-zhi-java-webfu-wu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ipfs/images/avatar.gif">
+      <meta itemprop="name" content="Graz">
+      <meta itemprop="description" content="linux,java,php">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hcaijin.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ipfs/di-ci-pei-zhi-java-webfu-wu/" class="post-title-link" itemprop="url">Linux服务器配置java web服务总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-01-25 03:14:16" itemprop="dateCreated datePublished" datetime="2016-01-25T03:14:16+08:00">2016-01-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2016-01-26 00:06:30" itemprop="dateModified" datetime="2016-01-26T00:06:30+08:00">2016-01-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>首先，以前是写php的，从未接触java的开发。最近公司项目重组，被安排说去做java开发，而且要快速上手,安排培训，可是，培训的都是windows下的IDE开发配置。没办法，Google呗。这样就有了这篇东拼西奏的文章，也有自己的一些经验总结，没少碰壁，不过这里还是感谢同事的帮忙，让我对java的运行有了清晰的认识。</p>
+</blockquote>
+<h2 id="了解java包运行原理"><a href="#了解java包运行原理" class="headerlink" title="了解java包运行原理"></a>了解java包运行原理</h2><p>java是编译型语言，自然少不了打包，链接，当然这些都可以用maven来管理。用maven打包，链接生成的安装包就是可以直接使用java来运行的，我们这里主要说web服务的配置，所以少不了tomcat。使用tomcat来运行web项目包，就可以在浏览器端访问，java应用服务，这就是大致的过程。</p>
+<h2 id="安装必要的软件包"><a href="#安装必要的软件包" class="headerlink" title="安装必要的软件包"></a>安装必要的软件包</h2><h3 id="安装jdk-至于安装哪个版本，视情况而定"><a href="#安装jdk-至于安装哪个版本，视情况而定" class="headerlink" title="安装jdk,至于安装哪个版本，视情况而定"></a>安装jdk,至于安装哪个版本，视情况而定</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S jdk8-openjdk</span><br></pre></td></tr></table></figure>
+<p>可以搜索一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Ss java</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装maven"><a href="#安装maven" class="headerlink" title="安装maven"></a>安装maven</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S maven</span><br></pre></td></tr></table></figure>
+
+<p>以上安装成功了以后，我们就可以使用<code>java, mvn</code> 的命令了，由于我们使用的是pacman安装方法，必要的环境变量都已经默认好了，可以不需要配置，具体可以看我以前写的 <a href="http://www.hcaijin.com/java-xue-xi-bi-ji/" target="_blank" rel="noopener">Java 学习笔记1</a></p>
+<h3 id="安装tomcat，同样的源里也有多个版本，视情况安装相应的版本"><a href="#安装tomcat，同样的源里也有多个版本，视情况安装相应的版本" class="headerlink" title="安装tomcat，同样的源里也有多个版本，视情况安装相应的版本"></a>安装tomcat，同样的源里也有多个版本，视情况安装相应的版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S tomcat7</span><br></pre></td></tr></table></figure>
+
+<h2 id="tomcat-主要配置详解"><a href="#tomcat-主要配置详解" class="headerlink" title="tomcat 主要配置详解"></a>tomcat 主要配置详解</h2><h3 id="主要目录功能"><a href="#主要目录功能" class="headerlink" title="主要目录功能"></a>主要目录功能</h3><p>默认情況 tomcat7 安装路径为 /usr/share/tomcat7，这里罗列一下主要目录的作用：</p>
+<ul>
+<li>/usr/share/tomcat7： 程序的主目录，也是变量 $CATALINA_HOME 所指向的位置，在单 tomcat 实例的情況下，也是变量 $CATALINA_BASE 所指向的位置。</li>
+<li>/usr/share/tomcat7/bin： 程序的执行脚本目录</li>
+<li>conf -&gt; /etc/tomcat7： 配置文档目录，存放主要是配置信息。</li>
+<li>lib -&gt; /usr/share/java/tomcat7： 共用jar包目录，这些包即给 tomcat 使用，也能给 web 应用程序所调用。</li>
+<li>logs -&gt; /var/log/tomcat7： 日志目录，对于查找错误以及查看访问记录很有用。</li>
+<li>webapps -&gt; /var/lib/tomcat7/webapps： 默认的 web 应用程序目录，tomcat7 自带了几个示例应用。</li>
+</ul>
+<h3 id="启动关闭脚本"><a href="#启动关闭脚本" class="headerlink" title="启动关闭脚本"></a>启动关闭脚本</h3><p>我们进入程序执行脚本目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;share&#x2F;tomcat7 </span><br><span class="line">sudo .&#x2F;startup.sh</span><br></pre></td></tr></table></figure>
+<p>以上，tomcat服务就启动成功了，可以在浏览器中访问<code>http://localhost:8080</code> ，如果看到 tomcat 猫即说明服务已经安装成功并且能正常运行了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo .&#x2F;shutdown.sh</span><br></pre></td></tr></table></figure>
+<p>这两个脚本都是通过调用 catalina.sh 来执行的，具体自己看脚本代码。</p>
+<h2 id="实例讲解tomcat启动java应用"><a href="#实例讲解tomcat启动java应用" class="headerlink" title="实例讲解tomcat启动java应用"></a>实例讲解tomcat启动java应用</h2><p>这里我犯了一个错误，总以为java应用之前总得有个相互调用的关系，没想到其实都已经在maven打包，安装到本地就行了，web应用配置好相应的pom.xml就可以调用maven打包，安装好的后台java应用。</p>
+<p>然后，我们开始说明代码部署过程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;data&#x2F;app&#x2F;                             ###进入工程主目录</span><br><span class="line">git clone git@erp:ecerp-saas              ###从erp服务器拉代码到本地</span><br><span class="line">cd &#x2F;data&#x2F;app&#x2F;ecerp-saas&#x2F;                  ###进入代码目录</span><br><span class="line">git pull                                  ###这个是同步服务器代码</span><br><span class="line">cd &#x2F;data&#x2F;app&#x2F;ecerp-saas&#x2F;Sources&#x2F;ecerp     ###进到主要工程目录</span><br><span class="line">mvn  clean install -Dmaven.test.skip&#x3D;true ###打包安装工程目录下相应的程序，这样就会编译好应用到本地用户目录下&#96;~&#x2F;.m2&#x2F;&#96;</span><br></pre></td></tr></table></figure>
+<p>在web目录下新建目录erp.hcj.com</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;data&#x2F;www&#x2F;</span><br><span class="line">mkdir erp.hcj.com&#x2F;</span><br><span class="line">cd erp.hcj.com&#x2F;</span><br></pre></td></tr></table></figure>
+<p>web应用java环境变量配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">touch webconfig</span><br><span class="line">cat webconfig</span><br></pre></td></tr></table></figure>
+<p><img data-src="/content/images/2016/01/--_2016-01-25_17-47-28.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;data&#x2F;www&#x2F;erp.hcj.com&#x2F;webconfig     ###使用环境变量生效</span><br></pre></td></tr></table></figure>
+<p>创建备份目录,当然这个不是必要的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">theday&#x3D;$(date +%Y%m%d)</span><br><span class="line">releaseDir&#x3D;&quot;&#x2F;data&#x2F;deployment&#x2F;packages&#x2F;$&#123;theday&#125;&quot;</span><br><span class="line">if [ ! -e $releaseDir ]</span><br><span class="line">then</span><br><span class="line">       mkdir -p $releaseDir</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>然后，我们就可以到java应用安装目录下找packagename，把它移到备份目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -fp &#96;find ~&#x2F;.m2&#x2F;repository&#x2F; -name $packagename&#96; $releaseDir&#x2F;$packagename</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#备份数据</span><br><span class="line">bktime&#x3D;$(date +%y%m%d%H%M)</span><br><span class="line">backupdir&#x3D;&quot;&#x2F;data&#x2F;deployment&#x2F;release-backup&#x2F;$bktime&#x2F;$(basename $srvdir)&quot;</span><br><span class="line">if [ ! -e $backupdir ]</span><br><span class="line">then</span><br><span class="line">    mkdir -p $backupdir</span><br><span class="line">fi</span><br><span class="line">rootdir&#x3D;&#x2F;data&#x2F;www&#x2F;erp.hcj.com&#x2F;webroot</span><br><span class="line">for files in $(ls $rootdir)</span><br><span class="line">do</span><br><span class="line">    if [ $files &#x3D;&#x3D; &quot;upload&quot; ]; then</span><br><span class="line">    ¦   echo $files not backup</span><br><span class="line">    else</span><br><span class="line">    ¦   &#x2F;bin&#x2F;cp -rfp $rootdir&#x2F;$files $backupdir</span><br><span class="line">    fi  </span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">### 删除旧应用</span><br><span class="line">rm -rf $rootdir&#x2F;WEB-INF&#x2F;*</span><br><span class="line">### 解压文件，在web主目录下生成webroot</span><br><span class="line">packagefile&#x3D;$releaseDir&#x2F;$packagename</span><br><span class="line">tar zxf $packagefile -C &#x2F;data&#x2F;www&#x2F;erp.hcj.com</span><br><span class="line">### 修改webroot的权限</span><br><span class="line">chown tomcat7.tomcat7 -R &#x2F;data&#x2F;www&#x2F;erp.hcj.com&#x2F;webroot</span><br></pre></td></tr></table></figure>
+<p>以上就基本是把java打包的应用程序，安装到了tomcat的webroot目录下了，但是要使这个应用启动成功，还需要配置多实例的tomcat的配置文件server.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;data&#x2F;www&#x2F;erp.hcj.com</span><br><span class="line">mkdir -p tomcat&#x2F;&#123;conf,logs,tmp,work,&#125;</span><br><span class="line">cp -r &#x2F;etc&#x2F;tomcat7&#x2F;* tomcat&#x2F;conf&#x2F;</span><br><span class="line">sudo chown -R tomcat7.tomcat7 tomcat&#x2F;</span><br><span class="line">vi server.xml</span><br></pre></td></tr></table></figure>
+<p>主要修改如下配置：<br><img data-src="/content/images/2016/01/--_2016-01-25_18-48-50.png" alt=""><br><img data-src="/content/images/2016/01/--_2016-01-25_18-49-35.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">### 设置tomcat环境变量</span><br><span class="line">export CATALINA_HOME&#x3D;&quot;&#x2F;usr&#x2F;share&#x2F;tomcat7&quot;</span><br><span class="line">export DUSER&#x3D;&quot;tomcat7&quot;</span><br><span class="line">export CATALINA_BASE&#x3D;&quot;&#x2F;data&#x2F;www&#x2F;erp.hcj.com&#x2F;tomcat&quot;</span><br><span class="line">export CATALINA_PID&#x3D;&quot;$CATALINA_BASE&#x2F;tomcat.pid&quot;</span><br><span class="line">export CATALINA_TMPDIR&#x3D;&quot;$CATALINA_BASE&#x2F;tmp&quot;</span><br><span class="line">export CATALINA_OUT&#x3D;&quot;$CATALINA_BASE&#x2F;logs&#x2F;catalina.out&quot;                                                                                                                                                                            </span><br><span class="line">export LOCKFILE&#x3D;&quot;$CATALINA_BASE&#x2F;tomcat.lock&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">### 启动服务</span><br><span class="line">&#x2F;bin&#x2F;bash $CATALINA_HOME&#x2F;bin&#x2F;startup.sh</span><br><span class="line">### 关闭服务</span><br><span class="line">&#x2F;bin&#x2F;bash $CATALINA_HOME&#x2F;bin&#x2F;shutdown.sh</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://ufaw0116.erufa.com/wordpress/?p=1254&ckattempt=3" target="_blank" rel="noopener">参考</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://hcaijin.com/java-xue-xi-bi-ji-2-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ipfs/images/avatar.gif">
+      <meta itemprop="name" content="Graz">
+      <meta itemprop="description" content="linux,java,php">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hcaijin.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ipfs/java-xue-xi-bi-ji-2-2/" class="post-title-link" itemprop="url">Java 学习笔记2</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-01-20 06:43:02" itemprop="dateCreated datePublished" datetime="2016-01-20T06:43:02+08:00">2016-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2016-01-25 03:09:09" itemprop="dateModified" datetime="2016-01-25T03:09:09+08:00">2016-01-25</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="镜像配置"><a href="#镜像配置" class="headerlink" title="镜像配置"></a>镜像配置</h2><p>由于maven的中央仓库位于国外，速度慢，也有可能其他原因无法访问，我们可以使用国内的镜像仓库。配置镜像仓库需要修改conf/settings.xml,打开该文件修改mirror标签如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;opt&#x2F;maven&#x2F;conf&#x2F;settings.xml</span><br></pre></td></tr></table></figure>
+<p><img data-src="/content/images/2016/01/--_2016-01-20_19-42-35.png" alt=""></p>
+<p>maven仓库默认是放在用户目录的.m2隐藏目录下的 ~/.m2/repository/ 。如果需要将仓库迁移到其他目录，修改conf/settings.xml<br><img data-src="/content/images/2016/01/--_2016-01-20_19-52-27.png" alt=""></p>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><p>配置maven编译程序过程中可用的最大，最下内存，防止内存溢出。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MAVEN_OPTS&#x3D;&quot;-Xms256m -Xmx512m&quot;</span><br><span class="line">export MAVEN_OPTS</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>配置web服务一定要记得设置compressableMimeType<br><img data-src="/content/images/2016/01/--_2016-01-25_16-02-11.png" alt=""></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://hcaijin.com/java-xue-xi-bi-ji/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ipfs/images/avatar.gif">
+      <meta itemprop="name" content="Graz">
+      <meta itemprop="description" content="linux,java,php">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hcaijin.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ipfs/java-xue-xi-bi-ji/" class="post-title-link" itemprop="url">Java 学习笔记1</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2016-01-20 04:08:30 / Modified: 06:34:05" itemprop="dateCreated datePublished" datetime="2016-01-20T04:08:30+08:00">2016-01-20</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>以下是在Arch Linux下操作，其他发行版或操作系统不适用。Maven这个词可以翻译为“知识的积累”，也可以翻译为“专 家”或“内行”。本文将介绍Maven这一跨平台的项目管理工具。作为Apache组织中的一个颇为成功的开源项目，Maven主要服务于基于Java平台的项目构建、依赖管理和项目信息管理。无论是小型的开源类库项目，还是大型的企业级应用；无论是传统的瀑布式开发，还是流行的敏捷模式，Maven都能大显身手。</p>
+</blockquote>
+<h2 id="安装java环境"><a href="#安装java环境" class="headerlink" title="安装java环境"></a>安装java环境</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S jdk8-openjdk</span><br></pre></td></tr></table></figure>
+<p>安装好以后可以使用如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">archlinux-java help             ##查看帮助</span><br><span class="line">archlinux-java status           ##java环境状态 使用的版本信息</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装maven"><a href="#安装maven" class="headerlink" title="安装maven"></a>安装maven</h2><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>maven 会被安装到<code>/opt/maven/</code> 目录下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S maven</span><br></pre></td></tr></table></figure>
+<p>修改环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi ~&#x2F;.bashrc</span><br></pre></td></tr></table></figure>
+<p><img data-src="/content/images/2016/01/--_2016-01-20_17-18-19.png" alt=""></p>
+<p>这样以后，就可以使用 mvn 命令来管理java项目，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;data&#x2F;gyapp&#x2F;                ###进入工作目录。(自定义)     </span><br><span class="line">mvn archetype:generate -DgroupId&#x3D;helloworld -DartifactId&#x3D;helloworld </span><br><span class="line">-Dpackage&#x3D;helloworld -Dversion&#x3D;1.0-SNAPSHO</span><br></pre></td></tr></table></figure>
+
+<h3 id="打包程序"><a href="#打包程序" class="headerlink" title="打包程序"></a>打包程序</h3><p>执行了上面的命令会在当前工作目录生成helloworld项目目录。<br><img data-src="/content/images/2016/01/--_2016-01-20_17-24-58.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd helloworld&#x2F;</span><br><span class="line">mvn package</span><br></pre></td></tr></table></figure>
+<p>这个时候， maven 在 helloworld 下面建立了一个新的目录 target/ ，构建打包后的 jar 文件 helloworld-1.0-SNAPSHOT.jar 就存放在这个目录下。编译后的 class 文件放在 target/classes/ 目录下面，测试 class 文件放在 target/test-classes/ 目录下面。</p>
+<p><img data-src="/content/images/2016/01/--_2016-01-20_17-26-01.png" alt=""></p>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>为了验证我们的程序能运行，执行下面的命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp target&#x2F;helloworld-1.0-SNAPSHOT.jar helloworld.App</span><br></pre></td></tr></table></figure>
+<p>输出源代码里的程序，显示 HelloWorld! 表示成功。</p>
+<h2 id="第一个程序"><a href="#第一个程序" class="headerlink" title="第一个程序"></a>第一个程序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi HelloWorld.java</span><br></pre></td></tr></table></figure>
+<p><img data-src="/content/images/2016/01/--_2016-01-20_17-10-49.png" alt=""><br>编译源代码，在当前目录生成HelloWorld.class,然后执行<code>java HelloWorld</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javac HelloWorld.java</span><br><span class="line">java HelloWorld</span><br></pre></td></tr></table></figure>
+
+<h2 id="重要"><a href="#重要" class="headerlink" title="重要"></a>重要</h2><p>转换ppk成linux下面支持的密钥文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S putty</span><br></pre></td></tr></table></figure>
+<p>安装putty以后，可以使用如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">puttygen git_cesi.ppk -o id_rsa.pub -O public-openssh</span><br><span class="line">puttygen git_cesi.ppk -o id_rsa -O private-openssh</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://www.oracle.com/technetwork/cn/community/java/apache-maven-getting-started-1-406235-zhs.html" target="_blank" rel="noopener">参考</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://hcaijin.com/linux-zhong-duan-xia-fa-song-xiao-xi-ming-ling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ipfs/images/avatar.gif">
+      <meta itemprop="name" content="Graz">
+      <meta itemprop="description" content="linux,java,php">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hcaijin.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ipfs/linux-zhong-duan-xia-fa-song-xiao-xi-ming-ling/" class="post-title-link" itemprop="url">Linux 终端下发送消息命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-01-13 03:58:19" itemprop="dateCreated datePublished" datetime="2016-01-13T03:58:19+08:00">2016-01-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2016-01-18 21:41:22" itemprop="dateModified" datetime="2016-01-18T21:41:22+08:00">2016-01-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>这里分享一个Linux服务器终端下发送消息的命令。由于平时工作中，必免不了与运维同事之间的信息交换，想到我们都是链的同一台服务器，这样就可以通过以下两个命令来发送消息。</p>
+</blockquote>
+<h3 id="给指定用户发送消息"><a href="#给指定用户发送消息" class="headerlink" title="给指定用户发送消息"></a>给指定用户发送消息</h3><p>首先，可使用w或who命令查看当前登录的用户信息；<br>然后，使用write命令将信息发送到用户的终端上，用法步骤如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ w</span><br><span class="line"> 17:17:53 up 19 days, 57 min,  3 users,  load average: 0.00, 0.01, 0.05</span><br><span class="line">USER     TTY        LOGIN@   IDLE   JCPU   PCPU WHAT</span><br><span class="line">zq       pts&#x2F;0     14:19    1:50   0.08s  0.02s -bash</span><br><span class="line">hcaijin  pts&#x2F;1     10:30   55.00s  7:05   0.23s -bash</span><br><span class="line">hcaijin  pts&#x2F;2     17:17    1.00s  0.01s  0.00s w</span><br><span class="line"></span><br><span class="line">$ write hcaijin pts&#x2F;1</span><br><span class="line">Test send message.</span><br></pre></td></tr></table></figure>
+
+<p>然后使用hcaijin账号登录，且tty号为pts/1的登录用户终端会收到如下消息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Message from hcaijin@hcj-arch on pts&#x2F;2 at 17:18 ...</span><br><span class="line">Test send message.</span><br></pre></td></tr></table></figure>
+<h3 id="给当前所有用户发送消息"><a href="#给当前所有用户发送消息" class="headerlink" title="给当前所有用户发送消息"></a>给当前所有用户发送消息</h3><p>给当前登录所有用户发送消息（需要root权限），使用wall（write all的缩写）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wall &#39;Test send message to all user.&#39;</span><br></pre></td></tr></table></figure>
+<p>执行wall命令，所有登录到该机器的控制台(console)界面上都会收到如上所示的消息。</p>
+<p><a href="http://www.cnblogs.com/gaojun/p/3387427.html" target="_blank" rel="noopener">引用</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://hcaijin.com/linux-xia-hao-wan-de-ming-ling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ipfs/images/avatar.gif">
+      <meta itemprop="name" content="Graz">
+      <meta itemprop="description" content="linux,java,php">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hcaijin.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ipfs/linux-xia-hao-wan-de-ming-ling/" class="post-title-link" itemprop="url">Linux 下终端里好玩与危险命令汇总</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2016-01-12 04:30:57 / Modified: 22:10:22" itemprop="dateCreated datePublished" datetime="2016-01-12T04:30:57+08:00">2016-01-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>最近发现Linux 终端里有很多好玩的命令，这里记录一下，以免下次还得搜索 - -</p>
+</blockquote>
+<h2 id="一些好玩的命令"><a href="#一些好玩的命令" class="headerlink" title="一些好玩的命令"></a>一些好玩的命令</h2><h3 id="sl"><a href="#sl" class="headerlink" title="sl"></a>sl</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sl</span><br></pre></td></tr></table></figure>
+<p><img data-src="/content/images/2016/01/2012111315222236.jpg" alt=""></p>
+<h3 id="telnet"><a href="#telnet" class="headerlink" title="telnet"></a>telnet</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ telnet towel.blinkenlights.nl</span><br></pre></td></tr></table></figure>
+<h3 id="rev"><a href="#rev" class="headerlink" title="rev"></a>rev</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rev</span><br></pre></td></tr></table></figure>
+<p><img data-src="/content/images/2016/01/--_2016-01-13_10-39-09.png" alt=""></p>
+<h3 id="factor"><a href="#factor" class="headerlink" title="factor"></a>factor</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ factor</span><br></pre></td></tr></table></figure>
+<p><img data-src="/content/images/2016/01/--_2016-01-13_10-32-16.png" alt=""></p>
+<h3 id="cowsay"><a href="#cowsay" class="headerlink" title="cowsay"></a>cowsay</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cowsay &#x2F; cowthink</span><br></pre></td></tr></table></figure>
+<p><img data-src="/content/images/2016/01/--_2016-01-13_10-41-06.png" alt=""></p>
+<h3 id="fortune"><a href="#fortune" class="headerlink" title="fortune"></a>fortune</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ fortune &#x2F; fortune-zh</span><br></pre></td></tr></table></figure>
+<p><img data-src="/content/images/2016/01/--_2016-01-13_10-42-01.png" alt=""></p>
+<h3 id="cmatrix"><a href="#cmatrix" class="headerlink" title="cmatrix"></a>cmatrix</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cmatrix</span><br></pre></td></tr></table></figure>
+<p><img data-src="/content/images/2016/01/--_2016-01-13_10-42-45.png" alt=""></p>
+<h3 id="yes"><a href="#yes" class="headerlink" title="yes"></a>yes</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ yes</span><br><span class="line">$ yes I love China</span><br></pre></td></tr></table></figure>
+<p>yes 是一个非常有趣又有用的命令，尤其对于脚本编写和系统管理员来说，它可以自动地生成预先定义的响应或者将其传到终端。</p>
+<h3 id="toilet"><a href="#toilet" class="headerlink" title="toilet"></a>toilet</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ toilet hcaijin.com</span><br><span class="line">$ toilet -f mono12 -F metal hcaijin.com</span><br></pre></td></tr></table></figure>
+<p><img data-src="/content/images/2016/01/--_2016-01-13_10-47-46.png" alt=""></p>
+<h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ while true; do echo &quot;$(date &#39;+%D %T&#39; | toilet -f term -F border --gay)&quot;; sleep 1; done</span><br></pre></td></tr></table></figure>
+<p><img data-src="/content/images/2016/01/--_2016-01-13_10-49-59.png" alt=""></p>
+<h3 id="espeak"><a href="#espeak" class="headerlink" title="espeak"></a>espeak</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ espeak &quot;Tecmint is a very good website dedicated to Foss Community&quot;</span><br></pre></td></tr></table></figure>
+<p>将你的多媒体音箱的音量调到最大，然后在将这个命令复制到你的终端，来看看你听到上帝的声音时的反应吧。</p>
+<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for i in &#123;1..19&#125;; do for j in $(seq 1 $i); do echo -ne $i x $j&#x3D;$((i*j))\\t;done; echo;done</span><br></pre></td></tr></table></figure>
+<p><img data-src="/content/images/2016/01/--_2016-01-13_10-44-41.png" alt=""></p>
+<h3 id="banner"><a href="#banner" class="headerlink" title="banner"></a>banner</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ banner hcaijin.com</span><br></pre></td></tr></table></figure>
+<p><img data-src="/content/images/2016/01/--_2016-01-13_10-58-38.png" alt=""></p>
+<h2 id="终端下有很多危险的命令，千万小心执行。"><a href="#终端下有很多危险的命令，千万小心执行。" class="headerlink" title="终端下有很多危险的命令，千万小心执行。"></a>终端下有很多危险的命令，千万小心执行。</h2><h3 id="fork炸弹"><a href="#fork炸弹" class="headerlink" title="fork炸弹"></a>fork炸弹</h3><p>这个命令其实是一个fork炸弹，它会以指数级的自乘，直到所有的系统资源都被利用了或者系统挂起</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ :()&#123; :|:&amp; &#125;:</span><br></pre></td></tr></table></figure>
+<h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h3><p>删除命令，一定要小心不可用root用户执行以下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rm -rf &#x2F;</span><br></pre></td></tr></table></figure>
+
+<h3 id="dd"><a href="#dd" class="headerlink" title="dd"></a>dd</h3><p>很有用的命令，但是要注意不要运行以下命令，其实我也没有运行过- -</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ dd if&#x3D;&#x2F;dev&#x2F;zero of&#x3D;&#x2F;dev&#x2F;mem</span><br></pre></td></tr></table></figure>
+
+<h3 id="shred"><a href="#shred" class="headerlink" title="shred"></a>shred</h3><p>覆盖文件让它不能再读，传说中的文件粉碎机</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ shred --help</span><br></pre></td></tr></table></figure>
+<p><img data-src="/content/images/2016/01/--_2016-01-13_11-03-46.png" alt=""></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/ipfs/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/ipfs/">1</a><span class="space">&hellip;</span><a class="page-number" href="/ipfs/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/ipfs/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/ipfs/page/10/">10</a><a class="extend next" rel="next" href="/ipfs/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Graz</p>
+  <div class="site-description" itemprop="description">linux,java,php</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/ipfs/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/ipfs/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hcaijin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hcaijin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hcjonline@gmail.com" title="E-Mail → mailto:hcjonline@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://groups.google.com/forum" title="https:&#x2F;&#x2F;groups.google.com&#x2F;forum" rel="noopener" target="_blank">Google 网上论坛</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://programgo.com/" title="http:&#x2F;&#x2F;programgo.com" rel="noopener" target="_blank">软件开发程序员博客文章收藏网</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://bbs.chinaunix.net/" title="http:&#x2F;&#x2F;bbs.chinaunix.net" rel="noopener" target="_blank">论坛-ChinaUnix.net</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://bbs.pediy.com/" title="http:&#x2F;&#x2F;bbs.pediy.com" rel="noopener" target="_blank">看雪安全论坛</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.ibm.com/developerworks/cn" title="http:&#x2F;&#x2F;www.ibm.com&#x2F;developerworks&#x2F;cn" rel="noopener" target="_blank">IBM developerWorks 中国</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.wooyun.org/" title="http:&#x2F;&#x2F;www.wooyun.org" rel="noopener" target="_blank">WooYun.org</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://wiki.backbox.org/" title="http:&#x2F;&#x2F;wiki.backbox.org" rel="noopener" target="_blank">BackBox Wiki</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.freebuf.com/" title="http:&#x2F;&#x2F;www.freebuf.com" rel="noopener" target="_blank">关注黑客与极客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://mcs.une.edu.au/doc" title="http:&#x2F;&#x2F;mcs.une.edu.au&#x2F;doc" rel="noopener" target="_blank">Linux 在线学习文档</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://stackoverflow.com/" title="http:&#x2F;&#x2F;stackoverflow.com" rel="noopener" target="_blank">程序设计领域的问答网站</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://linuxfromscratch.org/" title="http:&#x2F;&#x2F;linuxfromscratch.org" rel="noopener" target="_blank">Linux 从零开始</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Graz</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/ipfs/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/ipfs/lib/velocity/velocity.min.js"></script>
+  <script src="/ipfs/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/ipfs/js/utils.js"></script>
+
+<script src="/ipfs/js/motion.js"></script>
+
+
+<script src="/ipfs/js/schemes/muse.js"></script>
+
+
+<script src="/ipfs/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/ipfs/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

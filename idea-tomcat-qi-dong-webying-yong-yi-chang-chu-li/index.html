@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/ipfs/content/images/ilogo-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/ipfs/content/images/ilogo-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/ipfs/content/images/ilogo-16x16.png">
+  <link rel="mask-icon" href="/ipfs/content/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/ipfs/css/main.css">
+
+
+<link rel="stylesheet" href="/ipfs/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hcaijin.com","root":"/ipfs/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1234567892016-05-11 16:36:25.799 [RMI TCP Connection(4)-127.0.0.1] ERROR org.springframework.web.context.ContextLoader - Context initialization failedorg.springframework.beans.factory.BeanCreationExce">
+<meta property="og:type" content="article">
+<meta property="og:title" content="idea tomcat 启动web应用异常处理">
+<meta property="og:url" content="http://hcaijin.com/idea-tomcat-qi-dong-webying-yong-yi-chang-chu-li/index.html">
+<meta property="og:site_name" content="hcaijin.com">
+<meta property="og:description" content="1234567892016-05-11 16:36:25.799 [RMI TCP Connection(4)-127.0.0.1] ERROR org.springframework.web.context.ContextLoader - Context initialization failedorg.springframework.beans.factory.BeanCreationExce">
+<meta property="article:published_time" content="2016-05-10T21:28:04.000Z">
+<meta property="article:modified_time" content="2016-05-10T21:36:39.000Z">
+<meta property="article:author" content="Graz">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="tomcat">
+<meta property="article:tag" content="idea">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://hcaijin.com/idea-tomcat-qi-dong-webying-yong-yi-chang-chu-li/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>idea tomcat 启动web应用异常处理 | hcaijin.com</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/ipfs/atom.xml" title="hcaijin.com" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/ipfs/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hcaijin.com</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Graz's Blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/ipfs/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/ipfs/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/ipfs/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/ipfs/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://hcaijin.com/idea-tomcat-qi-dong-webying-yong-yi-chang-chu-li/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ipfs/images/avatar.gif">
+      <meta itemprop="name" content="Graz">
+      <meta itemprop="description" content="linux,java,php">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hcaijin.com">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          idea tomcat 启动web应用异常处理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2016-05-11 05:28:04 / Modified: 05:36:39" itemprop="dateCreated datePublished" datetime="2016-05-11T05:28:04+08:00">2016-05-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">2016-05-11 16:36:25.799 [RMI TCP Connection(4)-127.0.0.1] ERROR org.springframework.web.context.ContextLoader - Context initialization failed</span><br><span class="line">org.springframework.beans.factory.BeanCreationException: Error creating bean with name &#39;shiroFilter&#39; defined in file [&#x2F;home&#x2F;hcj&#x2F;Work&#x2F;data&#x2F;ecerp-saas&#x2F;Sources&#x2F;ecerp&#x2F;out&#x2F;artifacts&#x2F;ecerp_web_war_exploded&#x2F;WEB-INF&#x2F;classes&#x2F;spring&#x2F;applicationContext.xml]: Cannot resolve reference to bean &#39;securityManager&#39; while setting bean property &#39;securityManager&#39;; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &#39;securityManager&#39; defined in file [&#x2F;home&#x2F;hcj&#x2F;Work&#x2F;data&#x2F;ecerp-saas&#x2F;Sources&#x2F;ecerp&#x2F;out&#x2F;artifacts&#x2F;ecerp_web_war_exploded&#x2F;WEB-INF&#x2F;classes&#x2F;spring&#x2F;applicationContext.xml]: Cannot resolve reference to bean &#39;shiroSubjectFactory&#39; while setting bean property &#39;subjectFactory&#39;; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &#39;shiroSubjectFactory&#39;: Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private gy.erp.service.admin.SecurityMonitor gy.erp.shiro.ShiroSubjectFactory.securityMonitor; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &#39;securityMonitor&#39; defined in class path resource [spring-domain.xml]: Cannot resolve reference to bean &#39;sessionService&#39; while setting bean property &#39;sessionService&#39;; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &#39;sessionService&#39;: FactoryBean threw exception on object creation; nested exception is java.lang.IllegalArgumentException: Invalid registry store file &#x2F;data&#x2F;erp.guanyisoft.com&#x2F;tomcat&#x2F;ecerp-web.properties, cause: Failed to create directory &#x2F;data&#x2F;erp.guanyisoft.com&#x2F;tomcat!</span><br><span class="line">	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:329) ~[spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:107) ~[spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1391) ~[spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1132) ~[spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:461) ~[spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]</span><br><span class="line">	at org.</span><br></pre></td></tr></table></figure>
+<p>java报错总要看异常信息，以上主要关键的地方列在这里：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;nested exception is java.lang.IllegalArgumentException: Invalid registry store file &#x2F;data&#x2F;erp.guanyisoft.com&#x2F;tomcat&#x2F;ecerp-web.properties, cause: Failed to create directory &#x2F;data&#x2F;erp.guanyisoft.com&#x2F;tomcat!</span><br></pre></td></tr></table></figure>
+<p>idea tomcat 在启动web应用的时候会生成一个注册dubbo服务的文件，需要指定生成路径，以前项目都是默认生成在out文件里的吧，最近，不知道什么变动，需要手工在项目配置文件application.properties 指定一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dubbo.registry.file &#x3D; &#x2F;home&#x2F;hcj&#x2F;Work&#x2F;data&#x2F;ecerp-web.properties</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>授人以渔，是否得人予鱼</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/ipfs/content/images/wechatpay.png" alt="Graz WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/ipfs/content/images/ali_pay.jpg" alt="Graz Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/ipfs/content/images/paypal.png" alt="Graz PayPal">
+        <p>PayPal</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/lunome">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/content/images/wechat_channel.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/ipfs/tags/java/" rel="tag"># java</a>
+              <a href="/ipfs/tags/tomcat/" rel="tag"># tomcat</a>
+              <a href="/ipfs/tags/idea/" rel="tag"># idea</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/ipfs/linux-sheng-qia-qu-dong-wen-ti/" rel="prev" title="Linux 声卡驱动问题">
+      <i class="fa fa-chevron-left"></i> Linux 声卡驱动问题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/ipfs/linuxgua-zai-mac-xi-tong-xia-de-dmgwen-jian/" rel="next" title="Linux挂载Mac系统下的dmg文件">
+      Linux挂载Mac系统下的dmg文件 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Graz</p>
+  <div class="site-description" itemprop="description">linux,java,php</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/ipfs/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/ipfs/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hcaijin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hcaijin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hcjonline@gmail.com" title="E-Mail → mailto:hcjonline@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://groups.google.com/forum" title="https:&#x2F;&#x2F;groups.google.com&#x2F;forum" rel="noopener" target="_blank">Google 网上论坛</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://programgo.com/" title="http:&#x2F;&#x2F;programgo.com" rel="noopener" target="_blank">软件开发程序员博客文章收藏网</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://bbs.chinaunix.net/" title="http:&#x2F;&#x2F;bbs.chinaunix.net" rel="noopener" target="_blank">论坛-ChinaUnix.net</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://bbs.pediy.com/" title="http:&#x2F;&#x2F;bbs.pediy.com" rel="noopener" target="_blank">看雪安全论坛</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.ibm.com/developerworks/cn" title="http:&#x2F;&#x2F;www.ibm.com&#x2F;developerworks&#x2F;cn" rel="noopener" target="_blank">IBM developerWorks 中国</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.wooyun.org/" title="http:&#x2F;&#x2F;www.wooyun.org" rel="noopener" target="_blank">WooYun.org</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://wiki.backbox.org/" title="http:&#x2F;&#x2F;wiki.backbox.org" rel="noopener" target="_blank">BackBox Wiki</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.freebuf.com/" title="http:&#x2F;&#x2F;www.freebuf.com" rel="noopener" target="_blank">关注黑客与极客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://mcs.une.edu.au/doc" title="http:&#x2F;&#x2F;mcs.une.edu.au&#x2F;doc" rel="noopener" target="_blank">Linux 在线学习文档</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://stackoverflow.com/" title="http:&#x2F;&#x2F;stackoverflow.com" rel="noopener" target="_blank">程序设计领域的问答网站</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://linuxfromscratch.org/" title="http:&#x2F;&#x2F;linuxfromscratch.org" rel="noopener" target="_blank">Linux 从零开始</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Graz</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/ipfs/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/ipfs/lib/velocity/velocity.min.js"></script>
+  <script src="/ipfs/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/ipfs/js/utils.js"></script>
+
+<script src="/ipfs/js/motion.js"></script>
+
+
+<script src="/ipfs/js/schemes/muse.js"></script>
+
+
+<script src="/ipfs/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/ipfs/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/ipfs/content/images/ilogo-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/ipfs/content/images/ilogo-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/ipfs/content/images/ilogo-16x16.png">
+  <link rel="mask-icon" href="/ipfs/content/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/ipfs/css/main.css">
+
+
+<link rel="stylesheet" href="/ipfs/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hcaijin.com","root":"/ipfs/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言openwrt是一款基于linux的路由器系统，可以安装很多相关的工具包，完成像linux系统服务器可以完成的工作，比如今天我们要讲的路由器的网络数据包抓包。 环境 安装了openwrt的路由器，ip地址：192.168.10.1 要抓包流量的Android手机，ip地址：192.68.10.235 工作台笔记本，ip地址：192.168.10.234  安装与配置 以下介绍两种方法都可以实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用OPENWRT路由器抓包网络流量笔记">
+<meta property="og:url" content="http://hcaijin.com/openwrt-wireshark-setting/index.html">
+<meta property="og:site_name" content="hcaijin.com">
+<meta property="og:description" content="前言openwrt是一款基于linux的路由器系统，可以安装很多相关的工具包，完成像linux系统服务器可以完成的工作，比如今天我们要讲的路由器的网络数据包抓包。 环境 安装了openwrt的路由器，ip地址：192.168.10.1 要抓包流量的Android手机，ip地址：192.68.10.235 工作台笔记本，ip地址：192.168.10.234  安装与配置 以下介绍两种方法都可以实现">
+<meta property="article:published_time" content="2018-06-13T11:50:11.000Z">
+<meta property="article:modified_time" content="2020-05-06T19:05:11.192Z">
+<meta property="article:author" content="Graz">
+<meta property="article:tag" content="openwrt">
+<meta property="article:tag" content="wireshark">
+<meta property="article:tag" content="cloudshark">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://hcaijin.com/openwrt-wireshark-setting/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>用OPENWRT路由器抓包网络流量笔记 | hcaijin.com</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/ipfs/atom.xml" title="hcaijin.com" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/ipfs/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hcaijin.com</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Graz's Blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/ipfs/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/ipfs/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/ipfs/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/ipfs/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://hcaijin.com/openwrt-wireshark-setting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/ipfs/images/avatar.gif">
+      <meta itemprop="name" content="Graz">
+      <meta itemprop="description" content="linux,java,php">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hcaijin.com">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用OPENWRT路由器抓包网络流量笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-06-13 19:50:11" itemprop="dateCreated datePublished" datetime="2018-06-13T19:50:11+08:00">2018-06-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-07 03:05:11" itemprop="dateModified" datetime="2020-05-07T03:05:11+08:00">2020-05-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>openwrt是一款基于linux的路由器系统，可以安装很多相关的工具包，完成像linux系统服务器可以完成的工作，比如今天我们要讲的路由器的网络数据包抓包。</p>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
+<li>安装了openwrt的路由器，ip地址：192.168.10.1</li>
+<li>要抓包流量的Android手机，ip地址：192.68.10.235</li>
+<li>工作台笔记本，ip地址：192.168.10.234</li>
+</ul>
+<h1 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h1><blockquote>
+<p>以下介绍两种方法都可以实现路由器数据包抓取的功能</p>
+</blockquote>
+<p><strong><em>简单的说明<br>根据openwrt文档，所有的局域网的数据最后都是通过br-lan虚拟网卡来做转发，所以对此网卡进行监控即可<br>此命令本质是远程在路由器上执行网络监控命令，输入文本到本机的wireshark里面<br>使用wireshark作为可视化工具来查看</em></strong></p>
+<h2 id="捕获与tcpdump的通信"><a href="#捕获与tcpdump的通信" class="headerlink" title="捕获与tcpdump的通信"></a>捕获与tcpdump的通信</h2><blockquote>
+<p>Tcpdump可以安装在OpenWrt路由器上。因此，这种方法消除了让远程Wireshark或类似听众实时分析流量的需要。</p>
+</blockquote>
+<p>ssh登陆到openwrt(默认端口：22)，更新并安装tcpdump</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install tcpdump</span><br></pre></td></tr></table></figure>
+<p>执行以下命令在接口（-i）上侦听并将捕获的信息存储到文件（-w），并在执行此操作时（-v）进行冗长操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any -v -w pcap.cap</span><br></pre></td></tr></table></figure>
+<p>生成的pcap.cap文件，我们可以传回工作台，用wireshark打开做进一步的分析</p>
+<blockquote>
+<p>以下是一些使用tcpdump的例子：</p>
+</blockquote>
+<ul>
+<li><a href="https://www.rationallyparanoid.com/articles/tcpdump.html" target="_blank" rel="noopener">https://www.rationallyparanoid.com/articles/tcpdump.html</a></li>
+</ul>
+<h3 id="制作一键命令脚本"><a href="#制作一键命令脚本" class="headerlink" title="制作一键命令脚本"></a>制作一键命令脚本</h3><p>命令格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -p ssh端口 -o StrictHostKeyChecking&#x3D;no ssh用户名@ssh地址 &#39;tcpdump -s 0 -U -n -w - -i br-lan not port ssh端口&#39; | wireshark -k -i -</span><br></pre></td></tr></table></figure>
+<p>由于我环境配置了不用密码登陆的方式所以我们可以直接写成如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh openwrt &#39;tcpdump -s 0 -U -n -w - -i br-lan not port 22&#39; | wireshark -k -i -</span><br><span class="line">ssh -p 22 -o StrictHostKeyChecking&#x3D;no root@192.168.10.1 &#39;tcpdump -s 0 -U -n -w - -i br-lan not port 22&#39; | wireshark -k -i -</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>前面讲述了基本的原理和操作手段，但是缺点是每次都需要输入长串命令行和密码，可以利用linux的一些小操作技巧，简化此过程，做成一个命令工具，方便随时调用。<br>基本原理：</p>
+</blockquote>
+<ul>
+<li>使用 sshpass 工具来做密码输入</li>
+<li>使用 alias 别名来做成命令语句</li>
+</ul>
+<p>在工作台安装sshpass，执行以下脚本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S sshpass</span><br><span class="line">sshpass -p &#39;password&#39; ssh -p 22 -o StrictHostKeyChecking&#x3D;no root@192.168.10.1 &#39;tcpdump -s 0 -U -n -w - -i br-lan not port 22&#39; | wireshark-gtk -k -i -</span><br></pre></td></tr></table></figure>
+<p>把执行语句写到<code>.bash_rc</code>就可以一条命令执行抓包分析了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias tsharkbyopenwrt&#x3D;&quot;sshpass -p &#39;password&#39; ssh -p 22 -o StrictHostKeyChecking&#x3D;no root@192.168.10.1 &#39;tcpdump -s 0 -U -n -w - -i br-lan not port 22&#39; | wireshark-gtk -k -i -&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="完善脚本"><a href="#完善脚本" class="headerlink" title="完善脚本"></a>完善脚本</h3><p>通过命名管道来导回数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkfifo &#x2F;tmp&#x2F;fifo</span><br><span class="line">sshpass -p &#39;passwrod&#39; ssh openwrt &#39;tcpdump -s 0 -U -n -w - -i br-lan not port 22&#39; &gt; &#x2F;tmp&#x2F;fifo &amp; wireshark-gtk -k -i &#x2F;tmp&#x2F;fifo</span><br></pre></td></tr></table></figure>
+<p><em>这里我配置了<code>.ssh/config</code>，所以可以直接使用<code>ssh openwrt</code>命令代替前面指定端口与用户名的方式。</em></p>
+<blockquote>
+<p>我们还有一个方法可以不用安装sshpass,直接使用密钥的方式来登陆路由器抓包,以上就可以写为：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id openwrt</span><br><span class="line">ssh openwrt &#39;tcpdump -s 0 -U -n -w - -i br-lan not port 22&#39; &gt; &#x2F;tmp&#x2F;fifo &amp; wireshark-gtk -k -i &#x2F;tmp&#x2F;fifo</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用远程Wireshark侦听器进行分析"><a href="#使用远程Wireshark侦听器进行分析" class="headerlink" title="使用远程Wireshark侦听器进行分析"></a>使用远程Wireshark侦听器进行分析</h2><p>ssh登陆到openwrt(默认端口：22)，更新并安装iptables-mod-tee</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg update </span><br><span class="line">opkg install iptables-mod-tee</span><br></pre></td></tr></table></figure>
+<p>运行以下iptables命令以“在输出接口（-o）上将源IP（-s）的每个数据包的副本转发到网关IP（ - 网关）”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A POSTROUTING -t mangle -o br-lan ! -s 192.168.10.235 -j TEE --gateway 192.168.10.234</span><br></pre></td></tr></table></figure>
+<p>运行以下iptables命令以“在接口（-i）上将目的IP（-d）的每个数据包的副本转发到网关IP（ - 网关）”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A PREROUTING -t mangle -i br-lan ! -d 192.168.10.235 -j TEE --gateway 192.168.10.234</span><br></pre></td></tr></table></figure>
+<p>在Wireshark上开始捕获流量并应用下面的过滤器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(ip.src &#x3D;&#x3D; 192.168.9.121) || (ip.dst &#x3D;&#x3D; 192.168.9.121)</span><br></pre></td></tr></table></figure>
+
+<p>关于iptable规则一些有用的资源：</p>
+<ul>
+<li><a href="https://wiki.openwrt.org/doc/howto/netfilter" target="_blank" rel="noopener">https://wiki.openwrt.org/doc/howto/netfilter</a></li>
+<li><a href="http://www.faqs.org/docs/iptables/index.html" target="_blank" rel="noopener">http://www.faqs.org/docs/iptables/index.html</a></li>
+<li><a href="http://ipset.netfilter.org/iptables-extensions.man.html#lbDW" target="_blank" rel="noopener">http://ipset.netfilter.org/iptables-extensions.man.html#lbDW</a></li>
+</ul>
+<h2 id="安装使用CloudShark"><a href="#安装使用CloudShark" class="headerlink" title="安装使用CloudShark"></a>安装使用CloudShark</h2><p>CloudShark是一个独立的，与LEDE无关的云分析平台。它依靠cshark插件远程发送数据包进行分析。请检查您的内部规则，是否允许将网络流量发送到云平台。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install cshark luci-app-cshark</span><br></pre></td></tr></table></figure>
+<p>请查看<a href="https://support.cloudshark.org/openwrt/openwrt-cloudshark.html" target="_blank" rel="noopener">Cloud Shark文档</a>以获取更多信息。</p>
+<h1 id="问题处理"><a href="#问题处理" class="headerlink" title="问题处理"></a>问题处理</h1><p>在工作台使用wireshark-gtk的时候报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Couldn&#39;t run &#x2F;usr&#x2F;bin&#x2F;dumpcap in child process: Permission denied</span><br></pre></td></tr></table></figure>
+<p>这是由于dumpcap这个的权限问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ll &#x2F;usr&#x2F;bin&#x2F;dumpcap                                                                  :(</span><br><span class="line">-rwxr-xr-- 1 root wireshark 102K May 23 06:39 &#x2F;usr&#x2F;bin&#x2F;dumpcap</span><br></pre></td></tr></table></figure>
+<p>只要把当前用户加入到wireshark用户组里，重启就ok了（暂时不明为什么一定要重启，反正我是重启以后才正常使用的)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod -aG wireshark $LOGNAME</span><br><span class="line">sudo setcap cap_net_raw,cap_net_admin+eip &#x2F;usr&#x2F;bin&#x2F;dumpcap</span><br></pre></td></tr></table></figure>
+<p><em>setcat对应使用getcap查看当前的方法权限</em></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://www.ayomaonline.com/security/analyzing-network-traffic-with-openwrt/" target="_blank" rel="noopener">ANALYZING NETWORK TRAFFIC WITH OPENWRT</a></li>
+<li><a href="https://openwrt.org/docs/guide-user/firewall/capture-filter-inspect-packets" target="_blank" rel="noopener">How to capture, filter and inspect packets</a></li>
+<li><a href="http://www.ayomaonline.com/security/getting-started-with-openwrt-linuxfying-routers/" target="_blank" rel="noopener">GETTING STARTED WITH OPENWRT – LINUXFYING ROUTERS</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>授人以渔，是否得人予鱼</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/ipfs/content/images/wechatpay.png" alt="Graz WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/ipfs/content/images/ali_pay.jpg" alt="Graz Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/ipfs/content/images/paypal.png" alt="Graz PayPal">
+        <p>PayPal</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/lunome">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/content/images/wechat_channel.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/ipfs/tags/openwrt/" rel="tag"># openwrt</a>
+              <a href="/ipfs/tags/wireshark/" rel="tag"># wireshark</a>
+              <a href="/ipfs/tags/cloudshark/" rel="tag"># cloudshark</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/ipfs/archlinux-uefi-bootloader/" rel="prev" title="UEFI+GPT安装Archlinux与Win10双系统教程">
+      <i class="fa fa-chevron-left"></i> UEFI+GPT安装Archlinux与Win10双系统教程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/ipfs/openwrt-raspberry/" rel="next" title="树莓派安装配置软路由">
+      树莓派安装配置软路由 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#环境"><span class="nav-number">2.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装与配置"><span class="nav-number">3.</span> <span class="nav-text">安装与配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#捕获与tcpdump的通信"><span class="nav-number">3.1.</span> <span class="nav-text">捕获与tcpdump的通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#制作一键命令脚本"><span class="nav-number">3.1.1.</span> <span class="nav-text">制作一键命令脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完善脚本"><span class="nav-number">3.1.2.</span> <span class="nav-text">完善脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用远程Wireshark侦听器进行分析"><span class="nav-number">3.2.</span> <span class="nav-text">使用远程Wireshark侦听器进行分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装使用CloudShark"><span class="nav-number">3.3.</span> <span class="nav-text">安装使用CloudShark</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题处理"><span class="nav-number">4.</span> <span class="nav-text">问题处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Graz</p>
+  <div class="site-description" itemprop="description">linux,java,php</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/ipfs/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/ipfs/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hcaijin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hcaijin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hcjonline@gmail.com" title="E-Mail → mailto:hcjonline@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://groups.google.com/forum" title="https:&#x2F;&#x2F;groups.google.com&#x2F;forum" rel="noopener" target="_blank">Google 网上论坛</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://programgo.com/" title="http:&#x2F;&#x2F;programgo.com" rel="noopener" target="_blank">软件开发程序员博客文章收藏网</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://bbs.chinaunix.net/" title="http:&#x2F;&#x2F;bbs.chinaunix.net" rel="noopener" target="_blank">论坛-ChinaUnix.net</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://bbs.pediy.com/" title="http:&#x2F;&#x2F;bbs.pediy.com" rel="noopener" target="_blank">看雪安全论坛</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.ibm.com/developerworks/cn" title="http:&#x2F;&#x2F;www.ibm.com&#x2F;developerworks&#x2F;cn" rel="noopener" target="_blank">IBM developerWorks 中国</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.wooyun.org/" title="http:&#x2F;&#x2F;www.wooyun.org" rel="noopener" target="_blank">WooYun.org</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://wiki.backbox.org/" title="http:&#x2F;&#x2F;wiki.backbox.org" rel="noopener" target="_blank">BackBox Wiki</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.freebuf.com/" title="http:&#x2F;&#x2F;www.freebuf.com" rel="noopener" target="_blank">关注黑客与极客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://mcs.une.edu.au/doc" title="http:&#x2F;&#x2F;mcs.une.edu.au&#x2F;doc" rel="noopener" target="_blank">Linux 在线学习文档</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://stackoverflow.com/" title="http:&#x2F;&#x2F;stackoverflow.com" rel="noopener" target="_blank">程序设计领域的问答网站</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://linuxfromscratch.org/" title="http:&#x2F;&#x2F;linuxfromscratch.org" rel="noopener" target="_blank">Linux 从零开始</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Graz</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/ipfs/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/ipfs/lib/velocity/velocity.min.js"></script>
+  <script src="/ipfs/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/ipfs/js/utils.js"></script>
+
+<script src="/ipfs/js/motion.js"></script>
+
+
+<script src="/ipfs/js/schemes/muse.js"></script>
+
+
+<script src="/ipfs/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/ipfs/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
