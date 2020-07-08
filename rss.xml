@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Vladimir's Blog</title><link>https://blog.wxchat.xyz/</link><description>MemE is a powerful and highly customizable GoHugo theme for personal blogs.</description><generator>Hugo 0.73.0 https://gohugo.io/</generator><language>en</language><managingEditor>hcjonline@gmail.com (Vladimir)</managingEditor><webMaster>hcjonline@gmail.com (Vladimir)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><lastBuildDate>Wed, 08 Jul 2020 16:33:14 +0800</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://blog.wxchat.xyz/rss.xml"/><item><title>Nexus6p虚焊导致无限重启之救砖教程</title><link>https://blog.wxchat.xyz/posts/bootlooping-nexus6p-fix/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/bootlooping-nexus6p-fix/</guid><pubDate>Fri, 03 Jul 2020 14:44:06 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h1 id="前言">前言&lt;/h1>
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Vladimir's Blog</title><link>http://blog.wxchat.xyz/</link><description>MemE is a powerful and highly customizable GoHugo theme for personal blogs.</description><generator>Hugo 0.73.0 https://gohugo.io/</generator><language>en</language><managingEditor>hcjonline@gmail.com (Vladimir)</managingEditor><webMaster>hcjonline@gmail.com (Vladimir)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><lastBuildDate>Thu, 09 Jul 2020 00:23:20 +0800</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="http://blog.wxchat.xyz/rss.xml"/><item><title>Nexus6p虚焊导致无限重启之救砖教程</title><link>http://blog.wxchat.xyz/posts/bootlooping-nexus6p-fix/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/bootlooping-nexus6p-fix/</guid><pubDate>Fri, 03 Jul 2020 14:44:06 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h1 id="前言">前言&lt;/h1>
 &lt;blockquote>
 &lt;p>前两天手机在使用过程中，无故死机，重启发现在logo显示画面停留一会儿又重启，后面就一直不断的循环这个过程。
 本来以为重新做系统就好了，没想到再还原回去还是一样。我以为就这么变砖了，最后还是因为穷的力量，搜索nexus6p无限重启原因就发现原来这是由于前几天我手机摔过一次，可能导致cpu虚焊部分出了毛病，才导致现在手机无限重启的情况。
@@ -67,7 +67,7 @@
 &lt;h1 id="下载">下载&lt;/h1>
 &lt;blockquote>
 &lt;p>我打包了一下所有要用到的软件（不包括原厂镜像包，这些都可以去官网下载)，防止原链接失效。&lt;a href="https://drive.google.com/file/d/1Bd4nASTMve23qh28x3BR3OJWJp2NZJyI/view?usp=sharing">备份包&lt;/a>&lt;/p>
-&lt;/blockquote></description><category domain="https://blog.wxchat.xyz/tags/bootloop/">bootloop</category><category domain="https://blog.wxchat.xyz/tags/nexus6p/">nexus6p</category><category domain="https://blog.wxchat.xyz/tags/android/">android</category><category domain="https://blog.wxchat.xyz/tags/magisk/">magisk</category></item><item><title>Nexus6p Root提权以及刷机攻略</title><link>https://blog.wxchat.xyz/posts/root-nexus6p-use-twrp-magisk/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/root-nexus6p-use-twrp-magisk/</guid><pubDate>Wed, 25 Mar 2020 18:00:20 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;/blockquote></description><category domain="http://blog.wxchat.xyz/tags/bootloop/">bootloop</category><category domain="http://blog.wxchat.xyz/tags/nexus6p/">nexus6p</category><category domain="http://blog.wxchat.xyz/tags/android/">android</category><category domain="http://blog.wxchat.xyz/tags/magisk/">magisk</category></item><item><title>Nexus6p Root提权以及刷机攻略</title><link>http://blog.wxchat.xyz/posts/root-nexus6p-use-twrp-magisk/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/root-nexus6p-use-twrp-magisk/</guid><pubDate>Wed, 25 Mar 2020 18:00:20 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>Android 10.0也出来一段时间了，想着给自己的手机刷一下。所以就有了这个攻略，记录一下过程。&lt;/p>
 &lt;/blockquote>
 &lt;h1 id="准备工作">准备工作&lt;/h1>
@@ -124,7 +124,7 @@ zip -r -v -o pixel20200101.zip .
 &lt;li>&lt;a href="https://forum.xda-developers.com/nexus-6p/development/rom-pixel-experience-t3970525"> PixelExperience for Google Nexus 6P 【angler】&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://forum.xda-developers.com/nexus-6p/orig-development/rom-lineageos-17-0-nexus-6p-angler-t4012099">【ROM】【UNOFFICIAL】LineageOS 17.1 for Nexus 6P (angler)&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://mikey2008.github.io/2019/12/31/%E3%80%90%E6%95%99%E7%A8%8B%E3%80%91%E4%B8%80%E5%8A%A05%E5%88%B7LineageOS%E5%85%A8%E8%BF%87%E7%A8%8B/">【教程】一加5刷LineageOS全过程&lt;/a>&lt;/li>
-&lt;/ul></description><category domain="https://blog.wxchat.xyz/tags/android/">android</category><category domain="https://blog.wxchat.xyz/tags/nexus6p/">nexus6p</category><category domain="https://blog.wxchat.xyz/tags/twrp/">twrp</category><category domain="https://blog.wxchat.xyz/tags/magisk/">magisk</category></item><item><title>树莓派安装配置软路由</title><link>https://blog.wxchat.xyz/posts/openwrt-raspberry/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/openwrt-raspberry/</guid><pubDate>Wed, 17 Jul 2019 15:43:15 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h1 id="准备">准备&lt;/h1>
+&lt;/ul></description><category domain="http://blog.wxchat.xyz/tags/android/">android</category><category domain="http://blog.wxchat.xyz/tags/nexus6p/">nexus6p</category><category domain="http://blog.wxchat.xyz/tags/twrp/">twrp</category><category domain="http://blog.wxchat.xyz/tags/magisk/">magisk</category></item><item><title>树莓派安装配置软路由</title><link>http://blog.wxchat.xyz/posts/openwrt-raspberry/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/openwrt-raspberry/</guid><pubDate>Wed, 17 Jul 2019 15:43:15 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h1 id="准备">准备&lt;/h1>
 &lt;ul>
 &lt;li>Raspberry Pi 2 Model B Rev 1.1&lt;/li>
 &lt;li>SD卡闪盘(4G+)&lt;/li>
@@ -277,7 +277,7 @@ tcpdump -vv -i lo port 5353
 &lt;li>&lt;a href="https://medium.com/@cnnbysy/openwrt-18-06-1-%E9%85%8D%E7%BD%AE%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91-30e231958c38">openwrt 18.06.1 配置科学上网&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://swsmile.info/2019/01/30/%E3%80%90Network%E3%80%91Shadowsocks%20-Shadowsocks-OpenWRT-dnsmasq-full-ipset-gfwList-%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%94%B1%E5%99%A8%EF%BC%88%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8mini%EF%BC%89%E8%87%AA%E5%8A%A8%E7%BF%BB%E5%A2%99/">Shadowsocks + OpenWRT + dnsmasq-full + ipset + gfwList 实现路由器&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://blog.ch3n2k.com/posts/xin-de-ji-yu-openwrt-lu-you-qi-de-bu-wan-quan-zi-dong-fan-qiang-fang-an.html">新的基于OpenWrt路由器的（不完全）自动翻墙方案&lt;/a>&lt;/li>
-&lt;/ul></description><category domain="https://blog.wxchat.xyz/tags/openwrt/">openwrt</category><category domain="https://blog.wxchat.xyz/tags/raspberry/">raspberry</category></item><item><title>用OPENWRT路由器抓包网络流量笔记</title><link>https://blog.wxchat.xyz/posts/openwrt-wireshark-setting/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/openwrt-wireshark-setting/</guid><pubDate>Wed, 13 Jun 2018 19:50:11 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h1 id="前言">前言&lt;/h1>
+&lt;/ul></description><category domain="http://blog.wxchat.xyz/tags/openwrt/">openwrt</category><category domain="http://blog.wxchat.xyz/tags/raspberry/">raspberry</category></item><item><title>用OPENWRT路由器抓包网络流量笔记</title><link>http://blog.wxchat.xyz/posts/openwrt-wireshark-setting/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/openwrt-wireshark-setting/</guid><pubDate>Wed, 13 Jun 2018 19:50:11 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h1 id="前言">前言&lt;/h1>
 &lt;p>openwrt是一款基于linux的路由器系统，可以安装很多相关的工具包，完成像linux系统服务器可以完成的工作，比如今天我们要讲的路由器的网络数据包抓包。&lt;/p>
 &lt;h1 id="环境">环境&lt;/h1>
 &lt;ul>
@@ -374,7 +374,7 @@ sudo setcap cap_net_raw,cap_net_admin+eip /usr/bin/dumpcap
 &lt;li>&lt;a href="http://www.ayomaonline.com/security/analyzing-network-traffic-with-openwrt/">ANALYZING NETWORK TRAFFIC WITH OPENWRT&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://openwrt.org/docs/guide-user/firewall/capture-filter-inspect-packets">How to capture, filter and inspect packets&lt;/a>&lt;/li>
 &lt;li>&lt;a href="http://www.ayomaonline.com/security/getting-started-with-openwrt-linuxfying-routers/">GETTING STARTED WITH OPENWRT – LINUXFYING ROUTERS&lt;/a>&lt;/li>
-&lt;/ul></description><category domain="https://blog.wxchat.xyz/tags/openwrt/">openwrt</category><category domain="https://blog.wxchat.xyz/tags/wireshark/">wireshark</category><category domain="https://blog.wxchat.xyz/tags/cloudshark/">cloudshark</category></item><item><title>UEFI+GPT安装Archlinux与Win10双系统教程</title><link>https://blog.wxchat.xyz/posts/archlinux-uefi-bootloader/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/archlinux-uefi-bootloader/</guid><pubDate>Sun, 10 Jun 2018 00:42:24 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h1 id="前言">前言&lt;/h1>
+&lt;/ul></description><category domain="http://blog.wxchat.xyz/tags/openwrt/">openwrt</category><category domain="http://blog.wxchat.xyz/tags/wireshark/">wireshark</category><category domain="http://blog.wxchat.xyz/tags/cloudshark/">cloudshark</category></item><item><title>UEFI+GPT安装Archlinux与Win10双系统教程</title><link>http://blog.wxchat.xyz/posts/archlinux-uefi-bootloader/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/archlinux-uefi-bootloader/</guid><pubDate>Sun, 10 Jun 2018 00:42:24 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h1 id="前言">前言&lt;/h1>
 &lt;blockquote>
 &lt;p>最近新入手一台Thinkpad,使用UEFI+GPT预安装好了Win10操作系统，准备开始安装Archlinux。&lt;/p>
 &lt;/blockquote>
@@ -464,7 +464,7 @@ default arch
 &lt;p>至此，新系统的配置就完成了。&lt;/p>
 &lt;p>使用exit命令退出chroot环境，umount -R /mnt卸载挂载的分区，然后使用reboot重启一下就好了。&lt;/p>
 &lt;h1 id="最后">最后&lt;/h1>
-&lt;p>可能会启动失败，解决方法是进入BIOS里的设置把UEFI作为唯一的启动方式。然后保存退出，就可以看到有三个启动项（分别是Arch Linux, Windows Manage, Default），选择你要进入的系统就可以了。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/archlinux/">archlinux</category><category domain="https://blog.wxchat.xyz/tags/windows/">windows</category><category domain="https://blog.wxchat.xyz/tags/uefi/">uefi</category></item><item><title>Chromium OS源码编译、U盘安装及使用笔记</title><link>https://blog.wxchat.xyz/posts/chromium-os-install/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/chromium-os-install/</guid><pubDate>Sat, 02 Jun 2018 23:41:10 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>可能会启动失败，解决方法是进入BIOS里的设置把UEFI作为唯一的启动方式。然后保存退出，就可以看到有三个启动项（分别是Arch Linux, Windows Manage, Default），选择你要进入的系统就可以了。&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/archlinux/">archlinux</category><category domain="http://blog.wxchat.xyz/tags/windows/">windows</category><category domain="http://blog.wxchat.xyz/tags/uefi/">uefi</category></item><item><title>Chromium OS源码编译、U盘安装及使用笔记</title><link>http://blog.wxchat.xyz/posts/chromium-os-install/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/chromium-os-install/</guid><pubDate>Sat, 02 Jun 2018 23:41:10 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>根据官方文档 &lt;a href="https://www.chromium.org/chromium-os/quick-start-guide">https://www.chromium.org/chromium-os/quick-start-guide&lt;/a> 只有Ubuntu Trusty版本的安装方式写了个ArchLinux的安装方法&lt;/p>
 &lt;/blockquote>
 &lt;h1 id="安装依赖">安装依赖&lt;/h1>
@@ -519,7 +519,7 @@ adjust_part ='STATE：= 1G' --- 设置状态分区为1GB
 &lt;p>修改要安装到目标机器的bios启动项为U盘启动，插入U盘，启动。&lt;/p>
 &lt;p>进入系统，按Ctrl + Alt + Back（F2）。在提示符下输入chronos并使用以下命令进行安装。&lt;/p>
 &lt;pre>&lt;code>/usr/sbin/chromeos-install
-&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/chromiumos/">ChromiumOS</category><category domain="https://blog.wxchat.xyz/tags/archlinux/">archlinux</category></item><item><title>Arch Linux 内核更新 修复无线模块rtl8821ce编译失败的问题</title><link>https://blog.wxchat.xyz/posts/kernel-upgrade-fix-rtl8821ce/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/kernel-upgrade-fix-rtl8821ce/</guid><pubDate>Sat, 19 May 2018 01:36:07 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;/code>&lt;/pre></description><category domain="http://blog.wxchat.xyz/tags/chromiumos/">ChromiumOS</category><category domain="http://blog.wxchat.xyz/tags/archlinux/">archlinux</category></item><item><title>Arch Linux 内核更新 修复无线模块rtl8821ce编译失败的问题</title><link>http://blog.wxchat.xyz/posts/kernel-upgrade-fix-rtl8821ce/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/kernel-upgrade-fix-rtl8821ce/</guid><pubDate>Sat, 19 May 2018 01:36:07 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>最近更新系统，内核从4.15 更新到了 4.16.9发现原来的无线模块编译不通过，找不到头文件stdarg.h&lt;/p>
 &lt;/blockquote>
 &lt;h1 id="查看无线驱动信息">查看无线驱动信息&lt;/h1>
@@ -568,7 +568,7 @@ link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
 link/ether 8c:16:45:3f:68:0d brd ff:ff:ff:ff:ff:ff
 3: wlp5s0: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc mq state UP mode DORMANT group default qlen 1000
 link/ether 70:c9:4e:d8:6d:01 brd ff:ff:ff:ff:ff:ff
-&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/rtl8821ce/">rtl8821ce</category><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category></item><item><title>博客系统从ghost 迁移hexo 安装与配置</title><link>https://blog.wxchat.xyz/posts/hexo-install/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/hexo-install/</guid><pubDate>Sun, 06 May 2018 16:33:21 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h1 id="备份ghost">备份Ghost&lt;/h1>
+&lt;/code>&lt;/pre></description><category domain="http://blog.wxchat.xyz/tags/rtl8821ce/">rtl8821ce</category><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category></item><item><title>博客系统从ghost 迁移hexo 安装与配置</title><link>http://blog.wxchat.xyz/posts/hexo-install/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/hexo-install/</guid><pubDate>Sun, 06 May 2018 16:33:21 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h1 id="备份ghost">备份Ghost&lt;/h1>
 &lt;p>后台export，导出后是一个JSON，包含所有文章以及一些元数据：修改日期、Tags 等等&lt;/p>
 &lt;p>图片等资源，可以到 assets 文件夹下，打包下载&lt;/p>
 &lt;pre>&lt;code>cd /data/www/ghost
@@ -606,7 +606,7 @@ npm install hexo-generator-sitemap --save
 npm install hexo-generator-feed --save
 npm install hexo-pwa --save
 npm install hexo-all-minifier --save
-&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/hexo/">hexo</category><category domain="https://blog.wxchat.xyz/tags/ghost/">ghost</category></item><item><title>ghost 更新记录</title><link>https://blog.wxchat.xyz/posts/ghost-upgrade/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/ghost-upgrade/</guid><pubDate>Sat, 06 May 2017 12:33:21 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>好久没有更新ghost 0.6.0，今天更新的时候发现最新版本，0.11.11 版本 更新安装的时候报错。&lt;/p>
+&lt;/code>&lt;/pre></description><category domain="http://blog.wxchat.xyz/tags/hexo/">hexo</category><category domain="http://blog.wxchat.xyz/tags/ghost/">ghost</category></item><item><title>ghost 更新记录</title><link>http://blog.wxchat.xyz/posts/ghost-upgrade/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/ghost-upgrade/</guid><pubDate>Sat, 06 May 2017 12:33:21 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>好久没有更新ghost 0.6.0，今天更新的时候发现最新版本，0.11.11 版本 更新安装的时候报错。&lt;/p>
 &lt;p>查看error日志，是依赖的npm和node版本问题。解决方法就是要么升级npm,node，要么降级ghost到npm,node支持的版本。&lt;/p>
 &lt;ul>
 &lt;li>
@@ -639,7 +639,7 @@ unzip -uo Ghost-0.8.0.zip -d /data/www/ghost
 &lt;/code>&lt;/pre>&lt;p>没有报错的话就是安装成功了。&lt;/p>
 &lt;p>重启ghost&lt;/p>
 &lt;pre>&lt;code>NODE_ENV=production pm2 start index.js --name &amp;quot;ghost&amp;quot;
-&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/ghost/">ghost</category></item><item><title>Linux 系统Chrome,Firefox程序无用使用Fcitx的问题解决方法</title><link>https://blog.wxchat.xyz/posts/linux-%E7%B3%BB%E7%BB%9Fchrome-firefox%E7%A8%8B%E5%BA%8F%E6%97%A0%E7%94%A8%E4%BD%BF%E7%94%A8fcitx%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-%E7%B3%BB%E7%BB%9Fchrome-firefox%E7%A8%8B%E5%BA%8F%E6%97%A0%E7%94%A8%E4%BD%BF%E7%94%A8fcitx%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</guid><pubDate>Sun, 25 Dec 2016 05:04:29 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h3 id="起因">起因&lt;/h3>
+&lt;/code>&lt;/pre></description><category domain="http://blog.wxchat.xyz/tags/ghost/">ghost</category></item><item><title>Linux 系统Chrome,Firefox程序无用使用Fcitx的问题解决方法</title><link>http://blog.wxchat.xyz/posts/linux-%E7%B3%BB%E7%BB%9Fchrome-firefox%E7%A8%8B%E5%BA%8F%E6%97%A0%E7%94%A8%E4%BD%BF%E7%94%A8fcitx%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/linux-%E7%B3%BB%E7%BB%9Fchrome-firefox%E7%A8%8B%E5%BA%8F%E6%97%A0%E7%94%A8%E4%BD%BF%E7%94%A8fcitx%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</guid><pubDate>Sun, 25 Dec 2016 05:04:29 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h3 id="起因">起因&lt;/h3>
 &lt;p>使用的gentoo有半年没有更新系统了，原来用的好好的输入法，更新完以后，在其他的程序都可以正常使用fcitx。但是，在chrome,firefox（后来知道应该是GTK,QT相关的程序用了最新版导致的问题）就是用不了，网上也有很多人提问，也没有一个有效的解决方法。&lt;/p>
 &lt;h3 id="环境">环境&lt;/h3>
 &lt;ul>
@@ -655,12 +655,12 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 &lt;/code>&lt;/pre>&lt;p>主要的问题就是我们要用命令 &lt;code>fcitx-diagnose&lt;/code> 查看fcitx的相关模块是不是有安装。（更无脑的方式就是把这个命令里显示为红色的信息都看一遍，把相关的模块安装上就ok了）&lt;/p>
 &lt;p>那么，我们可以看到：
-&lt;img src="https://blog.wxchat.xyz/content/images/2017/01/Screenshot_2016-12-27_10-51-56.png" alt="">&lt;/p>
-&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2017/01/Screenshot_2016-12-27_10-52-09.png" alt="">&lt;/p>
+&lt;img src="http://blog.wxchat.xyz/content/images/2017/01/Screenshot_2016-12-27_10-51-56.png" alt="">&lt;/p>
+&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2017/01/Screenshot_2016-12-27_10-52-09.png" alt="">&lt;/p>
 &lt;p>== 如上图所示，缺少gtk2,gtk3相关的模块支持，导致的Chrome,Firefox等gtk软件无法使用输入法的情况 ==&lt;/p>
 &lt;h3 id="解决">解决&lt;/h3>
 &lt;p>我们先看一下fcitx构建时用到的USE标记，以下
-&lt;img src="https://blog.wxchat.xyz/content/images/2017/01/Screenshot_2017-01-09_11-06-32.png" alt="">
+&lt;img src="http://blog.wxchat.xyz/content/images/2017/01/Screenshot_2017-01-09_11-06-32.png" alt="">
 可以看到，我自己设置的是默认不安装gtk支持的，所以我们要加上，有以下两种方法：&lt;/p>
 &lt;ul>
 &lt;li>可以直接在/etc/portage/make.conf USE标记上加上gtk的支持&lt;/li>
@@ -669,7 +669,7 @@ export XMODIFIERS=@im=fcitx
 &lt;pre>&lt;code> USE=&amp;quot;X autostart cairo dbus enchant introspection nls pango qt4 table xml -debug gtk2 gtk3 -lua -opencc -static-libs {-test}&amp;quot; sudo emerge fcitx
 &lt;/code>&lt;/pre>&lt;blockquote>
 &lt;p>最后，重新编译安装过fcitx以后，再看一下&lt;code>fcitx-diagnose&lt;/code>，只要没有红色相关字体的警告信息，就说明已经可以正常使用了。把浏览器重启一下，如果还不行，得重启一下系统。&lt;/p>
-&lt;/blockquote></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/chrome/">chrome</category><category domain="https://blog.wxchat.xyz/tags/firefox/">firefox</category><category domain="https://blog.wxchat.xyz/tags/fcitx/">fcitx</category></item><item><title>Linux挂载Mac系统下的dmg文件</title><link>https://blog.wxchat.xyz/posts/linux%E6%8C%82%E8%BD%BDmac%E7%B3%BB%E7%BB%9F%E4%B8%8B%E7%9A%84dmg%E6%96%87%E4%BB%B6/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux%E6%8C%82%E8%BD%BDmac%E7%B3%BB%E7%BB%9F%E4%B8%8B%E7%9A%84dmg%E6%96%87%E4%BB%B6/</guid><pubDate>Fri, 27 May 2016 05:06:32 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;/blockquote></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/chrome/">chrome</category><category domain="http://blog.wxchat.xyz/tags/firefox/">firefox</category><category domain="http://blog.wxchat.xyz/tags/fcitx/">fcitx</category></item><item><title>Linux挂载Mac系统下的dmg文件</title><link>http://blog.wxchat.xyz/posts/linux%E6%8C%82%E8%BD%BDmac%E7%B3%BB%E7%BB%9F%E4%B8%8B%E7%9A%84dmg%E6%96%87%E4%BB%B6/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/linux%E6%8C%82%E8%BD%BDmac%E7%B3%BB%E7%BB%9F%E4%B8%8B%E7%9A%84dmg%E6%96%87%E4%BB%B6/</guid><pubDate>Fri, 27 May 2016 05:06:32 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>最近想在virtualbox下安装Mac系统，了解到Mac的安装镜像文件是dmg格式的，并下载到了 Install OS X Yosemite 10.10.1.dmg 安装包。&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="解压缩">解压缩&lt;/h2>
@@ -700,12 +700,12 @@ dmesg | tail or so
 [2015609.436682] hfsplus: unable to find HFS+ superblock
 &lt;/code>&lt;/pre>&lt;p>解决方案：&lt;/p>
 &lt;p>1.先用fdisk查询img扇区
-&lt;img src="https://blog.wxchat.xyz/content/images/2016/05/--_2016-05-27_17-42-21.png" alt="">
+&lt;img src="http://blog.wxchat.xyz/content/images/2016/05/--_2016-05-27_17-42-21.png" alt="">
 可以看到它有两个设备*.img1,*.img2&lt;/p>
 &lt;p>2.把img的文件挂载出来就得找到开始挂载的起始扇区，所以要设置一下offset的值，
 这里&lt;code>offset=1259643×512&lt;/code>，运行以下：&lt;/p>
 &lt;pre>&lt;code>sudo mount -t hfsplus -v -o loop,offset=644937216 yosemite.img /mnt/hfs
-&lt;/code>&lt;/pre>&lt;p>以上，就可以把镜像挂载到了目录/mnt/hfs下。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/mount/">mount</category><category domain="https://blog.wxchat.xyz/tags/mac/">mac</category><category domain="https://blog.wxchat.xyz/tags/virtualbox/">virtualbox</category></item><item><title>idea tomcat 启动web应用异常处理</title><link>https://blog.wxchat.xyz/posts/idea-tomcat-%E5%90%AF%E5%8A%A8web%E5%BA%94%E7%94%A8%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/idea-tomcat-%E5%90%AF%E5%8A%A8web%E5%BA%94%E7%94%A8%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</guid><pubDate>Wed, 11 May 2016 05:28:04 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;pre>&lt;code>2016-05-11 16:36:25.799 [RMI TCP Connection(4)-127.0.0.1] ERROR org.springframework.web.context.ContextLoader - Context initialization failed
+&lt;/code>&lt;/pre>&lt;p>以上，就可以把镜像挂载到了目录/mnt/hfs下。&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/mount/">mount</category><category domain="http://blog.wxchat.xyz/tags/mac/">mac</category><category domain="http://blog.wxchat.xyz/tags/virtualbox/">virtualbox</category></item><item><title>idea tomcat 启动web应用异常处理</title><link>http://blog.wxchat.xyz/posts/idea-tomcat-%E5%90%AF%E5%8A%A8web%E5%BA%94%E7%94%A8%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/idea-tomcat-%E5%90%AF%E5%8A%A8web%E5%BA%94%E7%94%A8%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</guid><pubDate>Wed, 11 May 2016 05:28:04 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;pre>&lt;code>2016-05-11 16:36:25.799 [RMI TCP Connection(4)-127.0.0.1] ERROR org.springframework.web.context.ContextLoader - Context initialization failed
 org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'shiroFilter' defined in file [/home/hcj/Work/data/ecerp-saas/Sources/ecerp/out/artifacts/ecerp_web_war_exploded/WEB-INF/classes/spring/applicationContext.xml]: Cannot resolve reference to bean 'securityManager' while setting bean property 'securityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityManager' defined in file [/home/hcj/Work/data/ecerp-saas/Sources/ecerp/out/artifacts/ecerp_web_war_exploded/WEB-INF/classes/spring/applicationContext.xml]: Cannot resolve reference to bean 'shiroSubjectFactory' while setting bean property 'subjectFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'shiroSubjectFactory': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private gy.erp.service.admin.SecurityMonitor gy.erp.shiro.ShiroSubjectFactory.securityMonitor; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityMonitor' defined in class path resource [spring-domain.xml]: Cannot resolve reference to bean 'sessionService' while setting bean property 'sessionService'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionService': FactoryBean threw exception on object creation; nested exception is java.lang.IllegalArgumentException: Invalid registry store file /data/erp.guanyisoft.com/tomcat/ecerp-web.properties, cause: Failed to create directory /data/erp.guanyisoft.com/tomcat!
 at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:329) ~[spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
 at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:107) ~[spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
@@ -718,7 +718,7 @@ at org.
 &lt;pre>&lt;code>;nested exception is java.lang.IllegalArgumentException: Invalid registry store file /data/erp.guanyisoft.com/tomcat/ecerp-web.properties, cause: Failed to create directory /data/erp.guanyisoft.com/tomcat!
 &lt;/code>&lt;/pre>&lt;p>idea tomcat 在启动web应用的时候会生成一个注册dubbo服务的文件，需要指定生成路径，以前项目都是默认生成在out文件里的吧，最近，不知道什么变动，需要手工在项目配置文件application.properties 指定一下：&lt;/p>
 &lt;pre>&lt;code>dubbo.registry.file = /home/hcj/Work/data/ecerp-web.properties
-&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/java/">java</category><category domain="https://blog.wxchat.xyz/tags/tomcat/">tomcat</category><category domain="https://blog.wxchat.xyz/tags/idea/">idea</category></item><item><title>Linux 声卡驱动问题</title><link>https://blog.wxchat.xyz/posts/linux-%E5%A3%B0%E5%8D%A1%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-%E5%A3%B0%E5%8D%A1%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98/</guid><pubDate>Mon, 21 Mar 2016 01:54:57 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;/code>&lt;/pre></description><category domain="http://blog.wxchat.xyz/tags/java/">java</category><category domain="http://blog.wxchat.xyz/tags/tomcat/">tomcat</category><category domain="http://blog.wxchat.xyz/tags/idea/">idea</category></item><item><title>Linux 声卡驱动问题</title><link>http://blog.wxchat.xyz/posts/linux-%E5%A3%B0%E5%8D%A1%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/linux-%E5%A3%B0%E5%8D%A1%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98/</guid><pubDate>Mon, 21 Mar 2016 01:54:57 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>最近转Gentoo，一切安装就绪了，但是想使用youtube观看视频的时候，竟没有声音，估计又得折腾一下了。&lt;/p>
 &lt;/blockquote>
 &lt;p>（Advanced Linux Sound Architecture，ALSA）是Linux中提供声音设备驱动的内核组件，用来代替原来的开放声音系统（Open Sound System，OSSv3）。&lt;/p>
@@ -729,7 +729,7 @@ at org.
 &lt;/ul>
 &lt;h3 id="硬件设备显示">硬件设备显示&lt;/h3>
 &lt;pre>&lt;code>lspci | grep -i audio
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-21_22-46-22.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/03/--_2016-03-21_22-46-22.png" alt="">&lt;/p>
 &lt;h3 id="安装">安装&lt;/h3>
 &lt;pre>&lt;code>euse -E alsa
 emerge --ask --changed-use --deep @world
@@ -739,13 +739,13 @@ emerge --ask alsa-utils
 rc-update add alsasound boot ###声音服务设置boot级别
 &lt;/code>&lt;/pre>&lt;h3 id="列出设备名">列出设备名&lt;/h3>
 &lt;pre>&lt;code>cat /sys/class/sound/card*/id
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-22_07-16-34.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/03/--_2016-03-22_07-16-34.png" alt="">&lt;/p>
 &lt;h3 id="配置默认设备">配置默认设备&lt;/h3>
 &lt;pre>&lt;code>vi ~/.asoundrc
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-22_07-17-59.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/03/--_2016-03-22_07-17-59.png" alt="">&lt;/p>
 &lt;p>最后，别忘了重启一下。&lt;/p>
 &lt;p>&lt;a href="https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture">参考链接1&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://wiki.gentoo.org/wiki/ALSA">参考链接2&lt;/a>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/alsamixer/">alsamixer</category></item><item><title>Gentoo安装RTL8723BE无线网卡驱动</title><link>https://blog.wxchat.xyz/posts/gentoo%E5%AE%89%E8%A3%85rtl8723be%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/gentoo%E5%AE%89%E8%A3%85rtl8723be%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8/</guid><pubDate>Thu, 17 Mar 2016 07:40:43 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>&lt;a href="https://wiki.gentoo.org/wiki/ALSA">参考链接2&lt;/a>&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/alsamixer/">alsamixer</category></item><item><title>Gentoo安装RTL8723BE无线网卡驱动</title><link>http://blog.wxchat.xyz/posts/gentoo%E5%AE%89%E8%A3%85rtl8723be%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/gentoo%E5%AE%89%E8%A3%85rtl8723be%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8/</guid><pubDate>Thu, 17 Mar 2016 07:40:43 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>新配了个ThinkPad E55c 安装Gentoo时无线网卡没能正确识别。网上查了一下是3.15内核版本之前还没有包含这个驱动，需要手动安装一下。但是我想说我安装的内核版本是4.1,而且也安装了linux-firmware固件，可是怎么就没有这个驱动呢 - - 暂时先不深究。&lt;/p>
 &lt;/blockquote>
 &lt;ul>
@@ -754,7 +754,7 @@ rc-update add alsasound boot ###声音服务设置boot级别
 &lt;/ul>
 &lt;h3 id="确认网卡型号">确认网卡型号&lt;/h3>
 &lt;pre>&lt;code>lspci -k | grep Network
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-18_04-16-28.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/03/--_2016-03-18_04-16-28.png" alt="">&lt;/p>
 &lt;h3 id="下载源码">下载源码&lt;/h3>
 &lt;pre>&lt;code>git clone https://github.com/lwfinger/rtlwifi_new.git
 cd rtlwifi_new/
@@ -763,13 +763,13 @@ make &amp;amp;&amp;amp; make install
 &lt;pre>&lt;code>modprobe rtl8723be ## 手动加载rtl8723be模块
 modinfo rtl8723be ## 查看模块详情
 &lt;/code>&lt;/pre>&lt;p>模块加载成功，使用&lt;code>lspci -k&lt;/code>看一下,如果显示的是如下图说明无线网卡驱动安装成功：
-&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-18_04-17-37.png" alt="">
+&lt;img src="http://blog.wxchat.xyz/content/images/2016/03/--_2016-03-18_04-17-37.png" alt="">
 最后&lt;code>ip addr show &lt;/code>可以看到对应的网卡设备了
-&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-18_04-30-58.png" alt="">&lt;/p>
+&lt;img src="http://blog.wxchat.xyz/content/images/2016/03/--_2016-03-18_04-30-58.png" alt="">&lt;/p>
 &lt;h3 id="自启动加载模块">自启动加载模块&lt;/h3>
 &lt;pre>&lt;code>cat /etc/conf.d/modules
 modules=&amp;quot;rtl8723be&amp;quot;
-&lt;/code>&lt;/pre>&lt;p>&lt;a href="https://wiki.archlinux.org/index.php/Wireless_network_configuration">引用&lt;/a>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/gentoo/">Gentoo</category><category domain="https://blog.wxchat.xyz/tags/rtl8723be/">rtl8723be</category></item><item><title>git常规使用</title><link>https://blog.wxchat.xyz/posts/git%E5%B8%B8%E8%A7%84%E4%BD%BF%E7%94%A8/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/git%E5%B8%B8%E8%A7%84%E4%BD%BF%E7%94%A8/</guid><pubDate>Tue, 15 Mar 2016 02:21:09 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h3 id="远程仓库有master和dev分支">远程仓库有master和dev分支&lt;/h3>
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="https://wiki.archlinux.org/index.php/Wireless_network_configuration">引用&lt;/a>&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/gentoo/">Gentoo</category><category domain="http://blog.wxchat.xyz/tags/rtl8723be/">rtl8723be</category></item><item><title>git常规使用</title><link>http://blog.wxchat.xyz/posts/git%E5%B8%B8%E8%A7%84%E4%BD%BF%E7%94%A8/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/git%E5%B8%B8%E8%A7%84%E4%BD%BF%E7%94%A8/</guid><pubDate>Tue, 15 Mar 2016 02:21:09 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h3 id="远程仓库有master和dev分支">远程仓库有master和dev分支&lt;/h3>
 &lt;h4 id="克隆代码">克隆代码&lt;/h4>
 &lt;pre>&lt;code>git clone &amp;lt;git url&amp;gt;
 &lt;/code>&lt;/pre>&lt;h4 id="查看所有分支">查看所有分支&lt;/h4>
@@ -838,7 +838,7 @@ git branch -d dev # 删除本地dev分支
 &lt;/code>&lt;/pre>&lt;h4 id="progitpdf">progit.pdf&lt;/h4>
 &lt;p>书籍格式和语言：中文、英文、PDF、ePub
 下载地址：http://git-scm.com/book&lt;/p>
-&lt;p>&lt;a href="https://www.zhihu.com/question/21995370/answer/19975870">转载&lt;/a>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/git/">git</category></item><item><title>ss-redir 的 iptables 配置(透明代理)</title><link>https://blog.wxchat.xyz/posts/ss-redir-%E7%9A%84-iptables-%E9%85%8D%E7%BD%AE-%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/ss-redir-%E7%9A%84-iptables-%E9%85%8D%E7%BD%AE-%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86/</guid><pubDate>Wed, 09 Mar 2016 08:22:01 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>&lt;a href="https://www.zhihu.com/question/21995370/answer/19975870">转载&lt;/a>&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/git/">git</category></item><item><title>ss-redir 的 iptables 配置(透明代理)</title><link>http://blog.wxchat.xyz/posts/ss-redir-%E7%9A%84-iptables-%E9%85%8D%E7%BD%AE-%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/ss-redir-%E7%9A%84-iptables-%E9%85%8D%E7%BD%AE-%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86/</guid><pubDate>Wed, 09 Mar 2016 08:22:01 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>透明代理指对客户端透明，客户端不需要进行任何设置就使用了网管设置的代理规则
 创建&lt;/p>
 &lt;/blockquote>
@@ -902,7 +902,7 @@ DNS=8.8.8.8
 DNS=$1
 esac
 sed -i &amp;quot;s|^\(server.*\)/[^/]*$|\1/$DNS|&amp;quot; /etc/dnsmasq.d/accelerated-domains.china.conf
-&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/iptables/">iptables</category><category domain="https://blog.wxchat.xyz/tags/shadowsocks/">shadowsocks</category></item><item><title>Linux系统挂载NTFS移动硬盘</title><link>https://blog.wxchat.xyz/posts/linux%E7%B3%BB%E7%BB%9F%E6%8C%82%E8%BD%BDntfs%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux%E7%B3%BB%E7%BB%9F%E6%8C%82%E8%BD%BDntfs%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98/</guid><pubDate>Tue, 08 Mar 2016 02:19:36 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;/code>&lt;/pre></description><category domain="http://blog.wxchat.xyz/tags/iptables/">iptables</category><category domain="http://blog.wxchat.xyz/tags/shadowsocks/">shadowsocks</category></item><item><title>Linux系统挂载NTFS移动硬盘</title><link>http://blog.wxchat.xyz/posts/linux%E7%B3%BB%E7%BB%9F%E6%8C%82%E8%BD%BDntfs%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/linux%E7%B3%BB%E7%BB%9F%E6%8C%82%E8%BD%BDntfs%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98/</guid><pubDate>Tue, 08 Mar 2016 02:19:36 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>工作中，同事之间拷贝数据的时候，由于我用的linux系统无法识别同事的NTFS移动硬盘，这才网上查了一下，原来还得安装一个软件，以下是&lt;a href="http://www.cnblogs.com/kerrycode/archive/2013/04/01/2993701.html">转载&lt;/a>的文章,记录一下。&lt;/p>
 &lt;/blockquote>
 &lt;hr>
@@ -948,7 +948,7 @@ $ ntfs-3g ntfs-3g /dev/sdc1 /mnt/usb
 &lt;pre>&lt;code>$ umount &amp;lt;NTFS Partition&amp;gt; 　　
 ##### 或者 #####
 $ umount &amp;lt;Mount Point&amp;gt;
-&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/ntfs/">ntfs</category></item><item><title>Linux gentoo U盘安装指南</title><link>https://blog.wxchat.xyz/posts/linux-gentoo-u%E7%9B%98%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-gentoo-u%E7%9B%98%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/</guid><pubDate>Sat, 05 Mar 2016 01:43:55 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;/code>&lt;/pre></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/ntfs/">ntfs</category></item><item><title>Linux gentoo U盘安装指南</title><link>http://blog.wxchat.xyz/posts/linux-gentoo-u%E7%9B%98%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/linux-gentoo-u%E7%9B%98%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/</guid><pubDate>Sat, 05 Mar 2016 01:43:55 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>再一次捣鼓gentoo,还是遇到了相当多的麻烦，这里把安装的方法重新在blog里整理一下，跟着官方安装步骤一点点来。&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="准备安装之前">准备安装之前&lt;/h2>
@@ -1046,12 +1046,12 @@ Sat Mar 5 16:26:08 UTC 2016
 &lt;li>配置就近的镜像地址 GETOO_MIRRORS 为厦门大学的镜像源&lt;/li>
 &lt;/ul>
 &lt;pre>&lt;code># cat /etc/mnt/gentoo/etc/portage/make.conf
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-05_16-53-28.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/03/--_2016-03-05_16-53-28.png" alt="">&lt;/p>
 &lt;p>==Tip: 参数配置文件/mnt/gentoo/usr/share/portage/config/make.conf.example ==&lt;/p>
 &lt;h4 id="配置主要gentoo的存储库">配置主要Gentoo的存储库&lt;/h4>
 &lt;pre>&lt;code># mkdir /mnt/gentoo/etc/portage/repos.conf
 # cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-05_17-00-14.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/03/--_2016-03-05_17-00-14.png" alt="">&lt;/p>
 &lt;h4 id="配置chroot环境的dns">配置chroot环境的dns&lt;/h4>
 &lt;p>只需要把livecd临时环境的resolv.conf复制到要chroot的目录里就好了，如下：&lt;/p>
 &lt;pre>&lt;code>cp -L /etc/resolv.conf /mnt/gentoo/etc/
@@ -1071,7 +1071,7 @@ Sat Mar 5 16:26:08 UTC 2016
 # echo &amp;quot;127.0.0.1 hcj.com localhost&amp;quot; &amp;gt; /etc/hosts
 &lt;/code>&lt;/pre>&lt;h4 id="配置portage">配置Portage&lt;/h4>
 &lt;pre>&lt;code># emerge-webrsync
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-05_17-33-41.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/03/--_2016-03-05_17-33-41.png" alt="">&lt;/p>
 &lt;p>我在配置这个的时候报错了，按照提示删除tmestamp.x文件即可。&lt;/p>
 &lt;p>更新portage树&lt;/p>
 &lt;pre>&lt;code># emerge --sync
@@ -1109,7 +1109,7 @@ Available targets for the LANG variable:
 # genkernel --install initramfs
 &lt;/code>&lt;/pre>&lt;h4 id="配置fstab">配置fstab&lt;/h4>
 &lt;pre>&lt;code>cat /etc/fstab
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-05_20-12-09.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/03/--_2016-03-05_20-12-09.png" alt="">&lt;/p>
 &lt;h4 id="编译内核文件">编译内核文件&lt;/h4>
 &lt;pre>&lt;code>genkernel all
 &lt;/code>&lt;/pre>&lt;p>完成以上就可以在/boot目录下看到内核文件&lt;/p>
@@ -1144,7 +1144,7 @@ routes_enp0s25=&amp;quot;default via 192.168.3.1&amp;quot;
 # umount -l /mnt/gentoo/dev{/shm,/pts,}
 # umount /mnt/gentoo{/boot,/sys,/proc,}
 # reboot
-&lt;/code>&lt;/pre>&lt;p>&lt;a href="https://gentoo-handbook.lugons.org/doc/zh_cn/handbook/handbook-amd64.xml">引用&lt;/a>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/gentoo/">Gentoo</category></item><item><title>ssh 服务端配置</title><link>https://blog.wxchat.xyz/posts/ssh-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/ssh-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE/</guid><pubDate>Sat, 05 Mar 2016 01:32:03 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="https://gentoo-handbook.lugons.org/doc/zh_cn/handbook/handbook-amd64.xml">引用&lt;/a>&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/gentoo/">Gentoo</category></item><item><title>ssh 服务端配置</title><link>http://blog.wxchat.xyz/posts/ssh-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/ssh-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE/</guid><pubDate>Sat, 05 Mar 2016 01:32:03 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>最近，在使用U盘安装gentoo配置sshd服务端碰到了问题，记录一下ssh服务端的配置文件。&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="关于-ssh-server-的整体设定包含使用的-port-啦以及使用的密码演算方式">关于 SSH Server 的整体设定，包含使用的 port 啦，以及使用的密码演算方式&lt;/h2>
@@ -1241,7 +1241,7 @@ DenyGroups test　　　　　 # 与 DenyUsers 相同！仅抵挡几个群组而
 &lt;pre>&lt;code>Subsystem sftp /usr/lib/ssh/sftp-server
 &lt;/code>&lt;/pre>&lt;p>　
 基本上，在您的系统中，『除非有必要，否则请不要更改 /etc/ssh/sshd_config 这个档案的设定值！』因为预设的情况下通常都是最严密的 SSH 保护了，因此，可以不需要更动他！上面的说明仅是在让大家了解每个细项的一些基本内容而已！需要注意的是最后一项，如果您不愿意开放 SFTP 的话，将最后一行批注掉即可！
-　&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/sshd/">sshd</category><category domain="https://blog.wxchat.xyz/tags/ssh/">ssh</category></item><item><title>10个很有用的 Git 命令（转）</title><link>https://blog.wxchat.xyz/posts/10%E4%B8%AA%E5%BE%88%E6%9C%89%E7%94%A8%E7%9A%84-git-%E5%91%BD%E4%BB%A4%E8%BD%AC/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/10%E4%B8%AA%E5%BE%88%E6%9C%89%E7%94%A8%E7%9A%84-git-%E5%91%BD%E4%BB%A4%E8%BD%AC/</guid><pubDate>Tue, 16 Feb 2016 21:24:34 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>&lt;a href="http://blog.sae.sina.com.cn/archives/3003">转自&lt;/a>&lt;a href="http://blog.sae.sina.com.cn/archives/3003">http://blog.sae.sina.com.cn/archives/3003&lt;/a>&lt;/p>
+　&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/sshd/">sshd</category><category domain="http://blog.wxchat.xyz/tags/ssh/">ssh</category></item><item><title>10个很有用的 Git 命令（转）</title><link>http://blog.wxchat.xyz/posts/10%E4%B8%AA%E5%BE%88%E6%9C%89%E7%94%A8%E7%9A%84-git-%E5%91%BD%E4%BB%A4%E8%BD%AC/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/10%E4%B8%AA%E5%BE%88%E6%9C%89%E7%94%A8%E7%9A%84-git-%E5%91%BD%E4%BB%A4%E8%BD%AC/</guid><pubDate>Tue, 16 Feb 2016 21:24:34 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>&lt;a href="http://blog.sae.sina.com.cn/archives/3003">转自&lt;/a>&lt;a href="http://blog.sae.sina.com.cn/archives/3003">http://blog.sae.sina.com.cn/archives/3003&lt;/a>&lt;/p>
 &lt;blockquote>
 &lt;p>这里给大家分享一些很有用的 Git 命令，其中很多用法你可能都不知道，无论你是工作在团队环境中或在您的个人项目中，这些命令将对你帮助很大，让你可以更加高效的进行项目开发，更轻松愉快的工作和生活。&lt;/p>
 &lt;/blockquote>
@@ -1283,7 +1283,7 @@ git cherry -v master
 &lt;pre>&lt;code>git config branch.BRANCH_NAME_HERE.rebase true
 &lt;/code>&lt;/pre>&lt;p>此外，您可以配置一个特定的分支总是衍合：&lt;/p>
 &lt;pre>&lt;code>git pull --rebase
-&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/git/">git</category></item><item><title>Linux服务器配置java web服务总结</title><link>https://blog.wxchat.xyz/posts/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AEjava-web%E6%9C%8D%E5%8A%A1%E6%80%BB%E7%BB%93/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AEjava-web%E6%9C%8D%E5%8A%A1%E6%80%BB%E7%BB%93/</guid><pubDate>Mon, 25 Jan 2016 03:14:16 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;/code>&lt;/pre></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/git/">git</category></item><item><title>Linux服务器配置java web服务总结</title><link>http://blog.wxchat.xyz/posts/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AEjava-web%E6%9C%8D%E5%8A%A1%E6%80%BB%E7%BB%93/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AEjava-web%E6%9C%8D%E5%8A%A1%E6%80%BB%E7%BB%93/</guid><pubDate>Mon, 25 Jan 2016 03:14:16 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>首先，以前是写php的，从未接触java的开发。最近公司项目重组，被安排说去做java开发，而且要快速上手,安排培训，可是，培训的都是windows下的IDE开发配置。没办法，Google呗。这样就有了这篇东拼西奏的文章，也有自己的一些经验总结，没少碰壁，不过这里还是感谢同事的帮忙，让我对java的运行有了清晰的认识。&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="了解java包运行原理">了解java包运行原理&lt;/h2>
@@ -1332,7 +1332,7 @@ cd erp.hcj.com/
 &lt;/code>&lt;/pre>&lt;p>web应用java环境变量配置&lt;/p>
 &lt;pre>&lt;code>touch webconfig
 cat webconfig
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-25_17-47-28.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-25_17-47-28.png" alt="">&lt;/p>
 &lt;pre>&lt;code>source /data/www/erp.hcj.com/webconfig ###使用环境变量生效
 &lt;/code>&lt;/pre>&lt;p>创建备份目录,当然这个不是必要的。&lt;/p>
 &lt;pre>&lt;code>theday=$(date +%Y%m%d)
@@ -1373,8 +1373,8 @@ cp -r /etc/tomcat7/* tomcat/conf/
 sudo chown -R tomcat7.tomcat7 tomcat/
 vi server.xml
 &lt;/code>&lt;/pre>&lt;p>主要修改如下配置：
-&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-25_18-48-50.png" alt="">
-&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-25_18-49-35.png" alt="">&lt;/p>
+&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-25_18-48-50.png" alt="">
+&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-25_18-49-35.png" alt="">&lt;/p>
 &lt;pre>&lt;code>### 设置tomcat环境变量
 export CATALINA_HOME=&amp;quot;/usr/share/tomcat7&amp;quot;
 export DUSER=&amp;quot;tomcat7&amp;quot;
@@ -1387,20 +1387,20 @@ export LOCKFILE=&amp;quot;$CATALINA_BASE/tomcat.lock&amp;quot;
 /bin/bash $CATALINA_HOME/bin/startup.sh
 ### 关闭服务
 /bin/bash $CATALINA_HOME/bin/shutdown.sh
-&lt;/code>&lt;/pre>&lt;p>&lt;a href="http://ufaw0116.erufa.com/wordpress/?p=1254&amp;amp;ckattempt=3">参考&lt;/a>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/java/">java</category><category domain="https://blog.wxchat.xyz/tags/tomcat/">tomcat</category></item><item><title>Java 学习笔记2</title><link>https://blog.wxchat.xyz/posts/java-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/java-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</guid><pubDate>Wed, 20 Jan 2016 06:43:02 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="镜像配置">镜像配置&lt;/h2>
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="http://ufaw0116.erufa.com/wordpress/?p=1254&amp;amp;ckattempt=3">参考&lt;/a>&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/java/">java</category><category domain="http://blog.wxchat.xyz/tags/tomcat/">tomcat</category></item><item><title>Java 学习笔记2</title><link>http://blog.wxchat.xyz/posts/java-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/java-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</guid><pubDate>Wed, 20 Jan 2016 06:43:02 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="镜像配置">镜像配置&lt;/h2>
 &lt;p>由于maven的中央仓库位于国外，速度慢，也有可能其他原因无法访问，我们可以使用国内的镜像仓库。配置镜像仓库需要修改conf/settings.xml,打开该文件修改mirror标签如下：&lt;/p>
 &lt;pre>&lt;code>vim /opt/maven/conf/settings.xml
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-20_19-42-35.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-20_19-42-35.png" alt="">&lt;/p>
 &lt;p>maven仓库默认是放在用户目录的.m2隐藏目录下的 ~/.m2/repository/ 。如果需要将仓库迁移到其他目录，修改conf/settings.xml
-&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-20_19-52-27.png" alt="">&lt;/p>
+&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-20_19-52-27.png" alt="">&lt;/p>
 &lt;h2 id="环境变量">环境变量&lt;/h2>
 &lt;p>配置maven编译程序过程中可用的最大，最下内存，防止内存溢出。&lt;/p>
 &lt;pre>&lt;code>MAVEN_OPTS=&amp;quot;-Xms256m -Xmx512m&amp;quot;
 export MAVEN_OPTS
 &lt;/code>&lt;/pre>&lt;blockquote>
 &lt;p>配置web服务一定要记得设置compressableMimeType
-&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-25_16-02-11.png" alt="">&lt;/p>
-&lt;/blockquote></description><category domain="https://blog.wxchat.xyz/tags/java/">java</category><category domain="https://blog.wxchat.xyz/tags/maven/">maven</category></item><item><title>Java 学习笔记1</title><link>https://blog.wxchat.xyz/posts/java-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/java-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</guid><pubDate>Wed, 20 Jan 2016 04:08:30 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-25_16-02-11.png" alt="">&lt;/p>
+&lt;/blockquote></description><category domain="http://blog.wxchat.xyz/tags/java/">java</category><category domain="http://blog.wxchat.xyz/tags/maven/">maven</category></item><item><title>Java 学习笔记1</title><link>http://blog.wxchat.xyz/posts/java-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/java-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</guid><pubDate>Wed, 20 Jan 2016 04:08:30 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>以下是在Arch Linux下操作，其他发行版或操作系统不适用。Maven这个词可以翻译为“知识的积累”，也可以翻译为“专 家”或“内行”。本文将介绍Maven这一跨平台的项目管理工具。作为Apache组织中的一个颇为成功的开源项目，Maven主要服务于基于Java平台的项目构建、依赖管理和项目信息管理。无论是小型的开源类库项目，还是大型的企业级应用；无论是传统的瀑布式开发，还是流行的敏捷模式，Maven都能大显身手。&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="安装java环境">安装java环境&lt;/h2>
@@ -1414,25 +1414,25 @@ archlinux-java status ##java环境状态 使用的版本信息
 &lt;pre>&lt;code>sudo pacman -S maven
 &lt;/code>&lt;/pre>&lt;p>修改环境变量&lt;/p>
 &lt;pre>&lt;code>vi ~/.bashrc
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-20_17-18-19.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-20_17-18-19.png" alt="">&lt;/p>
 &lt;p>这样以后，就可以使用 mvn 命令来管理java项目，如下：&lt;/p>
 &lt;pre>&lt;code>cd /data/gyapp/ ###进入工作目录。(自定义)
 mvn archetype:generate -DgroupId=helloworld -DartifactId=helloworld
 -Dpackage=helloworld -Dversion=1.0-SNAPSHO
 &lt;/code>&lt;/pre>&lt;h3 id="打包程序">打包程序&lt;/h3>
 &lt;p>执行了上面的命令会在当前工作目录生成helloworld项目目录。
-&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-20_17-24-58.png" alt="">&lt;/p>
+&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-20_17-24-58.png" alt="">&lt;/p>
 &lt;pre>&lt;code>cd helloworld/
 mvn package
 &lt;/code>&lt;/pre>&lt;p>这个时候， maven 在 helloworld 下面建立了一个新的目录 target/ ，构建打包后的 jar 文件 helloworld-1.0-SNAPSHOT.jar 就存放在这个目录下。编译后的 class 文件放在 target/classes/ 目录下面，测试 class 文件放在 target/test-classes/ 目录下面。&lt;/p>
-&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-20_17-26-01.png" alt="">&lt;/p>
+&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-20_17-26-01.png" alt="">&lt;/p>
 &lt;h3 id="运行">运行&lt;/h3>
 &lt;p>为了验证我们的程序能运行，执行下面的命令：&lt;/p>
 &lt;pre>&lt;code>java -cp target/helloworld-1.0-SNAPSHOT.jar helloworld.App
 &lt;/code>&lt;/pre>&lt;p>输出源代码里的程序，显示 HelloWorld! 表示成功。&lt;/p>
 &lt;h2 id="第一个程序">第一个程序&lt;/h2>
 &lt;pre>&lt;code>vi HelloWorld.java
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-20_17-10-49.png" alt="">
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-20_17-10-49.png" alt="">
 编译源代码，在当前目录生成HelloWorld.class,然后执行&lt;code>java HelloWorld&lt;/code>&lt;/p>
 &lt;pre>&lt;code>javac HelloWorld.java
 java HelloWorld
@@ -1442,7 +1442,7 @@ java HelloWorld
 &lt;/code>&lt;/pre>&lt;p>安装putty以后，可以使用如下命令：&lt;/p>
 &lt;pre>&lt;code>puttygen git_cesi.ppk -o id_rsa.pub -O public-openssh
 puttygen git_cesi.ppk -o id_rsa -O private-openssh
-&lt;/code>&lt;/pre>&lt;p>&lt;a href="http://www.oracle.com/technetwork/cn/community/java/apache-maven-getting-started-1-406235-zhs.html">参考&lt;/a>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/java/">java</category><category domain="https://blog.wxchat.xyz/tags/maven/">maven</category></item><item><title>Linux 终端下发送消息命令</title><link>https://blog.wxchat.xyz/posts/linux-%E7%BB%88%E7%AB%AF%E4%B8%8B%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E5%91%BD%E4%BB%A4/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-%E7%BB%88%E7%AB%AF%E4%B8%8B%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E5%91%BD%E4%BB%A4/</guid><pubDate>Wed, 13 Jan 2016 03:58:19 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="http://www.oracle.com/technetwork/cn/community/java/apache-maven-getting-started-1-406235-zhs.html">参考&lt;/a>&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/java/">java</category><category domain="http://blog.wxchat.xyz/tags/maven/">maven</category></item><item><title>Linux 终端下发送消息命令</title><link>http://blog.wxchat.xyz/posts/linux-%E7%BB%88%E7%AB%AF%E4%B8%8B%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E5%91%BD%E4%BB%A4/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/linux-%E7%BB%88%E7%AB%AF%E4%B8%8B%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E5%91%BD%E4%BB%A4/</guid><pubDate>Wed, 13 Jan 2016 03:58:19 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>这里分享一个Linux服务器终端下发送消息的命令。由于平时工作中，必免不了与运维同事之间的信息交换，想到我们都是链的同一台服务器，这样就可以通过以下两个命令来发送消息。&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="给指定用户发送消息">给指定用户发送消息&lt;/h3>
@@ -1463,30 +1463,30 @@ Test send message.
 &lt;p>给当前登录所有用户发送消息（需要root权限），使用wall（write all的缩写）&lt;/p>
 &lt;pre>&lt;code>$ wall 'Test send message to all user.'
 &lt;/code>&lt;/pre>&lt;p>执行wall命令，所有登录到该机器的控制台(console)界面上都会收到如上所示的消息。&lt;/p>
-&lt;p>&lt;a href="http://www.cnblogs.com/gaojun/p/3387427.html">引用&lt;/a>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/write/">write</category><category domain="https://blog.wxchat.xyz/tags/wall/">wall</category></item><item><title>Linux 下终端里好玩与危险命令汇总</title><link>https://blog.wxchat.xyz/posts/linux-%E4%B8%8B%E7%BB%88%E7%AB%AF%E9%87%8C%E5%A5%BD%E7%8E%A9%E4%B8%8E%E5%8D%B1%E9%99%A9%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-%E4%B8%8B%E7%BB%88%E7%AB%AF%E9%87%8C%E5%A5%BD%E7%8E%A9%E4%B8%8E%E5%8D%B1%E9%99%A9%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB/</guid><pubDate>Tue, 12 Jan 2016 04:30:57 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>&lt;a href="http://www.cnblogs.com/gaojun/p/3387427.html">引用&lt;/a>&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/write/">write</category><category domain="http://blog.wxchat.xyz/tags/wall/">wall</category></item><item><title>Linux 下终端里好玩与危险命令汇总</title><link>http://blog.wxchat.xyz/posts/linux-%E4%B8%8B%E7%BB%88%E7%AB%AF%E9%87%8C%E5%A5%BD%E7%8E%A9%E4%B8%8E%E5%8D%B1%E9%99%A9%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/linux-%E4%B8%8B%E7%BB%88%E7%AB%AF%E9%87%8C%E5%A5%BD%E7%8E%A9%E4%B8%8E%E5%8D%B1%E9%99%A9%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB/</guid><pubDate>Tue, 12 Jan 2016 04:30:57 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>最近发现Linux 终端里有很多好玩的命令，这里记录一下，以免下次还得搜索 - -&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="一些好玩的命令">一些好玩的命令&lt;/h2>
 &lt;h3 id="sl">sl&lt;/h3>
 &lt;pre>&lt;code>$ sl
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/2012111315222236.jpg" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/2012111315222236.jpg" alt="">&lt;/p>
 &lt;h3 id="telnet">telnet&lt;/h3>
 &lt;pre>&lt;code>$ telnet towel.blinkenlights.nl
 &lt;/code>&lt;/pre>&lt;h3 id="rev">rev&lt;/h3>
 &lt;pre>&lt;code>$ rev
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-39-09.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-39-09.png" alt="">&lt;/p>
 &lt;h3 id="factor">factor&lt;/h3>
 &lt;pre>&lt;code>$ factor
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-32-16.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-32-16.png" alt="">&lt;/p>
 &lt;h3 id="cowsay">cowsay&lt;/h3>
 &lt;pre>&lt;code>$ cowsay / cowthink
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-41-06.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-41-06.png" alt="">&lt;/p>
 &lt;h3 id="fortune">fortune&lt;/h3>
 &lt;pre>&lt;code>$ fortune / fortune-zh
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-42-01.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-42-01.png" alt="">&lt;/p>
 &lt;h3 id="cmatrix">cmatrix&lt;/h3>
 &lt;pre>&lt;code>$ cmatrix
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-42-45.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-42-45.png" alt="">&lt;/p>
 &lt;h3 id="yes">yes&lt;/h3>
 &lt;pre>&lt;code>$ yes
 $ yes I love China
@@ -1494,19 +1494,19 @@ $ yes I love China
 &lt;h3 id="toilet">toilet&lt;/h3>
 &lt;pre>&lt;code>$ toilet hcaijin.com
 $ toilet -f mono12 -F metal hcaijin.com
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-47-46.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-47-46.png" alt="">&lt;/p>
 &lt;h3 id="while">while&lt;/h3>
 &lt;pre>&lt;code>$ while true; do echo &amp;quot;$(date '+%D %T' | toilet -f term -F border --gay)&amp;quot;; sleep 1; done
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-49-59.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-49-59.png" alt="">&lt;/p>
 &lt;h3 id="espeak">espeak&lt;/h3>
 &lt;pre>&lt;code>$ espeak &amp;quot;Tecmint is a very good website dedicated to Foss Community&amp;quot;
 &lt;/code>&lt;/pre>&lt;p>将你的多媒体音箱的音量调到最大，然后在将这个命令复制到你的终端，来看看你听到上帝的声音时的反应吧。&lt;/p>
 &lt;h3 id="for">for&lt;/h3>
 &lt;pre>&lt;code>for i in {1..19}; do for j in $(seq 1 $i); do echo -ne $i x $j=$((i*j))\\t;done; echo;done
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-44-41.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-44-41.png" alt="">&lt;/p>
 &lt;h3 id="banner">banner&lt;/h3>
 &lt;pre>&lt;code>$ banner hcaijin.com
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-58-38.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-58-38.png" alt="">&lt;/p>
 &lt;h2 id="终端下有很多危险的命令千万小心执行">终端下有很多危险的命令，千万小心执行。&lt;/h2>
 &lt;h3 id="fork炸弹">fork炸弹&lt;/h3>
 &lt;p>这个命令其实是一个fork炸弹，它会以指数级的自乘，直到所有的系统资源都被利用了或者系统挂起&lt;/p>
@@ -1520,7 +1520,7 @@ $ toilet -f mono12 -F metal hcaijin.com
 &lt;/code>&lt;/pre>&lt;h3 id="shred">shred&lt;/h3>
 &lt;p>覆盖文件让它不能再读，传说中的文件粉碎机&lt;/p>
 &lt;pre>&lt;code>$ shred --help
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_11-03-46.png" alt="">&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/bash/">bash</category></item><item><title>Arch Linux 降级安装软件包与禁止自动升级指定软件包</title><link>https://blog.wxchat.xyz/posts/arch-linux-%E9%99%8D%E7%BA%A7%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6%E5%8C%85%E4%B8%8E%E7%A6%81%E6%AD%A2%E8%87%AA%E5%8A%A8%E5%8D%87%E7%BA%A7%E6%8C%87%E5%AE%9A%E8%BD%AF%E4%BB%B6%E5%8C%85/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/arch-linux-%E9%99%8D%E7%BA%A7%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6%E5%8C%85%E4%B8%8E%E7%A6%81%E6%AD%A2%E8%87%AA%E5%8A%A8%E5%8D%87%E7%BA%A7%E6%8C%87%E5%AE%9A%E8%BD%AF%E4%BB%B6%E5%8C%85/</guid><pubDate>Fri, 08 Jan 2016 00:21:47 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_11-03-46.png" alt="">&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/bash/">bash</category></item><item><title>Arch Linux 降级安装软件包与禁止自动升级指定软件包</title><link>http://blog.wxchat.xyz/posts/arch-linux-%E9%99%8D%E7%BA%A7%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6%E5%8C%85%E4%B8%8E%E7%A6%81%E6%AD%A2%E8%87%AA%E5%8A%A8%E5%8D%87%E7%BA%A7%E6%8C%87%E5%AE%9A%E8%BD%AF%E4%BB%B6%E5%8C%85/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/arch-linux-%E9%99%8D%E7%BA%A7%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6%E5%8C%85%E4%B8%8E%E7%A6%81%E6%AD%A2%E8%87%AA%E5%8A%A8%E5%8D%87%E7%BA%A7%E6%8C%87%E5%AE%9A%E8%BD%AF%E4%BB%B6%E5%8C%85/</guid><pubDate>Fri, 08 Jan 2016 00:21:47 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>由于 Arch Linux 采用滚动更新，最近php7.0也开始更新升级了，但是这会导致目前项目还是采用的mysql模块的程序来说真真是不适合升级的。所以，这里在网上查了一下降级安装的方法分享这里。&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="通过备份软件包降级安装">通过备份软件包降级安装&lt;/h3>
@@ -1561,7 +1561,7 @@ Server=http://ala.seblu.net/repos/2014/03/30/$repo/os/$arch
 &lt;p>这样子,我们就可以禁止上面的三个包自动升级了.如果有其它的包想禁止,直接添加就可以了,记住分隔符要用空格哦.&lt;/p>
 &lt;p>&lt;a href="https://wiki.archlinux.org/index.php/Downgrading_packages_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">参考文档1&lt;/a>
 &lt;a href="https://wiki.archlinux.org/index.php/Arch_Linux_Archive_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">参考文档2&lt;/a>
-&lt;a href="http://www.nenew.net/arch-linux-downgrade-install-packages-prevent-packages-update.html">引用&lt;/a>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/archlinux/">archlinux</category><category domain="https://blog.wxchat.xyz/tags/pacman/">pacman</category></item><item><title>Linux 服务器上相关脚本日志</title><link>https://blog.wxchat.xyz/posts/linux-%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9B%B8%E5%85%B3%E8%84%9A%E6%9C%AC%E6%97%A5%E5%BF%97/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9B%B8%E5%85%B3%E8%84%9A%E6%9C%AC%E6%97%A5%E5%BF%97/</guid><pubDate>Thu, 19 Nov 2015 21:23:02 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>用如下命令查询出来结果中包含“ip地址=数量”的攻击者信息：&lt;/p>
+&lt;a href="http://www.nenew.net/arch-linux-downgrade-install-packages-prevent-packages-update.html">引用&lt;/a>&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/archlinux/">archlinux</category><category domain="http://blog.wxchat.xyz/tags/pacman/">pacman</category></item><item><title>Linux 服务器上相关脚本日志</title><link>http://blog.wxchat.xyz/posts/linux-%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9B%B8%E5%85%B3%E8%84%9A%E6%9C%AC%E6%97%A5%E5%BF%97/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/linux-%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9B%B8%E5%85%B3%E8%84%9A%E6%9C%AC%E6%97%A5%E5%BF%97/</guid><pubDate>Thu, 19 Nov 2015 21:23:02 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>用如下命令查询出来结果中包含“ip地址=数量”的攻击者信息：&lt;/p>
 &lt;pre>&lt;code>cat /var/log/secure|awk '/Failed/{print $(NF-3)}'|sort|uniq -c|awk '{print $2&amp;quot;=&amp;quot;$1;}'
 &lt;/code>&lt;/pre>&lt;p>查看IP所在地：&lt;/p>
 &lt;pre>&lt;code>curl ipinfo.io/{IP}
@@ -1579,7 +1579,7 @@ port=1080
 chromium --proxy-server=&amp;quot;socks://localhost:$port&amp;quot; &amp;amp;
 exit
 }
-&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/shell/">shell</category><category domain="https://blog.wxchat.xyz/tags/bash/">bash</category></item><item><title>Ghost博客手工修改管理员密码方法</title><link>https://blog.wxchat.xyz/posts/ghost%E5%8D%9A%E5%AE%A2%E6%89%8B%E5%B7%A5%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86%E5%91%98%E5%AF%86%E7%A0%81%E6%96%B9%E6%B3%95/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/ghost%E5%8D%9A%E5%AE%A2%E6%89%8B%E5%B7%A5%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86%E5%91%98%E5%AF%86%E7%A0%81%E6%96%B9%E6%B3%95/</guid><pubDate>Sun, 11 Oct 2015 13:40:18 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;/code>&lt;/pre></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/shell/">shell</category><category domain="http://blog.wxchat.xyz/tags/bash/">bash</category></item><item><title>Ghost博客手工修改管理员密码方法</title><link>http://blog.wxchat.xyz/posts/ghost%E5%8D%9A%E5%AE%A2%E6%89%8B%E5%B7%A5%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86%E5%91%98%E5%AF%86%E7%A0%81%E6%96%B9%E6%B3%95/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/ghost%E5%8D%9A%E5%AE%A2%E6%89%8B%E5%B7%A5%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86%E5%91%98%E5%AF%86%E7%A0%81%E6%96%B9%E6%B3%95/</guid><pubDate>Sun, 11 Oct 2015 13:40:18 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>今天修改Ghost密码，因为是粘贴复制，估计是粘贴到了其他字符，导致密码错误登陆后台失败。而且还因为登录尝试次数过多，造成用户被锁定，只能通过发送邮件找回密码，但是，我配置的Gmail邮箱被google限制使用收发邮件功能了应该，以后看一下具体的原因。&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="查找sqlite数据库用户信息">查找sqlite数据库用户信息&lt;/h3>
@@ -1596,7 +1596,7 @@ sqlite&amp;gt; selete * from users;
 &lt;pre>&lt;code>sqlite&amp;gt; update users set password = &amp;quot;$2a$10$ahse9xU.Tr9MttVX4tO1zOER7odgDrQuJzgjZI4fm56x84c/2dGqq&amp;quot; where id = 1; ### 更新密码
 sqlite&amp;gt; update users set status = &amp;quot;active&amp;quot; where id = 1; ### 解锁用户
 sqlite&amp;gt; .quit
-&lt;/code>&lt;/pre>&lt;p>完成以上两步，就可以重新登录了。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/ghost/">ghost</category><category domain="https://blog.wxchat.xyz/tags/sqlite/">sqlite</category></item><item><title>树莓派安装Gentoo Linux</title><link>https://blog.wxchat.xyz/posts/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85gentoo-linux/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85gentoo-linux/</guid><pubDate>Thu, 24 Sep 2015 09:09:57 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="gentoo介绍">Gentoo介绍&lt;/h2>
+&lt;/code>&lt;/pre>&lt;p>完成以上两步，就可以重新登录了。&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/ghost/">ghost</category><category domain="http://blog.wxchat.xyz/tags/sqlite/">sqlite</category></item><item><title>树莓派安装Gentoo Linux</title><link>http://blog.wxchat.xyz/posts/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85gentoo-linux/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85gentoo-linux/</guid><pubDate>Thu, 24 Sep 2015 09:09:57 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="gentoo介绍">Gentoo介绍&lt;/h2>
 &lt;h3 id="gentoo的历史">Gentoo的历史&lt;/h3>
 &lt;pre>&lt;code> Gentoo Linux （原来被称为 Enoch Linux ) 是在1999年由Daniel Robbins 和一些开发人员开发的。目标就是创建一个没有预编译的二进制文件的Linux发行版并根据所在的硬件平台进行调整。中间因为Gentoo 缺少关键项目，没有自己的包管理系统，后面Robbins 受到FreeBSD包管理系统的启发，开发出了自己的包管理系统，被称为是portage。
 Gentoo没有二进制组件，它的包树中只包含源代码，这使它成为可以移植到其他架构上的理想的操作系统。当然，它的不足之处就是需要漫长的安装时间和大量的人工参与。不过，这不就是我们学习Linux的目的嘛。
@@ -1811,7 +1811,7 @@ $ cd linux
 &lt;/code>&lt;/pre>&lt;h3 id="为什么要使用交叉编译环境">为什么要使用交叉编译环境&lt;/h3>
 &lt;p>交叉编译是在你的宿主系统上编译不同机器类型的应用程序。因为，树莓派使用的ARM架构与宿主机系统x86机器类型不同，只有使用相同的CPU机器类型才能使用chroot引导新系统。所以，这里就得用到交叉编译环境，在宿主系统上编译出ARM架构的树莓派。 在开始之前，希望大家可以先看一下&lt;a href="http://linuxfromscratch.org/">《Linux 从零开始》&lt;/a> 。&lt;/p>
 &lt;h3 id="crosstool-ng">crosstool-NG&lt;/h3>
-&lt;p>暂时写到这里，以后再补充。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/gentoo/">Gentoo</category><category domain="https://blog.wxchat.xyz/tags/raspberry-pi/">Raspberry Pi</category></item><item><title>Nginx配置博客ghost使用https 及安装StartSSL免费SSL证书</title><link>https://blog.wxchat.xyz/posts/nginx%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2ghost%E4%BD%BF%E7%94%A8https-%E5%8F%8A%E5%AE%89%E8%A3%85startssl%E5%85%8D%E8%B4%B9ssl%E8%AF%81%E4%B9%A6/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/nginx%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2ghost%E4%BD%BF%E7%94%A8https-%E5%8F%8A%E5%AE%89%E8%A3%85startssl%E5%85%8D%E8%B4%B9ssl%E8%AF%81%E4%B9%A6/</guid><pubDate>Sun, 13 Sep 2015 10:33:52 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>今天配置安装ssl证书碰到了不少的问题，这里记录一下。&lt;/p>
+&lt;p>暂时写到这里，以后再补充。&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/gentoo/">Gentoo</category><category domain="http://blog.wxchat.xyz/tags/raspberry-pi/">Raspberry Pi</category></item><item><title>Nginx配置博客ghost使用https 及安装StartSSL免费SSL证书</title><link>http://blog.wxchat.xyz/posts/nginx%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2ghost%E4%BD%BF%E7%94%A8https-%E5%8F%8A%E5%AE%89%E8%A3%85startssl%E5%85%8D%E8%B4%B9ssl%E8%AF%81%E4%B9%A6/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/nginx%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2ghost%E4%BD%BF%E7%94%A8https-%E5%8F%8A%E5%AE%89%E8%A3%85startssl%E5%85%8D%E8%B4%B9ssl%E8%AF%81%E4%B9%A6/</guid><pubDate>Sun, 13 Sep 2015 10:33:52 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>今天配置安装ssl证书碰到了不少的问题，这里记录一下。&lt;/p>
 &lt;blockquote>
 &lt;p>HTTP协议默认情况下是不加密的，各种密码，邮件的传输都是明文的，极有可能被互联网上的黑客给获取，造成隐私泄漏。
 SSL是Secure Socket Layer的简称，具体的作用就是在部署了SSL证书的网站跟用户浏览器之间建立一个安全的会话。&lt;/p>
@@ -1839,7 +1839,7 @@ $ /usr/local/nginx/sbin/nginx -V ##这里就可以使用新版本的程序看一
 &lt;p>我们来说一下，安装的流程：
 首先使用ssh登陆vps，执行如下命令生成证书&lt;/p>
 &lt;pre>&lt;code>$ openssl req -new -newkey rsa:2048 -nodes -out server.csr -keyout server.key
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2015/09/--_2015-09-14_00-06-53.png" alt="">&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2015/09/--_2015-09-14_00-06-53.png" alt="">&lt;/p>
 &lt;p>以上生成的server.csr 需要把内容粘贴到 StartSSL 去生成域名证书了。&lt;/p>
 &lt;p>这里生成的server.key 是没有passphrase的，所以这一节我们可以跳过不看。如果有配置密码的话，我们需要去掉private key的passphrase才能让Nginx自由自在的启动。&lt;/p>
 &lt;pre>&lt;code>$ cp server.key server.key.bak
@@ -1880,7 +1880,7 @@ rewrite ^ https://$server_name$request_uri? permanent;
 $ wget http://cert.startssl.com/certs/sub.class1.server.ca.pem
 $ sudo cat ca.pem sub.class1.server.ca.pem &amp;gt;&amp;gt; server.crt
 $ /etc/init.d/nginx restart
-&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/ghost/">ghost</category><category domain="https://blog.wxchat.xyz/tags/nginx/">nginx</category><category domain="https://blog.wxchat.xyz/tags/https/">https</category><category domain="https://blog.wxchat.xyz/tags/openssl/">openssl</category></item><item><title>Arch Linux 配置Bluetooth</title><link>https://blog.wxchat.xyz/posts/arch-linux-%E9%85%8D%E7%BD%AEbluetooth/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/arch-linux-%E9%85%8D%E7%BD%AEbluetooth/</guid><pubDate>Wed, 19 Aug 2015 03:22:07 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;/code>&lt;/pre></description><category domain="http://blog.wxchat.xyz/tags/ghost/">ghost</category><category domain="http://blog.wxchat.xyz/tags/nginx/">nginx</category><category domain="http://blog.wxchat.xyz/tags/https/">https</category><category domain="http://blog.wxchat.xyz/tags/openssl/">openssl</category></item><item><title>Arch Linux 配置Bluetooth</title><link>http://blog.wxchat.xyz/posts/arch-linux-%E9%85%8D%E7%BD%AEbluetooth/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/arch-linux-%E9%85%8D%E7%BD%AEbluetooth/</guid><pubDate>Wed, 19 Aug 2015 03:22:07 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>蓝牙是一个短距离无线通信标准，适用于手机、计算机和其他电子设备之间的通信。在 Linux 中，通常使用的蓝牙协议栈实现是 BlueZ.&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="安装">安装&lt;/h2>
@@ -1900,7 +1900,7 @@ $ sudo systemctl start bluetooth.service
 &lt;pre>&lt;code>$ bluetoothctl
 &lt;/code>&lt;/pre>
 &lt;p>help 列出帮助文档。
-&lt;img src="https://blog.wxchat.xyz/content/images/2015/08/--_2015-08-19_15-31-47.png" alt="">&lt;/p>
+&lt;img src="http://blog.wxchat.xyz/content/images/2015/08/--_2015-08-19_15-31-47.png" alt="">&lt;/p>
 &lt;ul>
 &lt;li>首先执行 &lt;code>power on&lt;/code> 打开蓝牙适配器的电源开关，这样蓝牙的LED灯会亮起(默认是关闭的)。&lt;/li>
 &lt;li>先用命令 &lt;code>devices&lt;/code> 列出有已匹配的设备MAC地址&lt;/li>
@@ -1912,7 +1912,7 @@ $ sudo systemctl start bluetooth.service
 &lt;/ul>
 &lt;h3 id="obex">Obex&lt;/h3>
 &lt;p>使用obexctl是在蓝牙设备之间发送和接收文件的工具，是随bluez包安装好了的,在终端直接输入 &lt;code>obexctl&lt;/code> 就可以进入obex环境，如图：
-&lt;img src="https://blog.wxchat.xyz/content/images/2015/08/--_2015-08-19_16-41-12.png" alt="">&lt;/p>
+&lt;img src="http://blog.wxchat.xyz/content/images/2015/08/--_2015-08-19_16-41-12.png" alt="">&lt;/p>
 &lt;p>另外还有一个命令行工具obexfs (包括obexfs,obexftp等)&lt;/p>
 &lt;pre>&lt;code>$ sudo pacman -S obexfs
 &lt;/code>&lt;/pre>
@@ -1950,16 +1950,16 @@ $ hciconfig hci0 up
 &lt;/code>&lt;/pre>
 &lt;p>注意: 检查/etc/bluetooth/main.conf中的发现倒计时和配对倒计时
 试着在 /etc/bluetooth/main.conf 改变设备的class
-&lt;img src="https://blog.wxchat.xyz/content/images/2015/08/--_2015-08-19_17-23-20.png" alt="">
+&lt;img src="http://blog.wxchat.xyz/content/images/2015/08/--_2015-08-19_17-23-20.png" alt="">
 修改：Class = 0x100100&lt;/p>
-&lt;p>==参考：https://wiki.archlinux.org/index.php/Bluetooth ==&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/archlinux/">archlinux</category><category domain="https://blog.wxchat.xyz/tags/bluetooth/">bluetooth</category></item><item><title>导出CSV文件，对长数字字符会自动显示科学计数解决方法</title><link>https://blog.wxchat.xyz/posts/%E5%AF%BC%E5%87%BAcsv%E6%96%87%E4%BB%B6%E5%AF%B9%E9%95%BF%E6%95%B0%E5%AD%97%E5%AD%97%E7%AC%A6%E4%BC%9A%E8%87%AA%E5%8A%A8%E6%98%BE%E7%A4%BA%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/%E5%AF%BC%E5%87%BAcsv%E6%96%87%E4%BB%B6%E5%AF%B9%E9%95%BF%E6%95%B0%E5%AD%97%E5%AD%97%E7%AC%A6%E4%BC%9A%E8%87%AA%E5%8A%A8%E6%98%BE%E7%A4%BA%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</guid><pubDate>Thu, 06 Aug 2015 06:00:33 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>今天做csv导出遇到订单号太长导致导出来用EXCEL打开显示为科学计数了，最后几位直接显示为0。但是用文本方式打开订单号是正常的，这说明一定是与EXcel有关系。
+&lt;p>==参考：https://wiki.archlinux.org/index.php/Bluetooth ==&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/archlinux/">archlinux</category><category domain="http://blog.wxchat.xyz/tags/bluetooth/">bluetooth</category></item><item><title>导出CSV文件，对长数字字符会自动显示科学计数解决方法</title><link>http://blog.wxchat.xyz/posts/%E5%AF%BC%E5%87%BAcsv%E6%96%87%E4%BB%B6%E5%AF%B9%E9%95%BF%E6%95%B0%E5%AD%97%E5%AD%97%E7%AC%A6%E4%BC%9A%E8%87%AA%E5%8A%A8%E6%98%BE%E7%A4%BA%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/%E5%AF%BC%E5%87%BAcsv%E6%96%87%E4%BB%B6%E5%AF%B9%E9%95%BF%E6%95%B0%E5%AD%97%E5%AD%97%E7%AC%A6%E4%BC%9A%E8%87%AA%E5%8A%A8%E6%98%BE%E7%A4%BA%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</guid><pubDate>Thu, 06 Aug 2015 06:00:33 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>今天做csv导出遇到订单号太长导致导出来用EXCEL打开显示为科学计数了，最后几位直接显示为0。但是用文本方式打开订单号是正常的，这说明一定是与EXcel有关系。
 GOOGLE了一下，找到EXCEL相关介绍：&lt;/p>
 &lt;blockquote>
 &lt;p>Excel显示数字时，如果数字大于12位，它会自动转化为科学计数法；如果数字大于15位，它不仅用于科学技术费表示，还会只保留高15位，其他位都变0。&lt;/p>
 &lt;/blockquote>
 &lt;pre>&lt;code>$oid = &amp;quot;\t&amp;quot;.$val['oid'];
 &lt;/code>&lt;/pre>
-&lt;p>如果是phpexcel导出的话，把&amp;rdquo;\t&amp;quot;换成&amp;rdquo; &amp;ldquo;即可。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/csv/">csv</category><category domain="https://blog.wxchat.xyz/tags/excel/">excel</category><category domain="https://blog.wxchat.xyz/tags/phpexcel/">phpexcel</category></item><item><title>linux 无线网卡状态异常修复</title><link>https://blog.wxchat.xyz/posts/linux-%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E7%8A%B6%E6%80%81%E5%BC%82%E5%B8%B8%E4%BF%AE%E5%A4%8D/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E7%8A%B6%E6%80%81%E5%BC%82%E5%B8%B8%E4%BF%AE%E5%A4%8D/</guid><pubDate>Fri, 17 Jul 2015 12:43:40 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>无线网卡异常，有很多种原因造成。这里我是因为有做AP共享WIFI，本来好好的，不知道怎么实然，我手机wifi断了，再看，从PC共享的WIFI竟然挂了。
+&lt;p>如果是phpexcel导出的话，把&amp;rdquo;\t&amp;quot;换成&amp;rdquo; &amp;ldquo;即可。&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/csv/">csv</category><category domain="http://blog.wxchat.xyz/tags/excel/">excel</category><category domain="http://blog.wxchat.xyz/tags/phpexcel/">phpexcel</category></item><item><title>linux 无线网卡状态异常修复</title><link>http://blog.wxchat.xyz/posts/linux-%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E7%8A%B6%E6%80%81%E5%BC%82%E5%B8%B8%E4%BF%AE%E5%A4%8D/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/linux-%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E7%8A%B6%E6%80%81%E5%BC%82%E5%B8%B8%E4%BF%AE%E5%A4%8D/</guid><pubDate>Fri, 17 Jul 2015 12:43:40 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>无线网卡异常，有很多种原因造成。这里我是因为有做AP共享WIFI，本来好好的，不知道怎么实然，我手机wifi断了，再看，从PC共享的WIFI竟然挂了。
 就这样，下班回家，准备链接无线路由，因为有换新的网，得重新链接：&lt;/p>
 &lt;pre>&lt;code> $ sudo wifi-menu -o
 &lt;/code>&lt;/pre>
@@ -1974,14 +1974,14 @@ Google一下，就找到了问题的关键，原因RF-KILL其实是一个打开�
 &lt;pre>&lt;code> $ sudo pacman -S rfkill
 &lt;/code>&lt;/pre>
 &lt;p>安装好以后，为了查看当前的无限网卡的状态，执行命令rfkill list all ——列出所有无线设备的当前状态。结果如下：
-&lt;img src="https://blog.wxchat.xyz/content/images/2015/07/--_2015-07-18_01-13-01.png" alt="">&lt;/p>
+&lt;img src="http://blog.wxchat.xyz/content/images/2015/07/--_2015-07-18_01-13-01.png" alt="">&lt;/p>
 &lt;p>发现 Hard blocked 和 soft blocked 之间的同步失败,具体原因可以看这里&lt;a href="http://askubuntu.com/questions/62166/siocsifflags-operation-not-possible-due-to-rf-kill">“SIOCSIFFLAGS: Operation not possible due to RF-kill”?&lt;/a>&lt;/p>
 &lt;p>找到问题原因，我们可以使用命令使软硬设备同步:&lt;/p>
 &lt;pre>&lt;code>$ rfkill unblock wifi
 &lt;/code>&lt;/pre>
 &lt;p>用命令 rfkill list all 列出所有无线设备状态看一下结果，
-&lt;img src="https://blog.wxchat.xyz/content/images/2015/07/--_2015-07-18_01-24-26.png" alt="">&lt;/p>
-&lt;p>好了，无线网卡状态异常的问题修复了。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/wifi/">wifi</category><category domain="https://blog.wxchat.xyz/tags/rf-kill/">RF-kill</category></item><item><title>PPTP 服务器端安装与配置详解</title><link>https://blog.wxchat.xyz/posts/pptp-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/pptp-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/</guid><pubDate>Wed, 17 Jun 2015 05:44:35 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="安装前环境检查">安装前环境检查&lt;/h2>
+&lt;img src="http://blog.wxchat.xyz/content/images/2015/07/--_2015-07-18_01-24-26.png" alt="">&lt;/p>
+&lt;p>好了，无线网卡状态异常的问题修复了。&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/wifi/">wifi</category><category domain="http://blog.wxchat.xyz/tags/rf-kill/">RF-kill</category></item><item><title>PPTP 服务器端安装与配置详解</title><link>http://blog.wxchat.xyz/posts/pptp-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/pptp-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/</guid><pubDate>Wed, 17 Jun 2015 05:44:35 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="安装前环境检查">安装前环境检查&lt;/h2>
 &lt;p>因为pptp需要MPPE的支持，所以首先检测系统是否符已经编译了MPPE。
 下面介绍两种检测方法，只要符合其中的一条就可以&lt;/p>
 &lt;h3 id="第一种">第一种：&lt;/h3>
@@ -2042,7 +2042,7 @@ ms-dns 8.8.4.4&lt;/p>
 &lt;/code>&lt;/pre>
 &lt;h2 id="运行">运行&lt;/h2>
 &lt;pre>&lt;code>/etc/init.d/pptpd start
-&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/pptp/">pptp</category><category domain="https://blog.wxchat.xyz/tags/iptables/">iptables</category><category domain="https://blog.wxchat.xyz/tags/vps/">vps</category></item><item><title>Linux中的文件特殊权限</title><link>https://blog.wxchat.xyz/posts/linux%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E7%89%B9%E6%AE%8A%E6%9D%83%E9%99%90/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E7%89%B9%E6%AE%8A%E6%9D%83%E9%99%90/</guid><pubDate>Mon, 15 Jun 2015 06:25:56 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>linux中除了常见的读（r）、写（w）、执行（x）权限以外，还有3个特殊的权限，分别是setuid、setgid和stick bit&lt;/p>
+&lt;/code>&lt;/pre></description><category domain="http://blog.wxchat.xyz/tags/pptp/">pptp</category><category domain="http://blog.wxchat.xyz/tags/iptables/">iptables</category><category domain="http://blog.wxchat.xyz/tags/vps/">vps</category></item><item><title>Linux中的文件特殊权限</title><link>http://blog.wxchat.xyz/posts/linux%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E7%89%B9%E6%AE%8A%E6%9D%83%E9%99%90/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/linux%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E7%89%B9%E6%AE%8A%E6%9D%83%E9%99%90/</guid><pubDate>Mon, 15 Jun 2015 06:25:56 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>linux中除了常见的读（r）、写（w）、执行（x）权限以外，还有3个特殊的权限，分别是setuid、setgid和stick bit&lt;/p>
 &lt;h2 id="setuidsetgid">setuid、setgid&lt;/h2>
 &lt;p>先看个实例，查看你的/usr/bin/passwd 与/etc/passwd文件的权限&lt;/p>
 &lt;pre>&lt;code># ls -l /usr/bin/passwd /etc/passwd
@@ -2074,7 +2074,7 @@ drwxrwxrwt 6 root root 4096 08-22 11:37 /tmp
 &lt;p>于是也可以这样设:setuid:chmod 4755 xxx&lt;/p>
 &lt;p>setgid:chmod 2755 xxx&lt;/p>
 &lt;p>stick bit:chmod 1755 xxx&lt;/p>
-&lt;p>最后，在一些文件设置了特殊权限后，字母不是小写的s或者t，而是大写的S和T，那代表此文件的特殊权限没有生效，是因为你尚未给它对应用户的x权限&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/setuid/">setuid</category><category domain="https://blog.wxchat.xyz/tags/setgid/">setgid</category><category domain="https://blog.wxchat.xyz/tags/stick-bit/">stick bit</category></item><item><title>php session 丢失BUG修改</title><link>https://blog.wxchat.xyz/posts/php-session-%E4%B8%A2%E5%A4%B1bug%E4%BF%AE%E6%94%B9/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/php-session-%E4%B8%A2%E5%A4%B1bug%E4%BF%AE%E6%94%B9/</guid><pubDate>Mon, 15 Jun 2015 06:07:48 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>今天真是被这个问题给郁闷到了，调试了代码半天时间，终于从http://www.111cn.net/phper/php-cy/56742.htm 里找到了线索。就是存储session的目录权限不可写，或者目录空间満了写不进去就会出现这个BUG.&lt;/p>
+&lt;p>最后，在一些文件设置了特殊权限后，字母不是小写的s或者t，而是大写的S和T，那代表此文件的特殊权限没有生效，是因为你尚未给它对应用户的x权限&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/setuid/">setuid</category><category domain="http://blog.wxchat.xyz/tags/setgid/">setgid</category><category domain="http://blog.wxchat.xyz/tags/stick-bit/">stick bit</category></item><item><title>php session 丢失BUG修改</title><link>http://blog.wxchat.xyz/posts/php-session-%E4%B8%A2%E5%A4%B1bug%E4%BF%AE%E6%94%B9/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/php-session-%E4%B8%A2%E5%A4%B1bug%E4%BF%AE%E6%94%B9/</guid><pubDate>Mon, 15 Jun 2015 06:07:48 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>今天真是被这个问题给郁闷到了，调试了代码半天时间，终于从http://www.111cn.net/phper/php-cy/56742.htm 里找到了线索。就是存储session的目录权限不可写，或者目录空间満了写不进去就会出现这个BUG.&lt;/p>
 &lt;pre>&lt;code>$ ls -al /
 drwxr-xr-x. 12 root root 53248 Jun 15 17:14 tmp
 &lt;/code>&lt;/pre>
@@ -2082,7 +2082,7 @@ drwxr-xr-x. 12 root root 53248 Jun 15 17:14 tmp
 &lt;p>后面，打开Thinkphp debug ,trace 页面查找到 open('/tmp/sess_ifoeq9834f98h4h54&amp;rsquo;,O_REIOR) promostion demoin&lt;/p>
 &lt;blockquote>
 &lt;p>总结一下， 就是遇到问题，日志才是最好的排错地方。这里记录一下，以免以后又犯错，直接去调试代码，花费了不小的功夫，还找不到原因。&lt;/p>
-&lt;/blockquote></description><category domain="https://blog.wxchat.xyz/tags/php/">php</category><category domain="https://blog.wxchat.xyz/tags/session/">session</category><category domain="https://blog.wxchat.xyz/tags/thinkphp/">Thinkphp</category></item><item><title>LINUX ssh 用户配置文件 config 管理</title><link>https://blog.wxchat.xyz/posts/linux-ssh-%E7%94%A8%E6%88%B7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-config-%E7%AE%A1%E7%90%86/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-ssh-%E7%94%A8%E6%88%B7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-config-%E7%AE%A1%E7%90%86/</guid><pubDate>Sat, 13 Jun 2015 04:32:01 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;/blockquote></description><category domain="http://blog.wxchat.xyz/tags/php/">php</category><category domain="http://blog.wxchat.xyz/tags/session/">session</category><category domain="http://blog.wxchat.xyz/tags/thinkphp/">Thinkphp</category></item><item><title>LINUX ssh 用户配置文件 config 管理</title><link>http://blog.wxchat.xyz/posts/linux-ssh-%E7%94%A8%E6%88%B7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-config-%E7%AE%A1%E7%90%86/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/linux-ssh-%E7%94%A8%E6%88%B7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-config-%E7%AE%A1%E7%90%86/</guid><pubDate>Sat, 13 Jun 2015 04:32:01 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>利用 ssh 的用户配置文件 config 管理 ssh 会话。ssh 的用户配置文件是放在当前用户根目录下的 .ssh 文件夹里（~/.ssh/config，不存在则新创建一个），其配置写法如下：&lt;/p>
 &lt;/blockquote>
 &lt;pre>&lt;code>Host test
@@ -2128,7 +2128,7 @@ drwxr-xr-x. 5 other others 4096 Jun 13 16:15 ..
 &lt;/code>&lt;/pre>
 &lt;p>打包一个文件（假设当前目录有个名为 test 的文件夹），接着上传到远程服务器，最后解压文件&lt;/p>
 &lt;pre>&lt;code> # tar -zcvf - ./test/ | ssh test 'cd /user/; tar xvfz -'
-&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/ssh/">ssh</category></item><item><title>Mysql 设置大小写敏感</title><link>https://blog.wxchat.xyz/posts/mysql-%E8%AE%BE%E7%BD%AE%E5%A4%A7%E5%B0%8F%E5%86%99%E6%95%8F%E6%84%9F/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/mysql-%E8%AE%BE%E7%BD%AE%E5%A4%A7%E5%B0%8F%E5%86%99%E6%95%8F%E6%84%9F/</guid><pubDate>Mon, 01 Jun 2015 22:36:28 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>1、linux下mysql安装完后是默认：区分表名的大小写，不区分列名的大小写；&lt;/p>
+&lt;/code>&lt;/pre></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/ssh/">ssh</category></item><item><title>Mysql 设置大小写敏感</title><link>http://blog.wxchat.xyz/posts/mysql-%E8%AE%BE%E7%BD%AE%E5%A4%A7%E5%B0%8F%E5%86%99%E6%95%8F%E6%84%9F/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/mysql-%E8%AE%BE%E7%BD%AE%E5%A4%A7%E5%B0%8F%E5%86%99%E6%95%8F%E6%84%9F/</guid><pubDate>Mon, 01 Jun 2015 22:36:28 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>1、linux下mysql安装完后是默认：区分表名的大小写，不区分列名的大小写；&lt;/p>
 &lt;p>2、如何设置为不区分表名的大小写：
 修改mysql配置文件/etc/mysql/my.cnf 中,在[mysqld]后添加lower_case_table_names=1，默认为0表示区分大小写，然后重启MYSQL服务。；&lt;/p>
 &lt;p>3、Mysql 在不同的操作系统中大小写敏感区别：
@@ -2146,7 +2146,7 @@ CREATE TABLE T(
 A VARCHAR(10) BINARY
 );&lt;/p>
 &lt;p>B、使用alter修改：
-ALTER TABLE &lt;code>tablename&lt;/code> MODIFY COLUMN &lt;code>cloname&lt;/code> VARCHAR(45) BINARY;&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/mysql/">mysql</category></item><item><title>MySQL导入导出csv文件命令行操作</title><link>https://blog.wxchat.xyz/posts/mysql%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BAcsv%E6%96%87%E4%BB%B6%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/mysql%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BAcsv%E6%96%87%E4%BB%B6%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/</guid><pubDate>Mon, 01 Jun 2015 02:36:16 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>1、先确认一下cvs的文件格式，确保与表编码一至。设为utf8
+ALTER TABLE &lt;code>tablename&lt;/code> MODIFY COLUMN &lt;code>cloname&lt;/code> VARCHAR(45) BINARY;&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/mysql/">mysql</category></item><item><title>MySQL导入导出csv文件命令行操作</title><link>http://blog.wxchat.xyz/posts/mysql%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BAcsv%E6%96%87%E4%BB%B6%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/mysql%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BAcsv%E6%96%87%E4%BB%B6%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/</guid><pubDate>Mon, 01 Jun 2015 02:36:16 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>1、先确认一下cvs的文件格式，确保与表编码一至。设为utf8
 2、创建表，设置为utf8
 3、登陆mysql, 导入csv文件&lt;/p>
 &lt;pre>&lt;code>$ mysql -uroot -p
@@ -2157,7 +2157,7 @@ MariaDB [test]&amp;gt; LOAD DATA INFILE '/mysql/test_data.csv' REPLACE INTO TABL
 &lt;pre>&lt;code>$ sudo mkdir /mysql ;
 $ sudo chown -R mysql.mysql /mysql
 $ sudo cp ~/test_data.csv /mysql/
-&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/mysql/">mysql</category><category domain="https://blog.wxchat.xyz/tags/csv/">csv</category><category domain="https://blog.wxchat.xyz/tags/utf8/">utf8</category></item><item><title>Nginx 配置高并发</title><link>https://blog.wxchat.xyz/posts/nginx-%E9%85%8D%E7%BD%AE%E9%AB%98%E5%B9%B6%E5%8F%91/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/nginx-%E9%85%8D%E7%BD%AE%E9%AB%98%E5%B9%B6%E5%8F%91/</guid><pubDate>Wed, 13 May 2015 03:15:17 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="一般来说nginx-配置文件中对优化比较有作用的为以下几项">一般来说nginx 配置文件中对优化比较有作用的为以下几项：&lt;/h2>
+&lt;/code>&lt;/pre></description><category domain="http://blog.wxchat.xyz/tags/mysql/">mysql</category><category domain="http://blog.wxchat.xyz/tags/csv/">csv</category><category domain="http://blog.wxchat.xyz/tags/utf8/">utf8</category></item><item><title>Nginx 配置高并发</title><link>http://blog.wxchat.xyz/posts/nginx-%E9%85%8D%E7%BD%AE%E9%AB%98%E5%B9%B6%E5%8F%91/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/nginx-%E9%85%8D%E7%BD%AE%E9%AB%98%E5%B9%B6%E5%8F%91/</guid><pubDate>Wed, 13 May 2015 03:15:17 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="一般来说nginx-配置文件中对优化比较有作用的为以下几项">一般来说nginx 配置文件中对优化比较有作用的为以下几项：&lt;/h2>
 &lt;ol>
 &lt;li>worker_processes 8;&lt;/li>
 &lt;/ol>
@@ -2428,7 +2428,7 @@ fastcgi_cache_valid any 1m;&lt;/p>
 &lt;p>&lt;value name="rlimit_files">102400&lt;/value>&lt;/p>
 &lt;p>最多打开文件数。&lt;/p>
 &lt;p>&lt;value name="max_requests">204800&lt;/value>&lt;/p>
-&lt;p>每个进程在重置之前能够执行的最多请求数。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/nginx/">nginx</category></item><item><title>linux用extundelete恢复ext2、ext3、ext4下rm -rf误删除的数据</title><link>https://blog.wxchat.xyz/posts/linux%E7%94%A8extundelete%E6%81%A2%E5%A4%8Dext2ext3ext4%E4%B8%8Brm-rf%E8%AF%AF%E5%88%A0%E9%99%A4%E7%9A%84%E6%95%B0%E6%8D%AE/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux%E7%94%A8extundelete%E6%81%A2%E5%A4%8Dext2ext3ext4%E4%B8%8Brm-rf%E8%AF%AF%E5%88%A0%E9%99%A4%E7%9A%84%E6%95%B0%E6%8D%AE/</guid><pubDate>Tue, 12 May 2015 23:40:20 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>国外的Linux系统管理员守则中有这么一条：“慎用 rm -rf 命令，除非你知道此命令所带来的后果“&lt;/p>
+&lt;p>每个进程在重置之前能够执行的最多请求数。&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/nginx/">nginx</category></item><item><title>linux用extundelete恢复ext2、ext3、ext4下rm -rf误删除的数据</title><link>http://blog.wxchat.xyz/posts/linux%E7%94%A8extundelete%E6%81%A2%E5%A4%8Dext2ext3ext4%E4%B8%8Brm-rf%E8%AF%AF%E5%88%A0%E9%99%A4%E7%9A%84%E6%95%B0%E6%8D%AE/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/linux%E7%94%A8extundelete%E6%81%A2%E5%A4%8Dext2ext3ext4%E4%B8%8Brm-rf%E8%AF%AF%E5%88%A0%E9%99%A4%E7%9A%84%E6%95%B0%E6%8D%AE/</guid><pubDate>Tue, 12 May 2015 23:40:20 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>国外的Linux系统管理员守则中有这么一条：“慎用 rm -rf 命令，除非你知道此命令所带来的后果“&lt;/p>
 &lt;p>Linux下删除文件并不是真实的删除磁盘分区中的文件，而是将文件的inode节点中的扇区指针清除，同时释放这些数据对应的数据块，当释放的数据块被系统重新分配时，那些被删除的数据就会被覆盖，所以误删除数据后，应马上卸载文件所在的分区。
 每个文件有inode和block组成，inode是文件系统组成的最基本单元，它保存着文件的基本属性(大小、权限、属主组等)和存放的位置信息。而block用来存储数据。类似key-value，inode就是key，block对应value，通过key查找key对应的value。类似python的字典。&lt;/p>
 &lt;h2 id="查看根目录的inode值">查看根目录的inode值&lt;/h2>
@@ -2489,12 +2489,12 @@ test 130817 Deleted
 54fb6627dbaa37721048e4549db3224d RECOVERED_FILES/hosts
 # md5sum RECOVERED_FILES/test/geek.txt
 eb42e4b3f953ce00e78e11bf50652a80 RECOVERED_FILES/test/geek.txt
-&lt;/code>&lt;/pre>&lt;p>校验码与之前的完全一致。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/extundelete/">extundelete</category><category domain="https://blog.wxchat.xyz/tags/fdisk/">fdisk</category></item><item><title>Ghost 加载慢问题分析</title><link>https://blog.wxchat.xyz/posts/ghost-%E5%8A%A0%E8%BD%BD%E6%85%A2%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/ghost-%E5%8A%A0%E8%BD%BD%E6%85%A2%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/</guid><pubDate>Mon, 11 May 2015 01:52:45 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>Ghost 搭建完能正常访问，可是墙内访问实在太慢了，按F12打开Chrome 开发者工具可以看到主要是 &lt;a href="http://fonts.googleapis.com">http://fonts.googleapis.com&lt;/a> 这个访问使用了太长的时间。应该是GFW搞的鬼，使得 Google Fonts 服务也受影响了，Ghost 后台和默认主题都引用了 Google Fonts 服务，已至于每次打开自己的 Ghost 博客都很慢。&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>校验码与之前的完全一致。&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/extundelete/">extundelete</category><category domain="http://blog.wxchat.xyz/tags/fdisk/">fdisk</category></item><item><title>Ghost 加载慢问题分析</title><link>http://blog.wxchat.xyz/posts/ghost-%E5%8A%A0%E8%BD%BD%E6%85%A2%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/ghost-%E5%8A%A0%E8%BD%BD%E6%85%A2%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/</guid><pubDate>Mon, 11 May 2015 01:52:45 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>Ghost 搭建完能正常访问，可是墙内访问实在太慢了，按F12打开Chrome 开发者工具可以看到主要是 &lt;a href="http://fonts.googleapis.com">http://fonts.googleapis.com&lt;/a> 这个访问使用了太长的时间。应该是GFW搞的鬼，使得 Google Fonts 服务也受影响了，Ghost 后台和默认主题都引用了 Google Fonts 服务，已至于每次打开自己的 Ghost 博客都很慢。&lt;/p>
 &lt;p>&lt;em>这样我们就知道了问题的关键，马上登陆服务器，进入ghost目录。&lt;/em>&lt;/p>
 &lt;pre>&lt;code> $ cd /data/www/ghost
 $ grep 'fonts.googleapis.com' -n --color -r .
 &lt;/code>&lt;/pre>
-&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2015/05/--_2015-05-11_14-04-18.png" alt="">
+&lt;p>&lt;img src="http://blog.wxchat.xyz/content/images/2015/05/--_2015-05-11_14-04-18.png" alt="">
 &lt;em>使用sed删除相应的行&lt;/em>&lt;/p>
 &lt;pre>&lt;code> $ sudo sed -i '19d' ./content/themes/casper/default.hbs
 &lt;/code>&lt;/pre>
@@ -2502,7 +2502,7 @@ $ grep 'fonts.googleapis.com' -n --color -r .
 &lt;p>经过修改，Google Fonts 文件就被彻底清除了。然后重启 Ghost 系统，再登录你的博客看看吧！&lt;/p>
 &lt;pre>&lt;code> $ sudo -i
 $ pm2 restart ghost
-&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/ghost/">ghost</category><category domain="https://blog.wxchat.xyz/tags/google-fonts/">google fonts</category><category domain="https://blog.wxchat.xyz/tags/sed/">sed</category><category domain="https://blog.wxchat.xyz/tags/grep/">grep</category></item><item><title>保持文件原有排序去除重复行</title><link>https://blog.wxchat.xyz/posts/%E4%BF%9D%E6%8C%81%E6%96%87%E4%BB%B6%E5%8E%9F%E6%9C%89%E6%8E%92%E5%BA%8F%E5%8E%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E8%A1%8C/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/%E4%BF%9D%E6%8C%81%E6%96%87%E4%BB%B6%E5%8E%9F%E6%9C%89%E6%8E%92%E5%BA%8F%E5%8E%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E8%A1%8C/</guid><pubDate>Mon, 11 May 2015 00:41:42 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>通常如果我们想获取一个文件里不重复的行的时候，我们可以直接通过 sort -u 命令，先把文件排序，然后去掉连续的重复行就行。&lt;/p>
+&lt;/code>&lt;/pre></description><category domain="http://blog.wxchat.xyz/tags/ghost/">ghost</category><category domain="http://blog.wxchat.xyz/tags/google-fonts/">google fonts</category><category domain="http://blog.wxchat.xyz/tags/sed/">sed</category><category domain="http://blog.wxchat.xyz/tags/grep/">grep</category></item><item><title>保持文件原有排序去除重复行</title><link>http://blog.wxchat.xyz/posts/%E4%BF%9D%E6%8C%81%E6%96%87%E4%BB%B6%E5%8E%9F%E6%9C%89%E6%8E%92%E5%BA%8F%E5%8E%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E8%A1%8C/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/%E4%BF%9D%E6%8C%81%E6%96%87%E4%BB%B6%E5%8E%9F%E6%9C%89%E6%8E%92%E5%BA%8F%E5%8E%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E8%A1%8C/</guid><pubDate>Mon, 11 May 2015 00:41:42 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>通常如果我们想获取一个文件里不重复的行的时候，我们可以直接通过 sort -u 命令，先把文件排序，然后去掉连续的重复行就行。&lt;/p>
 &lt;p>可是，如果我们去掉重复行之后，还想保留文件原有的顺序，该怎么办呢？虽然 Linux 下有个看上去似乎很有用的命令叫 uniq，但事实上 uniq 命令仅仅只对连续的重复行有效。譬如我们有这样一个文件：&lt;/p>
 &lt;pre>&lt;code>$ cat file3
 AAAA
@@ -2547,7 +2547,7 @@ DDDD
 &lt;p>我们这里写的 awk 命令是 !x[$0]++，意思是，首先创建一个 map 叫 x，然后用当前行的全文 $0 作为 map 的 key，到 map 中查找相应的 value，如果没找到，则整个表达式的值为真，可以执行之后的语句；如果找到了，则表达式的值为假，跳过这一行。由于表达式之后有 ++，因此如果某个 key 找不到对应的 value，该 ++ 操作会先把对应的 value 设成 0，然后再自增成 1，这样下次再遇到重复的行的时候，对应的 key 就能找到一个非 0 的 value 了。&lt;/p>
 &lt;p>我们前面说过，awk 的流程是先判断表达式，表达式为真的时候就执行语句，可是我们前面写的这个 awk 命令里只有表达式，没有语句，那我们执行什么呢？原来，当语句被省略的时候，awk 就执行默认的语句，即打印整个完整的当前行。就这样，我们通过这个非常简短的 awk 命令实现了去除重复行并保留原有文件顺序的功能。&lt;/p>
 &lt;p>&lt;a href="http://edyfox.codecarver.org/html/bash_unique_lines_no_sorting.html">引用&lt;/a>&lt;/p>
-&lt;p>本文部分翻译来自 &lt;a href="http://www.unixcl.com/">Jadu Saikia 的博客&lt;/a>，这个博客上有很多非常有用的小技巧，有空可以多看看。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/sed/">sed</category><category domain="https://blog.wxchat.xyz/tags/bash/">bash</category><category domain="https://blog.wxchat.xyz/tags/awk/">awk</category><category domain="https://blog.wxchat.xyz/tags/sort/">sort</category><category domain="https://blog.wxchat.xyz/tags/uniq/">uniq</category></item><item><title>安装配置Arch linux 相关</title><link>https://blog.wxchat.xyz/posts/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEarch-linux-%E7%9B%B8%E5%85%B3/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEarch-linux-%E7%9B%B8%E5%85%B3/</guid><pubDate>Sun, 10 May 2015 22:19:00 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="安装-linux-lts-软件包">安装 linux-lts 软件包&lt;/h2>
+&lt;p>本文部分翻译来自 &lt;a href="http://www.unixcl.com/">Jadu Saikia 的博客&lt;/a>，这个博客上有很多非常有用的小技巧，有空可以多看看。&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/sed/">sed</category><category domain="http://blog.wxchat.xyz/tags/bash/">bash</category><category domain="http://blog.wxchat.xyz/tags/awk/">awk</category><category domain="http://blog.wxchat.xyz/tags/sort/">sort</category><category domain="http://blog.wxchat.xyz/tags/uniq/">uniq</category></item><item><title>安装配置Arch linux 相关</title><link>http://blog.wxchat.xyz/posts/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEarch-linux-%E7%9B%B8%E5%85%B3/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEarch-linux-%E7%9B%B8%E5%85%B3/</guid><pubDate>Sun, 10 May 2015 22:19:00 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="安装-linux-lts-软件包">安装 linux-lts 软件包&lt;/h2>
 &lt;p>&lt;em>小贴士: 强烈推荐安装linux-lts作为备用内核，因为默认安装的linux内核比较新，容易与其它软件发生冲突&lt;/em>&lt;/p>
 &lt;blockquote>
 &lt;p>linux-lts 是 Arch 官方提供的基于 Linux kernel 3.0 的长期支持内核。内核上游开发者针对此版本提供了长期支持，包括安全补丁和功能 backports。适用于需要长期支持的服务器环境用户，也可以将此内核作为新内核升级的后备内核。&lt;/p>
@@ -2558,7 +2558,7 @@ DDDD
 以 GRUB2 为例：&lt;br>
 为了编辑/更新启动加载项，需要安装os-prober.&lt;br>
 安装后,再执行&lt;br>
-&lt;code>$ sudo grub-mkconfig -o /boot/grub/grub.cfg&lt;/code>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/archlinux/">archlinux</category><category domain="https://blog.wxchat.xyz/tags/grub/">grub</category></item><item><title>Linux dd</title><link>https://blog.wxchat.xyz/posts/linux-dd/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-dd/</guid><pubDate>Sun, 03 May 2015 23:09:39 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;code>$ sudo grub-mkconfig -o /boot/grub/grub.cfg&lt;/code>&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/archlinux/">archlinux</category><category domain="http://blog.wxchat.xyz/tags/grub/">grub</category></item><item><title>Linux dd</title><link>http://blog.wxchat.xyz/posts/linux-dd/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/linux-dd/</guid><pubDate>Sun, 03 May 2015 23:09:39 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
 &lt;p>dd 是 Linux/UNIX 下的一个非常有用的命令，作用是用指定大小的块拷贝一个文件，并在拷贝的同时进行指定的转换。&lt;/p>
 &lt;/blockquote>
 &lt;p>常用：
@@ -2625,7 +2625,7 @@ $ dd if=/dev/zero of=/root/1Gb.file bs=1024 count=1000000
 在每次开机的时候自动加载swap文件, 需要在 /etc/fstab 文件中增加一行&lt;/p>
 &lt;p>&lt;em>#### 销毁磁盘数据&lt;/em> &lt;br>
 &lt;code>$ dd if=/dev/urandom of=/dev/hda1&lt;/code> &lt;br>
-利用随机的数据填充硬盘，在某些必要的场合可以用来销毁数据。执行此操作以后，/dev/hda1将无法挂载，创建和拷贝操作无法执行。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/dd/">dd</category></item><item><title>Linux 加解密打包文件</title><link>https://blog.wxchat.xyz/posts/linux-%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%89%93%E5%8C%85%E6%96%87%E4%BB%B6/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%89%93%E5%8C%85%E6%96%87%E4%BB%B6/</guid><pubDate>Thu, 30 Apr 2015 03:56:17 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="预备知识">预备知识&lt;/h2>
+利用随机的数据填充硬盘，在某些必要的场合可以用来销毁数据。执行此操作以后，/dev/hda1将无法挂载，创建和拷贝操作无法执行。&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category><category domain="http://blog.wxchat.xyz/tags/dd/">dd</category></item><item><title>Linux 加解密打包文件</title><link>http://blog.wxchat.xyz/posts/linux-%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%89%93%E5%8C%85%E6%96%87%E4%BB%B6/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/linux-%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%89%93%E5%8C%85%E6%96%87%E4%BB%B6/</guid><pubDate>Thu, 30 Apr 2015 03:56:17 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="预备知识">预备知识&lt;/h2>
 &lt;blockquote>
 &lt;p>使用到的命令有tar,openssl,dd&lt;/p>
 &lt;/blockquote>
@@ -2647,7 +2647,7 @@ test_dir/test.file&lt;/p>
 &lt;p>详细openssl 可查看帮助页&lt;/p>
 &lt;/blockquote>
 &lt;p>&lt;code>$ man openssl $ openssl enc -h &lt;/code>
-&lt;img src="https://blog.wxchat.xyz/content/images/2015/04/--_2015-04-30_17-51-29.png" alt="加密算法列表">&lt;/p>
+&lt;img src="http://blog.wxchat.xyz/content/images/2015/04/--_2015-04-30_17-51-29.png" alt="加密算法列表">&lt;/p>
 &lt;h2 id="openssl-命令详解">openssl 命令详解&lt;/h2>
 &lt;p>&lt;code> SYNOPSIS openssl enc -ciphername [-in filename] [-out filename] [-pass arg] [-e] [-d] [-a] [-A] [-k password] [-kfile filename] [-K key] [-iv IV] [-p] [-P] [-bufsize number] [-nopad] [-debug] 说明： -chipername选项：加密算法，Openssl支持的算法在上面已经列出了，你只需选择其中一种算法即可实现文件加密功能。 -in选项：输入文件，对于加密来说，输入的应该是明文文件；对于解密来说，输入的应该是加密的文件。该选项后面直接跟文件名。 -out选项：输出文件，对于加密来说，输出的应该是加密后的文件名；对于解密来说，输出的应该是明文文件名。 -pass选项：选择输入口令的方式，输入源可以是标准输入设备，命令行输入，文件、变量等。 -e选项：实现加密功能（不使用-d选项的话默认是加密选项）。 -d选项：实现解密功能。 -a和-A选项：对文件进行BASE64编解码操作。 -K选项：手动输入加密密钥（不使用该选项，Openssl会使用口令自动提取加密密钥）。 -IV选项：输入初始变量（不使用该选项，Openssl会使用口令自动提取初始变量）。 -salt选项：是否使用盐值，默认是使用的。 -p选项：打印出加密算法使用的加密密钥。&lt;/code>&lt;/p>
 &lt;h2 id="加密">加密&lt;/h2>
@@ -2669,7 +2669,7 @@ enter aes-128-cbc decryption password: ****************&lt;/p>
 enter aes-256-ecb decryption password:
 &lt;code>$ file pacman256.log &lt;/code> &lt;br>
 pacman256.log: UTF-8 Unicode text&lt;/p>
-&lt;p>&lt;em>&lt;strong>生成 pacman256.log 可以用file 看到文件解密为原来的类型了&lt;/strong>&lt;/em>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/openssl/">openssl</category><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category></item><item><title>安装 node.js ghost 相关总结</title><link>https://blog.wxchat.xyz/posts/%E5%AE%89%E8%A3%85-node-js-ghost-%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/%E5%AE%89%E8%A3%85-node-js-ghost-%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93/</guid><pubDate>Thu, 30 Apr 2015 02:49:04 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="下载安装">下载安装&lt;/h2>
+&lt;p>&lt;em>&lt;strong>生成 pacman256.log 可以用file 看到文件解密为原来的类型了&lt;/strong>&lt;/em>&lt;/p></description><category domain="http://blog.wxchat.xyz/tags/openssl/">openssl</category><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category></item><item><title>安装 node.js ghost 相关总结</title><link>http://blog.wxchat.xyz/posts/%E5%AE%89%E8%A3%85-node-js-ghost-%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93/</link><guid isPermaLink="true">http://blog.wxchat.xyz/posts/%E5%AE%89%E8%A3%85-node-js-ghost-%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93/</guid><pubDate>Thu, 30 Apr 2015 02:49:04 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="下载安装">下载安装&lt;/h2>
 &lt;blockquote>
 &lt;p>安装node.js 下载最新node.js 编译安装需要一段时间。&lt;/p>
 &lt;/blockquote>
@@ -2726,4 +2726,4 @@ proxy_pass http://127.0.0.1:2368;
 &lt;/blockquote>
 &lt;pre>&lt;code>$ sudo yun install -y ntp
 $ sudo cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/nodejs/">nodejs</category><category domain="https://blog.wxchat.xyz/tags/ghost/">ghost</category><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category></item></channel></rss>
+&lt;/code>&lt;/pre></description><category domain="http://blog.wxchat.xyz/tags/nodejs/">nodejs</category><category domain="http://blog.wxchat.xyz/tags/ghost/">ghost</category><category domain="http://blog.wxchat.xyz/tags/linux/">linux</category></item></channel></rss>
