@@ -1,0 +1,2729 @@
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Vladimir's Blog</title><link>https://blog.wxchat.xyz/</link><description>MemE is a powerful and highly customizable GoHugo theme for personal blogs.</description><generator>Hugo 0.73.0 https://gohugo.io/</generator><language>en</language><managingEditor>hcjonline@gmail.com (Vladimir)</managingEditor><webMaster>hcjonline@gmail.com (Vladimir)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><lastBuildDate>Wed, 08 Jul 2020 15:33:17 +0800</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://blog.wxchat.xyz/rss.xml"/><item><title>Nexus6p虚焊导致无限重启之救砖教程</title><link>https://blog.wxchat.xyz/posts/bootlooping-nexus6p-fix/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/bootlooping-nexus6p-fix/</guid><pubDate>Fri, 03 Jul 2020 14:44:06 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h1 id="前言">前言&lt;/h1>
+&lt;blockquote>
+&lt;p>前两天手机在使用过程中，无故死机，重启发现在logo显示画面停留一会儿又重启，后面就一直不断的循环这个过程。
+本来以为重新做系统就好了，没想到再还原回去还是一样。我以为就这么变砖了，最后还是因为穷的力量，搜索nexus6p无限重启原因就发现原来这是由于前几天我手机摔过一次，可能导致cpu虚焊部分出了毛病，才导致现在手机无限重启的情况。
+没办法，通过这几天各种google，终于找到网络上很多大神都有解决的方案，后面后提供大神帖子链接。&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="准备工作">准备工作&lt;/h1>
+&lt;ul>
+&lt;li>备份当前的文件和数据&lt;/li>
+&lt;li>在手机上启用USB调试和OEM解锁&lt;/li>
+&lt;li>下载&lt;a href="https://developer.android.com/studio/releases/platform-tools.html">ADB驱动程序&lt;/a>，安装到你的PC机里。这里有个问题，要安装低版本的，大于29.0的版本再使用时报了个错误,提示找不到可用的命令，网上解决方法就是下载安装26.0版本的解决了这个问题。&lt;/li>
+&lt;li>去这里&lt;a href="https://twrp.me/Devices/">下载&lt;/a>符合nexus6p的TWRP，这里我下载了3.3.1版本的&lt;/li>
+&lt;li>去magisk官网下载最新版本应用包括manage&lt;/li>
+&lt;li>下载要用到的刷机固件&lt;a href="https://androidfilehost.com/?w=files&amp;amp;flid=302684">Lineage OS&lt;/a>，&lt;a href="https://developers.google.com/android/ota#angler">原厂镜像 Nexus6p&lt;/a>&lt;/li>
+&lt;li>下载我打包的要用到的boot.img&lt;/li>
+&lt;/ul>
+&lt;h1 id="备份">备份&lt;/h1>
+&lt;blockquote>
+&lt;p>由于已经进入不了系统了，备份需要链接USB进到REF里使用这个方法&lt;code>adb pull sdcard&lt;/code>备份自己重要的数据&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="开始刷系统">开始刷系统&lt;/h1>
+&lt;blockquote>
+&lt;p>这里要提一点，一开始我找到的方法是刷指定原厂镜像，刷写4核boot.img就可以重新进入系统。后面又找到不一定原厂镜像的版本，比如lingage17.1的镜像也可以通过大神的方法。
+所以，这两种方法都可以解决无限重启进不了系统的问题，我都写在这里，只要看一种方法就好了。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="第一种方法刷原厂镜像">第一种方法：刷原厂镜像&lt;/h2>
+&lt;blockquote>
+&lt;p>先说一下刷原厂镜像7.1.2版本号n2g48c,&lt;a href="https://bbs.gfan.com/android-9270440-1-1.html">参考文档&lt;/a>,&lt;a href="https://forum.xda-developers.com/nexus-6p/general/guide-fix-nexus-6p-bootloop-death-blod-t3640279">英文原档&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>具体怎么刷参考文档里已经写得很清楚了，主要说一下，如果没有刷过twrp的先刷这个&lt;code>fastboot flash recovery twrp3_1_1_4Cores.img&lt;/code>&lt;/li>
+&lt;li>先线刷7.1.2, 具体线刷的操作，即进入TWRP界面，选Advanced再点sideload，滑块确认，等待pc端执行&lt;code>adb sideload angler-ota-n2g48c-b004b71e.zip&lt;/code>&lt;/li>
+&lt;li>接下来刷入修改版本的boot:&lt;code>adb flash boot 6p48C.img&lt;/code>&lt;/li>
+&lt;li>如果前面你先刷twrp就不用再刷一次了。&lt;/li>
+&lt;li>最后就是进入twrp卡刷性能包6pEX4_1_2.zip。具体操作：把zip包上传到手机sdcard,在twrp界面选择install指定的zip包安装，一路下一步就可以了。如果需要优化就得自己研究其他选项了。&lt;/li>
+&lt;li>以上就可以完美开机了。&lt;/li>
+&lt;/ul>
+&lt;h2 id="第二种方法刷第三方镜像lineage-171">第二种方法：刷第三方镜像lineage 17.1&lt;/h2>
+&lt;blockquote>
+&lt;p>理论上刷其他所有的镜像都可以使用这个方法重进系统。&lt;a href="https://forum.xda-developers.com/nexus-6p/general/bootloop-death-blod-workaround-zip-t3819515">参考文档&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>下载重要的改写cpu核心的软件&lt;a href="https://androidfilehost.com/?w=files&amp;amp;flid=312881">N5x-6P_BLOD_Workaround_Injector_Addon-AK3-signed&lt;/a>&lt;/li>
+&lt;li>USB链接手机，使用命令&lt;code>adb reboot bootloader&lt;/code>重启&lt;/li>
+&lt;li>进入原先系统已经刷过twrp的可以直接进入twrp线刷lineage 17.1&lt;code>adb sideload lineage-17.1-20200308-UNOFFICIAL-angler.zip&lt;/code> &lt;a href="https://forum.xda-developers.com/nexus-6p/orig-development/rom-lineageos-17-0-nexus-6p-angler-t4012099">参考文档&lt;/a>&lt;/li>
+&lt;li>刷写twrp &lt;code>fastboot flash recovery twrp-3.3.1-0-fbe-4core-angler.img&lt;/code>&lt;/li>
+&lt;li>然后进入REC模式，上传zip包到sdcard,线刷Addon-AK3.signed.zip这个包&lt;code>adb sideload N5X-6P_BLOD_Workaround_Injector_Addon-AK3-signed.zip&lt;/code>&lt;/li>
+&lt;li>最后重启，等待一会儿就可以进入系统了。&lt;/li>
+&lt;/ul>
+&lt;h3 id="解决指纹功能bug问题">解决指纹功能bug问题&lt;/h3>
+&lt;blockquote>
+&lt;p>就上一篇文章，我再刷PixelExperience时已经提到过，使用magisk安装补丁的方法重新刷boot就好了。&lt;a href="https://topjohnwu.github.io/Magisk/install.html">参考文档&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>上传boot-17.img到手机&lt;code>adb push boot-17.img sdcard/&lt;/code>&lt;/li>
+&lt;li>在手机里安装最新版本的magisk manager&lt;/li>
+&lt;li>打开magisk点击安装-&amp;gt;安装-&amp;gt;选择要安装的boot-17.img&lt;/li>
+&lt;li>magisk manager 将生成新的文件magisk_patched.img到sdcard/Download/&lt;/li>
+&lt;li>下载这个补丁到PC机&lt;code>adb pull /sdcard/Download/magisk_patche.img&lt;/code>&lt;/li>
+&lt;li>最后重启进入bootloader刷写这个补丁&lt;code>fastboot flash boot magisk_patched.img&lt;/code>&lt;/li>
+&lt;li>以上完成就可以重进系统使用指纹的功能了。&lt;/li>
+&lt;/ul>
+&lt;h1 id="总结">总结&lt;/h1>
+&lt;blockquote>
+&lt;p>其实这两个方法最主要是线刷的zip包不同，第二种方法里的AK3包实现了任何系统修改cpu4核心的方法。&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="下载">下载&lt;/h1>
+&lt;blockquote>
+&lt;p>我打包了一下所有要用到的软件（不包括原厂镜像包，这些都可以去官网下载)，防止原链接失效。&lt;a href="https://drive.google.com/file/d/1Bd4nASTMve23qh28x3BR3OJWJp2NZJyI/view?usp=sharing">备份包&lt;/a>&lt;/p>
+&lt;/blockquote></description><category domain="https://blog.wxchat.xyz/tags/bootloop/">bootloop</category><category domain="https://blog.wxchat.xyz/tags/nexus6p/">nexus6p</category><category domain="https://blog.wxchat.xyz/tags/android/">android</category><category domain="https://blog.wxchat.xyz/tags/magisk/">magisk</category></item><item><title>Nexus6p Root提权以及刷机攻略</title><link>https://blog.wxchat.xyz/posts/root-nexus6p-use-twrp-magisk/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/root-nexus6p-use-twrp-magisk/</guid><pubDate>Wed, 25 Mar 2020 18:00:20 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>Android 10.0也出来一段时间了，想着给自己的手机刷一下。所以就有了这个攻略，记录一下过程。&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="准备工作">准备工作&lt;/h1>
+&lt;ul>
+&lt;li>确保设备电池电量超过50%&lt;/li>
+&lt;li>备份当前的文件和数据&lt;/li>
+&lt;li>在手机上启用USB调试和OEM解锁&lt;/li>
+&lt;li>下载ADB驱动程序，安装到你的PC机里&lt;/li>
+&lt;li>去这里&lt;a href="https://twrp.me/Devices/">下载&lt;/a>符合nexus6p的TWRP，这里我下载了3.3.1版本的&lt;/li>
+&lt;li>去magisk官网下载最新版本应用包括manage&lt;/li>
+&lt;li>下载刷机的固件&lt;a href="https://download.pixelexperience.org/angler">PixelExperience 10&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h1 id="使用adb和fastboot解锁bootloader">使用ADB和Fastboot解锁Bootloader&lt;/h1>
+&lt;p>打开终端运行如下命令重启手机到fastboot模式，&lt;a href="https://developers.google.com/android/images">参考&lt;/a>&lt;/p>
+&lt;pre>&lt;code>adb reboot bootloader
+fastboot flashing unlock
+&lt;/code>&lt;/pre>&lt;p>完成以后，就成功解锁了Bootloader，再次检查以启用“开发人员选项”，然后转到“开发人员选项”并启用USB调试模式OEM解锁。有时，他们在启动后会自行禁用。&lt;/p>
+&lt;h1 id="安装twrp">安装TWRP&lt;/h1>
+&lt;p>还是一样先进到启动模式，把TWRP镜像刷进recovery,如下&lt;/p>
+&lt;pre>&lt;code>adb reboot bootloader
+fastboot flash recovery twrp-3.3.1-0-angler.img
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>完成上面两个准备刷机的步骤基本上就不用担心手机变砖了，下面开始刷机&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="刷pixelexperience-10-到nexus6p">刷PixelExperience 10 到Nexus6p&lt;/h1>
+&lt;p>首先确保Nexus6p没有刷过其他第三方Rom，如果刷过，要先通过官方Rom还原到指定&lt;a href="https://developers.google.com/android/images#angler">版本&lt;/a>
+这里我们需要下载8.1.0 (OPM7.181205.001, Dec 2018)版本，解压进入文件夹执行shell就可以还原了。当然首先还得USB链接成功。&lt;/p>
+&lt;h2 id="刷入pixel-10固件">刷入Pixel 10固件&lt;/h2>
+&lt;p>确保nexus6p是最新版本8.1.0以后，我们就可以通过TWRP刷入Pixel这个最新的固件了&lt;/p>
+&lt;p>重启手机，进入手机端的TWRP界面，点选Advanced选项，然后在手机界面里点选ADB sideload选项，然后滑动下面的滑块确认选择，等待电脑端执行adb sideload 刷机包名.zip命令&lt;/p>
+&lt;p>这里有一点要注意，下载固件的时候要把版本10的两个文件都下载了，因为最新的那版本指纹，锁屏功能有问题。&lt;/p>
+&lt;pre>&lt;code>unzip -x PixelExperience_angler-10.0-20191231-1607-OFFICIAL.zip -d piexl2019
+unzip -x PixelExperience_angler-10.0-20200101-0925-OFFICIAL.zip -d piexl2020
+cp piexl2019/boot.img piexl2020
+cd piexl2020
+zip -r -v -o pixel20200101.zip .
+&lt;/code>&lt;/pre>&lt;p>完成以上，生成我们要刷入的pixel20200101.zip这个固件包了，可以进入TWRP界面三清数据以后线刷就OK了
+这里的三清指的是擦除system &amp;amp; data &amp;amp; cache 这三个分区，还有格式化data分区
+最后执行以下，重启就能进入新系统了&lt;/p>
+&lt;pre>&lt;code>adb sideload pixel20200101.zip
+&lt;/code>&lt;/pre>&lt;p>到这里，如果不需要Root手机的话就不用看下面的了&lt;/p>
+&lt;h1 id="root提权">Root提权&lt;/h1>
+&lt;p>&lt;a href="https://www.youtube.com/watch?v=3pxOeiIBrHI&amp;amp;t=582s">参考&lt;/a>
+首先进到新系统（别忘了还是要先开启开发者选项）安装magisk manager这个app,把上一步解压出来的boot.img复制到手机里&lt;/p>
+&lt;pre>&lt;code>adb push boot.img /sdcard/
+&lt;/code>&lt;/pre>&lt;p>操作magisk manager安装magisk的补丁，生成magisk_patched.img
+把补丁下载回PC&lt;/p>
+&lt;pre>&lt;code>adb pull /sdcard/Download/magisk_patched.img .
+&lt;/code>&lt;/pre>&lt;p>重启手机进入快速启动模式,把补丁刷入boot&lt;/p>
+&lt;pre>&lt;code>fastboot flash boot magisk_patched.img
+&lt;/code>&lt;/pre>&lt;p>最后重启手机，进入magisk manager检查root权限。&lt;/p>
+&lt;h1 id="参考">参考&lt;/h1>
+&lt;ul>
+&lt;li>&lt;a href="https://forum.xda-developers.com/nexus-6p/development/rom-pixel-experience-t3970525"> PixelExperience for Google Nexus 6P 【angler】&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://forum.xda-developers.com/nexus-6p/orig-development/rom-lineageos-17-0-nexus-6p-angler-t4012099">【ROM】【UNOFFICIAL】LineageOS 17.1 for Nexus 6P (angler)&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://mikey2008.github.io/2019/12/31/%E3%80%90%E6%95%99%E7%A8%8B%E3%80%91%E4%B8%80%E5%8A%A05%E5%88%B7LineageOS%E5%85%A8%E8%BF%87%E7%A8%8B/">【教程】一加5刷LineageOS全过程&lt;/a>&lt;/li>
+&lt;/ul></description><category domain="https://blog.wxchat.xyz/tags/android/">android</category><category domain="https://blog.wxchat.xyz/tags/nexus6p/">nexus6p</category><category domain="https://blog.wxchat.xyz/tags/twrp/">twrp</category><category domain="https://blog.wxchat.xyz/tags/magisk/">magisk</category></item><item><title>树莓派安装配置软路由</title><link>https://blog.wxchat.xyz/posts/openwrt-raspberry/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/openwrt-raspberry/</guid><pubDate>Wed, 17 Jul 2019 15:43:15 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h1 id="准备">准备&lt;/h1>
+&lt;ul>
+&lt;li>Raspberry Pi 2 Model B Rev 1.1&lt;/li>
+&lt;li>SD卡闪盘(4G+)&lt;/li>
+&lt;li>主机我用的是ArchLinux,内核4.19.52-1-lts&lt;/li>
+&lt;li>主路由器一个TPlink&lt;/li>
+&lt;li>USB网卡&lt;/li>
+&lt;li>一条网线&lt;/li>
+&lt;/ul>
+&lt;h1 id="刷openwrt固件">刷openwrt固件&lt;/h1>
+&lt;h2 id="下载解压">下载解压&lt;/h2>
+&lt;p>去&lt;a href="https://www.openwrt.org">官网&lt;/a>下载对应的安装固件&lt;/p>
+&lt;pre>&lt;code>wget http://downloads.openwrt.org/releases/18.06.4/targets/brcm2708/bcm2709/openwrt-18.06.4-brcm2708-bcm2709-rpi-2-ext4-factory.img.gz
+gzip -d openwrt-18.06.4-brcm2708-bcm2709-rpi-2-ext4-factory.img.gz
+&lt;/code>&lt;/pre>&lt;h2 id="烧写sd卡">烧写SD卡&lt;/h2>
+&lt;pre>&lt;code>sudo fdisk -l #列出闪盘设备名 /dev/mmcblk0
+sudo dd if=openwrt-18.06.4-brcm2708-bcm2709-rpi-2-ext4-factory.img of=/dev/mmcblk0
+&lt;/code>&lt;/pre>&lt;h2 id="链接树莓派">链接树莓派&lt;/h2>
+&lt;p>配置主机IP(192.168.1.1) 网线直接连接树莓派接口 浏览器打开192.168.1.1 配置密码和ssh登陆以后，在终端里登陆&lt;code>ssh root@192.168.1.1&lt;/code>&lt;/p>
+&lt;p>修改lan口配置如下：&lt;/p>
+&lt;pre>&lt;code>cat /etc/config/network
+config interface 'lan'
+option type 'bridge'
+option ifname 'eth0'
+option proto 'static'
+option netmask '255.255.255.0'
+option ip6assign '60'
+option ipaddr '192.168.10.109'
+option gateway '192.168.10.1'
+option broadcast '255.255.255.0'
+option dns '114.114.114.114'
+&lt;/code>&lt;/pre>&lt;p>重启路由，用网线连接主路由器就可以链接外网了。&lt;/p>
+&lt;h2 id="安装软件">安装软件&lt;/h2>
+&lt;p>安装支持网卡的模块&lt;/p>
+&lt;pre>&lt;code>opkg update
+opkg install kmod-rtl8192cu
+&lt;/code>&lt;/pre>&lt;h3 id="修改无线网络配置">修改无线网络配置&lt;/h3>
+&lt;pre>&lt;code>cat /etc/config/wireless
+config wifi-iface 'default_radio0'
+option device 'radio0'
+option network 'lan'
+option mode 'ap'
+option encryption 'none'
+option ssid 'CMCCFREE'
+&lt;/code>&lt;/pre>&lt;h3 id="修改路由网络配置">修改路由网络配置&lt;/h3>
+&lt;pre>&lt;code>
+cat /etc/config/network
+config interface 'loopback'
+option ifname 'lo'
+option proto 'static'
+option ipaddr '127.0.0.1'
+option netmask '255.0.0.0'
+config globals 'globals'
+option ula_prefix 'fd3c:ca1e:c593::/48'
+config interface 'lan'
+option proto 'static'
+option netmask '255.255.255.0'
+option ipaddr '192.168.10.1'
+option ip6assign '64'
+config interface 'wan'
+option ifname 'eth0'
+option proto 'dhcp'
+option dns '127.0.0.1' #### 连接该 OpenWrt 路由器的所有设备发出的 DNS 请求都会由该路由器的 dnsmasq 来响应（当然，前提是设备没有手动去修改默认的 DNS 服务器 IP，而使用路由器默认提供的 DNS 服务器 IP）。
+option peerdns '0' #### 忽略通告的DNS服务器地址
+&lt;/code>&lt;/pre>&lt;h3 id="修改dhcp配置如下">修改DHCP配置如下&lt;/h3>
+&lt;pre>&lt;code>root@OpenWrt:~# cat /etc/config/dhcp
+config dnsmasq
+option domainneeded '1'
+option localise_queries '1'
+option rebind_protection '1'
+option rebind_localhost '1'
+option domain 'lan'
+option expandhosts '1'
+option authoritative '1'
+option readethers '1'
+option leasefile '/tmp/dhcp.leases'
+option nonwildcard '1'
+option localservice '1'
+option logqueries '1'
+option noresolv '1'
+option local '/lan/'
+option allservers '1'
+list server '114.114.114.114' #### 配置DNS转发 注意，此为路由器默认查询的 DNS 服务器，你可以根据你的实际情况选择一个较快的 DNS 服务器
+config dhcp 'lan'
+option interface 'lan'
+option dhcpv6 'server'
+option ra 'server'
+option ra_management '1'
+config dhcp 'wan'
+option interface 'wan'
+option ignore '1'
+&lt;/code>&lt;/pre>&lt;h3 id="提交修改并重启">提交修改并重启&lt;/h3>
+&lt;pre>&lt;code>uci commit /etc/config/wireless
+uci commit /etc/config/network
+uci commit /etc/config/dhcp
+## 重启路由也是一样的或者执行以下命令重启服务
+/etc/init.d/dnsmasq restart
+/etc/ini.d/network restart
+ifup wan &amp;amp;&amp;amp; wifi
+&lt;/code>&lt;/pre>&lt;h1 id="安装ss">安装SS&lt;/h1>
+&lt;h2 id="安装-shadowsocks-libev-相关的包">安装 shadowsocks-libev 相关的包&lt;/h2>
+&lt;pre>&lt;code>opkg update
+opkg install shadowsocks-libev-config shadowsocks-libev-ss-local shadowsocks-libev-ss-redir shadowsocks-libev-ss-rules shadowsocks-libev-ss-tunnel luci-app-shadowsocks-libev
+&lt;/code>&lt;/pre>&lt;h2 id="基础配置">基础配置&lt;/h2>
+&lt;p>进入openwrt web配置界面，选择 Service-&amp;gt;shadowsocks-libev&lt;/p>
+&lt;p>点击 Remote Servers, 里面已经默认配置一个服务器 sss0，修改地址，端口，密码，加密方式，最重要的，将disabled的勾去掉，点击 save&amp;amp;apply 按钮。&lt;/p>
+&lt;p>再点击 Local Instances, 点击 ss-local.cfgXXXXX (XXX为随机数字)条目对应的Disabled 按钮，将其变成 Enabled，点击 Save &amp;amp; Apply。配置保存生效以后, ss-local.cfgXXXX 条目的Running 状态由no变为yes。这时，路由器上已经运行一个SOCKS5服务器，端口1080。设置电脑浏览器的代理服务器为路由器地址，端口1080，尝试访问谷歌，如果成功则说明ss客户端在openwrt上工作一切正常。&lt;/p>
+&lt;p>接着要测试iptables+ss-redir自动转发代理(透明代理)的功能，在Local Instances中，将ss-redir.hi 设为Enabled。再点击 Redir Rules, Disabled勾去掉，点击Destination Settings，dst default 由bypass改为 forward。点击Save&amp;amp;Apply 使配置生效。将电脑浏览器的代理设置取消，访问谷歌，如果成功，则说明无条件透明代理设置成功。所有数据包都由路由器转发到ss服务器了。&lt;/p>
+&lt;h2 id="3-进阶配置">3. 进阶配置&lt;/h2>
+&lt;p>上面最后配置的透明代理将全部流量都转发到远端SS服务器，显然太浪费流量，而且国内的网站去国外转一圈效率也很低。因此我们需要在路由器上识别国内国外流量，区别对待。&lt;/p>
+&lt;p>1.首先将 Destination Settings中的dst forward 设为 bypass。&lt;/p>
+&lt;ol start="2">
+&lt;li>将opkg列表更新由http 改为https, http存在更新不全的情况，可能是GFW搞鬼&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code>opkg install libustream-mbedtls (如果提示找不到，opkg update 多运行几次)
+sed -i s/http:/https:/g /etc/opkg/distfeeds.conf
+opkg update
+&lt;/code>&lt;/pre>&lt;ol start="3">
+&lt;li>安装各种依赖包&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code>opkg remove dnsmasq
+opkg install dnsmasq-full
+opkg install coreutils-base64 curl ca-certificates ca-bundle
+&lt;/code>&lt;/pre>&lt;h1 id="问题总结">问题总结&lt;/h1>
+&lt;h2 id="dnsmasq服务不启动">dnsmasq服务不启动&lt;/h2>
+&lt;p>最早手动添加域名到 /etc/dnsmasq.d/下的配置文件中，经过测试，发现无法解析该域名，经过排查，可能是配置文件编码格式的问题，导致了dnsmasq服务无法启动&lt;/p>
+&lt;h2 id="主机路由地址">主机路由地址&lt;/h2>
+&lt;p>排查问题我们在主机上用&lt;code>nslookup&lt;/code>&lt;/p>
+&lt;pre>&lt;code>graz@graz ~ % nslookup twitter.com
+Server: 192.168.1.1
+Address: 192.168.1.1#53
+Non-authoritative answer:
+Name: twitter.com
+Address: 104.244.42.65
+Name: twitter.com
+Address: 104.244.42.1
+&lt;/code>&lt;/pre>&lt;p>如上，看server项，是上上级的路由地址，这就绕过了树莓派的路由直接走上级路由查询。&lt;/p>
+&lt;p>然后，我们再看一下&lt;code>cat /etc/resolv.conf&lt;/code>
+可以看到有多个路由地址，包括&lt;code>192.168.10.1&lt;/code>，&lt;code>192.168.1.1&lt;/code>&lt;/p>
+&lt;p>以上，主机路由地址获取到了上上级的路由，也不知道怎么回事，(有知道的可以邮件通知我一下，谢谢大家)，只能先手动修改一下主机路由如下:&lt;/p>
+&lt;pre>&lt;code>cat /etc/resolv.conf
+nameserver 192.168.10.1 ## 这里是树莓派路由器的路由地址，一开始获取的还有上上级的路由地址如：192.168.1.1 。要把这个删掉
+&lt;/code>&lt;/pre>&lt;h1 id="最后">最后&lt;/h1>
+&lt;p>最后，查看日志或者安装tcpdump抓取5353端口看是否正常配置&lt;/p>
+&lt;pre>&lt;code>opkg update
+opkg install tcpdump
+tcpdump -vv -i lo port 5353
+&lt;/code>&lt;/pre>&lt;h1 id="参考">参考&lt;/h1>
+&lt;ul>
+&lt;li>&lt;a href="http://blog.kompaz.win/2017/03/24/OpenWRT%20Shadowsocks+GFWList%20%E6%B5%81%E9%87%8F%E8%87%AA%E5%8A%A8%E5%88%86%E6%B5%81/">OpenWRT Shadowsocks+GFWList 流量自动分流&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://medium.com/@cnnbysy/openwrt-18-06-1-%E9%85%8D%E7%BD%AE%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91-30e231958c38">openwrt 18.06.1 配置科学上网&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://swsmile.info/2019/01/30/%E3%80%90Network%E3%80%91Shadowsocks%20-Shadowsocks-OpenWRT-dnsmasq-full-ipset-gfwList-%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%94%B1%E5%99%A8%EF%BC%88%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8mini%EF%BC%89%E8%87%AA%E5%8A%A8%E7%BF%BB%E5%A2%99/">Shadowsocks + OpenWRT + dnsmasq-full + ipset + gfwList 实现路由器&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://blog.ch3n2k.com/posts/xin-de-ji-yu-openwrt-lu-you-qi-de-bu-wan-quan-zi-dong-fan-qiang-fang-an.html">新的基于OpenWrt路由器的（不完全）自动翻墙方案&lt;/a>&lt;/li>
+&lt;/ul></description><category domain="https://blog.wxchat.xyz/tags/openwrt/">openwrt</category><category domain="https://blog.wxchat.xyz/tags/raspberry/">raspberry</category></item><item><title>用OPENWRT路由器抓包网络流量笔记</title><link>https://blog.wxchat.xyz/posts/openwrt-wireshark-setting/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/openwrt-wireshark-setting/</guid><pubDate>Wed, 13 Jun 2018 19:50:11 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h1 id="前言">前言&lt;/h1>
+&lt;p>openwrt是一款基于linux的路由器系统，可以安装很多相关的工具包，完成像linux系统服务器可以完成的工作，比如今天我们要讲的路由器的网络数据包抓包。&lt;/p>
+&lt;h1 id="环境">环境&lt;/h1>
+&lt;ul>
+&lt;li>安装了openwrt的路由器，ip地址：192.168.10.1&lt;/li>
+&lt;li>要抓包流量的Android手机，ip地址：192.68.10.235&lt;/li>
+&lt;li>工作台笔记本，ip地址：192.168.10.234&lt;/li>
+&lt;/ul>
+&lt;h1 id="安装与配置">安装与配置&lt;/h1>
+&lt;blockquote>
+&lt;p>以下介绍两种方法都可以实现路由器数据包抓取的功能&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;em>&lt;strong>简单的说明
+根据openwrt文档，所有的局域网的数据最后都是通过br-lan虚拟网卡来做转发，所以对此网卡进行监控即可
+此命令本质是远程在路由器上执行网络监控命令，输入文本到本机的wireshark里面
+使用wireshark作为可视化工具来查看&lt;/strong>&lt;/em>&lt;/p>
+&lt;h2 id="捕获与tcpdump的通信">捕获与tcpdump的通信&lt;/h2>
+&lt;blockquote>
+&lt;p>Tcpdump可以安装在OpenWrt路由器上。因此，这种方法消除了让远程Wireshark或类似听众实时分析流量的需要。&lt;/p>
+&lt;/blockquote>
+&lt;p>ssh登陆到openwrt(默认端口：22)，更新并安装tcpdump&lt;/p>
+&lt;pre>&lt;code>opkg update
+opkg install tcpdump
+&lt;/code>&lt;/pre>&lt;p>执行以下命令在接口（-i）上侦听并将捕获的信息存储到文件（-w），并在执行此操作时（-v）进行冗长操作。&lt;/p>
+&lt;pre>&lt;code>tcpdump -i any -v -w pcap.cap
+&lt;/code>&lt;/pre>&lt;p>生成的pcap.cap文件，我们可以传回工作台，用wireshark打开做进一步的分析&lt;/p>
+&lt;blockquote>
+&lt;p>以下是一些使用tcpdump的例子：&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>&lt;a href="https://www.rationallyparanoid.com/articles/tcpdump.html">https://www.rationallyparanoid.com/articles/tcpdump.html&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="制作一键命令脚本">制作一键命令脚本&lt;/h3>
+&lt;p>命令格式如下：&lt;/p>
+&lt;pre>&lt;code>ssh -p ssh端口 -o StrictHostKeyChecking=no ssh用户名@ssh地址 'tcpdump -s 0 -U -n -w - -i br-lan not port ssh端口' | wireshark -k -i -
+&lt;/code>&lt;/pre>&lt;p>由于我环境配置了不用密码登陆的方式所以我们可以直接写成如下：&lt;/p>
+&lt;pre>&lt;code>ssh openwrt 'tcpdump -s 0 -U -n -w - -i br-lan not port 22' | wireshark -k -i -
+ssh -p 22 -o StrictHostKeyChecking=no root@192.168.10.1 'tcpdump -s 0 -U -n -w - -i br-lan not port 22' | wireshark -k -i -
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>前面讲述了基本的原理和操作手段，但是缺点是每次都需要输入长串命令行和密码，可以利用linux的一些小操作技巧，简化此过程，做成一个命令工具，方便随时调用。
+基本原理：&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>使用 sshpass 工具来做密码输入&lt;/li>
+&lt;li>使用 alias 别名来做成命令语句&lt;/li>
+&lt;/ul>
+&lt;p>在工作台安装sshpass，执行以下脚本：&lt;/p>
+&lt;pre>&lt;code>sudo pacman -S sshpass
+sshpass -p 'password' ssh -p 22 -o StrictHostKeyChecking=no root@192.168.10.1 'tcpdump -s 0 -U -n -w - -i br-lan not port 22' | wireshark-gtk -k -i -
+&lt;/code>&lt;/pre>&lt;p>把执行语句写到&lt;code>.bash_rc&lt;/code>就可以一条命令执行抓包分析了&lt;/p>
+&lt;pre>&lt;code>alias tsharkbyopenwrt=&amp;quot;sshpass -p 'password' ssh -p 22 -o StrictHostKeyChecking=no root@192.168.10.1 'tcpdump -s 0 -U -n -w - -i br-lan not port 22' | wireshark-gtk -k -i -&amp;quot;
+&lt;/code>&lt;/pre>&lt;h3 id="完善脚本">完善脚本&lt;/h3>
+&lt;p>通过命名管道来导回数据&lt;/p>
+&lt;pre>&lt;code>mkfifo /tmp/fifo
+sshpass -p 'passwrod' ssh openwrt 'tcpdump -s 0 -U -n -w - -i br-lan not port 22' &amp;gt; /tmp/fifo &amp;amp; wireshark-gtk -k -i /tmp/fifo
+&lt;/code>&lt;/pre>&lt;p>&lt;em>这里我配置了&lt;code>.ssh/config&lt;/code>，所以可以直接使用&lt;code>ssh openwrt&lt;/code>命令代替前面指定端口与用户名的方式。&lt;/em>&lt;/p>
+&lt;blockquote>
+&lt;p>我们还有一个方法可以不用安装sshpass,直接使用密钥的方式来登陆路由器抓包,以上就可以写为：&lt;/p>
+&lt;/blockquote>
+&lt;pre>&lt;code>ssh-copy-id openwrt
+ssh openwrt 'tcpdump -s 0 -U -n -w - -i br-lan not port 22' &amp;gt; /tmp/fifo &amp;amp; wireshark-gtk -k -i /tmp/fifo
+&lt;/code>&lt;/pre>&lt;h2 id="使用远程wireshark侦听器进行分析">使用远程Wireshark侦听器进行分析&lt;/h2>
+&lt;p>ssh登陆到openwrt(默认端口：22)，更新并安装iptables-mod-tee&lt;/p>
+&lt;pre>&lt;code>opkg update
+opkg install iptables-mod-tee
+&lt;/code>&lt;/pre>&lt;p>运行以下iptables命令以“在输出接口（-o）上将源IP（-s）的每个数据包的副本转发到网关IP（ - 网关）”&lt;/p>
+&lt;pre>&lt;code>iptables -A POSTROUTING -t mangle -o br-lan ! -s 192.168.10.235 -j TEE --gateway 192.168.10.234
+&lt;/code>&lt;/pre>&lt;p>运行以下iptables命令以“在接口（-i）上将目的IP（-d）的每个数据包的副本转发到网关IP（ - 网关）”&lt;/p>
+&lt;pre>&lt;code>iptables -A PREROUTING -t mangle -i br-lan ! -d 192.168.10.235 -j TEE --gateway 192.168.10.234
+&lt;/code>&lt;/pre>&lt;p>在Wireshark上开始捕获流量并应用下面的过滤器：&lt;/p>
+&lt;pre>&lt;code>(ip.src == 192.168.9.121) || (ip.dst == 192.168.9.121)
+&lt;/code>&lt;/pre>&lt;p>关于iptable规则一些有用的资源：&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://wiki.openwrt.org/doc/howto/netfilter">https://wiki.openwrt.org/doc/howto/netfilter&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://www.faqs.org/docs/iptables/index.html">http://www.faqs.org/docs/iptables/index.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://ipset.netfilter.org/iptables-extensions.man.html#lbDW">http://ipset.netfilter.org/iptables-extensions.man.html#lbDW&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="安装使用cloudshark">安装使用CloudShark&lt;/h2>
+&lt;p>CloudShark是一个独立的，与LEDE无关的云分析平台。它依靠cshark插件远程发送数据包进行分析。请检查您的内部规则，是否允许将网络流量发送到云平台。&lt;/p>
+&lt;pre>&lt;code>opkg update
+opkg install cshark luci-app-cshark
+&lt;/code>&lt;/pre>&lt;p>请查看&lt;a href="https://support.cloudshark.org/openwrt/openwrt-cloudshark.html">Cloud Shark文档&lt;/a>以获取更多信息。&lt;/p>
+&lt;h1 id="问题处理">问题处理&lt;/h1>
+&lt;p>在工作台使用wireshark-gtk的时候报错：&lt;/p>
+&lt;pre>&lt;code>Couldn't run /usr/bin/dumpcap in child process: Permission denied
+&lt;/code>&lt;/pre>&lt;p>这是由于dumpcap这个的权限问题。&lt;/p>
+&lt;pre>&lt;code>ll /usr/bin/dumpcap :(
+-rwxr-xr-- 1 root wireshark 102K May 23 06:39 /usr/bin/dumpcap
+&lt;/code>&lt;/pre>&lt;p>只要把当前用户加入到wireshark用户组里，重启就ok了（暂时不明为什么一定要重启，反正我是重启以后才正常使用的)。&lt;/p>
+&lt;pre>&lt;code>sudo usermod -aG wireshark $LOGNAME
+sudo setcap cap_net_raw,cap_net_admin+eip /usr/bin/dumpcap
+&lt;/code>&lt;/pre>&lt;p>&lt;em>setcat对应使用getcap查看当前的方法权限&lt;/em>&lt;/p>
+&lt;h1 id="参考">参考&lt;/h1>
+&lt;ul>
+&lt;li>&lt;a href="http://www.ayomaonline.com/security/analyzing-network-traffic-with-openwrt/">ANALYZING NETWORK TRAFFIC WITH OPENWRT&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://openwrt.org/docs/guide-user/firewall/capture-filter-inspect-packets">How to capture, filter and inspect packets&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://www.ayomaonline.com/security/getting-started-with-openwrt-linuxfying-routers/">GETTING STARTED WITH OPENWRT – LINUXFYING ROUTERS&lt;/a>&lt;/li>
+&lt;/ul></description><category domain="https://blog.wxchat.xyz/tags/openwrt/">openwrt</category><category domain="https://blog.wxchat.xyz/tags/wireshark/">wireshark</category><category domain="https://blog.wxchat.xyz/tags/cloudshark/">cloudshark</category></item><item><title>UEFI+GPT安装Archlinux与Win10双系统教程</title><link>https://blog.wxchat.xyz/posts/archlinux-uefi-bootloader/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/archlinux-uefi-bootloader/</guid><pubDate>Sun, 10 Jun 2018 00:42:24 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h1 id="前言">前言&lt;/h1>
+&lt;blockquote>
+&lt;p>最近新入手一台Thinkpad,使用UEFI+GPT预安装好了Win10操作系统，准备开始安装Archlinux。&lt;/p>
+&lt;/blockquote>
+&lt;p>如果你准备在一块新硬盘上安装双系统，那么应该先安装windows。
+如果你安装的是Win10，那么它应该默认就是按UEFI+GPT方式安装的，可以按Win+X键打开磁盘管理，如果是UEFI安装的，那么应该有一个EFI分区，可能是250M。
+其它还有Windows的恢复分区和基本数据分区。不用管恢复分区，如果现在磁盘上没有剩余空间，可以右键点击基本数据分区，点击压缩卷，给Arch的安装腾出空间。用右键点击磁盘，查看属性，可以知道自己是否采用了GPT分区方式。&lt;/p>
+&lt;p>在安装之前，请在电源计划中关掉Windows的快速启动，并在BIOS中关掉Secure Boot，可以很容易搜到对应自己电脑的具体方法。
+如果上面有哪一条没有满足，请只看一看我遇到的问题，具体安装请再参考其它教程&lt;/p>
+&lt;h1 id="安装">安装&lt;/h1>
+&lt;h2 id="安装之前">安装之前&lt;/h2>
+&lt;ul>
+&lt;li>准备一个大于4G的U盘&lt;/li>
+&lt;li>安装镜像，可以从Arch Linux的&lt;a href="www.archlinux.org">官方网站&lt;/a>下载&lt;/li>
+&lt;/ul>
+&lt;h2 id="制作u盘启动盘">制作U盘启动盘&lt;/h2>
+&lt;p>这里我只介绍linux系统下使用&lt;code>dd&lt;/code>的方式，windows下面的方法可以看一下这个&lt;a href="https://github.com/mytbk/Linux_Notes/blob/master/install/install-archlinux.md">安装教程&lt;/a>&lt;/p>
+&lt;p>插入U盘，查看U盘设备名,不需求挂载&lt;/p>
+&lt;pre>&lt;code>lsblk
+sudo dd if=archlinux-2018.06.01-x86_64.iso of=/dev/sdb
+&lt;/code>&lt;/pre>&lt;p>这样，就制作好了U盘启动了，把U盘插入要安装的机子，配置BIOS通过U盘启动，就可以进入光盘引导的临时系统。&lt;/p>
+&lt;h2 id="选择镜像源">选择镜像源&lt;/h2>
+&lt;p>Arch Linux是通过网络进行安装的，为了以更快的速度下载软件包，建议先配置镜像源。配置镜像源的方法是编辑/etc/pacman.d/mirrorlist这个文件，将想用的镜像源的放到第一个非井号开头的行即可。如下可将中科大镜像源作为首选镜像源。&lt;/p>
+&lt;pre>&lt;code># /etc/pacman.d/mirrorlist
+# This is the USTC mirror
+Server = http://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
+# and other mirrors
+## Score: 4.6, China
+Server = http://mirrors.163.com/archlinux/$repo/os/$arch
+#
+&lt;/code>&lt;/pre>&lt;p>配置完成后可以执行pacman -Syy试一下，可以看一下pacman从镜像站下载文件的速度。&lt;/p>
+&lt;h2 id="分区">分区&lt;/h2>
+&lt;blockquote>
+&lt;p>我们前面提过已经默认有安装的Win10系统,使用&lt;code>fdisk&lt;/code>可以看到已经有一个EFI分区为250M大小。因此不要单独为Linux分出EFI分区，因为要双系统启动的话应该把Win10的EFI分区挂载到/boot上。&lt;/p>
+&lt;/blockquote>
+&lt;p>以下是我的硬盘分区情况,因为我还有一块硬盘用来挂载/home，所以我只要创建根分区和swap分区&lt;/p>
+&lt;pre>&lt;code>Device Start End Sectors Size Type
+/dev/nvme0n1p1 2048 534527 532480 260M EFI System
+/dev/nvme0n1p2 534528 567295 32768 16M Microsoft reserved
+/dev/nvme0n1p3 567296 254337023 253769728 121G Microsoft basic data
+/dev/nvme0n1p4 254337024 485023743 230686720 110G Linux filesystem
+/dev/nvme0n1p5 498069504 500117503 2048000 1000M Windows recovery environment
+/dev/nvme0n1p6 485023744 497606655 12582912 6G Linux swap
+&lt;/code>&lt;/pre>&lt;h2 id="格式化">格式化&lt;/h2>
+&lt;pre>&lt;code>mkfs.ext4 /dev/nvme0n1p4
+mkswap /dev/nvme0n1p6
+swapon /dev/nvme0n1p6
+&lt;/code>&lt;/pre>&lt;h2 id="挂载分区">挂载分区&lt;/h2>
+&lt;p>首先，一定是先挂载/分区，再挂载其它分区。因为要使用双系统启动，所以即使没有分/boot分区，还是应该把windows的EFI分区挂载到/上。&lt;/p>
+&lt;pre>&lt;code>mount /dev/nvme0n1p4 /mnt/
+mkdir -p /mnt/boot
+mount /dev/nvme0n1p1 /mnt/boot
+&lt;/code>&lt;/pre>&lt;h2 id="基本软件安装">基本软件安装&lt;/h2>
+&lt;p>安装Arch Linux的软件很简单，执行下面这条命令就行了：&lt;/p>
+&lt;pre>&lt;code>pacstrap /mnt base base-devel
+&lt;/code>&lt;/pre>&lt;h1 id="配置系统">配置系统&lt;/h1>
+&lt;h2 id="创建fstab">创建fstab&lt;/h2>
+&lt;p>生成一个fstab文件（使用-U或-L分别由UUID或标签定义）：&lt;/p>
+&lt;pre>&lt;code>genfstab -U /mnt &amp;gt;&amp;gt; /mnt/etc/fstab
+&lt;/code>&lt;/pre>&lt;h2 id="切换新系统">切换新系统&lt;/h2>
+&lt;p>现在我们执行&lt;code>arch-chroot /mnt&lt;/code>，这样就以chroot的方式进入了新的系统。&lt;/p>
+&lt;h2 id="配置时间">配置时间&lt;/h2>
+&lt;pre>&lt;code>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+hwclock --systohc
+&lt;/code>&lt;/pre>&lt;h2 id="配置本地化">配置本地化&lt;/h2>
+&lt;p>在/etc/locale.gen中取消注释en_US.UTF-8 UTF-8和其他所需的本地化，并使用&lt;code>local-gen&lt;/code>更新本地语言编码&lt;/p>
+&lt;h2 id="设置主机名">设置主机名&lt;/h2>
+&lt;pre>&lt;code>echo 'hcaijin.com' &amp;gt; /etc/hostname
+&lt;/code>&lt;/pre>&lt;h2 id="设置root密码">设置root密码&lt;/h2>
+&lt;pre>&lt;code>passwd
+&lt;/code>&lt;/pre>&lt;h2 id="设置启动">设置启动&lt;/h2>
+&lt;p>按照上面的步骤，efi分区应该被挂载到了/boot目录下。这时，我们使用&lt;code>bootctl install&lt;/code>命令，安装bootloader，然后用&lt;code>cp /usr/share/systemd/bootctl/arch.conf /boot/loader/entries/&lt;/code>把示例文件复制过来，只要修改它的options部分就可以了。
+以我的/boot分区为例，用&lt;code>blkid -s PARTUUID -o value /dev/nvme0n1p1&lt;/code>就可以生成所需要的PARTUUID，最后加上rw就行了。&lt;/p>
+&lt;p>格式大概为：&lt;/p>
+&lt;pre>&lt;code>title Arch Linux
+linux /vmlinuz-linux
+initrd /initramfs-linux.img
+options root=UUID=6278bd34-44cd-41b9-9bdd-239d9ce4020a rw
+&lt;/code>&lt;/pre>&lt;p>意思是创建一个标题为Arch Linux的启动项，它用bootloader所在分区(/dev/sda1)根目录下的vmlinuz-linux作为Linux内核，initramfs-linux.img作为initramfs镜像(可以认为是一个临时rootfs镜像)，并且用root=/dev/sda2 ro作为内核参数。&lt;/p>
+&lt;p>再编辑/boot/loader/loader.conf.&lt;/p>
+&lt;pre>&lt;code>timeout 3
+default arch
+&lt;/code>&lt;/pre>&lt;p>意思是默认用arch.conf的配置启动，等待3秒没有键盘操作即使用默认配置启动。&lt;/p>
+&lt;h2 id="新系统的网络">新系统的网络&lt;/h2>
+&lt;p>启动盘中默认配置好了有关网络的软件，但新的系统中却没有。
+如果你只是使用单一且固定的有线网络，使用&lt;code>systemctl enable dhcpcd@interface.service&lt;/code>就可以了（interface是你的网络接口名，可以使用ip link查看，类似enp3s0）。
+如果要使用无线网络，那么就要使用&lt;code>pacman -S iw wpa_supplicant dialog&lt;/code>命令安装这些软件包。如果失败，可能要安装固件。&lt;/p>
+&lt;p>至此，新系统的配置就完成了。&lt;/p>
+&lt;p>使用exit命令退出chroot环境，umount -R /mnt卸载挂载的分区，然后使用reboot重启一下就好了。&lt;/p>
+&lt;h1 id="最后">最后&lt;/h1>
+&lt;p>可能会启动失败，解决方法是进入BIOS里的设置把UEFI作为唯一的启动方式。然后保存退出，就可以看到有三个启动项（分别是Arch Linux, Windows Manage, Default），选择你要进入的系统就可以了。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/archlinux/">archlinux</category><category domain="https://blog.wxchat.xyz/tags/windows/">windows</category><category domain="https://blog.wxchat.xyz/tags/uefi/">uefi</category></item><item><title>Chromium OS源码编译、U盘安装及使用笔记</title><link>https://blog.wxchat.xyz/posts/chromium-os-install/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/chromium-os-install/</guid><pubDate>Sat, 02 Jun 2018 23:41:10 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>根据官方文档 &lt;a href="https://www.chromium.org/chromium-os/quick-start-guide">https://www.chromium.org/chromium-os/quick-start-guide&lt;/a> 只有Ubuntu Trusty版本的安装方式写了个ArchLinux的安装方法&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="安装依赖">安装依赖&lt;/h1>
+&lt;ul>
+&lt;li>Arch Linux 4.16.12-1-ARCH&lt;/li>
+&lt;li>x86_64 GNU/Linux&lt;/li>
+&lt;li>有sudo权限的用户&lt;/li>
+&lt;/ul>
+&lt;h2 id="基本依赖">基本依赖&lt;/h2>
+&lt;p>确保有如下包就好了，没有就用&lt;code>pacman -S&lt;/code> 安装就是：&lt;/p>
+&lt;pre>&lt;code>sudo pacman -S git-core gitk git-gui subversion curl lvm2 thin-provisioning-tools python-pkg-resources python-virtualenv python-oauth2client
+&lt;/code>&lt;/pre>&lt;h2 id="安装depot_tools">安装depot_tools&lt;/h2>
+&lt;p>用git克隆下来就好了,但要注意python的版本，后面会说.&lt;/p>
+&lt;pre>&lt;code>cd ~/Source/
+git clone https://chromium.googlesource.com/chromium/tools/depot_tools
+&lt;/code>&lt;/pre>&lt;p>确保deport_tools目录在PATH变量里&lt;/p>
+&lt;h2 id="sudoers配置">sudoers配置&lt;/h2>
+&lt;p>要设置Chrome操作系统构建环境，应该关闭sudo的tty_tickets选项，因为它与cros_sdk不兼容。执行如下操作：&lt;/p>
+&lt;pre>&lt;code>cd /tmp
+cat &amp;gt; ./sudo_editor &amp;lt;&amp;lt;EOF
+#!/bin/sh
+echo Defaults \!tty_tickets &amp;gt; \$1 # Entering your password in one shell affects all shells
+echo Defaults timestamp_timeout=180 &amp;gt;&amp;gt; \$1 # Time between re-requesting your password, in minutes
+EOF
+chmod +x ./sudo_editor
+sudo EDITOR=./sudo_editor visudo -f /etc/sudoers.d/relax_requirements
+&lt;/code>&lt;/pre>&lt;h1 id="获取源码">获取源码&lt;/h1>
+&lt;p>创建一个目录来保存源文件“${SOURCE_REPO}”。&lt;/p>
+&lt;pre>&lt;code>export SOURCE_REPO=&amp;quot;~/Source/chromiumos&amp;quot;
+mkdir ${SOURCE_REPO}
+cd ${SOURCE_REPO}
+virtualenv -p /usr/bin/python2 venv #这里我们要把python环境切换为2.7，才能使用下面的repo
+repo init -u https://chromium.googlesource.com/chromiumos/manifest.git
+# Optional: Make any changes to .repo/local_manifests/local_manifest.xml before syncing
+repo sync
+&lt;/code>&lt;/pre>&lt;h1 id="创建chromiumos">创建chromiumos&lt;/h1>
+&lt;h2 id="构建包">构建包&lt;/h2>
+&lt;pre>&lt;code>export BOARD=amd64-generic
+cros_sdk -- ./build_packages --board=${BOARD}
+&lt;/code>&lt;/pre>&lt;h2 id="构建镜像">构建镜像&lt;/h2>
+&lt;pre>&lt;code>cros_sdk -- ./build_image --board=${BOARD}
+&lt;/code>&lt;/pre>&lt;h2 id="烧入usb">烧入USB&lt;/h2>
+&lt;p>键入 &lt;code>sudo fdisk -l&lt;/code> 查看插入U盘所在区域，然后执行如下操作烧录编译的系统到U盘&lt;/p>
+&lt;pre>&lt;code>cros_sdk -- cros flash usb:///dev/sdd ~/chromiumos/src/build/images/amd-generic/latest/chromiumos_test_image.bin
+&lt;/code>&lt;/pre>&lt;h2 id="修改分区">修改分区&lt;/h2>
+&lt;p>如果要使用自定义大小容量的分区构建镜像，请考虑在 build_library/legacy_disk_layout.json 中添加新的磁盘布局或使用 adjust_part。请参阅下面的帮助，&lt;/p>
+&lt;pre>&lt;code>adjust_part ='STATE：1G' ---- 将1GB添加到状态分区
+adjust_part ='ROOT-A：-1G' ---- 从主rootfs分区中删除1GB
+adjust_part ='STATE：= 1G' --- 设置状态分区为1GB
+&lt;/code>&lt;/pre>&lt;p>这里键入 &lt;code>cros_sdk -- ./build_image --board=${BOARD} --noenable_rootfs_verification test --adjust_part='STATE:+10G'&lt;/code>，这样我们的Chromium OS用户空间便增加10G，如果使用默认设置你会发现用户空间容量不足（约140MB）&lt;/p>
+&lt;h1 id="最后">最后&lt;/h1>
+&lt;p>修改要安装到目标机器的bios启动项为U盘启动，插入U盘，启动。&lt;/p>
+&lt;p>进入系统，按Ctrl + Alt + Back（F2）。在提示符下输入chronos并使用以下命令进行安装。&lt;/p>
+&lt;pre>&lt;code>/usr/sbin/chromeos-install
+&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/chromiumos/">ChromiumOS</category><category domain="https://blog.wxchat.xyz/tags/archlinux/">archlinux</category></item><item><title>Arch Linux 内核更新 修复无线模块rtl8821ce编译失败的问题</title><link>https://blog.wxchat.xyz/posts/kernel-upgrade-fix-rtl8821ce/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/kernel-upgrade-fix-rtl8821ce/</guid><pubDate>Sat, 19 May 2018 01:36:07 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>最近更新系统，内核从4.15 更新到了 4.16.9发现原来的无线模块编译不通过，找不到头文件stdarg.h&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="查看无线驱动信息">查看无线驱动信息&lt;/h1>
+&lt;p>通过&lt;code>ip l&lt;/code>可以看到只有有线网卡&lt;/p>
+&lt;pre>&lt;code>
+1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: enp3s0: &amp;lt;BROADCAST,MULTICAST&amp;gt; mtu 1500 qdisc fq_codel state DOWN mode DEFAULT group default qlen 1000
+link/ether 8c:16:45:3f:68:0d brd ff:ff:ff:ff:ff:ff
+&lt;/code>&lt;/pre>&lt;p>查看无线网卡驱动，找到相应的驱动去下载就好了&lt;/p>
+&lt;pre>&lt;code>lspci | grep -i 'newwork'
+Network controller: Realtek Semiconductor Co., Ltd. RTL8821CE 802.11ac PCIe Wireless Network Adapter
+&lt;/code>&lt;/pre>&lt;h1 id="下载无线驱动源码">下载无线驱动源码&lt;/h1>
+&lt;pre>&lt;code>git clone https://github.com/endlessm/linux
+&lt;/code>&lt;/pre>&lt;p>由于这个项目特别的大，这里只需要下载drivers/net/wireless/rtl8821ce&lt;/p>
+&lt;h1 id="编译">编译&lt;/h1>
+&lt;h2 id="修改makefile">修改Makefile&lt;/h2>
+&lt;p>这里需要修改Makefile中TopDIR变量的值为当前路径，否则会提示错误退出&lt;/p>
+&lt;pre>&lt;code>cd drivers/net/wireless/rtl8821ce
+sed -i 's/export TopDIR ?=/export TopDIR ?= $(shell pwd)/g' Makefile
+&lt;/code>&lt;/pre>&lt;h2 id="执行make">执行&lt;code>make&lt;/code>&lt;/h2>
+&lt;p>在最新的内核版本（4.16.9-1-ARCH）下编译失败，提示如下：&lt;/p>
+&lt;pre>&lt;code>graz@graz ~/Source/driver_net_wireless/rtl8821ce % make
+/usr/bin/make ARCH=x86_64 CROSS_COMPILE= -C /lib/modules/4.16.9-1-ARCH/build M=/home/graz/Source/driver_net_wireless/rtl8821ce modules
+make[1]: Entering directory '/usr/lib/modules/4.16.9-1-ARCH/build'
+CC [M] /home/graz/Source/driver_net_wireless/rtl8821ce/core/rtw_cmd.o
+In file included from ./include/linux/list.h:9,
+from ./include/linux/module.h:9,
+from /home/graz/Source/driver_net_wireless/rtl8821ce/include/basic_types.h:81,
+from /home/graz/Source/driver_net_wireless/rtl8821ce/include/drv_types.h:31,
+from /home/graz/Source/driver_net_wireless/rtl8821ce/core/rtw_cmd.c:22:
+./include/linux/kernel.h:6:10: fatal error: stdarg.h: No such file or directory
+#include &amp;lt;stdarg.h&amp;gt;
+^~~~~~~~~~
+compilation terminated.
+&lt;/code>&lt;/pre>&lt;p>通过&lt;code>locate stdarg.h&lt;/code>找到头文件 &amp;ldquo;/usr/lib/gcc/x86_64-pc-linux-gnu/8.1.0/include/stdarg.h&amp;rdquo;&lt;/p>
+&lt;pre>&lt;code>ln -s /usr/lib/gcc/x86_64-pc-linux-gnu/8.1.0/include/stdarg.h include/
+&lt;/code>&lt;/pre>&lt;p>软链接创建好后，就可以执行&lt;code>make&lt;/code>编译成功&lt;/p>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;pre>&lt;code>sudo make install
+modprobe 8821ce
+&lt;/code>&lt;/pre>&lt;p>最后，没有报错的话，通过&lt;code>ip l&lt;/code> 就可以找到这个无线网卡了&lt;/p>
+&lt;pre>&lt;code>1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: enp3s0: &amp;lt;BROADCAST,MULTICAST&amp;gt; mtu 1500 qdisc fq_codel state DOWN mode DEFAULT group default qlen 1000
+link/ether 8c:16:45:3f:68:0d brd ff:ff:ff:ff:ff:ff
+3: wlp5s0: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc mq state UP mode DORMANT group default qlen 1000
+link/ether 70:c9:4e:d8:6d:01 brd ff:ff:ff:ff:ff:ff
+&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/rtl8821ce/">rtl8821ce</category><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category></item><item><title>博客系统从ghost 迁移hexo 安装与配置</title><link>https://blog.wxchat.xyz/posts/hexo-install/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/hexo-install/</guid><pubDate>Sun, 06 May 2018 16:33:21 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h1 id="备份ghost">备份Ghost&lt;/h1>
+&lt;p>后台export，导出后是一个JSON，包含所有文章以及一些元数据：修改日期、Tags 等等&lt;/p>
+&lt;p>图片等资源，可以到 assets 文件夹下，打包下载&lt;/p>
+&lt;pre>&lt;code>cd /data/www/ghost
+tar -zcvf images.tag assets/content
+&lt;/code>&lt;/pre>&lt;h1 id="安装hexo">安装hexo&lt;/h1>
+&lt;h2 id="安装依赖">安装依赖&lt;/h2>
+&lt;pre>&lt;code>pacman -S npm
+&lt;/code>&lt;/pre>&lt;h2 id="安装">安装&lt;/h2>
+&lt;pre>&lt;code>npm install hexo-cli -g
+cd /data/www/
+hexo init hcaijin.com
+cd hcaijin.com
+hexo install
+hexo server
+&lt;/code>&lt;/pre>&lt;h1 id="迁移">迁移&lt;/h1>
+&lt;h2 id="导入ghost数据">导入Ghost数据&lt;/h2>
+&lt;pre>&lt;code>## 安装数据转换插件
+npm install hexo-migrator-ghost --save
+## 导入数据
+hexo migrate ghost ghost-export.json
+&lt;/code>&lt;/pre>&lt;h2 id="导入图片">导入图片&lt;/h2>
+&lt;pre>&lt;code>cp images.tag /data/www/hcaijin.com/source/
+cd /data/www/hcaijin.com/source/
+tar -zxvf images.tag
+&lt;/code>&lt;/pre>&lt;h1 id="最后做一些必要的配置">最后，做一些必要的配置&lt;/h1>
+&lt;h2 id="基本配置">基本配置&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://hexo.io/zh-cn/docs/configuration.html">Hexo 配置&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://theme-next.iissnan.com/getting-started.html">NexT 配置&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://theme-next.iissnan.com/theme-settings.html">NexT 高级配置&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="安装其他插件">安装其他插件&lt;/h2>
+&lt;pre>&lt;code>npm install hexo-generator-searchdb --save
+npm install hexo-generator-sitemap --save
+npm install hexo-generator-feed --save
+npm install hexo-pwa --save
+npm install hexo-all-minifier --save
+&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/hexo/">hexo</category><category domain="https://blog.wxchat.xyz/tags/ghost/">ghost</category></item><item><title>ghost 更新记录</title><link>https://blog.wxchat.xyz/posts/ghost-upgrade/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/ghost-upgrade/</guid><pubDate>Sat, 06 May 2017 12:33:21 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>好久没有更新ghost 0.6.0，今天更新的时候发现最新版本，0.11.11 版本 更新安装的时候报错。&lt;/p>
+&lt;p>查看error日志，是依赖的npm和node版本问题。解决方法就是要么升级npm,node，要么降级ghost到npm,node支持的版本。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>升级npm,node在这里就不说了，网上有很多的方法，我用的是搬瓦工家的最便宜vps，使用的npm,node不好升级，估计还得升级linux内核，我就不打算使用这个方法了。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>降级ghost到npm,node支持的版本。
+我们到&lt;a href="https://github.com/TryGhost/Ghost/releases">Ghost各版本历史&lt;/a>去找一下历史版本，我尝试了几个版本，最后确定0.8.0这个版本是可以正常使用的。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>这样我们就可以开始升级ghost了。升级ghost不需要停了当前的服务，但是，升级更新都要做好备份。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="备份">备份&lt;/h3>
+&lt;p>登陆并进入https://$HOSTNAME/ghost/debug这个页面导出备份。&lt;/p>
+&lt;p>最好能登陆到服务器进入ghost安装的目录备份一下根目录下的content，这一步要先暂停服务。&lt;/p>
+&lt;pre>&lt;code>cd /data/www/ghost
+tar -zcvf ghost-content.tag content
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>备份好以后，我们就可以删除与升级相关的目录了文件。&lt;/p>
+&lt;/blockquote>
+&lt;pre>&lt;code>rm -rf core/ node_modules/ index.js *.json
+&lt;/code>&lt;/pre>&lt;h3 id="下载最新版本">下载最新版本&lt;/h3>
+&lt;pre>&lt;code>curl -LOk https://github.com/TryGhost/Ghost/releases/download/0.8.0/Ghost-0.8.0.zip
+&lt;/code>&lt;/pre>&lt;p>然后解压到/data/www/ghost&lt;/p>
+&lt;pre>&lt;code>cd ~
+unzip -uo Ghost-0.8.0.zip -d /data/www/ghost
+&lt;/code>&lt;/pre>&lt;h3 id="安装并重启">安装并重启&lt;/h3>
+&lt;pre>&lt;code>npm cache clear &amp;amp;&amp;amp; npm install --production
+&lt;/code>&lt;/pre>&lt;p>没有报错的话就是安装成功了。&lt;/p>
+&lt;p>重启ghost&lt;/p>
+&lt;pre>&lt;code>NODE_ENV=production pm2 start index.js --name &amp;quot;ghost&amp;quot;
+&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/ghost/">ghost</category></item><item><title>Linux 系统Chrome,Firefox程序无用使用Fcitx的问题解决方法</title><link>https://blog.wxchat.xyz/posts/linux-%E7%B3%BB%E7%BB%9Fchrome-firefox%E7%A8%8B%E5%BA%8F%E6%97%A0%E7%94%A8%E4%BD%BF%E7%94%A8fcitx%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-%E7%B3%BB%E7%BB%9Fchrome-firefox%E7%A8%8B%E5%BA%8F%E6%97%A0%E7%94%A8%E4%BD%BF%E7%94%A8fcitx%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</guid><pubDate>Sun, 25 Dec 2016 05:04:29 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h3 id="起因">起因&lt;/h3>
+&lt;p>使用的gentoo有半年没有更新系统了，原来用的好好的输入法，更新完以后，在其他的程序都可以正常使用fcitx。但是，在chrome,firefox（后来知道应该是GTK,QT相关的程序用了最新版导致的问题）就是用不了，网上也有很多人提问，也没有一个有效的解决方法。&lt;/p>
+&lt;h3 id="环境">环境&lt;/h3>
+&lt;ul>
+&lt;li>Linux hcj-arch 4.4.39-1-lts #1 SMP Thu Dec 15 21:10:18 CET 2016 x86_64 GNU/Linu&lt;/li>
+&lt;li>fcitx version: 4.2.9.1&lt;/li>
+&lt;li>Google Chrome 55.0.2883.87&lt;/li>
+&lt;li>Mozilla Firefox 50.1.0&lt;/li>
+&lt;/ul>
+&lt;h3 id="检查">检查&lt;/h3>
+&lt;p>首先保证环境变量有设置，当然，如果其他程序都可以使用，那这个应该是没有问题的&lt;/p>
+&lt;pre>&lt;code>export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+&lt;/code>&lt;/pre>&lt;p>主要的问题就是我们要用命令 &lt;code>fcitx-diagnose&lt;/code> 查看fcitx的相关模块是不是有安装。（更无脑的方式就是把这个命令里显示为红色的信息都看一遍，把相关的模块安装上就ok了）&lt;/p>
+&lt;p>那么，我们可以看到：
+&lt;img src="https://blog.wxchat.xyz/content/images/2017/01/Screenshot_2016-12-27_10-51-56.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2017/01/Screenshot_2016-12-27_10-52-09.png" alt="">&lt;/p>
+&lt;p>== 如上图所示，缺少gtk2,gtk3相关的模块支持，导致的Chrome,Firefox等gtk软件无法使用输入法的情况 ==&lt;/p>
+&lt;h3 id="解决">解决&lt;/h3>
+&lt;p>我们先看一下fcitx构建时用到的USE标记，以下
+&lt;img src="https://blog.wxchat.xyz/content/images/2017/01/Screenshot_2017-01-09_11-06-32.png" alt="">
+可以看到，我自己设置的是默认不安装gtk支持的，所以我们要加上，有以下两种方法：&lt;/p>
+&lt;ul>
+&lt;li>可以直接在/etc/portage/make.conf USE标记上加上gtk的支持&lt;/li>
+&lt;li>直接定义USE标记，加上gtk的支持&lt;/li>
+&lt;/ul>
+&lt;pre>&lt;code> USE=&amp;quot;X autostart cairo dbus enchant introspection nls pango qt4 table xml -debug gtk2 gtk3 -lua -opencc -static-libs {-test}&amp;quot; sudo emerge fcitx
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>最后，重新编译安装过fcitx以后，再看一下&lt;code>fcitx-diagnose&lt;/code>，只要没有红色相关字体的警告信息，就说明已经可以正常使用了。把浏览器重启一下，如果还不行，得重启一下系统。&lt;/p>
+&lt;/blockquote></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/chrome/">chrome</category><category domain="https://blog.wxchat.xyz/tags/firefox/">firefox</category><category domain="https://blog.wxchat.xyz/tags/fcitx/">fcitx</category></item><item><title>Linux挂载Mac系统下的dmg文件</title><link>https://blog.wxchat.xyz/posts/linux%E6%8C%82%E8%BD%BDmac%E7%B3%BB%E7%BB%9F%E4%B8%8B%E7%9A%84dmg%E6%96%87%E4%BB%B6/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux%E6%8C%82%E8%BD%BDmac%E7%B3%BB%E7%BB%9F%E4%B8%8B%E7%9A%84dmg%E6%96%87%E4%BB%B6/</guid><pubDate>Fri, 27 May 2016 05:06:32 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>最近想在virtualbox下安装Mac系统，了解到Mac的安装镜像文件是dmg格式的，并下载到了 Install OS X Yosemite 10.10.1.dmg 安装包。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="解压缩">解压缩&lt;/h2>
+&lt;p>本来以为Mac的安装与其他系统的类似，只要把镜像包在虚拟机中做为cd启动就可以了，然而并没什么用 - -&lt;/p>
+&lt;p>这不，想到把dmg格式的包转化为iso的格式再在虚拟机中启动，这就有了这篇文章的问题了。&lt;/p>
+&lt;p>google到这个工具acetoneiso可以直接把dmg格式的转为iso&lt;/p>
+&lt;p>但是，我想是不是可以用更简单的方法来操作。
+现在的dmg一般都使用(zlib 或者 bzip2压缩算法)压缩过&lt;/p>
+&lt;p>需要使用dmg2img把dmg文件转为img&lt;/p>
+&lt;pre>&lt;code>$ dmg2img Install\ OS\ X\ Yosemite\ 10.10.1.dmg yosemite.img
+&lt;/code>&lt;/pre>&lt;p>提示如，就表示成功了：
+Archive successfully decompressed as yosemite.img&lt;/p>
+&lt;h2 id="检查模块">检查模块&lt;/h2>
+&lt;p>在挂载之前我们要先确保hfsplus模块启用：&lt;/p>
+&lt;pre>&lt;code>lsmod | grep hfs
+&lt;/code>&lt;/pre>&lt;p>如果没有输出，就表示模块未启用，使用如下命令启用：&lt;/p>
+&lt;pre>&lt;code>modprobe hfsplus
+&lt;/code>&lt;/pre>&lt;h2 id="挂载">挂载&lt;/h2>
+&lt;p>启用成功后，就可以用mount挂载img，这里我挂载失败，提示存在坏道，在&lt;a href="http://www.linuxquestions.org/questions/linux-software-2/how-to-mount-dos-img-file-4175430554/">这里&lt;/a>才找到了解决的方法。&lt;/p>
+&lt;pre>&lt;code>mount -t hfsplus -o loop my.img /mnt/hfs
+mount: wrong fs type, bad option, bad superblock on /dev/loop0,
+missing codepage or helper program, or other error
+In some cases useful info is found in syslog - try
+dmesg | tail or so
+&lt;/code>&lt;/pre>&lt;h3 id="问题处理">问题处理&lt;/h3>
+&lt;p>查询系统日志在最下面提示如下信息：&lt;/p>
+&lt;pre>&lt;code>dmesg | tail
+[2015609.436682] hfsplus: unable to find HFS+ superblock
+&lt;/code>&lt;/pre>&lt;p>解决方案：&lt;/p>
+&lt;p>1.先用fdisk查询img扇区
+&lt;img src="https://blog.wxchat.xyz/content/images/2016/05/--_2016-05-27_17-42-21.png" alt="">
+可以看到它有两个设备*.img1,*.img2&lt;/p>
+&lt;p>2.把img的文件挂载出来就得找到开始挂载的起始扇区，所以要设置一下offset的值，
+这里&lt;code>offset=1259643×512&lt;/code>，运行以下：&lt;/p>
+&lt;pre>&lt;code>sudo mount -t hfsplus -v -o loop,offset=644937216 yosemite.img /mnt/hfs
+&lt;/code>&lt;/pre>&lt;p>以上，就可以把镜像挂载到了目录/mnt/hfs下。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/mount/">mount</category><category domain="https://blog.wxchat.xyz/tags/mac/">mac</category><category domain="https://blog.wxchat.xyz/tags/virtualbox/">virtualbox</category></item><item><title>idea tomcat 启动web应用异常处理</title><link>https://blog.wxchat.xyz/posts/idea-tomcat-%E5%90%AF%E5%8A%A8web%E5%BA%94%E7%94%A8%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/idea-tomcat-%E5%90%AF%E5%8A%A8web%E5%BA%94%E7%94%A8%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</guid><pubDate>Wed, 11 May 2016 05:28:04 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;pre>&lt;code>2016-05-11 16:36:25.799 [RMI TCP Connection(4)-127.0.0.1] ERROR org.springframework.web.context.ContextLoader - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'shiroFilter' defined in file [/home/hcj/Work/data/ecerp-saas/Sources/ecerp/out/artifacts/ecerp_web_war_exploded/WEB-INF/classes/spring/applicationContext.xml]: Cannot resolve reference to bean 'securityManager' while setting bean property 'securityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityManager' defined in file [/home/hcj/Work/data/ecerp-saas/Sources/ecerp/out/artifacts/ecerp_web_war_exploded/WEB-INF/classes/spring/applicationContext.xml]: Cannot resolve reference to bean 'shiroSubjectFactory' while setting bean property 'subjectFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'shiroSubjectFactory': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private gy.erp.service.admin.SecurityMonitor gy.erp.shiro.ShiroSubjectFactory.securityMonitor; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityMonitor' defined in class path resource [spring-domain.xml]: Cannot resolve reference to bean 'sessionService' while setting bean property 'sessionService'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionService': FactoryBean threw exception on object creation; nested exception is java.lang.IllegalArgumentException: Invalid registry store file /data/erp.guanyisoft.com/tomcat/ecerp-web.properties, cause: Failed to create directory /data/erp.guanyisoft.com/tomcat!
+at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:329) ~[spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:107) ~[spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1391) ~[spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1132) ~[spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:461) ~[spring-beans-3.2.0.RELEASE.jar:3.2.0.RELEASE]
+at org.
+&lt;/code>&lt;/pre>&lt;p>java报错总要看异常信息，以上主要关键的地方列在这里：&lt;/p>
+&lt;pre>&lt;code>;nested exception is java.lang.IllegalArgumentException: Invalid registry store file /data/erp.guanyisoft.com/tomcat/ecerp-web.properties, cause: Failed to create directory /data/erp.guanyisoft.com/tomcat!
+&lt;/code>&lt;/pre>&lt;p>idea tomcat 在启动web应用的时候会生成一个注册dubbo服务的文件，需要指定生成路径，以前项目都是默认生成在out文件里的吧，最近，不知道什么变动，需要手工在项目配置文件application.properties 指定一下：&lt;/p>
+&lt;pre>&lt;code>dubbo.registry.file = /home/hcj/Work/data/ecerp-web.properties
+&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/java/">java</category><category domain="https://blog.wxchat.xyz/tags/tomcat/">tomcat</category><category domain="https://blog.wxchat.xyz/tags/idea/">idea</category></item><item><title>Linux 声卡驱动问题</title><link>https://blog.wxchat.xyz/posts/linux-%E5%A3%B0%E5%8D%A1%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-%E5%A3%B0%E5%8D%A1%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98/</guid><pubDate>Mon, 21 Mar 2016 01:54:57 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>最近转Gentoo，一切安装就绪了，但是想使用youtube观看视频的时候，竟没有声音，估计又得折腾一下了。&lt;/p>
+&lt;/blockquote>
+&lt;p>（Advanced Linux Sound Architecture，ALSA）是Linux中提供声音设备驱动的内核组件，用来代替原来的开放声音系统（Open Sound System，OSSv3）。&lt;/p>
+&lt;ul>
+&lt;li>系统环境：Linux hcj.com 4.1.15-gentoo-r1&lt;/li>
+&lt;li>组件：alsa&lt;/li>
+&lt;li>前提：内核已经配置支持&lt;/li>
+&lt;/ul>
+&lt;h3 id="硬件设备显示">硬件设备显示&lt;/h3>
+&lt;pre>&lt;code>lspci | grep -i audio
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-21_22-46-22.png" alt="">&lt;/p>
+&lt;h3 id="安装">安装&lt;/h3>
+&lt;pre>&lt;code>euse -E alsa
+emerge --ask --changed-use --deep @world
+emerge --ask alsa-utils
+&lt;/code>&lt;/pre>&lt;h3 id="启动声音服务">启动声音服务&lt;/h3>
+&lt;pre>&lt;code>/etc/init.d/alsasound start
+rc-update add alsasound boot ###声音服务设置boot级别
+&lt;/code>&lt;/pre>&lt;h3 id="列出设备名">列出设备名&lt;/h3>
+&lt;pre>&lt;code>cat /sys/class/sound/card*/id
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-22_07-16-34.png" alt="">&lt;/p>
+&lt;h3 id="配置默认设备">配置默认设备&lt;/h3>
+&lt;pre>&lt;code>vi ~/.asoundrc
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-22_07-17-59.png" alt="">&lt;/p>
+&lt;p>最后，别忘了重启一下。&lt;/p>
+&lt;p>&lt;a href="https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture">参考链接1&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://wiki.gentoo.org/wiki/ALSA">参考链接2&lt;/a>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/alsamixer/">alsamixer</category></item><item><title>Gentoo安装RTL8723BE无线网卡驱动</title><link>https://blog.wxchat.xyz/posts/gentoo%E5%AE%89%E8%A3%85rtl8723be%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/gentoo%E5%AE%89%E8%A3%85rtl8723be%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8/</guid><pubDate>Thu, 17 Mar 2016 07:40:43 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>新配了个ThinkPad E55c 安装Gentoo时无线网卡没能正确识别。网上查了一下是3.15内核版本之前还没有包含这个驱动，需要手动安装一下。但是我想说我安装的内核版本是4.1,而且也安装了linux-firmware固件，可是怎么就没有这个驱动呢 - - 暂时先不深究。&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>内核版本：Kernel: x86_64 Linux 4.1.15-gentoo-r1&lt;/li>
+&lt;li>网卡型号：RTL8723BE&lt;/li>
+&lt;/ul>
+&lt;h3 id="确认网卡型号">确认网卡型号&lt;/h3>
+&lt;pre>&lt;code>lspci -k | grep Network
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-18_04-16-28.png" alt="">&lt;/p>
+&lt;h3 id="下载源码">下载源码&lt;/h3>
+&lt;pre>&lt;code>git clone https://github.com/lwfinger/rtlwifi_new.git
+cd rtlwifi_new/
+make &amp;amp;&amp;amp; make install
+&lt;/code>&lt;/pre>&lt;h3 id="手动加载模块">手动加载模块&lt;/h3>
+&lt;pre>&lt;code>modprobe rtl8723be ## 手动加载rtl8723be模块
+modinfo rtl8723be ## 查看模块详情
+&lt;/code>&lt;/pre>&lt;p>模块加载成功，使用&lt;code>lspci -k&lt;/code>看一下,如果显示的是如下图说明无线网卡驱动安装成功：
+&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-18_04-17-37.png" alt="">
+最后&lt;code>ip addr show &lt;/code>可以看到对应的网卡设备了
+&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-18_04-30-58.png" alt="">&lt;/p>
+&lt;h3 id="自启动加载模块">自启动加载模块&lt;/h3>
+&lt;pre>&lt;code>cat /etc/conf.d/modules
+modules=&amp;quot;rtl8723be&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="https://wiki.archlinux.org/index.php/Wireless_network_configuration">引用&lt;/a>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/gentoo/">Gentoo</category><category domain="https://blog.wxchat.xyz/tags/rtl8723be/">rtl8723be</category></item><item><title>git常规使用</title><link>https://blog.wxchat.xyz/posts/git%E5%B8%B8%E8%A7%84%E4%BD%BF%E7%94%A8/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/git%E5%B8%B8%E8%A7%84%E4%BD%BF%E7%94%A8/</guid><pubDate>Tue, 15 Mar 2016 02:21:09 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h3 id="远程仓库有master和dev分支">远程仓库有master和dev分支&lt;/h3>
+&lt;h4 id="克隆代码">克隆代码&lt;/h4>
+&lt;pre>&lt;code>git clone &amp;lt;git url&amp;gt;
+&lt;/code>&lt;/pre>&lt;h4 id="查看所有分支">查看所有分支&lt;/h4>
+&lt;pre>&lt;code>git branch --all
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>默认有了dev和master分支，所以会看到如下三个分支&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>master[本地主分支]&lt;/li>
+&lt;li>origin/master[远程主分支]&lt;/li>
+&lt;li>origin/dev[远程开发分支]&lt;/li>
+&lt;/ul>
+&lt;p>==新克隆下来的代码默认master和origin/master是关联的，也就是他们的代码保持同步，但是origin/dev分支在本地没有任何的关联，所以我们无法在那里开发==&lt;/p>
+&lt;h4 id="创建本地关联origindev的分支">创建本地关联origin/dev的分支&lt;/h4>
+&lt;pre>&lt;code>git checkout dev origin/dev
+&lt;/code>&lt;/pre>&lt;p>创建本地分支dev，并且和远程origin/dev分支关联，本地dev分支的初始代码和远程的dev分支代码一样&lt;/p>
+&lt;h4 id="切换到dev分支进行开发">切换到dev分支进行开发&lt;/h4>
+&lt;pre>&lt;code>git checkout dev # 这个是切换到dev分支，然后就是常规的开发
+&lt;/code>&lt;/pre>&lt;h3 id="假设远程仓库只有mater分支">假设远程仓库只有mater分支&lt;/h3>
+&lt;h4 id="克隆代码-1">克隆代码&lt;/h4>
+&lt;pre>&lt;code>git clone &amp;lt;git url&amp;gt;
+&lt;/code>&lt;/pre>&lt;h4 id="查看所有分支-1">查看所有分支&lt;/h4>
+&lt;pre>&lt;code>git branch --all
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>默认只有master分支，所以会看到如下两个分支&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>master[本地主分支]&lt;/li>
+&lt;li>origin/master[远程主分支]&lt;/li>
+&lt;/ul>
+&lt;p>==新克隆下来的代码默认master和origin/master是关联的，也就是他们的代码保持同步==&lt;/p>
+&lt;h4 id="创建本地新的dev分支">创建本地新的dev分支&lt;/h4>
+&lt;pre>&lt;code>git branch dev # 创建本地分支
+git branch # 查看分支
+&lt;/code>&lt;/pre>&lt;p>这时会看到master和dev，而且master上会有一个星号
+这个时候dev是一个本地分支，远程仓库不知道它的存在
+本地分支可以不同步到远程仓库，我们可以在dev开发，然后merge到master，使用master同步代码，当然也可以同步&lt;/p>
+&lt;h4 id="发布dev分支">发布dev分支&lt;/h4>
+&lt;p>发布dev分支指的是同步dev分支的代码到远程服务器&lt;/p>
+&lt;pre>&lt;code>git push origin dev:dev # 这样远程仓库也有一个dev分支了
+&lt;/code>&lt;/pre>&lt;h4 id="在dev分支开发代码">在dev分支开发代码&lt;/h4>
+&lt;pre>&lt;code>git checkout dev # 切换到dev分支进行开发
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>开发代码之后，我们有两个选择&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>第一个：如果功能开发完成了，可以合并主分支&lt;/li>
+&lt;/ul>
+&lt;pre>&lt;code>git checkout master # 切换到主分支
+git merge dev # 把dev分支的更改和master合并
+git push # 提交主分支代码远程
+git checkout dev # 切换到dev远程分支
+git push # 提交dev分支到远程
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>第二个：如果功能没有完成，可以直接推送&lt;/li>
+&lt;/ul>
+&lt;pre>&lt;code>git push # 提交到dev远程分支
+&lt;/code>&lt;/pre>&lt;p>== 注意：在分支切换之前最好先commit全部的改变，除非你真的知道自己在做什么 ==&lt;/p>
+&lt;h4 id="删除分支">删除分支&lt;/h4>
+&lt;pre>&lt;code>git push origin :dev # 删除远程dev分支，危险命令哦
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>下面两条是删除本地分支&lt;/p>
+&lt;/blockquote>
+&lt;pre>&lt;code>git checkout master # 切换到master分支
+git branch -d dev # 删除本地dev分支
+&lt;/code>&lt;/pre>&lt;h4 id="progitpdf">progit.pdf&lt;/h4>
+&lt;p>书籍格式和语言：中文、英文、PDF、ePub
+下载地址：http://git-scm.com/book&lt;/p>
+&lt;p>&lt;a href="https://www.zhihu.com/question/21995370/answer/19975870">转载&lt;/a>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/git/">git</category></item><item><title>ss-redir 的 iptables 配置(透明代理)</title><link>https://blog.wxchat.xyz/posts/ss-redir-%E7%9A%84-iptables-%E9%85%8D%E7%BD%AE-%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/ss-redir-%E7%9A%84-iptables-%E9%85%8D%E7%BD%AE-%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86/</guid><pubDate>Wed, 09 Mar 2016 08:22:01 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>透明代理指对客户端透明，客户端不需要进行任何设置就使用了网管设置的代理规则
+创建&lt;/p>
+&lt;/blockquote>
+&lt;pre>&lt;code>/etc/ss-redir.json 本地监听 1080 运行ss-redir -v -c /etc/ss-redir.json
+&lt;/code>&lt;/pre>&lt;h3 id="nat表配置脚本">NAT表配置脚本&lt;/h3>
+&lt;p>基本配置&lt;/p>
+&lt;pre>&lt;code>iptables -t nat -N SHADOWSOCKS
+# 在 nat 表中创建新链
+iptables -t nat -A SHADOWSOCKS -p tcp --dport 23596 -j RETURN
+# 23596 是 ss 代理服务器的端口，即远程 shadowsocks 服务器提供服务的端口，如果你有多个 ip 可用,但端口一致，就设置这个
+iptables -t nat -A SHADOWSOCKS -d 123.456.789.111 -j RETURN
+# 123.456.789.111 是 ss 代理服务器的 ip, 如果你只有一个 ss服务器的 ip，却能选择不同端口,就设置此条
+iptables -t nat -A SHADOWSOCKS -d 0.0.0.0/8 -j RETURN
+iptables -t nat -A SHADOWSOCKS -d 10.0.0.0/8 -j RETURN
+iptables -t nat -A SHADOWSOCKS -d 127.0.0.0/8 -j RETURN
+iptables -t nat -A SHADOWSOCKS -d 169.254.0.0/16 -j RETURN
+iptables -t nat -A SHADOWSOCKS -d 172.16.0.0/12 -j RETURN
+iptables -t nat -A SHADOWSOCKS -d 192.168.0.0/16 -j RETURN
+iptables -t nat -A SHADOWSOCKS -d 224.0.0.0/4 -j RETURN
+iptables -t nat -A SHADOWSOCKS -d 240.0.0.0/4 -j RETURN
+iptables -t nat -A SHADOWSOCKS -p tcp -j REDIRECT --to-ports 1080
+# 1080 是 ss-redir 的监听端口,ss-local 和 ss-redir 的监听端口不同,配置文件不同
+&lt;/code>&lt;/pre>&lt;p>最后是应用上面的规则,将OUTPUT出去的tcp流量全部经过SOCKS链&lt;/p>
+&lt;pre>&lt;code>
+#如果是在openwrt上实现透明代理的话,使用下面被注释了的规则
+iptables -t nat -I PREROUTING -p tcp -j SHADOWSOCKS
+# 在 PREROUTING 链前插入 SHADOWSOCKS 链,使其生效
+在个人电脑上使用以下配置
+iptables -t nat -A OUTPUT -p tcp -j SHADOWSOCKS
+&lt;/code>&lt;/pre>&lt;h3 id="如果要过滤国内流量可以">如果要过滤国内流量可以&lt;/h3>
+&lt;p>列表太长了就不列出来了！&lt;/p>
+&lt;h3 id="清除自定义规则">清除自定义规则&lt;/h3>
+&lt;p>清空整个链 iptables -F 链名,比如:&lt;/p>
+&lt;pre>&lt;code>iptables -t nat -F SHADOWSOCKS
+&lt;/code>&lt;/pre>&lt;p>删除指定的用户自定义链 iptables -X 链名 比如:&lt;/p>
+&lt;pre>&lt;code>iptables -t nat -X SHADOWSOCKS
+&lt;/code>&lt;/pre>&lt;p>从所选链中删除规则 iptables -D 链名 规则详情 比如:&lt;/p>
+&lt;pre>&lt;code>iptables -t nat -D SHADOWSOCKS -d 223.223.192.0/255.255.240.0 -j RETURN
+&lt;/code>&lt;/pre>&lt;h3 id="解决dns污染的问题">解决DNS污染的问题&lt;/h3>
+&lt;pre>&lt;code>$ sudo pacman -S archlinuxcn/dnsmasq-china-list-git
+$ sudo dnsmasq-update-china-list 114
+####脚本如下：
+#!/bin/bash
+case &amp;quot;$1&amp;quot; in
+114)
+DNS=114.114.114.114
+;;
+ali)
+DNS=223.5.5.5
+;;
+cnnic)
+DNS=1.2.4.8
+;;
+baidu)
+DNS=180.76.76.76
+;;
+google)
+DNS=8.8.8.8
+;;
+*)
+DNS=$1
+esac
+sed -i &amp;quot;s|^\(server.*\)/[^/]*$|\1/$DNS|&amp;quot; /etc/dnsmasq.d/accelerated-domains.china.conf
+&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/iptables/">iptables</category><category domain="https://blog.wxchat.xyz/tags/shadowsocks/">shadowsocks</category></item><item><title>Linux系统挂载NTFS移动硬盘</title><link>https://blog.wxchat.xyz/posts/linux%E7%B3%BB%E7%BB%9F%E6%8C%82%E8%BD%BDntfs%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux%E7%B3%BB%E7%BB%9F%E6%8C%82%E8%BD%BDntfs%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98/</guid><pubDate>Tue, 08 Mar 2016 02:19:36 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>工作中，同事之间拷贝数据的时候，由于我用的linux系统无法识别同事的NTFS移动硬盘，这才网上查了一下，原来还得安装一个软件，以下是&lt;a href="http://www.cnblogs.com/kerrycode/archive/2013/04/01/2993701.html">转载&lt;/a>的文章,记录一下。&lt;/p>
+&lt;/blockquote>
+&lt;hr>
+&lt;p>有时候做大数据量迁移时，为了快速迁移大数据，有可能在Linux服务器上临时挂载NTFS格式的移动硬盘， 一般情况下，Linux是识别不了NTFS格式移动硬盘的（需要重编译Linux核心才能，加挂NTFS分区），这时候为了能让Linux服务器能够识别NTFS的移动硬盘，就必须安装ntfs-3g（Third Generation Read/Write NTFS Driver）的包。&lt;/p>
+&lt;hr>
+&lt;p>NTFS-3G介绍
+NTFS-3G是一个开源项目，NTFS-3G是为Linux, Android, Mac OS X, FreeBSD, NetBSD, OpenSolaris, QNX, Haiku,和其他操作系统提供的一个稳定的，功能齐全，读写NTFS的驱动程序的。它提供了安全处理Windows XP，Windows Server 2003，Windows 2000，Windows Vista，Windows Server 2008和Windows 7操作系统下的NTFS文件系统。&lt;/p>
+&lt;p>NTFS-3g是一个开源软件，它支持在Linux下面读写NTFS格式的分区。它非常的快速，同时也很安全。它支持Windows 2000、XP、2003和Vista，并且支持所有的符合POSIX标准的磁盘操作。 ntfs-3g的目的是为了持续的发展，各硬件平台和操作系统的用户需要可靠的互通与支持ntfs的驱动，ntfs-3g可以提供可信任的、功能丰富的高性能解决方案。经过了12年多的发展，ntfs-3g已经逐渐稳定；&lt;/p>
+&lt;blockquote>
+&lt;p>资料介绍&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>官方网址：http://www.tuxera.com/，&lt;/li>
+&lt;li>文档手册：http://www.tuxera.com/community/ntfs-3g-manual/&lt;/li>
+&lt;li>下载地址：http://www.tuxera.com/community/ntfs-3g-download/&lt;/li>
+&lt;/ul>
+&lt;h3 id="安装">安装&lt;/h3>
+&lt;h4 id="解压安装ntfs-3g">解压安装NTFS-3G。&lt;/h4>
+&lt;pre>&lt;code class="language-　" data-lang="　">tar -xvzf ntfs-3g_ntfsprogs-2012.1.15.tgz　　
+cd ntfs-3g_ntfsprogs-2012.1.15
+　　./configure
+　　make
+　　make install
+&lt;/code>&lt;/pre>&lt;p>&lt;em>如果没有报错，提示安装成功，下面就可以用ntfs-3g来实现对NTFS分区的读写了&lt;/em>&lt;/p>
+&lt;h3 id="配置">配置&lt;/h3>
+&lt;h4 id="配置挂载ntfs格式的移动硬盘">配置挂载NTFS格式的移动硬盘&lt;/h4>
+&lt;h5 id="首先得到ntfs分区的信息">首先得到NTFS分区的信息&lt;/h5>
+&lt;pre>&lt;code>$ sudo fdisk -l | grep NTFS
+/dev/sdc1 * 1 244 1955776+ 7 HPFS/NTFS
+&lt;/code>&lt;/pre>&lt;h5 id="设置挂载点用如下命令实现挂载">设置挂载点，用如下命令实现挂载&lt;/h5>
+&lt;pre>&lt;code>mount -t ntfs-3g &amp;lt;NTFS Partition&amp;gt; &amp;lt;Mount Point&amp;gt;
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>例如得到的NTFS分区信息为/dev/sdc1，挂载点设置在/mnt/usb下:&lt;/p>
+&lt;/blockquote>
+&lt;pre>&lt;code>$ mount -t ntfs-3g /dev/sdc1 /mnt/usb
+########## 或者直接用 #######
+$ ntfs-3g ntfs-3g /dev/sdc1 /mnt/usb
+&lt;/code>&lt;/pre>&lt;h4 id="如果想实现开机自动挂载可以在etcfstab里面添加如下格式语句">如果想实现开机自动挂载，可以在/etc/fstab里面添加如下格式语句&lt;/h4>
+&lt;pre>&lt;code>&amp;lt;NTFS Partition&amp;gt; &amp;lt;Mount Point&amp;gt; ntfs-3g silent,umask=0,locale=zh_CN.utf8 0 0
+&lt;/code>&lt;/pre>&lt;p>==这样可以实现NTFS分区里中文文件名的显示。 ==&lt;/p>
+&lt;p>　　&lt;/p>
+&lt;h3 id="卸载分区">卸载分区&lt;/h3>
+&lt;pre>&lt;code>$ umount &amp;lt;NTFS Partition&amp;gt; 　　
+##### 或者 #####
+$ umount &amp;lt;Mount Point&amp;gt;
+&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/ntfs/">ntfs</category></item><item><title>Linux gentoo U盘安装指南</title><link>https://blog.wxchat.xyz/posts/linux-gentoo-u%E7%9B%98%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-gentoo-u%E7%9B%98%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/</guid><pubDate>Sat, 05 Mar 2016 01:43:55 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>再一次捣鼓gentoo,还是遇到了相当多的麻烦，这里把安装的方法重新在blog里整理一下，跟着官方安装步骤一点点来。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="准备安装之前">准备安装之前&lt;/h2>
+&lt;h3 id="下载gentoo所需的引导镜像和系统文件压缩包">下载gentoo所需的引导镜像和系统文件压缩包&lt;/h3>
+&lt;p>下载地址：
+&lt;a href="https://www.gentoo.org/downloads/">https://www.gentoo.org/downloads/&lt;/a>&lt;/p>
+&lt;p>主要文件：&lt;/p>
+&lt;ul>
+&lt;li>install-amd64-minimal-20160303.iso&lt;/li>
+&lt;li>portage-latest.tar.bz2&lt;/li>
+&lt;li>stage3-amd64-20160303.tar.bz2&lt;/li>
+&lt;/ul>
+&lt;pre>&lt;code>$ mkdir gentoo/ &amp;amp;&amp;amp; cd gentoo/
+$ wget -c # http://mirrors.163.com/gentoo/releases/amd64/autobuilds/20160303/install-amd64-minimal-20160303.iso
+$ wget -c http://mirrors.163.com/gentoo/snapshots/portage-latest.tar.bz2
+$ wget -c http://mirrors.163.com/gentoo/releases/amd64/autobuilds/20160303/stage3-amd64-20160303.tar.bz2
+&lt;/code>&lt;/pre>&lt;h3 id="u盘准备">U盘准备&lt;/h3>
+&lt;p>插入U盘，查看U盘设备名,不需求挂载&lt;/p>
+&lt;pre>&lt;code>$ lsblk
+$ sudo dd if=install-amd64-minimal-20160303.iso of=/dev/sdb
+&lt;/code>&lt;/pre>&lt;p>这样，就制作好了U盘启动了，把U盘插入要安装的机子，配置BIOS通过U盘启动，就可以进入光盘引导的临时系统。&lt;/p>
+&lt;h2 id="开始安装">开始安装&lt;/h2>
+&lt;h3 id="配置临时系统">配置临时系统&lt;/h3>
+&lt;blockquote>
+&lt;p>安装gentoo最主要是先把网络配置好，这里我安装的时候遇到了个非常郁闷的问题，就是，公司的个别网段限制下载，导致我在配置网络的时候浪费了不少时间，所以最好先确认一下，你所在的网段是否可以使用wget下载文件。&lt;/p>
+&lt;/blockquote>
+&lt;h4 id="配置ip">配置IP&lt;/h4>
+&lt;p>通常启动U盘临时系统应该可以dhcp分配到一个ip,但是我因为是公司的网络，所以最好手动配置一下&lt;/p>
+&lt;pre>&lt;code># ip addr add 192.168.3.155/24 dev enp0s25
+# ip route add default via 192.168.3.1 dev enp0s25
+# echo &amp;quot;192.168.1.1&amp;quot; &amp;gt; /etc/resolv.conf
+&lt;/code>&lt;/pre>&lt;h4 id="配置ssh链接">配置ssh链接&lt;/h4>
+&lt;p>为了方便，最好远程链接到临时系统下，那么就得配置sshd服务。&lt;/p>
+&lt;p>==Tip: 最新的sshd服务器默认限制root登陆，需要修改一下/etc/ssh/sshd_config
+配置PermitRootLogin 为 yes==&lt;/p>
+&lt;pre>&lt;code># /etc/init.d/sshd start
+# passwd root ####配置root用户密码
+&lt;/code>&lt;/pre>&lt;p>以上，我们就可以到本机，使用ssh远程登陆这个U盘挂启的临时系统了&lt;/p>
+&lt;h3 id="安装到硬盘上">安装到硬盘上&lt;/h3>
+&lt;h4 id="系统分区fdisk">系统分区fdisk&lt;/h4>
+&lt;pre>&lt;code># fdisk -l
+Device Boot Start End Sectors Size Id Type
+/dev/sda1 2048 6143 4096 2M ef EFI (FAT-12/16/32)
+/dev/sda2 6144 268287 262144 128M 83 Linux
+/dev/sda3 268288 17045503 16777216 8G 82 Linux swap / Solaris
+/dev/sda4 17045504 937703087 920657584 439G 5 Extended
+/dev/sda5 17047552 226762751 209715200 100G 83 Linux
+/dev/sda6 226764800 937703087 710938288 339G 83 Linux
+# fdisk /dev/sda
+&lt;/code>&lt;/pre>&lt;p>使用fdisk分区以前有详细的说明过，在这里就不再说了。不懂的，请写看一下这个
+&lt;a href="https://www.hcaijin.com/shu-mei-pai-an-zhuang-gentoo-linux/">树莓派安装Gentoo Linux&lt;/a> 1.1.3 节&lt;/p>
+&lt;p>也可以参照 &lt;a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks">官方分区方案&lt;/a>&lt;/p>
+&lt;h4 id="重新读取sda分区表">重新读取sda分区表:&lt;/h4>
+&lt;pre>&lt;code># partx -a /dev/sda
+&lt;/code>&lt;/pre>&lt;h4 id="格式化分区为文件系统">格式化分区为文件系统&lt;/h4>
+&lt;pre>&lt;code># mkfs.ext2 /dev/sda2
+# mkfs.ext4 /dev/sda5
+# mkfs.ext4 /dev/sda6
+&lt;/code>&lt;/pre>&lt;h4 id="格式化swap分区并激活">格式化swap分区并激活&lt;/h4>
+&lt;pre>&lt;code># mkswap /dev/sda3
+# swapon /dev/sda3
+&lt;/code>&lt;/pre>&lt;h4 id="创建系统临时挂载点">创建系统临时挂载点&lt;/h4>
+&lt;pre>&lt;code># mount /dev/sda5 /mnt/gentoo
+# mkdir -p /mnt/gentoo/{boot,home,}
+# mount /dev/sda2 /mnt/gentoo/boot
+# mount /dev/sda6 /mnt/gentoo/home
+&lt;/code>&lt;/pre>&lt;h3 id="设定日期和时间">设定日期和时间&lt;/h3>
+&lt;p>安装Gentoo之前，请确保日期和时间是否正确设置。错误配置的时钟可能会产生各种奇怪的错误！==主要==！！！&lt;/p>
+&lt;p>要验证当前日期和时间，运行日期：&lt;/p>
+&lt;pre>&lt;code># date
+Sat Mar 5 16:26:08 UTC 2016
+&lt;/code>&lt;/pre>&lt;p>如果时间不对，请使用 &lt;code>MMDDhhmmYYYY&lt;/code> 这样的格式配置一下日期和时间&lt;/p>
+&lt;pre>&lt;code>date 030516262016
+&lt;/code>&lt;/pre>&lt;h3 id="下载和解压相关包">下载和解压相关包&lt;/h3>
+&lt;h4 id="使用临时系统自带的links下载stage3和portage">使用临时系统自带的links下载stage3和portage&lt;/h4>
+&lt;p>==Tip: 如果前面已经在本机下载过了可以跳过这一步==&lt;/p>
+&lt;pre>&lt;code># links https://www.gentoo.org/downloads/mirrors/
+&lt;/code>&lt;/pre>&lt;p>或者配置代理下载：&lt;/p>
+&lt;pre>&lt;code># links -http-proxy proxy.server.com:8080 https://www.gentoo.org/downloads/mirrors/
+&lt;/code>&lt;/pre>&lt;h4 id="效验下载的文件">效验下载的文件&lt;/h4>
+&lt;p>效验下载的文件是否完整，打开 .DIGESTS(.asc) 相关文件对比sha512加密的是否一至。&lt;/p>
+&lt;pre>&lt;code># openssl dgst -r -sha512 stage3-amd64-20160303.tar.bz2
+&lt;/code>&lt;/pre>&lt;h4 id="解压stage3和portage">解压stage3和portage&lt;/h4>
+&lt;p>把下载好的stage3和portage放到/mnt/gentoo目录下，进入目录解压：&lt;/p>
+&lt;pre>&lt;code># cd /mnt/gentoo/
+# tar xvjpf stage3-*.tar.bz2 --xattrs
+&lt;/code>&lt;/pre>&lt;p>==注: stage3解压的文件是Gentoo的目录结构，所以要解压到临时的系统目录下,即/mnt/gentoo，方便后面进行chroot==&lt;/p>
+&lt;p>下面解压portage，这个解压需要一点时间。&lt;/p>
+&lt;pre>&lt;code># tar jxvf portage-latest.tar.bz2 -C /mnt/gentoo/usr
+&lt;/code>&lt;/pre>&lt;p>==注: portage-latest.tar.bz2解压的文件为系统软件目录结构,需要解压到/mnt/gentoo/usr目录下==&lt;/p>
+&lt;h3 id="安装基本gentoo系统">安装基本gentoo系统&lt;/h3>
+&lt;h4 id="配置portage-make-参数">配置portage make 参数&lt;/h4>
+&lt;ul>
+&lt;li>配置了MAKEOPTS为cpu核心数+1&lt;/li>
+&lt;li>配置就近的镜像地址 GETOO_MIRRORS 为厦门大学的镜像源&lt;/li>
+&lt;/ul>
+&lt;pre>&lt;code># cat /etc/mnt/gentoo/etc/portage/make.conf
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-05_16-53-28.png" alt="">&lt;/p>
+&lt;p>==Tip: 参数配置文件/mnt/gentoo/usr/share/portage/config/make.conf.example ==&lt;/p>
+&lt;h4 id="配置主要gentoo的存储库">配置主要Gentoo的存储库&lt;/h4>
+&lt;pre>&lt;code># mkdir /mnt/gentoo/etc/portage/repos.conf
+# cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-05_17-00-14.png" alt="">&lt;/p>
+&lt;h4 id="配置chroot环境的dns">配置chroot环境的dns&lt;/h4>
+&lt;p>只需要把livecd临时环境的resolv.conf复制到要chroot的目录里就好了，如下：&lt;/p>
+&lt;pre>&lt;code>cp -L /etc/resolv.conf /mnt/gentoo/etc/
+&lt;/code>&lt;/pre>&lt;h4 id="挂载必要的文件系统">挂载必要的文件系统&lt;/h4>
+&lt;pre>&lt;code># mount -t proc proc /mnt/gentoo/proc
+# mount --rbind /sys /mnt/gentoo/sys
+# mount --make-rslave /mnt/gentoo/sys
+# mount --rbind /dev /mnt/gentoo/dev
+# mount --make-rslave /mnt/gentoo/dev
+&lt;/code>&lt;/pre>&lt;h4 id="chroot-到新的环境">Chroot 到新的环境&lt;/h4>
+&lt;pre>&lt;code># chroot /mnt/gentoo /bin/bash
+# source /etc/profile
+# export PS1=&amp;quot;(chroot) $PS1&amp;quot;
+&lt;/code>&lt;/pre>&lt;h4 id="设置主机名">设置主机名&lt;/h4>
+&lt;p>这不是必要的步骤&lt;/p>
+&lt;pre>&lt;code># sed -i -e 's/hostname.*/hostname=&amp;quot;hcj.com&amp;quot;/' /etc/conf.d/hostname
+# echo &amp;quot;127.0.0.1 hcj.com localhost&amp;quot; &amp;gt; /etc/hosts
+&lt;/code>&lt;/pre>&lt;h4 id="配置portage">配置Portage&lt;/h4>
+&lt;pre>&lt;code># emerge-webrsync
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-05_17-33-41.png" alt="">&lt;/p>
+&lt;p>我在配置这个的时候报错了，按照提示删除tmestamp.x文件即可。&lt;/p>
+&lt;p>更新portage树&lt;/p>
+&lt;pre>&lt;code># emerge --sync
+&lt;/code>&lt;/pre>&lt;p>小内存的情况使用静默模式&lt;/p>
+&lt;pre>&lt;code># emerge --sync --quiet
+&lt;/code>&lt;/pre>&lt;h4 id="配置系统环境">配置系统环境&lt;/h4>
+&lt;p>查看更新的通知&lt;/p>
+&lt;pre>&lt;code># eselect news list
+# eselect news read
+&lt;/code>&lt;/pre>&lt;p>选择适合的配置&lt;/p>
+&lt;pre>&lt;code># eselect profile list
+# eselect profile set 3 ### 我选择的是桌面环境系统
+&lt;/code>&lt;/pre>&lt;p>更新timezone&lt;/p>
+&lt;pre>&lt;code># ls /usr/share/zoneinfo
+# echo &amp;quot;Asia/Shanghai&amp;quot; &amp;gt; /etc/timezone
+# emerge --config sys-libs/timezone-data
+&lt;/code>&lt;/pre>&lt;p>配置语言编码&lt;/p>
+&lt;pre>&lt;code># nano -w /etc/locale.gen
+# locale-gen
+# eselect locale list
+Available targets for the LANG variable:
+[1] C
+[2] POSIX
+[3] en_US
+[4] en_US.iso88591
+[5] en_US.utf8
+[6] zh_CN.utf8 *
+[ ] (free form)
+# eselect locale set 6
+&lt;/code>&lt;/pre>&lt;p>更新一下环境&lt;/p>
+&lt;pre>&lt;code># env-update &amp;amp;&amp;amp; source /etc/profile &amp;amp;&amp;amp; export PS1=&amp;quot;(chroot) $PS1&amp;quot;
+&lt;/code>&lt;/pre>&lt;h3 id="内核配置">内核配置&lt;/h3>
+&lt;h4 id="安装内核源码">安装内核源码&lt;/h4>
+&lt;pre>&lt;code># emerge --ask sys-kernel/gentoo-sources
+# genkernel --install initramfs
+&lt;/code>&lt;/pre>&lt;h4 id="配置fstab">配置fstab&lt;/h4>
+&lt;pre>&lt;code>cat /etc/fstab
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/03/--_2016-03-05_20-12-09.png" alt="">&lt;/p>
+&lt;h4 id="编译内核文件">编译内核文件&lt;/h4>
+&lt;pre>&lt;code>genkernel all
+&lt;/code>&lt;/pre>&lt;p>完成以上就可以在/boot目录下看到内核文件&lt;/p>
+&lt;pre>&lt;code># ls /boot/kernel* /boot/initramfs*
+&lt;/code>&lt;/pre>&lt;p>==注: genkernel编译出的内核支持几乎所有硬件，编译需要一段很长的时间，一旦genkernel运行完成，一个包括全部模块和initrd的内核将被建立。在后面配置引导程序时我们将会用到这个内核和initrd。请记下内核和initrd的名字，因为您将在配置引导程序的时候用到他们。initrd将会在启动真正的系统前自动识别硬件（如同安装光盘一样）==&lt;/p>
+&lt;h3 id="安装其他软件">安装其他软件&lt;/h3>
+&lt;pre>&lt;code># emerge vim ### 安装vim 方便后面的配置
+# emerge syslog-ng ### 安装系统日志管理
+# rc-update add sysklogd default
+# emerge logrotate ### 日志格式化工具
+# emerge --ask sys-process/cronie ### 计划任务系统
+# rc-update add cronie default
+# emerge --ask net-misc/dhcpcd
+# emerge --ask sys-apps/mlocate ### 快速索引
+&lt;/code>&lt;/pre>&lt;h4 id="配置网络">配置网络&lt;/h4>
+&lt;pre>&lt;code># cat /etc/conf.d/net
+config_enp0s25=&amp;quot;192.168.3.155 netmask 255.255.255.0 brd 192.168.3.255&amp;quot;
+routes_enp0s25=&amp;quot;default via 192.168.3.1&amp;quot;
+# ln -s /etc/init.d/net.lo /etc/init.d/net.enp0s25
+# rc-update add net.enp0s25 default
+# rc-update add sshd default
+&lt;/code>&lt;/pre>&lt;h4 id="配置root用户密码">配置root用户密码&lt;/h4>
+&lt;p>这是必要的，为了从新系统能进入&lt;/p>
+&lt;pre>&lt;code># passwd
+&lt;/code>&lt;/pre>&lt;h3 id="配置grub引导程序">配置GRUB引导程序&lt;/h3>
+&lt;pre>&lt;code># emerge --ask sys-boot/grub:2
+# grub2-install /dev/sda
+# grub2-mkconfig -o /boot/grub/grub.cfg
+&lt;/code>&lt;/pre>&lt;h3 id="最后重启一下系统">最后重启一下系统&lt;/h3>
+&lt;pre>&lt;code># exit
+# cd
+# umount -l /mnt/gentoo/dev{/shm,/pts,}
+# umount /mnt/gentoo{/boot,/sys,/proc,}
+# reboot
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="https://gentoo-handbook.lugons.org/doc/zh_cn/handbook/handbook-amd64.xml">引用&lt;/a>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/gentoo/">Gentoo</category></item><item><title>ssh 服务端配置</title><link>https://blog.wxchat.xyz/posts/ssh-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/ssh-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE/</guid><pubDate>Sat, 05 Mar 2016 01:32:03 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>最近，在使用U盘安装gentoo配置sshd服务端碰到了问题，记录一下ssh服务端的配置文件。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="关于-ssh-server-的整体设定包含使用的-port-啦以及使用的密码演算方式">关于 SSH Server 的整体设定，包含使用的 port 啦，以及使用的密码演算方式&lt;/h2>
+&lt;pre>&lt;code>Port 22　　　　　　　　　　# SSH 预设使用 22 这个 port，您也可以使用多的 port ！
+　　　　　　　　　　　　　 # 亦即重复使用 port 这个设定项目即可！
+Protocol 2,1　　　　　　　 # 选择的 SSH 协议版本，可以是 1 也可以是 2 ，
+　　　　　　　　　　　　　 # 如果要同时支持两者，就必须要使用 2,1 这个分隔了！
+#ListenAddress 0.0.0.0　　 # 监听的主机适配卡！举个例子来说，如果您有两个 IP，
+　　　　　　　　　　　　　 # 分别是 192.168.0.100 及 192.168.2.20 ，那么只想要
+　　　　　　　　　　　　　 # 开放 192.168.0.100 时，就可以写如同下面的样式：
+ListenAddress 192.168.0.100 # 只监听来自 192.168.0.100 这个 IP 的SSH联机。
+　　　　　　　　　　　　　　　　　　 # 如果不使用设定的话，则预设所有接口均接受 SSH
+PidFile /var/run/sshd.pid　　　　　　# 可以放置 SSHD 这个 PID 的档案！左列为默认值
+LoginGraceTime 600　　　　 # 当使用者连上 SSH server 之后，会出现输入密码的画面，
+　　　　　　　　　　　　　 # 在该画面中，在多久时间内没有成功连上 SSH server ，
+　　　　　　　　　　　　　 # 就断线！时间为秒！
+Compression yes　　　　　　# 是否可以使用压缩指令？当然可以啰！
+&lt;/code>&lt;/pre>&lt;p>　&lt;/p>
+&lt;h2 id="说明主机的-private-key-放置的档案预设使用下面的档案即可">说明主机的 Private Key 放置的档案，预设使用下面的档案即可！&lt;/h2>
+&lt;pre>&lt;code>HostKey /etc/ssh/ssh_host_key　　　　# SSH version 1 使用的私钥
+HostKey /etc/ssh/ssh_host_rsa_key　　# SSH version 2 使用的 RSA 私钥
+HostKey /etc/ssh/ssh_host_dsa_key　　# SSH version 2 使用的 DSA 私钥
+&lt;/code>&lt;/pre>&lt;h3 id="关于-version-1-的一些设定">关于 version 1 的一些设定！&lt;/h3>
+&lt;pre>&lt;code>KeyRegenerationInterval 3600　 　　　# 由前面联机的说明可以知道， version 1 会使用
+　　　　　　　　　　　　　　　　　　 # server 的 Public Key ，那么如果这个 Public
+　　　　　　　　　　　　　　　　　　 # Key 被偷的话，岂不完蛋？所以需要每隔一段时间
+　　　　　　　　　　　　　　　　　　 # 来重新建立一次！这里的时间为秒！
+ServerKeyBits 768 　　　　　　　　　 # 没错！这个就是 Server key 的长度！
+&lt;/code>&lt;/pre>&lt;h2 id="关于登录文件的讯息数据放置与-daemon-的名称">关于登录文件的讯息数据放置与 daemon 的名称！&lt;/h2>
+&lt;pre>&lt;code>SyslogFacility AUTH　　　　　　　　　# 当有人使用 SSH 登入系统的时候，SSH会记录资
+　　　　　　　　　　　　　　　　　　 # 讯，这个信息要记录在什么 daemon name 底下？
+　　　　　　　　　　　　　　　　　　 # 预设是以 AUTH 来设定的，即是 /var/log/secure
+　　　　　　　　　　　　　　　　　　 # 里面！什么？忘记了！回到 Linux 基础去翻一下
+　　　　　　　　　　　　　　　　　　 # 其它可用的 daemon name 为：DAEMON,USER,AUTH,
+　　　　　　　　　　　　　　　　　　 # LOCAL0,LOCAL1,LOCAL2,LOCAL3,LOCAL4,LOCAL5,
+LogLevel INFO　　　　　　　　　　　　# 登录记录的等级！嘿嘿！任何讯息！
+　　　　　　　　　　　　　　　　　　 # 同样的，忘记了就回去参考！
+&lt;/code>&lt;/pre>&lt;h2 id="安全设定项目极重要">安全设定项目！极重要！&lt;/h2>
+&lt;h3 id="登入设定部分">登入设定部分&lt;/h3>
+&lt;pre>&lt;code>PermitRootLogin no　　 　　# 是否允许 root 登入！最新版本的sshd配置默认是不允许使用root登陆的，如果要使用root登陆，要把no 改为 yes 。
+UserLogin no　　　　　　　 # 在 SSH 底下本来就不接受 login 这个程序的登入！
+StrictModes yes　　　　　　# 当使用者的 host key 改变之后，Server 就不接受联机，
+　　　　　　　　　　　　　 # 可以抵挡部分的木马程序！
+RSAAuthentication yes　　 # 是否使用纯的 RSA 认证！？仅针对 version 1 ！
+PubkeyAuthentication yes　 # 是否允许 Public Key ？当然允许啦！只有 version 2
+AuthorizedKeysFile .ssh/authorized_keys
+　　　　　　　　　　　　　 # 上面这个在设定若要使用不需要密码登入的账号时，那么那个
+　　　　　　　　　　　　　 # 账号的存放档案所在档名！
+&lt;/code>&lt;/pre>&lt;h3 id="认证部分">认证部分&lt;/h3>
+&lt;pre>&lt;code>RhostsAuthentication no　　# 本机系统不止使用 .rhosts ，因为仅使用 .rhosts 太
+　　　　　　　　　　　　　 # 不安全了，所以这里一定要设定为 no ！
+IgnoreRhosts yes　　　　　 # 是否取消使用 ~/.ssh/.rhosts 来做为认证！当然是！
+RhostsRSAAuthentication no # 这个选项是专门给 version 1 用的，使用 rhosts 档案在
+　　　　　　　　　　　　　 # /etc/hosts.equiv配合 RSA 演算方式来进行认证！不要使用
+HostbasedAuthentication no # 这个项目与上面的项目类似，不过是给 version 2 使用的！
+IgnoreUserKnownHosts no　　# 是否忽略家目录内的 ~/.ssh/known_hosts 这个档案所记录
+　　　　　　　　　　　　　 # 的主机内容？当然不要忽略，所以这里就是 no 啦！
+PasswordAuthentication yes # 密码验证当然是需要的！所以这里写 yes 啰！
+PermitEmptyPasswords no　　# 若上面那一项如果设定为 yes 的话，这一项就最好设定
+　　　　　　　　　　　　　 # 为 no ，这个项目在是否允许以空的密码登入！当然不许！
+ChallengeResponseAuthentication yes # 挑战任何的密码认证！所以，任何 login.conf
+　　　　　　　　　　　　　　　　　　 # 规定的认证方式，均可适用！
+#PAMAuthenticationViaKbdInt yes # 是否启用其它的 PAM 模块！启用这个模块将会
+　　　　　　　　　　　　　　　　　　 # 导致 PasswordAuthentication 设定失效！
+&lt;/code>&lt;/pre>&lt;p>　&lt;/p>
+&lt;h3 id="与-kerberos-有关的参数设定因为我们没有-kerberos-主机所以底下不用设定">与 Kerberos 有关的参数设定！因为我们没有 Kerberos 主机，所以底下不用设定！&lt;/h3>
+&lt;pre>&lt;code>#KerberosAuthentication no
+#KerberosOrLocalPasswd yes
+#KerberosTicketCleanup yes
+#KerberosTgtPassing no
+&lt;/code>&lt;/pre>&lt;h3 id="底下是有关在-x-window-底下使用的相关设定">底下是有关在 X-Window 底下使用的相关设定！&lt;/h3>
+&lt;pre>&lt;code>X11Forwarding yes
+#X11DisplayOffset 10
+#X11UseLocalhost yes
+&lt;/code>&lt;/pre>&lt;h3 id="登入后的项目">登入后的项目：&lt;/h3>
+&lt;pre>&lt;code>PrintMotd no # 登入后是否显示出一些信息呢？例如上次登入的时间、地点等
+　　　　　　　　　　　　　# 等，预设是 yes ，但是，如果为了安全，可以考虑改为 no ！
+PrintLastLog yes　　　　　# 显示上次登入的信息！可以啊！预设也是 yes ！
+KeepAlive yes　　　　　　 # 一般而言，如果设定这项目的话，那么 SSH Server 会传送
+　　　　　　　　　　　　　# KeepAlive 的讯息给 Client 端，以确保两者的联机正常！
+　　　　　　　　　　　　　# 在这个情况下，任何一端死掉后， SSH 可以立刻知道！而不会
+　　　　　　　　　　　　　# 有僵尸程序的发生！
+UsePrivilegeSeparation yes # 使用者的权限设定项目！就设定为 yes 吧！
+MaxStartups 10　　　　　　# 同时允许几个尚未登入的联机画面？当我们连上 SSH ，
+　　　　　　　　　　　　　# 但是尚未输入密码时，这个时候就是我们所谓的联机画面啦！
+　　　　　　　　　　　　　# 在这个联机画面中，为了保护主机，所以需要设定最大值，
+　　　　　　　　　　　　　# 预设最多十个联机画面，而已经建立联机的不计算在这十个当中
+&lt;/code>&lt;/pre>&lt;h3 id="关于使用者抵挡的设定项目">关于使用者抵挡的设定项目：&lt;/h3>
+&lt;pre>&lt;code>DenyUsers *　　　　　　　 # 设定受抵挡的使用者名称，如果是全部的使用者，那就是全部
+　　　　　　　　　　　　　# 挡吧！若是部分使用者，可以将该账号填入！例如下列！
+DenyUsers test
+DenyGroups test　　　　　 # 与 DenyUsers 相同！仅抵挡几个群组而已！
+&lt;/code>&lt;/pre>&lt;h2 id="关于-sftp-服务的设定项目">关于 SFTP 服务的设定项目！&lt;/h2>
+&lt;pre>&lt;code>Subsystem sftp /usr/lib/ssh/sftp-server
+&lt;/code>&lt;/pre>&lt;p>　
+基本上，在您的系统中，『除非有必要，否则请不要更改 /etc/ssh/sshd_config 这个档案的设定值！』因为预设的情况下通常都是最严密的 SSH 保护了，因此，可以不需要更动他！上面的说明仅是在让大家了解每个细项的一些基本内容而已！需要注意的是最后一项，如果您不愿意开放 SFTP 的话，将最后一行批注掉即可！
+　&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/sshd/">sshd</category><category domain="https://blog.wxchat.xyz/tags/ssh/">ssh</category></item><item><title>10个很有用的 Git 命令（转）</title><link>https://blog.wxchat.xyz/posts/10%E4%B8%AA%E5%BE%88%E6%9C%89%E7%94%A8%E7%9A%84-git-%E5%91%BD%E4%BB%A4%E8%BD%AC/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/10%E4%B8%AA%E5%BE%88%E6%9C%89%E7%94%A8%E7%9A%84-git-%E5%91%BD%E4%BB%A4%E8%BD%AC/</guid><pubDate>Tue, 16 Feb 2016 21:24:34 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>&lt;a href="http://blog.sae.sina.com.cn/archives/3003">转自&lt;/a>&lt;a href="http://blog.sae.sina.com.cn/archives/3003">http://blog.sae.sina.com.cn/archives/3003&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>这里给大家分享一些很有用的 Git 命令，其中很多用法你可能都不知道，无论你是工作在团队环境中或在您的个人项目中，这些命令将对你帮助很大，让你可以更加高效的进行项目开发，更轻松愉快的工作和生活。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="导出最后一次提交修改过的文件">导出最后一次提交修改过的文件&lt;/h3>
+&lt;p>我一直在使用这个命令定期进行发送给其他人进行审查/整合。这条命令将把近期提交的修改过的文件导出到一个zip文件。&lt;/p>
+&lt;pre>&lt;code>git archive -o ../updated.zip HEAD $(git diff --name-only HEAD^)
+&lt;/code>&lt;/pre>&lt;h3 id="导出两次提交之间修改过的文件">导出两次提交之间修改过的文件&lt;/h3>
+&lt;p>同样，如果你需要导出两次提交之间修改过的文件，你可以用这一个。&lt;/p>
+&lt;pre>&lt;code>git archive -o ../latest.zip NEW_COMMIT_ID_HERE $(git diff --name-only
+OLD_COMMIT_ID_HERE NEW_COMMIT_ID_HERE)
+&lt;/code>&lt;/pre>&lt;h3 id="克隆一个特定的远程分支">克隆一个特定的远程分支&lt;/h3>
+&lt;p>如果你想从远程仓库克隆特定的一个分支，这条命令对你很有用：&lt;/p>
+&lt;pre>&lt;code>git init
+git remote add -t BRANCH_NAME_HERE -f origin REMOTE_REPO_URL_PATH_HERE
+git checkout BRANCH_NAME_HERE
+&lt;/code>&lt;/pre>&lt;h3 id="从无关的本地仓库应用补丁">从无关的本地仓库应用补丁&lt;/h3>
+&lt;p>如果您需要申请从提交的一些其他不相关的创库到本地存储库，这里是一个快捷的方式：&lt;/p>
+&lt;pre>&lt;code>git --git-dir=PATH_TO_OTHER_REPOSITORY_HERE/.git format-patch -k -1 --stdout
+COMMIT_HASH_ID_HERE| git am -3 -k
+&lt;/code>&lt;/pre>&lt;h3 id="检查您的分支变化是是否其他分支的一部分">检查您的分支变化是是否其他分支的一部分&lt;/h3>
+&lt;p>cherry 命令可以让你检查你的分支的变化是否存在于其他一些分支之中。它会显示在当前分支相对于给定的分支的修改，用+或-标志提示提交合并与否。+表示不存在，而-表示存在于给定的分支。&lt;/p>
+&lt;pre>&lt;code>git cherry -v OTHER_BRANCH_NAME_HERE
+#For example: to check with master branch
+git cherry -v master
+&lt;/code>&lt;/pre>&lt;h3 id="启动一个无历史的新分支">启动一个无历史的新分支&lt;/h3>
+&lt;p>有时候，你需要启动一个新的分支，同时想摒弃历史信息，例如，你想将代码放在公共领域（开源）又不想共享历史信息。&lt;/p>
+&lt;pre>&lt;code>git checkout --orphan NEW_BRANCH_NAME_HERE
+&lt;/code>&lt;/pre>&lt;h3 id="在不切换分支的情况下从其它分支检出文件">在不切换分支的情况下从其它分支检出文件&lt;/h3>
+&lt;p>下面的命令是从其他分支获取文件，而不用切换分支。&lt;/p>
+&lt;pre>&lt;code>git checkout BRANCH_NAME_HERE -- PATH_TO_FILE_IN_BRANCH_HERE
+&lt;/code>&lt;/pre>&lt;h3 id="忽略跟踪文件的修改">忽略跟踪文件的修改&lt;/h3>
+&lt;p>如果你工作在一个团队，他们都是工作在同一个分支，你需要频繁的读取/合并文件。但是有时复位了你环境的特定配置，你必须在合并后每一次都再改一下。使用这个命令，你可以忽略更改特定的文件：&lt;/p>
+&lt;pre>&lt;code>git update-index --assume-unchanged PATH_TO_FILE_HERE
+&lt;/code>&lt;/pre>&lt;h3 id="检查提交的修改是否发布版本的一部分">检查提交的修改是否发布版本的一部分&lt;/h3>
+&lt;p>这个 name-rev 命令可以告诉你提交相对于最新发布版本的位置。利用这一点，你可以检查你的变化是否发布版本的一部分。&lt;/p>
+&lt;pre>&lt;code>git name-rev --name-only COMMIT_HASH_HERE
+&lt;/code>&lt;/pre>&lt;h3 id="使用-pull-rebase-操作替代-merge">使用 pull rebase 操作替代 merge&lt;/h3>
+&lt;p>如果你工作的团队正工作在同一个分支，那么你所要做的获取/合并或经常拉取。分支合并的 git 记录与合并提交时提示功能分支被并入主干。但在多个团队成员工作的同一分支的情况下，经常合并导致在日志中多个合并的消息引起混乱。所以你可以使用 pull rebase，以保持历史信息清除了无用合并的消息。&lt;/p>
+&lt;pre>&lt;code>git config branch.BRANCH_NAME_HERE.rebase true
+&lt;/code>&lt;/pre>&lt;p>此外，您可以配置一个特定的分支总是衍合：&lt;/p>
+&lt;pre>&lt;code>git pull --rebase
+&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/git/">git</category></item><item><title>Linux服务器配置java web服务总结</title><link>https://blog.wxchat.xyz/posts/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AEjava-web%E6%9C%8D%E5%8A%A1%E6%80%BB%E7%BB%93/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AEjava-web%E6%9C%8D%E5%8A%A1%E6%80%BB%E7%BB%93/</guid><pubDate>Mon, 25 Jan 2016 03:14:16 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>首先，以前是写php的，从未接触java的开发。最近公司项目重组，被安排说去做java开发，而且要快速上手,安排培训，可是，培训的都是windows下的IDE开发配置。没办法，Google呗。这样就有了这篇东拼西奏的文章，也有自己的一些经验总结，没少碰壁，不过这里还是感谢同事的帮忙，让我对java的运行有了清晰的认识。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="了解java包运行原理">了解java包运行原理&lt;/h2>
+&lt;p>java是编译型语言，自然少不了打包，链接，当然这些都可以用maven来管理。用maven打包，链接生成的安装包就是可以直接使用java来运行的，我们这里主要说web服务的配置，所以少不了tomcat。使用tomcat来运行web项目包，就可以在浏览器端访问，java应用服务，这就是大致的过程。&lt;/p>
+&lt;h2 id="安装必要的软件包">安装必要的软件包&lt;/h2>
+&lt;h3 id="安装jdk至于安装哪个版本视情况而定">安装jdk,至于安装哪个版本，视情况而定&lt;/h3>
+&lt;pre>&lt;code>sudo pacman -S jdk8-openjdk
+&lt;/code>&lt;/pre>&lt;p>可以搜索一下&lt;/p>
+&lt;pre>&lt;code>pacman -Ss java
+&lt;/code>&lt;/pre>&lt;h3 id="安装maven">安装maven&lt;/h3>
+&lt;pre>&lt;code>sudo pacman -S maven
+&lt;/code>&lt;/pre>&lt;p>以上安装成功了以后，我们就可以使用&lt;code>java, mvn &lt;/code> 的命令了，由于我们使用的是pacman安装方法，必要的环境变量都已经默认好了，可以不需要配置，具体可以看我以前写的 &lt;a href="http://www.hcaijin.com/java-xue-xi-bi-ji/">Java 学习笔记1&lt;/a>&lt;/p>
+&lt;h3 id="安装tomcat同样的源里也有多个版本视情况安装相应的版本">安装tomcat，同样的源里也有多个版本，视情况安装相应的版本&lt;/h3>
+&lt;pre>&lt;code>sudo pacman -S tomcat7
+&lt;/code>&lt;/pre>&lt;h2 id="tomcat-主要配置详解">tomcat 主要配置详解&lt;/h2>
+&lt;h3 id="主要目录功能">主要目录功能&lt;/h3>
+&lt;p>默认情況 tomcat7 安装路径为 /usr/share/tomcat7，这里罗列一下主要目录的作用：&lt;/p>
+&lt;ul>
+&lt;li>/usr/share/tomcat7： 程序的主目录，也是变量 $CATALINA_HOME 所指向的位置，在单 tomcat 实例的情況下，也是变量 $CATALINA_BASE 所指向的位置。&lt;/li>
+&lt;li>/usr/share/tomcat7/bin： 程序的执行脚本目录&lt;/li>
+&lt;li>conf -&amp;gt; /etc/tomcat7： 配置文档目录，存放主要是配置信息。&lt;/li>
+&lt;li>lib -&amp;gt; /usr/share/java/tomcat7： 共用jar包目录，这些包即给 tomcat 使用，也能给 web 应用程序所调用。&lt;/li>
+&lt;li>logs -&amp;gt; /var/log/tomcat7： 日志目录，对于查找错误以及查看访问记录很有用。&lt;/li>
+&lt;li>webapps -&amp;gt; /var/lib/tomcat7/webapps： 默认的 web 应用程序目录，tomcat7 自带了几个示例应用。&lt;/li>
+&lt;/ul>
+&lt;h3 id="启动关闭脚本">启动关闭脚本&lt;/h3>
+&lt;p>我们进入程序执行脚本目录&lt;/p>
+&lt;pre>&lt;code>cd /usr/share/tomcat7
+sudo ./startup.sh
+&lt;/code>&lt;/pre>&lt;p>以上，tomcat服务就启动成功了，可以在浏览器中访问&lt;code>http://localhost:8080&lt;/code> ，如果看到 tomcat 猫即说明服务已经安装成功并且能正常运行了。&lt;/p>
+&lt;pre>&lt;code>sudo ./shutdown.sh
+&lt;/code>&lt;/pre>&lt;p>这两个脚本都是通过调用 catalina.sh 来执行的，具体自己看脚本代码。&lt;/p>
+&lt;h2 id="实例讲解tomcat启动java应用">实例讲解tomcat启动java应用&lt;/h2>
+&lt;p>这里我犯了一个错误，总以为java应用之前总得有个相互调用的关系，没想到其实都已经在maven打包，安装到本地就行了，web应用配置好相应的pom.xml就可以调用maven打包，安装好的后台java应用。&lt;/p>
+&lt;p>然后，我们开始说明代码部署过程：&lt;/p>
+&lt;pre>&lt;code>cd /data/app/ ###进入工程主目录
+git clone git@erp:ecerp-saas ###从erp服务器拉代码到本地
+cd /data/app/ecerp-saas/ ###进入代码目录
+git pull ###这个是同步服务器代码
+cd /data/app/ecerp-saas/Sources/ecerp ###进到主要工程目录
+mvn clean install -Dmaven.test.skip=true ###打包安装工程目录下相应的程序，这样就会编译好应用到本地用户目录下`~/.m2/`
+&lt;/code>&lt;/pre>&lt;p>在web目录下新建目录erp.hcj.com&lt;/p>
+&lt;pre>&lt;code>cd /data/www/
+mkdir erp.hcj.com/
+cd erp.hcj.com/
+&lt;/code>&lt;/pre>&lt;p>web应用java环境变量配置&lt;/p>
+&lt;pre>&lt;code>touch webconfig
+cat webconfig
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-25_17-47-28.png" alt="">&lt;/p>
+&lt;pre>&lt;code>source /data/www/erp.hcj.com/webconfig ###使用环境变量生效
+&lt;/code>&lt;/pre>&lt;p>创建备份目录,当然这个不是必要的。&lt;/p>
+&lt;pre>&lt;code>theday=$(date +%Y%m%d)
+releaseDir=&amp;quot;/data/deployment/packages/${theday}&amp;quot;
+if [ ! -e $releaseDir ]
+then
+mkdir -p $releaseDir
+fi
+&lt;/code>&lt;/pre>&lt;p>然后，我们就可以到java应用安装目录下找packagename，把它移到备份目录&lt;/p>
+&lt;pre>&lt;code>cp -fp `find ~/.m2/repository/ -name $packagename` $releaseDir/$packagename
+&lt;/code>&lt;/pre>&lt;pre>&lt;code>#备份数据
+bktime=$(date +%y%m%d%H%M)
+backupdir=&amp;quot;/data/deployment/release-backup/$bktime/$(basename $srvdir)&amp;quot;
+if [ ! -e $backupdir ]
+then
+mkdir -p $backupdir
+fi
+rootdir=/data/www/erp.hcj.com/webroot
+for files in $(ls $rootdir)
+do
+if [ $files == &amp;quot;upload&amp;quot; ]; then
+¦ echo $files not backup
+else
+¦ /bin/cp -rfp $rootdir/$files $backupdir
+fi
+done
+&lt;/code>&lt;/pre>&lt;pre>&lt;code>### 删除旧应用
+rm -rf $rootdir/WEB-INF/*
+### 解压文件，在web主目录下生成webroot
+packagefile=$releaseDir/$packagename
+tar zxf $packagefile -C /data/www/erp.hcj.com
+### 修改webroot的权限
+chown tomcat7.tomcat7 -R /data/www/erp.hcj.com/webroot
+&lt;/code>&lt;/pre>&lt;p>以上就基本是把java打包的应用程序，安装到了tomcat的webroot目录下了，但是要使这个应用启动成功，还需要配置多实例的tomcat的配置文件server.xml&lt;/p>
+&lt;pre>&lt;code>cd /data/www/erp.hcj.com
+mkdir -p tomcat/{conf,logs,tmp,work,}
+cp -r /etc/tomcat7/* tomcat/conf/
+sudo chown -R tomcat7.tomcat7 tomcat/
+vi server.xml
+&lt;/code>&lt;/pre>&lt;p>主要修改如下配置：
+&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-25_18-48-50.png" alt="">
+&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-25_18-49-35.png" alt="">&lt;/p>
+&lt;pre>&lt;code>### 设置tomcat环境变量
+export CATALINA_HOME=&amp;quot;/usr/share/tomcat7&amp;quot;
+export DUSER=&amp;quot;tomcat7&amp;quot;
+export CATALINA_BASE=&amp;quot;/data/www/erp.hcj.com/tomcat&amp;quot;
+export CATALINA_PID=&amp;quot;$CATALINA_BASE/tomcat.pid&amp;quot;
+export CATALINA_TMPDIR=&amp;quot;$CATALINA_BASE/tmp&amp;quot;
+export CATALINA_OUT=&amp;quot;$CATALINA_BASE/logs/catalina.out&amp;quot;
+export LOCKFILE=&amp;quot;$CATALINA_BASE/tomcat.lock&amp;quot;
+&lt;/code>&lt;/pre>&lt;pre>&lt;code>### 启动服务
+/bin/bash $CATALINA_HOME/bin/startup.sh
+### 关闭服务
+/bin/bash $CATALINA_HOME/bin/shutdown.sh
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="http://ufaw0116.erufa.com/wordpress/?p=1254&amp;amp;ckattempt=3">参考&lt;/a>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/java/">java</category><category domain="https://blog.wxchat.xyz/tags/tomcat/">tomcat</category></item><item><title>Java 学习笔记2</title><link>https://blog.wxchat.xyz/posts/java-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/java-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</guid><pubDate>Wed, 20 Jan 2016 06:43:02 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="镜像配置">镜像配置&lt;/h2>
+&lt;p>由于maven的中央仓库位于国外，速度慢，也有可能其他原因无法访问，我们可以使用国内的镜像仓库。配置镜像仓库需要修改conf/settings.xml,打开该文件修改mirror标签如下：&lt;/p>
+&lt;pre>&lt;code>vim /opt/maven/conf/settings.xml
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-20_19-42-35.png" alt="">&lt;/p>
+&lt;p>maven仓库默认是放在用户目录的.m2隐藏目录下的 ~/.m2/repository/ 。如果需要将仓库迁移到其他目录，修改conf/settings.xml
+&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-20_19-52-27.png" alt="">&lt;/p>
+&lt;h2 id="环境变量">环境变量&lt;/h2>
+&lt;p>配置maven编译程序过程中可用的最大，最下内存，防止内存溢出。&lt;/p>
+&lt;pre>&lt;code>MAVEN_OPTS=&amp;quot;-Xms256m -Xmx512m&amp;quot;
+export MAVEN_OPTS
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>配置web服务一定要记得设置compressableMimeType
+&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-25_16-02-11.png" alt="">&lt;/p>
+&lt;/blockquote></description><category domain="https://blog.wxchat.xyz/tags/java/">java</category><category domain="https://blog.wxchat.xyz/tags/maven/">maven</category></item><item><title>Java 学习笔记1</title><link>https://blog.wxchat.xyz/posts/java-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/java-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</guid><pubDate>Wed, 20 Jan 2016 04:08:30 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>以下是在Arch Linux下操作，其他发行版或操作系统不适用。Maven这个词可以翻译为“知识的积累”，也可以翻译为“专 家”或“内行”。本文将介绍Maven这一跨平台的项目管理工具。作为Apache组织中的一个颇为成功的开源项目，Maven主要服务于基于Java平台的项目构建、依赖管理和项目信息管理。无论是小型的开源类库项目，还是大型的企业级应用；无论是传统的瀑布式开发，还是流行的敏捷模式，Maven都能大显身手。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="安装java环境">安装java环境&lt;/h2>
+&lt;pre>&lt;code>sudo pacman -S jdk8-openjdk
+&lt;/code>&lt;/pre>&lt;p>安装好以后可以使用如下命令：&lt;/p>
+&lt;pre>&lt;code>archlinux-java help ##查看帮助
+archlinux-java status ##java环境状态 使用的版本信息
+&lt;/code>&lt;/pre>&lt;h2 id="安装maven">安装maven&lt;/h2>
+&lt;h3 id="配置">配置&lt;/h3>
+&lt;p>maven 会被安装到&lt;code>/opt/maven/ &lt;/code> 目录下&lt;/p>
+&lt;pre>&lt;code>sudo pacman -S maven
+&lt;/code>&lt;/pre>&lt;p>修改环境变量&lt;/p>
+&lt;pre>&lt;code>vi ~/.bashrc
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-20_17-18-19.png" alt="">&lt;/p>
+&lt;p>这样以后，就可以使用 mvn 命令来管理java项目，如下：&lt;/p>
+&lt;pre>&lt;code>cd /data/gyapp/ ###进入工作目录。(自定义)
+mvn archetype:generate -DgroupId=helloworld -DartifactId=helloworld
+-Dpackage=helloworld -Dversion=1.0-SNAPSHO
+&lt;/code>&lt;/pre>&lt;h3 id="打包程序">打包程序&lt;/h3>
+&lt;p>执行了上面的命令会在当前工作目录生成helloworld项目目录。
+&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-20_17-24-58.png" alt="">&lt;/p>
+&lt;pre>&lt;code>cd helloworld/
+mvn package
+&lt;/code>&lt;/pre>&lt;p>这个时候， maven 在 helloworld 下面建立了一个新的目录 target/ ，构建打包后的 jar 文件 helloworld-1.0-SNAPSHOT.jar 就存放在这个目录下。编译后的 class 文件放在 target/classes/ 目录下面，测试 class 文件放在 target/test-classes/ 目录下面。&lt;/p>
+&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-20_17-26-01.png" alt="">&lt;/p>
+&lt;h3 id="运行">运行&lt;/h3>
+&lt;p>为了验证我们的程序能运行，执行下面的命令：&lt;/p>
+&lt;pre>&lt;code>java -cp target/helloworld-1.0-SNAPSHOT.jar helloworld.App
+&lt;/code>&lt;/pre>&lt;p>输出源代码里的程序，显示 HelloWorld! 表示成功。&lt;/p>
+&lt;h2 id="第一个程序">第一个程序&lt;/h2>
+&lt;pre>&lt;code>vi HelloWorld.java
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-20_17-10-49.png" alt="">
+编译源代码，在当前目录生成HelloWorld.class,然后执行&lt;code>java HelloWorld&lt;/code>&lt;/p>
+&lt;pre>&lt;code>javac HelloWorld.java
+java HelloWorld
+&lt;/code>&lt;/pre>&lt;h2 id="重要">重要&lt;/h2>
+&lt;p>转换ppk成linux下面支持的密钥文件&lt;/p>
+&lt;pre>&lt;code>sudo pacman -S putty
+&lt;/code>&lt;/pre>&lt;p>安装putty以后，可以使用如下命令：&lt;/p>
+&lt;pre>&lt;code>puttygen git_cesi.ppk -o id_rsa.pub -O public-openssh
+puttygen git_cesi.ppk -o id_rsa -O private-openssh
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="http://www.oracle.com/technetwork/cn/community/java/apache-maven-getting-started-1-406235-zhs.html">参考&lt;/a>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/java/">java</category><category domain="https://blog.wxchat.xyz/tags/maven/">maven</category></item><item><title>Linux 终端下发送消息命令</title><link>https://blog.wxchat.xyz/posts/linux-%E7%BB%88%E7%AB%AF%E4%B8%8B%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E5%91%BD%E4%BB%A4/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-%E7%BB%88%E7%AB%AF%E4%B8%8B%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E5%91%BD%E4%BB%A4/</guid><pubDate>Wed, 13 Jan 2016 03:58:19 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>这里分享一个Linux服务器终端下发送消息的命令。由于平时工作中，必免不了与运维同事之间的信息交换，想到我们都是链的同一台服务器，这样就可以通过以下两个命令来发送消息。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="给指定用户发送消息">给指定用户发送消息&lt;/h3>
+&lt;p>首先，可使用w或who命令查看当前登录的用户信息；
+然后，使用write命令将信息发送到用户的终端上，用法步骤如下：&lt;/p>
+&lt;pre>&lt;code>$ w
+17:17:53 up 19 days, 57 min, 3 users, load average: 0.00, 0.01, 0.05
+USER TTY LOGIN@ IDLE JCPU PCPU WHAT
+zq pts/0 14:19 1:50 0.08s 0.02s -bash
+hcaijin pts/1 10:30 55.00s 7:05 0.23s -bash
+hcaijin pts/2 17:17 1.00s 0.01s 0.00s w
+$ write hcaijin pts/1
+Test send message.
+&lt;/code>&lt;/pre>&lt;p>然后使用hcaijin账号登录，且tty号为pts/1的登录用户终端会收到如下消息：&lt;/p>
+&lt;pre>&lt;code>Message from hcaijin@hcj-arch on pts/2 at 17:18 ...
+Test send message.
+&lt;/code>&lt;/pre>&lt;h3 id="给当前所有用户发送消息">给当前所有用户发送消息&lt;/h3>
+&lt;p>给当前登录所有用户发送消息（需要root权限），使用wall（write all的缩写）&lt;/p>
+&lt;pre>&lt;code>$ wall 'Test send message to all user.'
+&lt;/code>&lt;/pre>&lt;p>执行wall命令，所有登录到该机器的控制台(console)界面上都会收到如上所示的消息。&lt;/p>
+&lt;p>&lt;a href="http://www.cnblogs.com/gaojun/p/3387427.html">引用&lt;/a>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/write/">write</category><category domain="https://blog.wxchat.xyz/tags/wall/">wall</category></item><item><title>Linux 下终端里好玩与危险命令汇总</title><link>https://blog.wxchat.xyz/posts/linux-%E4%B8%8B%E7%BB%88%E7%AB%AF%E9%87%8C%E5%A5%BD%E7%8E%A9%E4%B8%8E%E5%8D%B1%E9%99%A9%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-%E4%B8%8B%E7%BB%88%E7%AB%AF%E9%87%8C%E5%A5%BD%E7%8E%A9%E4%B8%8E%E5%8D%B1%E9%99%A9%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB/</guid><pubDate>Tue, 12 Jan 2016 04:30:57 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>最近发现Linux 终端里有很多好玩的命令，这里记录一下，以免下次还得搜索 - -&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="一些好玩的命令">一些好玩的命令&lt;/h2>
+&lt;h3 id="sl">sl&lt;/h3>
+&lt;pre>&lt;code>$ sl
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/2012111315222236.jpg" alt="">&lt;/p>
+&lt;h3 id="telnet">telnet&lt;/h3>
+&lt;pre>&lt;code>$ telnet towel.blinkenlights.nl
+&lt;/code>&lt;/pre>&lt;h3 id="rev">rev&lt;/h3>
+&lt;pre>&lt;code>$ rev
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-39-09.png" alt="">&lt;/p>
+&lt;h3 id="factor">factor&lt;/h3>
+&lt;pre>&lt;code>$ factor
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-32-16.png" alt="">&lt;/p>
+&lt;h3 id="cowsay">cowsay&lt;/h3>
+&lt;pre>&lt;code>$ cowsay / cowthink
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-41-06.png" alt="">&lt;/p>
+&lt;h3 id="fortune">fortune&lt;/h3>
+&lt;pre>&lt;code>$ fortune / fortune-zh
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-42-01.png" alt="">&lt;/p>
+&lt;h3 id="cmatrix">cmatrix&lt;/h3>
+&lt;pre>&lt;code>$ cmatrix
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-42-45.png" alt="">&lt;/p>
+&lt;h3 id="yes">yes&lt;/h3>
+&lt;pre>&lt;code>$ yes
+$ yes I love China
+&lt;/code>&lt;/pre>&lt;p>yes 是一个非常有趣又有用的命令，尤其对于脚本编写和系统管理员来说，它可以自动地生成预先定义的响应或者将其传到终端。&lt;/p>
+&lt;h3 id="toilet">toilet&lt;/h3>
+&lt;pre>&lt;code>$ toilet hcaijin.com
+$ toilet -f mono12 -F metal hcaijin.com
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-47-46.png" alt="">&lt;/p>
+&lt;h3 id="while">while&lt;/h3>
+&lt;pre>&lt;code>$ while true; do echo &amp;quot;$(date '+%D %T' | toilet -f term -F border --gay)&amp;quot;; sleep 1; done
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-49-59.png" alt="">&lt;/p>
+&lt;h3 id="espeak">espeak&lt;/h3>
+&lt;pre>&lt;code>$ espeak &amp;quot;Tecmint is a very good website dedicated to Foss Community&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>将你的多媒体音箱的音量调到最大，然后在将这个命令复制到你的终端，来看看你听到上帝的声音时的反应吧。&lt;/p>
+&lt;h3 id="for">for&lt;/h3>
+&lt;pre>&lt;code>for i in {1..19}; do for j in $(seq 1 $i); do echo -ne $i x $j=$((i*j))\\t;done; echo;done
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-44-41.png" alt="">&lt;/p>
+&lt;h3 id="banner">banner&lt;/h3>
+&lt;pre>&lt;code>$ banner hcaijin.com
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_10-58-38.png" alt="">&lt;/p>
+&lt;h2 id="终端下有很多危险的命令千万小心执行">终端下有很多危险的命令，千万小心执行。&lt;/h2>
+&lt;h3 id="fork炸弹">fork炸弹&lt;/h3>
+&lt;p>这个命令其实是一个fork炸弹，它会以指数级的自乘，直到所有的系统资源都被利用了或者系统挂起&lt;/p>
+&lt;pre>&lt;code>$ :(){ :|:&amp;amp; }:
+&lt;/code>&lt;/pre>&lt;h3 id="rm">rm&lt;/h3>
+&lt;p>删除命令，一定要小心不可用root用户执行以下&lt;/p>
+&lt;pre>&lt;code>$ rm -rf /
+&lt;/code>&lt;/pre>&lt;h3 id="dd">dd&lt;/h3>
+&lt;p>很有用的命令，但是要注意不要运行以下命令，其实我也没有运行过- -&lt;/p>
+&lt;pre>&lt;code>$ dd if=/dev/zero of=/dev/mem
+&lt;/code>&lt;/pre>&lt;h3 id="shred">shred&lt;/h3>
+&lt;p>覆盖文件让它不能再读，传说中的文件粉碎机&lt;/p>
+&lt;pre>&lt;code>$ shred --help
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2016/01/--_2016-01-13_11-03-46.png" alt="">&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/bash/">bash</category></item><item><title>Arch Linux 降级安装软件包与禁止自动升级指定软件包</title><link>https://blog.wxchat.xyz/posts/arch-linux-%E9%99%8D%E7%BA%A7%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6%E5%8C%85%E4%B8%8E%E7%A6%81%E6%AD%A2%E8%87%AA%E5%8A%A8%E5%8D%87%E7%BA%A7%E6%8C%87%E5%AE%9A%E8%BD%AF%E4%BB%B6%E5%8C%85/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/arch-linux-%E9%99%8D%E7%BA%A7%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6%E5%8C%85%E4%B8%8E%E7%A6%81%E6%AD%A2%E8%87%AA%E5%8A%A8%E5%8D%87%E7%BA%A7%E6%8C%87%E5%AE%9A%E8%BD%AF%E4%BB%B6%E5%8C%85/</guid><pubDate>Fri, 08 Jan 2016 00:21:47 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>由于 Arch Linux 采用滚动更新，最近php7.0也开始更新升级了，但是这会导致目前项目还是采用的mysql模块的程序来说真真是不适合升级的。所以，这里在网上查了一下降级安装的方法分享这里。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="通过备份软件包降级安装">通过备份软件包降级安装&lt;/h3>
+&lt;p>找到相应的php备份包，如果你最近没有执行 pacman -Scc以清空包缓存的话，应该在那儿)&lt;/p>
+&lt;pre>&lt;code>ls -l /var/cache/pacman/pkg | grep php
+&lt;/code>&lt;/pre>&lt;p>如果在，你可以执行pacman -U ×××.pkg.tar.gz来安装旧版本。如果pacman提示文件冲突的话，你可以通过加上-f参数以强制执行，即&lt;/p>
+&lt;pre>&lt;code>pacman -U --force ×××.pkg.tar.gz
+&lt;/code>&lt;/pre>&lt;p>这个过程会移除现有的包，仔细的计算所有依赖的改变，然后安装你选择的旧版本的软件包以及合适的依赖。&lt;/p>
+&lt;h3 id="通过downgrade程序来自动化降级安装软件包">通过downgrade程序来自动化降级安装软件包&lt;/h3>
+&lt;p>&lt;em>在 AUR 中有一个包叫做downgradeAUR。它是一个简单的 Bash 脚本，它会从你的缓存中寻找旧版本的包，如果没有的话它会搜索 A.R.M.。你可以选择一个旧包来安装。它基本上自动化了上面所述的过程。查看 downgrade &amp;ndash;help 获取使用方法的信息。&lt;/em>&lt;/p>
+&lt;pre>&lt;code>sudo yaourt -S downgrade
+downgrade -s php ##搜索相关包版本
+downgrade php ##降级安装包
+&lt;/code>&lt;/pre>&lt;h3 id="如何恢复所有包到指定日期">如何恢复所有包到指定日期&lt;/h3>
+&lt;p>如果想恢复所有包到指定日期（比如2014年3月30日），你必须如下例所示编辑 /etc/pacman.conf，从而让 pacman 保持在这个时间点并且直接使用指定的服务器：&lt;/p>
+&lt;pre>&lt;code>[core]
+SigLevel = PackageRequired
+Server=http://ala.seblu.net/repos/2014/03/30/$repo/os/$arch
+[extra]
+SigLevel = PackageRequired
+Server=http://ala.seblu.net/repos/2014/03/30/$repo/os/$arch
+[community]
+SigLevel = PackageRequired
+Server=http://ala.seblu.net/repos/2014/03/30/$repo/os/$arch
+&lt;/code>&lt;/pre>&lt;p>或者如下例编辑 /etc/pacman.d/mirrorlist：&lt;/p>
+&lt;pre>&lt;code>##
+## Arch Linux repository mirrorlist
+## Generated on 2042-01-01
+##
+Server=http://ala.seblu.net/repos/2014/03/30/$repo/os/$arch
+&lt;/code>&lt;/pre>&lt;p>然后同步包数据库以强制降级：&lt;/p>
+&lt;pre>&lt;code># pacman -Syyuu
+&lt;/code>&lt;/pre>&lt;h3 id="禁止指定包自动升级的方法">禁止指定包自动升级的方法&lt;/h3>
+&lt;p>==注意: 如果你改变了操作系统的一个基本的组件包，你也许需要降级许多包。这些软件包可能在过程中被删除，需要手动一点一点的安装回来；同时，后续升级时要小心，不要重新安装不想要的软件包版本。==&lt;/p>
+&lt;pre>&lt;code>sudo vim /etc/rc.conf
+&lt;/code>&lt;/pre>&lt;p>添加行&lt;/p>
+&lt;p>IgnorePkg = php php-cgi php-gd&lt;/p>
+&lt;p>这样子,我们就可以禁止上面的三个包自动升级了.如果有其它的包想禁止,直接添加就可以了,记住分隔符要用空格哦.&lt;/p>
+&lt;p>&lt;a href="https://wiki.archlinux.org/index.php/Downgrading_packages_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">参考文档1&lt;/a>
+&lt;a href="https://wiki.archlinux.org/index.php/Arch_Linux_Archive_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">参考文档2&lt;/a>
+&lt;a href="http://www.nenew.net/arch-linux-downgrade-install-packages-prevent-packages-update.html">引用&lt;/a>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/archlinux/">archlinux</category><category domain="https://blog.wxchat.xyz/tags/pacman/">pacman</category></item><item><title>Linux 服务器上相关脚本日志</title><link>https://blog.wxchat.xyz/posts/linux-%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9B%B8%E5%85%B3%E8%84%9A%E6%9C%AC%E6%97%A5%E5%BF%97/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9B%B8%E5%85%B3%E8%84%9A%E6%9C%AC%E6%97%A5%E5%BF%97/</guid><pubDate>Thu, 19 Nov 2015 21:23:02 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>用如下命令查询出来结果中包含“ip地址=数量”的攻击者信息：&lt;/p>
+&lt;pre>&lt;code>cat /var/log/secure|awk '/Failed/{print $(NF-3)}'|sort|uniq -c|awk '{print $2&amp;quot;=&amp;quot;$1;}'
+&lt;/code>&lt;/pre>&lt;p>查看IP所在地：&lt;/p>
+&lt;pre>&lt;code>curl ipinfo.io/{IP}
+curl cip.cc/{IP}
+&lt;/code>&lt;/pre>&lt;p>随机生成密码：&lt;/p>
+&lt;pre>&lt;code>function randpw32(){ &amp;lt; /dev/urandom tr -dc '!@#$%^&amp;amp;*'_A-Z-a-z-0-9 | head -c${1:-32};echo; }
+function randpw16(){ &amp;lt; /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-16};echo; }
+&lt;/code>&lt;/pre>&lt;p>Chromium 开启代理：&lt;/p>
+&lt;pre>&lt;code>function secure_chromium {
+port=1080
+#使用以下两种配置都可以
+#export SOCKS_SERVER=localhost:$port
+#export SOCKS_VERSION=5
+#chromium &amp;amp;
+chromium --proxy-server=&amp;quot;socks://localhost:$port&amp;quot; &amp;amp;
+exit
+}
+&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/shell/">shell</category><category domain="https://blog.wxchat.xyz/tags/bash/">bash</category></item><item><title>Ghost博客手工修改管理员密码方法</title><link>https://blog.wxchat.xyz/posts/ghost%E5%8D%9A%E5%AE%A2%E6%89%8B%E5%B7%A5%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86%E5%91%98%E5%AF%86%E7%A0%81%E6%96%B9%E6%B3%95/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/ghost%E5%8D%9A%E5%AE%A2%E6%89%8B%E5%B7%A5%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86%E5%91%98%E5%AF%86%E7%A0%81%E6%96%B9%E6%B3%95/</guid><pubDate>Sun, 11 Oct 2015 13:40:18 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>今天修改Ghost密码，因为是粘贴复制，估计是粘贴到了其他字符，导致密码错误登陆后台失败。而且还因为登录尝试次数过多，造成用户被锁定，只能通过发送邮件找回密码，但是，我配置的Gmail邮箱被google限制使用收发邮件功能了应该，以后看一下具体的原因。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="查找sqlite数据库用户信息">查找sqlite数据库用户信息&lt;/h3>
+&lt;p>Ghost用的sqlite数据库，登陆到服务器，找到sqlite数据库，存放位置默认是在 Ghost 安装目录下的 content/data/ ，名称为ghost.db使用如下命令：&lt;/p>
+&lt;pre>&lt;code>$ cd /data/www/ghost/content/data/
+$ sudo sqlite3 ghost.db
+sqlite&amp;gt; .help ### 这里已经进到sqlite命令行模式下了，用&amp;quot;.help&amp;quot;查看帮助
+sqlite&amp;gt; .tables ### 列表所有的表
+sqlite&amp;gt; .schema ### 列表所有表的结构 这里我们主要看users表
+sqlite&amp;gt; selete * from users;
+&lt;/code>&lt;/pre>&lt;p>到这里就可以列出后台登陆的会员信息了，仔细看一下发现有个status字段的值应该是locked; password字段值是一串使用 &lt;a href="http://bcrypthashgenerator.apphb.com/">BCrypt Hash Generator&lt;/a> 生成的密钥。&lt;/p>
+&lt;h3 id="修改密码为新生成的密钥">修改密码为新生成的密钥&lt;/h3>
+&lt;p>// 更新密码 这里的密码为 admin&lt;/p>
+&lt;pre>&lt;code>sqlite&amp;gt; update users set password = &amp;quot;$2a$10$ahse9xU.Tr9MttVX4tO1zOER7odgDrQuJzgjZI4fm56x84c/2dGqq&amp;quot; where id = 1; ### 更新密码
+sqlite&amp;gt; update users set status = &amp;quot;active&amp;quot; where id = 1; ### 解锁用户
+sqlite&amp;gt; .quit
+&lt;/code>&lt;/pre>&lt;p>完成以上两步，就可以重新登录了。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/ghost/">ghost</category><category domain="https://blog.wxchat.xyz/tags/sqlite/">sqlite</category></item><item><title>树莓派安装Gentoo Linux</title><link>https://blog.wxchat.xyz/posts/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85gentoo-linux/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85gentoo-linux/</guid><pubDate>Thu, 24 Sep 2015 09:09:57 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="gentoo介绍">Gentoo介绍&lt;/h2>
+&lt;h3 id="gentoo的历史">Gentoo的历史&lt;/h3>
+&lt;pre>&lt;code> Gentoo Linux （原来被称为 Enoch Linux ) 是在1999年由Daniel Robbins 和一些开发人员开发的。目标就是创建一个没有预编译的二进制文件的Linux发行版并根据所在的硬件平台进行调整。中间因为Gentoo 缺少关键项目，没有自己的包管理系统，后面Robbins 受到FreeBSD包管理系统的启发，开发出了自己的包管理系统，被称为是portage。
+Gentoo没有二进制组件，它的包树中只包含源代码，这使它成为可以移植到其他架构上的理想的操作系统。当然，它的不足之处就是需要漫长的安装时间和大量的人工参与。不过，这不就是我们学习Linux的目的嘛。
+&lt;/code>&lt;/pre>
+&lt;h3 id="gentoo与其他发行版的异同">Gentoo与其他发行版的异同&lt;/h3>
+&lt;pre>&lt;code> Gentoo安装和大多数流行的Linux发行版很多不同的地方。虽然有自启动光盘，但是没有安装程序。安装Gentoo时，所有事情都是通过命令行手动操作的。没有配置向导也没有GUI工具。不过，它有一个非常有用的安装指南（安装使用手册）。
+与其他发行版相比，Gentoo的另外一个不同点在于它没有发行版本。Gentoo是一个元发行版。元发行版指的是它会一直更新下去。使用元发行版的好处在于你可以随时更新到最新的版本程序。缺点就是你将得到非常复杂的包版本，这个版本没有经过彻底的测试，这点与Arch（另一个Linux的发行版本）是一样的。
+Gentoo的处理包的方式是一大不同点。大多数发行版使用二进制包的形式来发布包。Gentoo中发布软件包的系统被称为portage。Gentoo的开发人员是受到FreeBSD的ports collection的启发，在port collection 中只有源代码和包含构建源代码的方法的小文件会发布给终端用户。这被称为源代码发布。Gentoo的portage系统是由一组文件组成的，这个文件被称为ebuild，必要的补丁文件是由Gentoo社区创建。Ebuild文件是由一个被称为emerge的工具来读取。
+这个文件仅仅运行标准的./configure、make和make install 工具。这意味着你想要运行在Gentoo系统中的每一个应用程序都需要从源代码进行编译。Gentoo的一切都是从源代码进行编译的，因此，这个发行版要负责GCC工具链中的代码修复工作，包括那些改进GCC的性能优化。源代码的发布除了给Linux社区整体带来益处，也为终端用户带来了巨大的好处。当你在Gentoo中安装一个包是，你将可以通过选项来指定哪些模块被安装，哪些不需要安装，这个用来标记的方法就是use。use标记在构建的配置阶段使用，它们可以设置你想要编译应用程序的哪些部分，这样可以为你提供一个快速简洁的轻量级系统。不过，当你发现一些应用程序需要依赖你前面剔出的功能时，那么你就得需要花费更多的时间重新编译程序才能使用这些功能。- -
+&lt;/code>&lt;/pre>
+&lt;h2 id="分区">分区&lt;/h2>
+&lt;p>我们是在树莓派上安装Gentoo，所以这里准备一个全新的SD卡，至少要有4GB。
+拿到SD卡以后，首先我们为SD卡创建分区。==这里，要提醒一下，读卡器上有一个开关可以控制SD卡的读写性。如果，开关按了也没用，把卡拿出来，插拔多几次，主要是有的读卡器接触点不好，我就是遇到这个问题，卡了很长时间。==&lt;/p>
+&lt;ul>
+&lt;li>引导分区，fat32格式&lt;/li>
+&lt;li>根分区，EXT4格式或者其他的Linux文件系统格式。&lt;/li>
+&lt;/ul>
+&lt;pre>&lt;code>$ fdisk -l
+Disk /dev/sda：298.1 GiB，320072933376 字节，625142448 个扇区
+单元：扇区 / 1 * 512 = 512 字节
+扇区大小(逻辑/物理)：512 字节 / 512 字节
+I/O 大小(最小/最佳)：512 字节 / 512 字节
+磁盘标签类型：dos
+磁盘标识符：0x86258625
+设备 启动 起点 末尾 扇区 大小 Id 类型
+/dev/sda1 * 63 62926604 62926542 30G 7 HPFS/NTFS/exFAT
+/dev/sda2 62926605 625137344 562210740 268.1G f W95 扩展 (LBA)
+/dev/sda5 272658432 272863231 204800 100M 83 Linux
+/dev/sda6 272865280 281253887 8388608 4G 83 Linux
+/dev/sda7 281255936 616800255 335544320 160G 83 Linux
+/dev/sda8 616802304 620996607 4194304 2G 83 Linux
+/dev/sda9 62928896 188758015 125829120 60G 7 HPFS/NTFS/exFAT
+/dev/sda10 188760064 209731583 20971520 10G 83 Linux
+分区表记录没有按磁盘顺序。
+Disk /dev/sdb：14.9 GiB，15931539456 字节，31116288 个扇区
+单元：扇区 / 1 * 512 = 512 字节
+扇区大小(逻辑/物理)：512 字节 / 512 字节
+I/O 大小(最小/最佳)：512 字节 / 512 字节
+磁盘标签类型：dos
+磁盘标识符：0x00000000
+设备 启动 起点 末尾 扇区 大小 Id 类型
+/dev/sdb1 2048 31116287 31114240 14.9G c W95 FAT32 (LBA)
+$ fdisk /dev/sdb
+欢迎使用 fdisk (util-linux 2.27)。
+更改将停留在内存中，直到您决定将更改写入磁盘。
+使用写入命令前请三思。
+命令(输入 m 获取帮助)：p
+Disk /dev/sdb：14.9 GiB，15931539456 字节，31116288 个扇区
+单元：扇区 / 1 * 512 = 512 字节
+扇区大小(逻辑/物理)：512 字节 / 512 字节
+I/O 大小(最小/最佳)：512 字节 / 512 字节
+磁盘标签类型：dos
+磁盘标识符：0x00000000
+设备 启动 起点 末尾 扇区 大小 Id 类型
+/dev/sdb1 2048 31116287 31114240 14.9G c W95 FAT32 (LBA)
+命令(输入 m 获取帮助)：d
+已选择分区 1
+分区 1 已删除。
+命令(输入 m 获取帮助)：
+命令(输入 m 获取帮助)：n
+分区类型
+p 主分区 (0个主分区，0个扩展分区，4空闲)
+e 扩展分区 (逻辑分区容器)
+选择 (默认 p)：p
+分区号 (1-4，默认 1)：
+第一个扇区 (2048-31116287，默认 2048)：
+上个扇区，+sectors 或 +size{K,M,G,T,P} (2048-31116287，默认 31116287)：+100M
+创建了一个新分区 1，类型为“Linux”，大小为 100 MiB。
+命令(输入 m 获取帮助)：n
+分区类型
+p 主分区 (1个主分区，0个扩展分区，3空闲)
+e 扩展分区 (逻辑分区容器)
+选择 (默认 p)：p
+分区号 (2-4，默认 2)：
+第一个扇区 (206848-31116287，默认 206848)：
+上个扇区，+sectors 或 +size{K,M,G,T,P} (206848-31116287，默认 31116287)：
+创建了一个新分区 2，类型为“Linux”，大小为 14.8 GiB。
+命令(输入 m 获取帮助)：p
+Disk /dev/sdb：14.9 GiB，15931539456 字节，31116288 个扇区
+单元：扇区 / 1 * 512 = 512 字节
+扇区大小(逻辑/物理)：512 字节 / 512 字节
+I/O 大小(最小/最佳)：512 字节 / 512 字节
+磁盘标签类型：dos
+磁盘标识符：0x00000000
+设备 启动 起点 末尾 扇区 大小 Id 类型
+/dev/sdb1 2048 206847 204800 100M 83 Linux
+/dev/sdb2 206848 31116287 30909440 14.8G 83 Linux
+命令(输入 m 获取帮助)：t
+分区号 (1,2，默认 2)：1
+分区类型(输入 L 列出所有类型)：c
+已将分区“Linux”的类型更改为“W95 FAT32 (LBA)”。
+命令(输入 m 获取帮助)：p
+Disk /dev/sdb：14.9 GiB，15931539456 字节，31116288 个扇区
+单元：扇区 / 1 * 512 = 512 字节
+扇区大小(逻辑/物理)：512 字节 / 512 字节
+I/O 大小(最小/最佳)：512 字节 / 512 字节
+磁盘标签类型：dos
+磁盘标识符：0x00000000
+设备 启动 起点 末尾 扇区 大小 Id 类型
+/dev/sdb1 2048 206847 204800 100M c W95 FAT32 (LBA)
+/dev/sdb2 206848 31116287 30909440 14.8G 83 Linux
+命令(输入 m 获取帮助)：w
+分区表已调整。
+将调用 ioctl() 来重新读分区表。
+正在同步磁盘。
+&lt;/code>&lt;/pre>&lt;p>接下来，将分区按照它们自己的文件系统格式进行格式化。&lt;/p>
+&lt;pre>&lt;code>$ mkfs /dev/sdb1
+mke2fs 1.42.12 (29-Aug-2014)
+/dev/sdb1 contains a ext2 file system
+last mounted on /mnt/cdrom/armv7 on Thu Sep 24 19:40:44 2015
+无论如何也要继续? (y,n) y
+Creating filesystem with 102400 1k blocks and 25688 inodes
+Filesystem UUID: 256e4119-5d49-4303-9ca2-a28638838ce6
+Superblock backups stored on blocks:
+8193, 24577, 40961, 57345, 73729
+Allocating group tables: 完成
+正在写入inode表: 完成
+Writing superblocks and filesystem accounting information: 完成
+$ mkfs.ext4 /dev/sdb2
+mke2fs 1.42.12 (29-Aug-2014)
+Creating filesystem with 3863680 4k blocks and 966656 inodes
+Filesystem UUID: a0a95364-389a-4c4d-b63e-e1e61ed4b6c3
+Superblock backups stored on blocks:
+32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208
+Allocating group tables: 完成
+正在写入inode表: 完成
+Creating journal (32768 blocks): 完成
+Writing superblocks and filesystem accounting information: 完成
+&lt;/code>&lt;/pre>&lt;p>现在，我们已经创建好了两个可以使用的文件系统。然后，我们把相应分区挂载到/mnt 目录下。&lt;/p>
+&lt;pre>&lt;code>$ mkdir -p /mnt/raspberry/
+$ mount /dev/sdb2 /mnt/raspberry #### 首先挂载根分区
+$ mkdir -p /mnt/raspberry/boot &amp;amp;&amp;amp; mount /dev/sdb1 /mnt/raspberry/boot ### 再挂载引导分区到根分区目录里的boot下。
+&lt;/code>&lt;/pre>&lt;p>这个引导分区和其他的树莓派引导分区类似。它包含基金会提供的固件、命令行参数、配置文件和内核。创建引导文件系统的第一步是从基金会的GitHub网站上获取固件文件：
+&lt;a href="https://github.com/raspberrypi/firmware/tree/master/boot">https://github.com/raspberrypi/firmware/tree/master/boot&lt;/a>&lt;/p>
+&lt;pre>&lt;code>$ cd /mnt/raspberry/boot
+$ wget https://github.com/raspberrypi/firmware/tree/master/boot/bootcode.bin
+$ wget https://github.com/raspberrypi/firmware/tree/master/boot/start.elf
+$ wget https://github.com/raspberrypi/firmware/tree/master/boot/fixup.dat
+&lt;/code>&lt;/pre>&lt;p>分别下载这三个文件就可以了。接下来，需要创建cmdline.txt 和 config.txt 两个文件。
+内容如下：&lt;/p>
+&lt;pre>&lt;code>$ cat cmdline.txt
+root=/dev/mmcblk0p2 rootdelay=2
+$ cat config.txt
+gpu_mem=32
+######完成以上步骤，用ls -l 看一下引导分区现在的文件。
+$ ls -l
+总用量 104
+-rw-r--r-- 1 root root 29026 9月 24 22:54 bootcode.bin
+-rw-r--r-- 1 root root 32 9月 24 22:59 cmdline.txt
+-rw-r--r-- 1 root root 11 9月 24 23:00 config.txt
+-rw-r--r-- 1 root root 29219 9月 24 22:56 fixup.dat
+drwx------ 2 root root 12288 9月 24 22:33 lost+found
+-rw-r--r-- 1 root root 29221 9月 24 22:56 start.elf
+&lt;/code>&lt;/pre>&lt;h2 id="安装">安装&lt;/h2>
+&lt;h3 id="下载系统包">下载系统包&lt;/h3>
+&lt;p>&lt;a href="http://distfiles.gentoo.org/releases/arm/autobuilds/current-stage3-armv7a_hardfp/">http://distfiles.gentoo.org/releases/arm/autobuilds/current-stage3-armv7a_hardfp/&lt;/a>&lt;/p>
+&lt;pre>&lt;code>$ cd ~/Downloads/
+$ wget http://distfiles.gentoo.org/releases/arm/autobuilds/current-stage3-armv7a_hardfp/stage3-armv7a_hardfp-20150730.tar.bz2
+$ tar xfj ~/Downloads/stage3-armv7a_hardfp-20150730.tar.bz2 -C /mnt/raspberry ### -C 指定解压的目录。解压需要一些时间，完成以后，看上去如下：
+$ ls -al
+总用量 89
+drwxr-xr-x 20 root root 4096 7月 30 13:50 .
+drwxr-xr-x 4 root root 4096 9月 24 22:38 ..
+drwxr-xr-x 2 root root 4096 7月 30 21:22 bin
+drwxr-xr-x 3 root root 1024 7月 30 13:50 boot
+drwxr-xr-x 3 root root 4096 7月 30 13:50 dev
+drwxr-xr-x 31 root root 4096 7月 30 21:31 etc
+drwxr-xr-x 2 root root 4096 7月 30 13:50 home
+drwxr-xr-x 10 root root 4096 7月 30 21:27 lib
+drwx------ 2 root root 16384 9月 24 22:33 lost+found
+drwxr-xr-x 2 root root 4096 7月 30 13:50 media
+drwxr-xr-x 2 root root 4096 7月 30 13:50 mnt
+drwxr-xr-x 2 root root 4096 7月 30 13:50 opt
+drwxr-xr-x 2 root root 4096 7月 30 13:18 proc
+drwx------ 2 root root 4096 7月 30 13:50 root
+drwxr-xr-x 3 root root 4096 7月 30 21:22 run
+drwxr-xr-x 2 root root 4096 7月 30 21:31 sbin
+drwxr-xr-x 2 root root 4096 7月 30 13:50 sys
+drwxrwxrwt 2 root root 4096 7月 30 21:31 tmp
+drwxr-xr-x 11 root root 4096 7月 30 21:31 usr
+drwxr-xr-x 9 root root 4096 7月 30 13:50 var
+&lt;/code>&lt;/pre>&lt;p>到这里，相信大家都很熟悉这个目录了。&lt;/p>
+&lt;h3 id="配置系统文件">配置系统文件&lt;/h3>
+&lt;p>第一步就是配置fstab，因为这是系统引导完成以后最先需要挂载好文件系统。==这里千万要注意修改的是 /mnt/raspberry/etc/fstab ==&lt;/p>
+&lt;pre>&lt;code>$ cat etc/fstab
+# &amp;lt;fs&amp;gt; &amp;lt;mountpoint&amp;gt; &amp;lt;type&amp;gt; &amp;lt;opts&amp;gt; &amp;lt;dump/pass&amp;gt;
+# NOTE: If your BOOT partition is ReiserFS, add the notail option to opts.
+/dev/mmcblk0p1 /boot ext2 noauto,noatime 1 2
+/dev/mmcblk0p2 / ext4 noatime 0 1
+&lt;/code>&lt;/pre>&lt;p>不要使用/dev/sdX设置的引用 。因为SD卡在树莓派上被视为/dev/mmcdlk0 。因为无法chroot到新的构建环境中，所以需要手动设置一些东西。首先，为Gentoo系统设置一个新的root用户密码。如下，&lt;/p>
+&lt;pre>&lt;code>$ openssl passwd -1
+Password:
+Verifying - Password:
+$1$ZoQIFaY4$3Re0RSS0qu6nds3wvqlRf1
+&lt;/code>&lt;/pre>&lt;p>以上，最后一行就是我们的encrypted密码，把它放到/etc/shadow文件中。&lt;/p>
+&lt;pre>&lt;code>$ cat etc/shadow | grep root
+root:$1$ZoQIFaY4$3Re0RSS0qu6nds3wvqlRf1:10770:0:::::
+&lt;/code>&lt;/pre>&lt;h3 id="配置-portage">配置 portage&lt;/h3>
+&lt;p>到目前为止，已经完成了所有的系统配置。但是，这还不是最终的系统，现在我们必须解压当前的portage集合。这样，才能在系统引导时，构建应用程序。下载，我们到以下地址去下载portage包。
+&lt;a href="http://distfiles.gentoo.org/releases/snapshots/current/portage-lastest.tar.bz2">http://distfiles.gentoo.org/releases/snapshots/current/portage-lastest.tar.bz2&lt;/a>&lt;/p>
+&lt;pre>&lt;code>$ cd ~/Downloads/
+$ wget http://distfiles.gentoo.org/releases/snapshots/current/portage-latest.tar.bz2
+$ tar xjvpf ~/Downloads/portage-latest.tar.bz2 -C /mnt/raspberry/usr
+&lt;/code>&lt;/pre>&lt;h2 id="交叉编译环境">交叉编译环境&lt;/h2>
+&lt;p>构造一个最小的 Linux 系统，
+==主要分为两步：第一步是构建一个宿主系统无关的新工具链（编译器、汇编器、链接器、库和一些有用的工具）。第二步则是使用该工具链构建其它的基础工具。==
+这里说的工具链就是说的交叉编译环境。&lt;/p>
+&lt;h3 id="下载系统内核">下载系统内核&lt;/h3>
+&lt;p>到了这一步以后，我们需要为新的Gentoo系统构建一个内核。为了完成这一步，需要有相关配置交叉编译环境基础知识。还需要内核源码,这里我们使用树莓派官方内核源码，因为这将包含所有已经打好的树莓派的补丁。到GitHub上clone一份内核源码或者下载zip包，如下：&lt;/p>
+&lt;pre>&lt;code>$ git clone https://github.com/raspberrypi/linux
+$ cd linux
+&lt;/code>&lt;/pre>&lt;h3 id="为什么要使用交叉编译环境">为什么要使用交叉编译环境&lt;/h3>
+&lt;p>交叉编译是在你的宿主系统上编译不同机器类型的应用程序。因为，树莓派使用的ARM架构与宿主机系统x86机器类型不同，只有使用相同的CPU机器类型才能使用chroot引导新系统。所以，这里就得用到交叉编译环境，在宿主系统上编译出ARM架构的树莓派。 在开始之前，希望大家可以先看一下&lt;a href="http://linuxfromscratch.org/">《Linux 从零开始》&lt;/a> 。&lt;/p>
+&lt;h3 id="crosstool-ng">crosstool-NG&lt;/h3>
+&lt;p>暂时写到这里，以后再补充。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/gentoo/">Gentoo</category><category domain="https://blog.wxchat.xyz/tags/raspberry-pi/">Raspberry Pi</category></item><item><title>Nginx配置博客ghost使用https 及安装StartSSL免费SSL证书</title><link>https://blog.wxchat.xyz/posts/nginx%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2ghost%E4%BD%BF%E7%94%A8https-%E5%8F%8A%E5%AE%89%E8%A3%85startssl%E5%85%8D%E8%B4%B9ssl%E8%AF%81%E4%B9%A6/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/nginx%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2ghost%E4%BD%BF%E7%94%A8https-%E5%8F%8A%E5%AE%89%E8%A3%85startssl%E5%85%8D%E8%B4%B9ssl%E8%AF%81%E4%B9%A6/</guid><pubDate>Sun, 13 Sep 2015 10:33:52 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>今天配置安装ssl证书碰到了不少的问题，这里记录一下。&lt;/p>
+&lt;blockquote>
+&lt;p>HTTP协议默认情况下是不加密的，各种密码，邮件的传输都是明文的，极有可能被互联网上的黑客给获取，造成隐私泄漏。
+SSL是Secure Socket Layer的简称，具体的作用就是在部署了SSL证书的网站跟用户浏览器之间建立一个安全的会话。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="nginx编译安装ssl模块">nginx编译安装ssl模块&lt;/h3>
+&lt;p>在说安装证书之前，我先说一下，nginx 要想使用ssl需要在编译安装的时候加上配置参数 &lt;code>--with-zlib=/data/nginx/lib/&lt;/code> 使用命令先看一下nginx配置&lt;/p>
+&lt;pre>&lt;code>$ /usr/local/nginx/sbin/nginx -V
+nginx version: nginx/1.9.0
+built by gcc 4.4.7 20120313 (Red Hat 4.4.7-11) (GCC)
+built with OpenSSL 1.0.1e-fips 11 Feb 2013
+TLS SNI support enabled
+configure arguments: --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module
+&lt;/code>&lt;/pre>&lt;p>如果在configure arguments: 没有找到ssl相关模块，就得重新编译一下。找到nginx源码包，执行以下命令，如下：&lt;/p>
+&lt;p>==这里提醒一下，安装软件的时候我觉得还是在root权限下方便，而且可以避免不必要的无权限执行报错，即使有sudo的权限。==&lt;/p>
+&lt;pre>&lt;code>$ cd nginx-1.9.0
+$ ./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module ##这里的stub模块是个统计性能用的，与本文无关，你也可以不安装这个。
+$ make ##这里不要使用 make install，否则就覆盖安装了 make完之后在objs目录下就多了个nginx，这个就是新版本的程序了
+$ cp /usr/local/nginx/sbin/nginx /usr/local/nginx/sbin/nginx.bak
+$ cp objs/nginx /usr/local/nginx/sbin/nginx
+$ /usr/local/nginx/sbin/nginx -V ##这里就可以使用新版本的程序看一下编译参数里已经有ssl模块了。
+&lt;/code>&lt;/pre>&lt;h3 id="证书安装">证书安装&lt;/h3>
+&lt;p>这里说一下，免费的SSL与付费的SSL还是有区别的，我主要是为博客后台登陆使用SSL，学习配置一下。&lt;/p>
+&lt;p>StartCom公司是到目前止仅有的还提供免费SSL服务的公司（应该是吧，我也是听别人说的），支持多种浏览器的正常识别，只要通过他们的个人信息审核就可以免费使用一年的时间。我自己审核的时候，本想随便写个英文名称，地址，但是都被弊掉了。建议填写个人信息的时候还是要尽量真实。这样才能够一次性通过邮件审核。
+&lt;a href="http://www.startssl.com/">StartSSL官方首页&lt;/a> 具体申请流程我就不说了，打开官方网站看一下就知道了。&lt;/p>
+&lt;p>我们来说一下，安装的流程：
+首先使用ssh登陆vps，执行如下命令生成证书&lt;/p>
+&lt;pre>&lt;code>$ openssl req -new -newkey rsa:2048 -nodes -out server.csr -keyout server.key
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2015/09/--_2015-09-14_00-06-53.png" alt="">&lt;/p>
+&lt;p>以上生成的server.csr 需要把内容粘贴到 StartSSL 去生成域名证书了。&lt;/p>
+&lt;p>这里生成的server.key 是没有passphrase的，所以这一节我们可以跳过不看。如果有配置密码的话，我们需要去掉private key的passphrase才能让Nginx自由自在的启动。&lt;/p>
+&lt;pre>&lt;code>$ cp server.key server.key.bak
+$ sudo openssl rsa -in server.key.bak -out server.key
+&lt;/code>&lt;/pre>&lt;h3 id="开始配置nginx">开始配置nginx&lt;/h3>
+&lt;pre>&lt;code>server {
+listen 443 ssl;
+server_name hcaijin.com www.hcaijin.com;
+location / {
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header Host $http_host;
+proxy_pass http://127.0.0.1:2368;
+}
+ssl_certificate /usr/local/nginx/ssl/hcjwebssl.crt;
+ssl_certificate_key /usr/local/nginx/ssl/hcjnopassssl.key;
+ssl_session_cache shared:SSL:1m;
+ssl_session_timeout 5m;
+ssl_ciphers HIGH:!aNULL:!MD5;
+ssl_prefer_server_ciphers on;
+}
+&lt;/code>&lt;/pre>&lt;p>配置把http的请求转到https&lt;/p>
+&lt;pre>&lt;code>server {
+listen 80;
+server_name hcaijin.com www.hcaijin.com;
+location / {
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header Host $http_host;
+proxy_pass http://127.0.0.1:2368;
+}
+#rewrite ^(.*) https://$server_name$1 permanent;
+location ~ /ghost(/.*) {
+rewrite ^ https://$server_name$request_uri? permanent;
+}
+}
+&lt;/code>&lt;/pre>&lt;pre>&lt;code>$ /etc/init.d/nginx restart ##重启一下nginx服务
+&lt;/code>&lt;/pre>&lt;h3 id="解决firefox浏览器不信任startssl免费ssl的问题">解决Firefox浏览器不信任StartSSL免费SSL的问题&lt;/h3>
+&lt;pre>&lt;code>$ wget http://cert.startssl.com/certs/ca.pem
+$ wget http://cert.startssl.com/certs/sub.class1.server.ca.pem
+$ sudo cat ca.pem sub.class1.server.ca.pem &amp;gt;&amp;gt; server.crt
+$ /etc/init.d/nginx restart
+&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/ghost/">ghost</category><category domain="https://blog.wxchat.xyz/tags/nginx/">nginx</category><category domain="https://blog.wxchat.xyz/tags/https/">https</category><category domain="https://blog.wxchat.xyz/tags/openssl/">openssl</category></item><item><title>Arch Linux 配置Bluetooth</title><link>https://blog.wxchat.xyz/posts/arch-linux-%E9%85%8D%E7%BD%AEbluetooth/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/arch-linux-%E9%85%8D%E7%BD%AEbluetooth/</guid><pubDate>Wed, 19 Aug 2015 03:22:07 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>蓝牙是一个短距离无线通信标准，适用于手机、计算机和其他电子设备之间的通信。在 Linux 中，通常使用的蓝牙协议栈实现是 BlueZ.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;p>为了使用蓝牙(Blutooth)，必须要安装官方仓库中的 bluez 软件包。&lt;/p>
+&lt;pre>&lt;code>$ sudo pacman -S bluez bluez-utils
+&lt;/code>&lt;/pre>
+&lt;p>bluez会使用dbus 服务读取设置和进行pin(个人识别码 personal identification number)配对。蓝牙(Bluetooth)协议需要bluetooth服务来支撑：&lt;/p>
+&lt;pre>&lt;code>$ sudo systemctl enable bluetooth.service
+$ sudo systemctl start bluetooth.service
+&lt;/code>&lt;/pre>
+&lt;p>加载通用蓝牙驱动程序，如果还没有装载：&lt;/p>
+&lt;pre>&lt;code>$ modprobe btusb
+&lt;/code>&lt;/pre>
+&lt;h2 id="配置">配置&lt;/h2>
+&lt;h3 id="bluetoothctl">bluetoothctl&lt;/h3>
+&lt;p>使用bluetoothctl 需要安装bluez-utils 包。这个在上一步里已经执行过了，这里就直接说配置与使用的方法：&lt;/p>
+&lt;pre>&lt;code>$ bluetoothctl
+&lt;/code>&lt;/pre>
+&lt;p>help 列出帮助文档。
+&lt;img src="https://blog.wxchat.xyz/content/images/2015/08/--_2015-08-19_15-31-47.png" alt="">&lt;/p>
+&lt;ul>
+&lt;li>首先执行 &lt;code>power on&lt;/code> 打开蓝牙适配器的电源开关，这样蓝牙的LED灯会亮起(默认是关闭的)。&lt;/li>
+&lt;li>先用命令 &lt;code>devices&lt;/code> 列出有已匹配的设备MAC地址&lt;/li>
+&lt;li>如果列表为空，那么就要使用 &lt;code>scan on&lt;/code> 来扫描网络中开启蓝牙的设备&lt;/li>
+&lt;li>开启代理 &lt;code>agent on&lt;/code>&lt;/li>
+&lt;li>输入命令 &lt;code>pair [MAC Address] &lt;/code> 匹配两个蓝牙设备&lt;/li>
+&lt;li>如果使用设备没有PIN，要成功地重新连接设备之前，可能需要手动信任设备。输入 &lt;code>trust [MAC Address] &lt;/code>&lt;/li>
+&lt;li>如果以上步骤都没有问题的话，那么就可以链接你的蓝牙设备了。 &lt;code>connect [MAC Address]&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h3 id="obex">Obex&lt;/h3>
+&lt;p>使用obexctl是在蓝牙设备之间发送和接收文件的工具，是随bluez包安装好了的,在终端直接输入 &lt;code>obexctl&lt;/code> 就可以进入obex环境，如图：
+&lt;img src="https://blog.wxchat.xyz/content/images/2015/08/--_2015-08-19_16-41-12.png" alt="">&lt;/p>
+&lt;p>另外还有一个命令行工具obexfs (包括obexfs,obexftp等)&lt;/p>
+&lt;pre>&lt;code>$ sudo pacman -S obexfs
+&lt;/code>&lt;/pre>
+&lt;p>安装好了就可以使用命令直接挂载蓝牙设备到本地目录，&lt;/p>
+&lt;pre>&lt;code>$ obexfs -b MAC_address_of_device -p /mnt/bluez/
+&lt;/code>&lt;/pre>
+&lt;p>一旦你完成了，卸载的设备使用以下命令：&lt;/p>
+&lt;pre>&lt;code>$ fusermount -u /mnt/bluez/
+&lt;/code>&lt;/pre>
+&lt;p>如果您的设备支持FTP服务，但你不希望加载该设备，您可以使用obexftp传输文件在设备之间。
+发送文件：&lt;/p>
+&lt;pre>&lt;code>$ obexftp -b MAC_address_of_device -p /path/to/file
+&lt;/code>&lt;/pre>
+&lt;p>接收文件：&lt;/p>
+&lt;pre>&lt;code>$ obexftp -b MAC_address_of_device -g filename
+&lt;/code>&lt;/pre>
+&lt;h3 id="bluetooth-usb-适配器">Bluetooth USB 适配器&lt;/h3>
+&lt;p>如果你在使用USB适配器，你应当确认你的适配器被正确识别。你可以在插入适配器时通过查看/var/log/messages.log （或者journalctl -f)，&lt;/p>
+&lt;pre>&lt;code>$ tail -f /var/log/messages.log
+&lt;/code>&lt;/pre>
+&lt;p>这应当会出现类似于下面所示的信息：&lt;/p>
+&lt;p>May 2 23:36:40 tatooine usb 4-1: new full speed USB device using uhci_hcd and address 9
+May 2 23:36:40 tatooine usb 4-1: configuration #1 chosen from 1 choice
+May 2 23:36:41 tatooine hcid[8109]: HCI dev 0 registered
+May 2 23:36:41 tatooine hcid[8109]: HCI dev 0 up
+May 2 23:36:41 tatooine hcid[8109]: Device hci0 has been added
+May 2 23:36:41 tatooine hcid[8109]: Starting security manager 0
+May 2 23:36:41 tatooine hcid[8109]: Device hci0 has been activated&lt;/p>
+&lt;p>如果你只得到了前面两行，说明了电脑发现了这个设备，但是你需要手动启动它。 例如：&lt;/p>
+&lt;pre>&lt;code> $ hciconfig -a hci0
+$ hciconfig hci0 up
+&lt;/code>&lt;/pre>
+&lt;p>如果不能从你的手机发现电脑，那么就需要启用PSCAN和ISCAN：&lt;/p>
+&lt;pre>&lt;code> $ hciconfig hci0 piscan
+&lt;/code>&lt;/pre>
+&lt;p>注意: 检查/etc/bluetooth/main.conf中的发现倒计时和配对倒计时
+试着在 /etc/bluetooth/main.conf 改变设备的class
+&lt;img src="https://blog.wxchat.xyz/content/images/2015/08/--_2015-08-19_17-23-20.png" alt="">
+修改：Class = 0x100100&lt;/p>
+&lt;p>==参考：https://wiki.archlinux.org/index.php/Bluetooth ==&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/archlinux/">archlinux</category><category domain="https://blog.wxchat.xyz/tags/bluetooth/">bluetooth</category></item><item><title>导出CSV文件，对长数字字符会自动显示科学计数解决方法</title><link>https://blog.wxchat.xyz/posts/%E5%AF%BC%E5%87%BAcsv%E6%96%87%E4%BB%B6%E5%AF%B9%E9%95%BF%E6%95%B0%E5%AD%97%E5%AD%97%E7%AC%A6%E4%BC%9A%E8%87%AA%E5%8A%A8%E6%98%BE%E7%A4%BA%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/%E5%AF%BC%E5%87%BAcsv%E6%96%87%E4%BB%B6%E5%AF%B9%E9%95%BF%E6%95%B0%E5%AD%97%E5%AD%97%E7%AC%A6%E4%BC%9A%E8%87%AA%E5%8A%A8%E6%98%BE%E7%A4%BA%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</guid><pubDate>Thu, 06 Aug 2015 06:00:33 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>今天做csv导出遇到订单号太长导致导出来用EXCEL打开显示为科学计数了，最后几位直接显示为0。但是用文本方式打开订单号是正常的，这说明一定是与EXcel有关系。
+GOOGLE了一下，找到EXCEL相关介绍：&lt;/p>
+&lt;blockquote>
+&lt;p>Excel显示数字时，如果数字大于12位，它会自动转化为科学计数法；如果数字大于15位，它不仅用于科学技术费表示，还会只保留高15位，其他位都变0。&lt;/p>
+&lt;/blockquote>
+&lt;pre>&lt;code>$oid = &amp;quot;\t&amp;quot;.$val['oid'];
+&lt;/code>&lt;/pre>
+&lt;p>如果是phpexcel导出的话，把&amp;rdquo;\t&amp;quot;换成&amp;rdquo; &amp;ldquo;即可。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/csv/">csv</category><category domain="https://blog.wxchat.xyz/tags/excel/">excel</category><category domain="https://blog.wxchat.xyz/tags/phpexcel/">phpexcel</category></item><item><title>linux 无线网卡状态异常修复</title><link>https://blog.wxchat.xyz/posts/linux-%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E7%8A%B6%E6%80%81%E5%BC%82%E5%B8%B8%E4%BF%AE%E5%A4%8D/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E7%8A%B6%E6%80%81%E5%BC%82%E5%B8%B8%E4%BF%AE%E5%A4%8D/</guid><pubDate>Fri, 17 Jul 2015 12:43:40 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>无线网卡异常，有很多种原因造成。这里我是因为有做AP共享WIFI，本来好好的，不知道怎么实然，我手机wifi断了，再看，从PC共享的WIFI竟然挂了。
+就这样，下班回家，准备链接无线路由，因为有换新的网，得重新链接：&lt;/p>
+&lt;pre>&lt;code> $ sudo wifi-menu -o
+&lt;/code>&lt;/pre>
+&lt;p>竟然报No networks found&lt;/p>
+&lt;p>重启了问题依然存在，没办法，只能用有线先连着。
+开始Google：No networks found
+我一开始就找错了方向，自然是没有找到解决的方法。&lt;/p>
+&lt;p>经过这次，让我对日志的记录有了更深的认识，以前，觉得日志记录太难看得懂了，从来都是很少去看，浪费了很多时间在无用的地方，这里给自己个警戒，凡是就得先看日志信息。&lt;/p>
+&lt;p>这样，接下来，在日志里有发现有这个错误 Operation not possible due to RF-kill
+Google一下，就找到了问题的关键，原因RF-KILL其实是一个打开和关闭无线设备的工具。 由此可以知道，这是一打开无线设备wifi的错误。
+因为我用的arch没有安装rfkill,执行：&lt;/p>
+&lt;pre>&lt;code> $ sudo pacman -S rfkill
+&lt;/code>&lt;/pre>
+&lt;p>安装好以后，为了查看当前的无限网卡的状态，执行命令rfkill list all ——列出所有无线设备的当前状态。结果如下：
+&lt;img src="https://blog.wxchat.xyz/content/images/2015/07/--_2015-07-18_01-13-01.png" alt="">&lt;/p>
+&lt;p>发现 Hard blocked 和 soft blocked 之间的同步失败,具体原因可以看这里&lt;a href="http://askubuntu.com/questions/62166/siocsifflags-operation-not-possible-due-to-rf-kill">“SIOCSIFFLAGS: Operation not possible due to RF-kill”?&lt;/a>&lt;/p>
+&lt;p>找到问题原因，我们可以使用命令使软硬设备同步:&lt;/p>
+&lt;pre>&lt;code>$ rfkill unblock wifi
+&lt;/code>&lt;/pre>
+&lt;p>用命令 rfkill list all 列出所有无线设备状态看一下结果，
+&lt;img src="https://blog.wxchat.xyz/content/images/2015/07/--_2015-07-18_01-24-26.png" alt="">&lt;/p>
+&lt;p>好了，无线网卡状态异常的问题修复了。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/wifi/">wifi</category><category domain="https://blog.wxchat.xyz/tags/rf-kill/">RF-kill</category></item><item><title>PPTP 服务器端安装与配置详解</title><link>https://blog.wxchat.xyz/posts/pptp-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/pptp-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/</guid><pubDate>Wed, 17 Jun 2015 05:44:35 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="安装前环境检查">安装前环境检查&lt;/h2>
+&lt;p>因为pptp需要MPPE的支持，所以首先检测系统是否符已经编译了MPPE。
+下面介绍两种检测方法，只要符合其中的一条就可以&lt;/p>
+&lt;h3 id="第一种">第一种：&lt;/h3>
+&lt;pre>&lt;code> # zgrep MPPE /proc/config.gz
+CONFIG_PPP_MPPE=y
+# cat /dev/net/tun
+cat: /dev/net/tun: File descriptor in bad state
+&lt;/code>&lt;/pre>
+&lt;h3 id="第二种">第二种：&lt;/h3>
+&lt;p>网上大多数资料还提到了另一个测试命令&lt;/p>
+&lt;pre>&lt;code>$ modprobe ppp-compress-18 &amp;amp;&amp;amp; echo ok
+FATAL: Module ppp_mppe not found.
+&lt;/code>&lt;/pre>
+&lt;p>如果返回“OK”说明可以安装PPTP，我查了一下，这个命令是在CentOS 4.4版本中有人提出的，但是经过实际测试，发现在我的环境中非但没有效果，而且报错。
+所以&lt;strong>如果modprobe ppp-compress-18 &amp;amp;&amp;amp; echo ok没有显示“OK”甚至报错，并不代表不能安装&lt;/strong>。最好还是用上面那种方法查看。&lt;/p>
+&lt;h3 id="安装依赖">安装依赖&lt;/h3>
+&lt;p>由于pptp需要iptables支持，所以需要安装iptables。如果您的服务器上已经安装了iptables，那么可以只安装pptp&lt;/p>
+&lt;pre>&lt;code>$ yum install -y ppp iptables
+&lt;/code>&lt;/pre>
+&lt;p>注意：这里先安装的是ppp而不是pptp，不要打错了。另：PPP是一种数据链路层协议类似我们熟知的pppoe
+接下来就是一大堆的信息，无非是寻找最快的源，找到后下载相关安装包，下载完成自动安装。
+如果回到提示符状态，并且安装结果为Complete!，说明安装成功。&lt;/p>
+&lt;h2 id="安装pptp">安装pptp&lt;/h2>
+&lt;p>现在我们可以正式安装VPN Server了。这里我们选择pptp(VPN 协议的一种),因为简单，一条命令搞定。剩下的无非是一些配置。
+yum -y install pptpd&lt;/p>
+&lt;h3 id="配置pptp">配置pptp&lt;/h3>
+&lt;h4 id="编辑etcpppoptionspptpd">编辑/etc/ppp/options.pptpd&lt;/h4>
+&lt;p>pptpd安装完成后，编辑/etc/pptpd.conf文件，去掉下面两行的注释或者直接添加这两行(在文件的最后).这一步是配置ip地址的范围。&lt;/p>
+&lt;p>localip 192.168.0.1
+remoteip 192.168.0.100-150&lt;/p>
+&lt;h4 id="设置使用pptp的用户名和密码">设置使用pptp的用户名和密码&lt;/h4>
+&lt;p>然后在/etc/ppp/chap-secrets文件中添加VPN用户，按照下面的格式,每个用户一行。&lt;/p>
+&lt;p>username pptpd password *&lt;/p>
+&lt;h4 id="配置dns服务器">配置DNS服务器&lt;/h4>
+&lt;p>为了让你的用户连上VPN后能够正常地解析域名，我们需要手动设置DNS. 编辑/etc/ppp/options，找到ms-dns这一项，设置你的DNS.这里我推荐的是Google 最近发布的Public DNS,原因是因为好记。&lt;/p>
+&lt;p>ms-dns 8.8.8.8
+ms-dns 209.244.0.3
+ms-dns 208.67.222.222
+ms-dns 8.8.4.4&lt;/p>
+&lt;h4 id="修改内核设置使其支持转发">修改内核设置，使其支持转发。&lt;/h4>
+&lt;p>编辑/etc/sysctl.conf文件，找到”net.ipv4.ip_forward=1″这一行，去掉前面的注释并注释掉 &amp;ldquo;net.ipv4.tcp_syncookies=1&amp;rdquo;。&lt;/p>
+&lt;pre>&lt;code>net.ipv4.ip_forward=1
+#net.ipv4.tcp_syncookies = 1
+&lt;/code>&lt;/pre>
+&lt;p>运行下面的命令让配置生效。&lt;/p>
+&lt;pre>&lt;code>$ sysctl -p
+&lt;/code>&lt;/pre>
+&lt;h2 id="iptables转发">iptables转发&lt;/h2>
+&lt;pre>&lt;code>$ iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -j SNAT --to-source 12.34.56.78
+&lt;/code>&lt;/pre>
+&lt;p>(适合于OpenVZ架构的VPS,12.34.56.78为您VPS的公网IP地址)&lt;/p>
+&lt;pre>&lt;code>$ iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -o eth0 -j MASQUERADE
+&lt;/code>&lt;/pre>
+&lt;p>(适合于XEN架构的VPS)
+以上两条命令分别对应OpenVZ架构和XEN架构的VPS，您的VPS是什么架构需要询问供应商。Linode采用的是XEN架构，所以输入&lt;/p>
+&lt;p>我的是搬瓦工的vps,配置如下：&lt;/p>
+&lt;pre>&lt;code>$ iptables -t nat -A POSTROUTING -o venet0 -s 192.168.0.0/24 -j SNAT --to-source `ifconfig | grep 'inet addr:'| grep -v '127.0.0.1' | cut -d: -f2 | awk 'NR==1 { print $1}'`
+&lt;/code>&lt;/pre>
+&lt;h2 id="运行">运行&lt;/h2>
+&lt;pre>&lt;code>/etc/init.d/pptpd start
+&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/pptp/">pptp</category><category domain="https://blog.wxchat.xyz/tags/iptables/">iptables</category><category domain="https://blog.wxchat.xyz/tags/vps/">vps</category></item><item><title>Linux中的文件特殊权限</title><link>https://blog.wxchat.xyz/posts/linux%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E7%89%B9%E6%AE%8A%E6%9D%83%E9%99%90/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E7%89%B9%E6%AE%8A%E6%9D%83%E9%99%90/</guid><pubDate>Mon, 15 Jun 2015 06:25:56 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>linux中除了常见的读（r）、写（w）、执行（x）权限以外，还有3个特殊的权限，分别是setuid、setgid和stick bit&lt;/p>
+&lt;h2 id="setuidsetgid">setuid、setgid&lt;/h2>
+&lt;p>先看个实例，查看你的/usr/bin/passwd 与/etc/passwd文件的权限&lt;/p>
+&lt;pre>&lt;code># ls -l /usr/bin/passwd /etc/passwd
+-rw-r--r-- 1 root root 1549 08-19 13:54 /etc/passwd
+-rwsr-xr-x 1 root root 22984 2007-01-07 /usr/bin/passwd
+&lt;/code>&lt;/pre>
+&lt;p>众所周知，/etc/passwd文件存放的各个用户的账号与密码信息，/usr/bin/passwd是执行修改和查看此文件的程序，但从权限上看，/etc/passwd仅有root权限的写（w）权，可实际上每个用户都可以通过/usr/bin/passwd命令去修改这个文件，于是这里就涉及了linux里的特殊权限setuid，正如-rwsr-xr-x中的s&lt;/p>
+&lt;p>setuid就是：让普通用户拥有可以执行“只有root权限才能执行”的特殊权限，setgid同理指”组“&lt;/p>
+&lt;p>作为普通用户是没有权限修改/etc/passwd文件的，但给/usr/bin/passwd以setuid权限后，普通用户就可以通过执行passwd命令，临时的拥有root权限，去修改/etc/passwd文件了&lt;/p>
+&lt;h2 id="stick-bit-粘贴位">stick bit （粘贴位）&lt;/h2>
+&lt;p>再看个实例，查看你的/tmp目录的权限&lt;/p>
+&lt;pre>&lt;code># ls -dl /tmp
+drwxrwxrwt 6 root root 4096 08-22 11:37 /tmp
+&lt;/code>&lt;/pre>
+&lt;p>tmp目录是所有用户共有的临时文件夹，所有用户都拥有读写权限，这就必然出现一个问题，A用户在/tmp里创建了文件a.file，此时B用户看了不爽，在/tmp里把它给删了（因为拥有读写权限），那肯定是不行的。实际上是不会发生这种情况，因为有特殊权限stick bit（粘贴位）权限，正如drwxrwxrwt中的最后一个t&lt;/p>
+&lt;p>stick bit (粘贴位)就是：除非目录的属主和root用户有权限删除它，除此之外其它用户不能删除和修改这个目录。&lt;/p>
+&lt;p>也就是说，在/tmp目录中，只有文件的拥有者和root才能对其进行修改和删除，其他用户则不行，避免了上面所说的问题产生。用途一般是把一个文件夹的的权限都打开，然后来共享文件，象/tmp目录一样。&lt;/p>
+&lt;h2 id="设置方法">设置方法&lt;/h2>
+&lt;p>setuid：chmod u+s xxx&lt;/p>
+&lt;p>setgid: chmod g+s xxx&lt;/p>
+&lt;p>stick bit : chmod o+t xxx&lt;/p>
+&lt;p>或者使用八进制方式，在原先的数字前加一个数字，三个权限所代表的进制数与一般权限的方式类似，如下:&lt;/p>
+&lt;pre>&lt;code> suid guid stick bit
+1 1 1
+&lt;/code>&lt;/pre>
+&lt;p>所以：suid的二进制串为：100，换算十进制为：4&lt;/p>
+&lt;p>guid的二进制串为:010,换算：2&lt;/p>
+&lt;p>stick bit 二进制串：001，换算：1&lt;/p>
+&lt;p>于是也可以这样设:setuid:chmod 4755 xxx&lt;/p>
+&lt;p>setgid:chmod 2755 xxx&lt;/p>
+&lt;p>stick bit:chmod 1755 xxx&lt;/p>
+&lt;p>最后，在一些文件设置了特殊权限后，字母不是小写的s或者t，而是大写的S和T，那代表此文件的特殊权限没有生效，是因为你尚未给它对应用户的x权限&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/setuid/">setuid</category><category domain="https://blog.wxchat.xyz/tags/setgid/">setgid</category><category domain="https://blog.wxchat.xyz/tags/stick-bit/">stick bit</category></item><item><title>php session 丢失BUG修改</title><link>https://blog.wxchat.xyz/posts/php-session-%E4%B8%A2%E5%A4%B1bug%E4%BF%AE%E6%94%B9/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/php-session-%E4%B8%A2%E5%A4%B1bug%E4%BF%AE%E6%94%B9/</guid><pubDate>Mon, 15 Jun 2015 06:07:48 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>今天真是被这个问题给郁闷到了，调试了代码半天时间，终于从http://www.111cn.net/phper/php-cy/56742.htm 里找到了线索。就是存储session的目录权限不可写，或者目录空间満了写不进去就会出现这个BUG.&lt;/p>
+&lt;pre>&lt;code>$ ls -al /
+drwxr-xr-x. 12 root root 53248 Jun 15 17:14 tmp
+&lt;/code>&lt;/pre>
+&lt;p>发现/tmp 目录权限不对。&lt;/p>
+&lt;p>后面，打开Thinkphp debug ,trace 页面查找到 open('/tmp/sess_ifoeq9834f98h4h54&amp;rsquo;,O_REIOR) promostion demoin&lt;/p>
+&lt;blockquote>
+&lt;p>总结一下， 就是遇到问题，日志才是最好的排错地方。这里记录一下，以免以后又犯错，直接去调试代码，花费了不小的功夫，还找不到原因。&lt;/p>
+&lt;/blockquote></description><category domain="https://blog.wxchat.xyz/tags/php/">php</category><category domain="https://blog.wxchat.xyz/tags/session/">session</category><category domain="https://blog.wxchat.xyz/tags/thinkphp/">Thinkphp</category></item><item><title>LINUX ssh 用户配置文件 config 管理</title><link>https://blog.wxchat.xyz/posts/linux-ssh-%E7%94%A8%E6%88%B7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-config-%E7%AE%A1%E7%90%86/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-ssh-%E7%94%A8%E6%88%B7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-config-%E7%AE%A1%E7%90%86/</guid><pubDate>Sat, 13 Jun 2015 04:32:01 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>利用 ssh 的用户配置文件 config 管理 ssh 会话。ssh 的用户配置文件是放在当前用户根目录下的 .ssh 文件夹里（~/.ssh/config，不存在则新创建一个），其配置写法如下：&lt;/p>
+&lt;/blockquote>
+&lt;pre>&lt;code>Host test
+User root
+HostName 192.168.3.152
+PassWord V8kbwqsV0UGTob8EEeL4
+Host *
+#PubkeyAuthentication no
+IdentityFile ~/.ssh/id_rsa
+&lt;/code>&lt;/pre>
+&lt;p>这样我们就可以使用如下命令直接登陆到hostname 为192.168.3.152 的服务器了：&lt;/p>
+&lt;pre>&lt;code> # ssh test
+&lt;/code>&lt;/pre>
+&lt;p>使用密钥的好处就是省去每次 ssh 登陆服务器时都要输入登陆密码的操作，这里使用 ssh-keygen 生成 ssh 密钥与公钥：&lt;/p>
+&lt;pre>&lt;code> # ssh-keygen -t rsa
+&lt;/code>&lt;/pre>
+&lt;p>把公钥 id_rsa.pub 上传到远程 192.168.3.152 服务器的 ~/.ssh/ 目录下：&lt;/p>
+&lt;pre>&lt;code> # ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.3.152
+&lt;/code>&lt;/pre>
+&lt;p>这样会在服务器的 ~/.ssh/ 目录下生成文件 authorized_keys&lt;/p>
+&lt;p>&lt;strong>这里注意一点：以 ssh publickey 的形式访问，对当前用户根目录下的 .ssh 文件夹里的目录文件是要有一定的权限要求，之前遇到过 ssh publickey 配置好了，不过用 publickey 登陆验证时则无效。所以，最好设下.ssh 目录权限为 700，authorized_keys 权限为 600，并检查当前用户目录所属的用户组，如：&lt;/strong>&lt;/p>
+&lt;pre>&lt;code> # ls -al .ssh/
+total 12
+drwx------ 2 root root 4096 Jun 13 16:20 .
+drwxr-xr-x. 5 other others 4096 Jun 13 16:15 ..
+-rw------- 1 root root 401 Jun 13 16:20 authorized_keys
+&lt;/code>&lt;/pre>
+&lt;p>以上，注意目录 .ssh/ 父目录用户所属用户组，用户。这样也会造成使用publickey 登陆验证时无效，还是提示要输入密码。&lt;/p>
+&lt;pre>&lt;code> # chown -R root.root /root/
+&lt;/code>&lt;/pre>
+&lt;p>当然，用密钥的方式连接服务器是需要服务器上的 ssh 支持的，需要 ssh 的配置文件（默认是在 etc/ssh/sshd_config）里的 PubkeyAuthentication 设置成 yes。如果要改登陆的端口，直接把 Port 改成你想要的端口值就行。修改完后重启下 ssh ，配置就生效：&lt;/p>
+&lt;pre>&lt;code> # /etc/init.d/sshd restart
+&lt;/code>&lt;/pre>
+&lt;p>然后，就可以使用ssh 别名登陆服务器了。&lt;/p>
+&lt;p>用 ssh 作 socks5 代理翻墙，以后不用这样写了(hcj.com 为在墙外的代理服务器)：&lt;/p>
+&lt;pre>&lt;code> # ssh -CfNg -D1080 hcj.com
+&lt;/code>&lt;/pre>
+&lt;p>使用 scp 传送可以简写成这样：&lt;/p>
+&lt;pre>&lt;code> # scp ~/.ssh/id_rsa.pub test:~/.ssh/authorized_keys
+&lt;/code>&lt;/pre>
+&lt;p>执行远程 ssh 命令：&lt;/p>
+&lt;pre>&lt;code> # ssh test 'ls -al ~'
+&lt;/code>&lt;/pre>
+&lt;p>打包一个文件（假设当前目录有个名为 test 的文件夹），接着上传到远程服务器，最后解压文件&lt;/p>
+&lt;pre>&lt;code> # tar -zcvf - ./test/ | ssh test 'cd /user/; tar xvfz -'
+&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/ssh/">ssh</category></item><item><title>Mysql 设置大小写敏感</title><link>https://blog.wxchat.xyz/posts/mysql-%E8%AE%BE%E7%BD%AE%E5%A4%A7%E5%B0%8F%E5%86%99%E6%95%8F%E6%84%9F/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/mysql-%E8%AE%BE%E7%BD%AE%E5%A4%A7%E5%B0%8F%E5%86%99%E6%95%8F%E6%84%9F/</guid><pubDate>Mon, 01 Jun 2015 22:36:28 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>1、linux下mysql安装完后是默认：区分表名的大小写，不区分列名的大小写；&lt;/p>
+&lt;p>2、如何设置为不区分表名的大小写：
+修改mysql配置文件/etc/mysql/my.cnf 中,在[mysqld]后添加lower_case_table_names=1，默认为0表示区分大小写，然后重启MYSQL服务。；&lt;/p>
+&lt;p>3、Mysql 在不同的操作系统中大小写敏感区别：
+3.1、MySQL在Linux下数据库名、表名、列名、别名大小写规则是这样的：&lt;/p>
+&lt;ul>
+&lt;li>数据库名与表名是严格区分大小写的；&lt;/li>
+&lt;li>表的别名是严格区分大小写的；&lt;/li>
+&lt;li>列名与列的别名在所有的情况下均是忽略大小写的；&lt;/li>
+&lt;li>变量名也是严格区分大小写的；&lt;/li>
+&lt;/ul>
+&lt;p>3.2、MySQL在Windows下都不区分大小写。&lt;/p>
+&lt;p>4、如果想在查询时区分字段值的大小写，则：字段值需要设置BINARY属性，设置的方法有多种：&lt;/p>
+&lt;p>A、创建时设置：
+CREATE TABLE T(
+A VARCHAR(10) BINARY
+);&lt;/p>
+&lt;p>B、使用alter修改：
+ALTER TABLE &lt;code>tablename&lt;/code> MODIFY COLUMN &lt;code>cloname&lt;/code> VARCHAR(45) BINARY;&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/mysql/">mysql</category></item><item><title>MySQL导入导出csv文件命令行操作</title><link>https://blog.wxchat.xyz/posts/mysql%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BAcsv%E6%96%87%E4%BB%B6%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/mysql%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BAcsv%E6%96%87%E4%BB%B6%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/</guid><pubDate>Mon, 01 Jun 2015 02:36:16 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>1、先确认一下cvs的文件格式，确保与表编码一至。设为utf8
+2、创建表，设置为utf8
+3、登陆mysql, 导入csv文件&lt;/p>
+&lt;pre>&lt;code>$ mysql -uroot -p
+MariaDB []&amp;gt; create database test; use test;
+MariaDB [test]&amp;gt; LOAD DATA INFILE '/mysql/test_data.csv' REPLACE INTO TABLE test_table CHARACTER SET utf8 FIELDS TERMINATED BY ',' ENCLOSED BY '&amp;quot;' LINES TERMINATED BY '\r\n';
+&lt;/code>&lt;/pre>
+&lt;p>注意：test_data.csv 要在mysql 的用户权限中，即使放到/tmp 目录下也是有问题的，暂时不知道怎么解决。&lt;/p>
+&lt;pre>&lt;code>$ sudo mkdir /mysql ;
+$ sudo chown -R mysql.mysql /mysql
+$ sudo cp ~/test_data.csv /mysql/
+&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/mysql/">mysql</category><category domain="https://blog.wxchat.xyz/tags/csv/">csv</category><category domain="https://blog.wxchat.xyz/tags/utf8/">utf8</category></item><item><title>Nginx 配置高并发</title><link>https://blog.wxchat.xyz/posts/nginx-%E9%85%8D%E7%BD%AE%E9%AB%98%E5%B9%B6%E5%8F%91/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/nginx-%E9%85%8D%E7%BD%AE%E9%AB%98%E5%B9%B6%E5%8F%91/</guid><pubDate>Wed, 13 May 2015 03:15:17 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="一般来说nginx-配置文件中对优化比较有作用的为以下几项">一般来说nginx 配置文件中对优化比较有作用的为以下几项：&lt;/h2>
+&lt;ol>
+&lt;li>worker_processes 8;&lt;/li>
+&lt;/ol>
+&lt;p>nginx 进程数，建议按照cpu 数目来指定，一般为它的倍数 (如,2个四核的cpu计为8)。&lt;/p>
+&lt;ol start="2">
+&lt;li>worker_cpu_affinity 00000001 00000010 00000100 00001000 00010000 00100000 01000000 10000000;&lt;/li>
+&lt;/ol>
+&lt;p>为每个进程分配cpu，上例中将8 个进程分配到8 个cpu，当然可以写多个，或者将一
+个进程分配到多个cpu。&lt;/p>
+&lt;ol start="3">
+&lt;li>worker_rlimit_nofile 65535;&lt;/li>
+&lt;/ol>
+&lt;p>这个指令是指当一个nginx 进程打开的最多文件描述符数目，理论值应该是最多打开文
+件数（ulimit -n）与nginx 进程数相除，但是nginx 分配请求并不是那么均匀，所以最好与ulimit -n 的值保持一致。&lt;/p>
+&lt;p>现在在linux 2.6内核下开启文件打开数为65535，worker_rlimit_nofile就相应应该填写65535。&lt;/p>
+&lt;p>这是因为nginx调度时分配请求到进程并不是那么的均衡，所以假如填写10240，总并发量达到3-4万时就有进程可能超过10240了，这时会返回502错误。&lt;/p>
+&lt;p>查看linux系统文件描述符的方法：&lt;/p>
+&lt;p>[root@web001 ~]# sysctl -a | grep fs.file&lt;/p>
+&lt;p>fs.file-max = 789972&lt;/p>
+&lt;p>fs.file-nr = 510 0 789972&lt;/p>
+&lt;ol start="4">
+&lt;li>use epoll;&lt;/li>
+&lt;/ol>
+&lt;p>使用epoll 的I/O 模型&lt;/p>
+&lt;p>(&lt;/p>
+&lt;p>补充说明:&lt;/p>
+&lt;p>与apache相类，nginx针对不同的操作系统，有不同的事件模型&lt;/p>
+&lt;pre>&lt;code> A）标准事件模型
+Select、poll属于标准事件模型，如果当前系统不存在更有效的方法，nginx会选择select或poll
+B）高效事件模型
+&lt;/code>&lt;/pre>
+&lt;p>Kqueue：使用于 FreeBSD 4.1+, OpenBSD 2.9+, NetBSD 2.0 和 MacOS X. 使用双处理器的MacOS X系统使用kqueue可能会造成内核崩溃。
+Epoll: 使用于Linux内核2.6版本及以后的系统。
+/dev/poll：使用于 Solaris 7 11/99+, HP/UX 11.22+ (eventport), IRIX 6.5.15+ 和 Tru64 UNIX 5.1A+。&lt;/p>
+&lt;pre>&lt;code> Eventport：使用于 Solaris 10. 为了防止出现内核崩溃的问题， 有必要安装安全补丁。
+&lt;/code>&lt;/pre>
+&lt;p>)&lt;/p>
+&lt;ol start="5">
+&lt;li>worker_connections 65535;&lt;/li>
+&lt;/ol>
+&lt;p>每个进程允许的最多连接数， 理论上每台nginx 服务器的最大连接数为worker_processes*worker_connections。&lt;/p>
+&lt;ol start="6">
+&lt;li>keepalive_timeout 60;&lt;/li>
+&lt;/ol>
+&lt;p>keepalive 超时时间。&lt;/p>
+&lt;ol start="7">
+&lt;li>client_header_buffer_size 4k;&lt;/li>
+&lt;/ol>
+&lt;p>客户端请求头部的缓冲区大小，这个可以根据你的系统分页大小来设置，一般一个请求头的大小不会超过1k，不过由于一般系统分页都要大于1k，所以这里设置为分页大小。&lt;/p>
+&lt;p>分页大小可以用命令getconf PAGESIZE 取得。&lt;/p>
+&lt;p>[root@web001 ~]# getconf PAGESIZE&lt;/p>
+&lt;p>4096&lt;/p>
+&lt;p>但也有client_header_buffer_size超过4k的情况，但是client_header_buffer_size该值必须设置为“系统分页大小”的整倍数。&lt;/p>
+&lt;ol start="8">
+&lt;li>open_file_cache max=65535 inactive=60s;&lt;/li>
+&lt;/ol>
+&lt;p>这个将为打开文件指定缓存，默认是没有启用的，max 指定缓存数量，建议和打开文件数一致，inactive 是指经过多长时间文件没被请求后删除缓存。&lt;/p>
+&lt;ol start="9">
+&lt;li>open_file_cache_valid 80s;&lt;/li>
+&lt;/ol>
+&lt;p>这个是指多长时间检查一次缓存的有效信息。&lt;/p>
+&lt;ol start="10">
+&lt;li>open_file_cache_min_uses 1;&lt;/li>
+&lt;/ol>
+&lt;p>open_file_cache 指令中的inactive 参数时间内文件的最少使用次数，如果超过这个数字，文件描述符一直是在缓存中打开的，如上例，如果有一个文件在inactive 时间内一次没被使用，它将被移除。&lt;/p>
+&lt;h2 id="关于内核参数的优化">关于内核参数的优化：&lt;/h2>
+&lt;p>net.ipv4.tcp_max_tw_buckets = 6000&lt;/p>
+&lt;p>timewait 的数量，默认是180000。&lt;/p>
+&lt;p>net.ipv4.ip_local_port_range = 1024 65000&lt;/p>
+&lt;p>允许系统打开的端口范围。&lt;/p>
+&lt;p>net.ipv4.tcp_tw_recycle = 1&lt;/p>
+&lt;p>启用timewait 快速回收。&lt;/p>
+&lt;p>net.ipv4.tcp_tw_reuse = 1&lt;/p>
+&lt;p>开启重用。允许将TIME-WAIT sockets 重新用于新的TCP 连接。&lt;/p>
+&lt;p>net.ipv4.tcp_syncookies = 1&lt;/p>
+&lt;p>开启SYN Cookies，当出现SYN 等待队列溢出时，启用cookies 来处理。&lt;/p>
+&lt;p>net.core.somaxconn = 262144&lt;/p>
+&lt;p>web 应用中listen 函数的backlog 默认会给我们内核参数的net.core.somaxconn 限制到128，而nginx 定义的NGX_LISTEN_BACKLOG 默认为511，所以有必要调整这个值。&lt;/p>
+&lt;p>net.core.netdev_max_backlog = 262144&lt;/p>
+&lt;p>每个网络接口接收数据包的速率比内核处理这些包的速率快时，允许送到队列的数据包的最大数目。&lt;/p>
+&lt;p>net.ipv4.tcp_max_orphans = 262144&lt;/p>
+&lt;p>系统中最多有多少个TCP 套接字不被关联到任何一个用户文件句柄上。如果超过这个数字，孤儿连接将即刻被复位并打印出警告信息。这个限制仅仅是为了防止简单的DoS 攻击，不能过分依靠它或者人为地减小这个值，更应该增加这个值(如果增加了内存之后)。&lt;/p>
+&lt;p>net.ipv4.tcp_max_syn_backlog = 262144&lt;/p>
+&lt;p>记录的那些尚未收到客户端确认信息的连接请求的最大值。对于有128M 内存的系统而言，缺省值是1024，小内存的系统则是128。&lt;/p>
+&lt;p>net.ipv4.tcp_timestamps = 0&lt;/p>
+&lt;p>时间戳可以避免序列号的卷绕。一个1Gbps 的链路肯定会遇到以前用过的序列号。时间戳能够让内核接受这种“异常”的数据包。这里需要将其关掉。&lt;/p>
+&lt;p>net.ipv4.tcp_synack_retries = 1&lt;/p>
+&lt;p>为了打开对端的连接，内核需要发送一个SYN 并附带一个回应前面一个SYN 的ACK。也就是所谓三次握手中的第二次握手。这个设置决定了内核放弃连接之前发送SYN+ACK 包的数量。&lt;/p>
+&lt;p>net.ipv4.tcp_syn_retries = 1&lt;/p>
+&lt;p>在内核放弃建立连接之前发送SYN 包的数量。&lt;/p>
+&lt;p>net.ipv4.tcp_fin_timeout = 1&lt;/p>
+&lt;p>如 果套接字由本端要求关闭，这个参数决定了它保持在FIN-WAIT-2 状态的时间。对端可以出错并永远不关闭连接，甚至意外当机。缺省值是60 秒。2.2 内核的通常值是180 秒，3你可以按这个设置，但要记住的是，即使你的机器是一个轻载的WEB 服务器，也有因为大量的死套接字而内存溢出的风险，FIN- WAIT-2 的危险性比FIN-WAIT-1 要小，因为它最多只能吃掉1.5K 内存，但是它们的生存期长些。&lt;/p>
+&lt;p>net.ipv4.tcp_keepalive_time = 30&lt;/p>
+&lt;p>当keepalive 起用的时候，TCP 发送keepalive 消息的频度。缺省是2 小时。&lt;/p>
+&lt;h2 id="下面贴一个完整的内核优化设置">下面贴一个完整的内核优化设置:&lt;/h2>
+&lt;p>vi /etc/sysctl.conf CentOS5.5中可以将所有内容清空直接替换为如下内容:&lt;/p>
+&lt;p>net.ipv4.ip_forward = 0
+net.ipv4.conf.default.rp_filter = 1
+net.ipv4.conf.default.accept_source_route = 0
+kernel.sysrq = 0
+kernel.core_uses_pid = 1
+net.ipv4.tcp_syncookies = 1
+kernel.msgmnb = 65536
+kernel.msgmax = 65536
+kernel.shmmax = 68719476736
+kernel.shmall = 4294967296
+net.ipv4.tcp_max_tw_buckets = 6000
+net.ipv4.tcp_sack = 1
+net.ipv4.tcp_window_scaling = 1
+net.ipv4.tcp_rmem = 4096 87380 4194304
+net.ipv4.tcp_wmem = 4096 16384 4194304
+net.core.wmem_default = 8388608
+net.core.rmem_default = 8388608
+net.core.rmem_max = 16777216
+net.core.wmem_max = 16777216
+net.core.netdev_max_backlog = 262144
+net.core.somaxconn = 262144
+net.ipv4.tcp_max_orphans = 3276800
+net.ipv4.tcp_max_syn_backlog = 262144
+net.ipv4.tcp_timestamps = 0
+net.ipv4.tcp_synack_retries = 1
+net.ipv4.tcp_syn_retries = 1
+net.ipv4.tcp_tw_recycle = 1
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_mem = 94500000 915000000 927000000
+net.ipv4.tcp_fin_timeout = 1
+net.ipv4.tcp_keepalive_time = 30
+net.ipv4.ip_local_port_range = 1024 65000&lt;/p>
+&lt;p>使配置立即生效可使用如下命令：
+/sbin/sysctl -p&lt;/p>
+&lt;h2 id="下面是关于系统连接数的优化">下面是关于系统连接数的优化&lt;/h2>
+&lt;p>linux 默认值 open files 和 max user processes 为 1024&lt;/p>
+&lt;pre>&lt;code>ulimit -n
+&lt;/code>&lt;/pre>&lt;p>1024&lt;/p>
+&lt;pre>&lt;code>ulimit –u
+&lt;/code>&lt;/pre>&lt;p>1024&lt;/p>
+&lt;p>问题描述： 说明 server 只允许同时打开 1024 个文件，处理 1024 个用户进程&lt;/p>
+&lt;p>使用ulimit -a 可以查看当前系统的所有限制值，使用ulimit -n 可以查看当前的最大打开文件数。&lt;/p>
+&lt;p>新装的linux 默认只有1024 ，当作负载较大的服务器时，很容易遇到error: too many open files 。因此，需要将其改大。&lt;/p>
+&lt;p>解决方法：&lt;/p>
+&lt;p>使用 ulimit –n 65535 可即时修改，但重启后就无效了。（注ulimit -SHn 65535 等效 ulimit -n 65535 ，-S 指soft ，-H 指hard)&lt;/p>
+&lt;p>有如下三种修改方式：&lt;/p>
+&lt;ol>
+&lt;li>在/etc/rc.local 中增加一行 ulimit -SHn 65535&lt;/li>
+&lt;li>在/etc/profile 中增加一行 ulimit -SHn 65535&lt;/li>
+&lt;li>在/etc/security/limits.conf 最后增加：&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>soft nofile 65535&lt;/li>
+&lt;li>hard nofile 65535&lt;/li>
+&lt;li>soft nproc 65535&lt;/li>
+&lt;li>hard nproc 65535&lt;/li>
+&lt;/ul>
+&lt;p>具体使用哪种，在 CentOS 中使用第1 种方式无效果，使用第3 种方式有效果，而在Debian 中使用第2 种有效果&lt;/p>
+&lt;pre>&lt;code>ulimit -n
+&lt;/code>&lt;/pre>&lt;p>65535&lt;/p>
+&lt;pre>&lt;code>ulimit -u
+&lt;/code>&lt;/pre>&lt;p>65535&lt;/p>
+&lt;p>备注：ulimit 命令本身就有分软硬设置，加-H 就是硬，加-S 就是软默认显示的是软限制&lt;/p>
+&lt;p>soft 限制指的是当前系统生效的设置值。 hard 限制值可以被普通用户降低。但是不能增加。 soft 限制不能设置的比 hard 限制更高。 只有 root 用户才能够增加 hard 限制值。&lt;/p>
+&lt;h2 id="下面是一个简单的nginx-配置文件">下面是一个简单的nginx 配置文件：&lt;/h2>
+&lt;p>user www www;
+worker_processes 8;
+worker_cpu_affinity 00000001 00000010 00000100 00001000 00010000 00100000
+01000000;
+error_log /www/log/nginx_error.log crit;
+pid /usr/local/nginx/nginx.pid;
+worker_rlimit_nofile 204800;
+events
+{
+use epoll;
+worker_connections 204800;
+}
+http
+{
+include mime.types;
+default_type application/octet-stream;
+charset utf-8;
+server_names_hash_bucket_size 128;
+client_header_buffer_size 2k;
+large_client_header_buffers 4 4k;
+client_max_body_size 8m;
+sendfile on;
+tcp_nopush on;
+keepalive_timeout 60;
+fastcgi_cache_path /usr/local/nginx/fastcgi_cache levels=1:2
+keys_zone=TEST:10m
+inactive=5m;
+fastcgi_connect_timeout 300;
+fastcgi_send_timeout 300;
+fastcgi_read_timeout 300;
+fastcgi_buffer_size 4k;
+fastcgi_buffers 8 4k;
+fastcgi_busy_buffers_size 8k;
+fastcgi_temp_file_write_size 8k;
+fastcgi_cache TEST;
+fastcgi_cache_valid 200 302 1h;
+fastcgi_cache_valid 301 1d;
+fastcgi_cache_valid any 1m;
+fastcgi_cache_min_uses 1;
+fastcgi_cache_use_stale error timeout invalid_header http_500;
+open_file_cache max=204800 inactive=20s;
+open_file_cache_min_uses 1;
+open_file_cache_valid 30s;
+tcp_nodelay on;
+gzip on;
+gzip_min_length 1k;
+gzip_buffers 4 16k;
+gzip_http_version 1.0;
+gzip_comp_level 2;
+gzip_types text/plain application/x-javascript text/css application/xml;
+gzip_vary on;
+server
+{
+listen 8080;
+server_name backup.aiju.com;
+index index.php index.htm;
+root /www/html/;
+location /status
+{
+stub_status on;
+}
+location ~ .&lt;em>.(php|php5)?$
+{
+fastcgi_pass 127.0.0.1:9000;
+fastcgi_index index.php;
+include fcgi.conf;
+}
+location ~ .&lt;/em>.(gif|jpg|jpeg|png|bmp|swf|js|css)$
+{
+expires 30d;
+}
+log_format access &amp;lsquo;$remote_addr &amp;ndash; $remote_user [$time_local] &amp;ldquo;$request&amp;rdquo; '
+&amp;lsquo;$status $body_bytes_sent &amp;ldquo;$http_referer&amp;rdquo; '
+&amp;lsquo;&amp;ldquo;$http_user_agent&amp;rdquo; $http_x_forwarded_for&amp;rsquo;;
+access_log /www/log/access.log access;
+}
+}&lt;/p>
+&lt;h2 id="关于fastcgi-的几个指令">关于FastCGI 的几个指令：&lt;/h2>
+&lt;p>fastcgi_cache_path /usr/local/nginx/fastcgi_cache levels=1:2 keys_zone=TEST:10minactive=5m;&lt;/p>
+&lt;p>这个指令为FastCGI 缓存指定一个路径，目录结构等级，关键字区域存储时间和非活动删除时间。&lt;/p>
+&lt;p>fastcgi_connect_timeout 300;&lt;/p>
+&lt;p>指定连接到后端FastCGI 的超时时间。&lt;/p>
+&lt;p>fastcgi_send_timeout 300;&lt;/p>
+&lt;p>向FastCGI 传送请求的超时时间，这个值是指已经完成两次握手后向FastCGI 传送请求的超时时间。&lt;/p>
+&lt;p>fastcgi_read_timeout 300;&lt;/p>
+&lt;p>接收FastCGI 应答的超时时间，这个值是指已经完成两次握手后接收FastCGI 应答的超时时间。&lt;/p>
+&lt;p>fastcgi_buffer_size 4k;&lt;/p>
+&lt;p>指定读取FastCGI 应答第一部分需要用多大的缓冲区，一般第一部分应答不会超过1k，由于页面大小为4k，所以这里设置为4k。&lt;/p>
+&lt;p>fastcgi_buffers 8 4k;&lt;/p>
+&lt;p>指定本地需要用多少和多大的缓冲区来缓冲FastCGI 的应答。&lt;/p>
+&lt;p>fastcgi_busy_buffers_size 8k;&lt;/p>
+&lt;p>这个指令我也不知道是做什么用，只知道默认值是fastcgi_buffers 的两倍。&lt;/p>
+&lt;p>fastcgi_temp_file_write_size 8k;&lt;/p>
+&lt;p>在写入fastcgi_temp_path 时将用多大的数据块，默认值是fastcgi_buffers 的两倍。&lt;/p>
+&lt;p>fastcgi_cache TEST&lt;/p>
+&lt;p>开启FastCGI 缓存并且为其制定一个名称。个人感觉开启缓存非常有用，可以有效降低CPU 负载，并且防止502 错误。&lt;/p>
+&lt;p>fastcgi_cache_valid 200 302 1h;
+fastcgi_cache_valid 301 1d;
+fastcgi_cache_valid any 1m;&lt;/p>
+&lt;p>为指定的应答代码指定缓存时间，如上例中将200，302 应答缓存一小时，301 应答缓存1 天，其他为1 分钟。&lt;/p>
+&lt;p>fastcgi_cache_min_uses 1;&lt;/p>
+&lt;p>缓存在fastcgi_cache_path 指令inactive 参数值时间内的最少使用次数，如上例，如果在5 分钟内某文件1 次也没有被使用，那么这个文件将被移除。&lt;/p>
+&lt;p>fastcgi_cache_use_stale error timeout invalid_header http_500;&lt;/p>
+&lt;p>不知道这个参数的作用，猜想应该是让nginx 知道哪些类型的缓存是没用的。以上为nginx 中FastCGI 相关参数，另外，FastCGI 自身也有一些配置需要进行优化，如果你使用php-fpm 来管理FastCGI，可以修改配置文件中的以下值：&lt;/p>
+&lt;p>&lt;value name="max_children">60&lt;/value>&lt;/p>
+&lt;p>同时处理的并发请求数，即它将开启最多60 个子线程来处理并发连接。&lt;/p>
+&lt;p>&lt;value name="rlimit_files">102400&lt;/value>&lt;/p>
+&lt;p>最多打开文件数。&lt;/p>
+&lt;p>&lt;value name="max_requests">204800&lt;/value>&lt;/p>
+&lt;p>每个进程在重置之前能够执行的最多请求数。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/nginx/">nginx</category></item><item><title>linux用extundelete恢复ext2、ext3、ext4下rm -rf误删除的数据</title><link>https://blog.wxchat.xyz/posts/linux%E7%94%A8extundelete%E6%81%A2%E5%A4%8Dext2ext3ext4%E4%B8%8Brm-rf%E8%AF%AF%E5%88%A0%E9%99%A4%E7%9A%84%E6%95%B0%E6%8D%AE/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux%E7%94%A8extundelete%E6%81%A2%E5%A4%8Dext2ext3ext4%E4%B8%8Brm-rf%E8%AF%AF%E5%88%A0%E9%99%A4%E7%9A%84%E6%95%B0%E6%8D%AE/</guid><pubDate>Tue, 12 May 2015 23:40:20 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>国外的Linux系统管理员守则中有这么一条：“慎用 rm -rf 命令，除非你知道此命令所带来的后果“&lt;/p>
+&lt;p>Linux下删除文件并不是真实的删除磁盘分区中的文件，而是将文件的inode节点中的扇区指针清除，同时释放这些数据对应的数据块，当释放的数据块被系统重新分配时，那些被删除的数据就会被覆盖，所以误删除数据后，应马上卸载文件所在的分区。
+每个文件有inode和block组成，inode是文件系统组成的最基本单元，它保存着文件的基本属性(大小、权限、属主组等)和存放的位置信息。而block用来存储数据。类似key-value，inode就是key，block对应value，通过key查找key对应的value。类似python的字典。&lt;/p>
+&lt;h2 id="查看根目录的inode值">查看根目录的inode值&lt;/h2>
+&lt;pre>&lt;code>ls -id /
+2 /
+&lt;/code>&lt;/pre>&lt;p>一般”根”目录的inode值为2,一个分区挂载到一个目录下时，这个”根”目录的inode值为2&lt;/p>
+&lt;pre>&lt;code>mount /dev/sdb2 /mnt
+ls -id /mnt
+2 /mnt
+&lt;/code>&lt;/pre>&lt;h2 id="安装extundelete">安装extundelete&lt;/h2>
+&lt;h3 id="下载extundelete">下载extundelete&lt;/h3>
+&lt;pre>&lt;code>wget http://ncu.dl.sourceforge.net/project/extundelete/extundelete/0.2.0/extundelete-0.2.0.tar.bz2
+&lt;/code>&lt;/pre>&lt;h3 id="所需依赖包">所需依赖包&lt;/h3>
+&lt;pre>&lt;code>yum -y install e2fsprogs e2fsprogs-libs e2fsprogs-devel
+&lt;/code>&lt;/pre>&lt;h3 id="编译安装extundelte">编译安装extundelte&lt;/h3>
+&lt;pre>&lt;code># tar jxvf extundelete-0.2.0.tar.bz2
+# cd extundelte-0.2.0
+# ./configure
+# make; make install
+&lt;/code>&lt;/pre>&lt;h2 id="用extundelete恢复文件">用extundelete恢复文件&lt;/h2>
+&lt;h3 id="模拟数据误删除环境">模拟数据误删除环境&lt;/h3>
+&lt;pre>&lt;code># mkdir /data
+# mkfs.ext4 /dev/sdb2
+# mount /dev/sdb2 /data
+# cp /etc/hosts /data/
+# mkdir /data/test
+# echo &amp;quot;extundelete test&amp;quot; &amp;gt; /data/test/geek.txt
+# md5sum hosts
+#获取文件校验码
+54fb6627dbaa37721048e4549db3224d hosts
+# md5sum test/geek.txt
+eb42e4b3f953ce00e78e11bf50652a80 test/geek.txt
+# rm -fr /data/*
+&lt;/code>&lt;/pre>&lt;h3 id="卸载磁盘分区">卸载磁盘分区&lt;/h3>
+&lt;pre>&lt;code> umount /dev/sdb2
+&lt;/code>&lt;/pre>&lt;h3 id="查询恢复数据信息">查询恢复数据信息&lt;/h3>
+&lt;pre>&lt;code>extundelete /dev/sdb2 --inode 2
+&lt;/code>&lt;/pre>&lt;p>&amp;hellip;..&lt;/p>
+&lt;pre>&lt;code>
+File name | Inode number | Deleted status
+Directory block 8657:
+. 2
+.. 2
+lost+found 11 Deleted
+hosts 12 Deleted
+test 130817 Deleted
+&lt;/code>&lt;/pre>&lt;p>上面标记为Deleted是已经删除的文件或目录&lt;/p>
+&lt;h2 id="具体操作">具体操作&lt;/h2>
+&lt;h3 id="开始恢复单个文件">开始恢复单个文件&lt;/h3>
+&lt;p>默认恢复到当前目录下的RECOVERED_FILES目录中去&lt;/p>
+&lt;pre>&lt;code> extundelete /dev/sdb2 --restore-file hosts
+&lt;/code>&lt;/pre>&lt;h3 id="恢复一个目录">恢复一个目录&lt;/h3>
+&lt;pre>&lt;code> extundelete /dev/sdb2 --restore-directory test/
+&lt;/code>&lt;/pre>&lt;h3 id="全部恢复">全部恢复&lt;/h3>
+&lt;pre>&lt;code> extundelete /dev/sdb2 --restore-all
+&lt;/code>&lt;/pre>&lt;h2 id="检测是否恢复成功">检测是否恢复成功&lt;/h2>
+&lt;pre>&lt;code># md5sum RECOVERED_FILES/hosts 获取文件校验码
+54fb6627dbaa37721048e4549db3224d RECOVERED_FILES/hosts
+# md5sum RECOVERED_FILES/test/geek.txt
+eb42e4b3f953ce00e78e11bf50652a80 RECOVERED_FILES/test/geek.txt
+&lt;/code>&lt;/pre>&lt;p>校验码与之前的完全一致。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/extundelete/">extundelete</category><category domain="https://blog.wxchat.xyz/tags/fdisk/">fdisk</category></item><item><title>Ghost 加载慢问题分析</title><link>https://blog.wxchat.xyz/posts/ghost-%E5%8A%A0%E8%BD%BD%E6%85%A2%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/ghost-%E5%8A%A0%E8%BD%BD%E6%85%A2%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/</guid><pubDate>Mon, 11 May 2015 01:52:45 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>Ghost 搭建完能正常访问，可是墙内访问实在太慢了，按F12打开Chrome 开发者工具可以看到主要是 &lt;a href="http://fonts.googleapis.com">http://fonts.googleapis.com&lt;/a> 这个访问使用了太长的时间。应该是GFW搞的鬼，使得 Google Fonts 服务也受影响了，Ghost 后台和默认主题都引用了 Google Fonts 服务，已至于每次打开自己的 Ghost 博客都很慢。&lt;/p>
+&lt;p>&lt;em>这样我们就知道了问题的关键，马上登陆服务器，进入ghost目录。&lt;/em>&lt;/p>
+&lt;pre>&lt;code> $ cd /data/www/ghost
+$ grep 'fonts.googleapis.com' -n --color -r .
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://blog.wxchat.xyz/content/images/2015/05/--_2015-05-11_14-04-18.png" alt="">
+&lt;em>使用sed删除相应的行&lt;/em>&lt;/p>
+&lt;pre>&lt;code> $ sudo sed -i '19d' ./content/themes/casper/default.hbs
+&lt;/code>&lt;/pre>
+&lt;p>上面修改的地方其实就是删除 Ghost 系统内引用的 Google Fonts 英文字体文件，这对于国内的用户丝毫没有影响，毕竟我们用的是 中文 嘛。&lt;/p>
+&lt;p>经过修改，Google Fonts 文件就被彻底清除了。然后重启 Ghost 系统，再登录你的博客看看吧！&lt;/p>
+&lt;pre>&lt;code> $ sudo -i
+$ pm2 restart ghost
+&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/ghost/">ghost</category><category domain="https://blog.wxchat.xyz/tags/google-fonts/">google fonts</category><category domain="https://blog.wxchat.xyz/tags/sed/">sed</category><category domain="https://blog.wxchat.xyz/tags/grep/">grep</category></item><item><title>保持文件原有排序去除重复行</title><link>https://blog.wxchat.xyz/posts/%E4%BF%9D%E6%8C%81%E6%96%87%E4%BB%B6%E5%8E%9F%E6%9C%89%E6%8E%92%E5%BA%8F%E5%8E%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E8%A1%8C/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/%E4%BF%9D%E6%8C%81%E6%96%87%E4%BB%B6%E5%8E%9F%E6%9C%89%E6%8E%92%E5%BA%8F%E5%8E%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E8%A1%8C/</guid><pubDate>Mon, 11 May 2015 00:41:42 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;p>通常如果我们想获取一个文件里不重复的行的时候，我们可以直接通过 sort -u 命令，先把文件排序，然后去掉连续的重复行就行。&lt;/p>
+&lt;p>可是，如果我们去掉重复行之后，还想保留文件原有的顺序，该怎么办呢？虽然 Linux 下有个看上去似乎很有用的命令叫 uniq，但事实上 uniq 命令仅仅只对连续的重复行有效。譬如我们有这样一个文件：&lt;/p>
+&lt;pre>&lt;code>$ cat file3
+AAAA
+FFFF
+BBBB
+BBBB
+CCCC
+AAAA
+FFFF
+DDDD
+&lt;/code>&lt;/pre>&lt;p>如果不排序，直接使用 uniq 命令是没有用的：&lt;/p>
+&lt;pre>&lt;code>$ uniq file3
+AAAA
+FFFF
+BBBB
+CCCC
+AAAA
+FFFF
+DDDD
+&lt;/code>&lt;/pre>&lt;p>使用 sort -u 的话，我们就丢失了文件原有的行的顺序了：&lt;/p>
+&lt;pre>&lt;code>$ sort -u file3
+AAAA
+BBBB
+CCCC
+DDDD
+FFFF
+&lt;/code>&lt;/pre>&lt;p>sort 和 uniq 一起用，和 sort -u 效果是一样的：&lt;/p>
+&lt;pre>&lt;code>$ sort file3 | uniq
+AAAA
+BBBB
+CCCC
+DDDD
+FFFF
+&lt;/code>&lt;/pre>&lt;p>一个终极的解决方案是使用 awk：&lt;/p>
+&lt;pre>&lt;code>$ awk ' !x[$0]++' file3
+AAAA
+FFFF
+BBBB
+CCCC
+DDDD
+&lt;/code>&lt;/pre>&lt;p>简要解释一下，awk 的基本执行流程是，对文件的每一行，做一个指定的逻辑判断，如果逻辑判断成立，则执行指定的命令；如果逻辑判断不成立，则直接跳过这一行。&lt;/p>
+&lt;p>我们这里写的 awk 命令是 !x[$0]++，意思是，首先创建一个 map 叫 x，然后用当前行的全文 $0 作为 map 的 key，到 map 中查找相应的 value，如果没找到，则整个表达式的值为真，可以执行之后的语句；如果找到了，则表达式的值为假，跳过这一行。由于表达式之后有 ++，因此如果某个 key 找不到对应的 value，该 ++ 操作会先把对应的 value 设成 0，然后再自增成 1，这样下次再遇到重复的行的时候，对应的 key 就能找到一个非 0 的 value 了。&lt;/p>
+&lt;p>我们前面说过，awk 的流程是先判断表达式，表达式为真的时候就执行语句，可是我们前面写的这个 awk 命令里只有表达式，没有语句，那我们执行什么呢？原来，当语句被省略的时候，awk 就执行默认的语句，即打印整个完整的当前行。就这样，我们通过这个非常简短的 awk 命令实现了去除重复行并保留原有文件顺序的功能。&lt;/p>
+&lt;p>&lt;a href="http://edyfox.codecarver.org/html/bash_unique_lines_no_sorting.html">引用&lt;/a>&lt;/p>
+&lt;p>本文部分翻译来自 &lt;a href="http://www.unixcl.com/">Jadu Saikia 的博客&lt;/a>，这个博客上有很多非常有用的小技巧，有空可以多看看。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/sed/">sed</category><category domain="https://blog.wxchat.xyz/tags/bash/">bash</category><category domain="https://blog.wxchat.xyz/tags/awk/">awk</category><category domain="https://blog.wxchat.xyz/tags/sort/">sort</category><category domain="https://blog.wxchat.xyz/tags/uniq/">uniq</category></item><item><title>安装配置Arch linux 相关</title><link>https://blog.wxchat.xyz/posts/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEarch-linux-%E7%9B%B8%E5%85%B3/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEarch-linux-%E7%9B%B8%E5%85%B3/</guid><pubDate>Sun, 10 May 2015 22:19:00 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="安装-linux-lts-软件包">安装 linux-lts 软件包&lt;/h2>
+&lt;p>&lt;em>小贴士: 强烈推荐安装linux-lts作为备用内核，因为默认安装的linux内核比较新，容易与其它软件发生冲突&lt;/em>&lt;/p>
+&lt;blockquote>
+&lt;p>linux-lts 是 Arch 官方提供的基于 Linux kernel 3.0 的长期支持内核。内核上游开发者针对此版本提供了长期支持，包括安全补丁和功能 backports。适用于需要长期支持的服务器环境用户，也可以将此内核作为新内核升级的后备内核。&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;code>$ sudo pacman -S linux-lts&lt;/code>&lt;/p>
+&lt;h2 id="配置启动">配置启动&lt;/h2>
+&lt;p>需要编辑 GRUB2 或 LILO 的启动加载项。&lt;br>
+以 GRUB2 为例：&lt;br>
+为了编辑/更新启动加载项，需要安装os-prober.&lt;br>
+安装后,再执行&lt;br>
+&lt;code>$ sudo grub-mkconfig -o /boot/grub/grub.cfg&lt;/code>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/archlinux/">archlinux</category><category domain="https://blog.wxchat.xyz/tags/grub/">grub</category></item><item><title>Linux dd</title><link>https://blog.wxchat.xyz/posts/linux-dd/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-dd/</guid><pubDate>Sun, 03 May 2015 23:09:39 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;blockquote>
+&lt;p>dd 是 Linux/UNIX 下的一个非常有用的命令，作用是用指定大小的块拷贝一个文件，并在拷贝的同时进行指定的转换。&lt;/p>
+&lt;/blockquote>
+&lt;p>常用：
+dd 命令生成文件test.data 大小为1024M&lt;br>
+&lt;code>$ dd if=/dev/zero of=test.data bs=1024M count=1&lt;/code>&lt;/p>
+&lt;h3 id="整盘数据备份与恢复">整盘数据备份与恢复&lt;/h3>
+&lt;p>将本地的/dev/sda1整盘备份到/dev/sda2&lt;br>
+&lt;code>$ dd if=/dev/sda1 of=/dev/sda2&lt;/code>&lt;br>
+将/dev/sda2全盘数据备份到指定路径的image文件 &lt;br>
+&lt;code>$ dd if=/dev/sda2 of=/path/to/image&lt;/code> &lt;br>
+备份/dev/hdx全盘数据，并利用gzip工具进行压缩，保存到指定路径
+&lt;code>$ dd if=/dev/hdx | gzip &amp;gt;/path/to/image.gz&lt;/code> &lt;br>
+将备份文件恢复到指定盘： &lt;br>
+&lt;code>$ dd if=/path/to/image of=/dev/hdx&lt;/code>&lt;br>
+将压缩的备份文件恢复到指定盘: &lt;br>
+&lt;code>$ gzip -dc /path/to/image.gz | dd of=/dev/hdx&lt;/code>&lt;/p>
+&lt;h3 id="利用netcat远程备份">利用netcat远程备份&lt;/h3>
+&lt;p>在源主机上执行此命令备份/dev/hda &lt;br>
+&lt;code>$ dd if=/dev/hda bs=16065b | netcat &amp;lt; targethost-IP &amp;gt; 1234&lt;/code>&lt;br>
+在目的主机上执行此命令来接收数据并写入/dev/hdc&lt;br>
+&lt;code>$ netcat -l -p 1234 | dd of=/dev/hdc bs=16065b&lt;/code> &lt;br>
+以下两条指令是目的主机指令的变化分别采用bzip2 gzip对数据进行压缩，并将备份文件保存在当前目录。&lt;/p>
+&lt;pre>&lt;code> $ netcat -l -p 1234 | bzip2 &amp;gt; partition.img
+$ netcat -l -p 1234 | gzip &amp;gt; partition.img
+&lt;/code>&lt;/pre>
+&lt;h3 id="备份mbr">备份MBR&lt;/h3>
+&lt;p>备份磁盘开始的512Byte大小的MBR信息到指定文件 &lt;br>
+&lt;code>$ dd if=/dev/hdx of=/path/to/image count=1 bs=512&lt;/code>&lt;br>
+将备份的MBR信息写到磁盘开始部分&lt;br>
+&lt;code>$ dd if=/path/to/image of=/dev/hdx&lt;/code>&lt;/p>
+&lt;h3 id="磁盘管理">磁盘管理&lt;/h3>
+&lt;p>&lt;em>#### 得到最恰当的block size&lt;/em>&lt;/p>
+&lt;pre>&lt;code> dd if=/dev/zero bs=1024 count=1000000 of=/root/1Gb.file
+dd if=/dev/zero bs=2048 count=500000 of=/root/1Gb.file
+dd if=/dev/zero bs=4096 count=250000 of=/root/1Gb.file
+dd if=/dev/zero bs=8192 count=125000 of=/root/1Gb.file
+&lt;/code>&lt;/pre>
+&lt;p>通过比较dd指令输出中所显示的命令执行时间，即可确定系统最佳的block size大小&lt;/p>
+&lt;p>&lt;em>#### 测试硬盘读写速度&lt;/em>&lt;/p>
+&lt;pre>&lt;code>$ dd if=/root/1Gb.file bs=64k | dd of=/dev/null
+$ dd if=/dev/zero of=/root/1Gb.file bs=1024 count=1000000
+&lt;/code>&lt;/pre>
+&lt;p>通过上两个命令输出的执行时间，可以计算出测试硬盘的读／写速度&lt;/p>
+&lt;p>&lt;em>#### 修复硬盘&lt;/em> &lt;br>
+&lt;code>$ dd if=/dev/sda of=/dev/sda&lt;/code> &lt;br>
+当硬盘较长时间（比如1，2年）放置不使用后，磁盘上会产生magnetic flux point。当磁头读到这些区域时会遇到困难，并可能导致I/O错误。当这种情况影响到硬盘的第一个扇区时，可能导致硬盘报废。上边的命令有可能使这些数据起死回生。且这个过程是安全，高效的。&lt;/p>
+&lt;h3 id="其他">其他&lt;/h3>
+&lt;p>&lt;em>#### 将软驱数据备份到当前目录的disk.img文件&lt;/em>&lt;br>
+&lt;code>dd if=/dev/fd0 of=disk.img count=1 bs=1440k&lt;/code>&lt;/p>
+&lt;p>&lt;em>#### 拷贝内存资料到硬盘&lt;/em> &lt;br>
+&lt;code>$ dd if=/dev/mem of=/root/mem.bin bs=1024&lt;/code>&lt;br>
+将内存里的数据拷贝到root目录下的mem.bin文件&lt;/p>
+&lt;p>&lt;em>#### 从光盘拷贝iso镜像&lt;/em>&lt;br>
+&lt;code>$ dd if=/dev/cdrom of=/root/cd.iso&lt;/code> &lt;br>
+拷贝光盘数据到root文件夹下，并保存为cd.iso文件&lt;/p>
+&lt;p>&lt;em>#### 增加Swap分区文件大小&lt;/em> &lt;br>
+&lt;code>$ dd if=/dev/zero of=/swapfile bs=1024 count=262144&lt;/code> &lt;br>
+创建一个足够大的文件（此处为256M）&lt;br>
+&lt;code>$ mkswap /swapfile&lt;/code>&lt;br>
+把这个文件变成swap文件 &lt;br>
+&lt;code>$ swapon /swapfile&lt;/code> &lt;br>
+启用这个swap文件&lt;br>
+&lt;code>$ /swapfile swap swap defaults 0 0 &lt;/code> &lt;br>
+在每次开机的时候自动加载swap文件, 需要在 /etc/fstab 文件中增加一行&lt;/p>
+&lt;p>&lt;em>#### 销毁磁盘数据&lt;/em> &lt;br>
+&lt;code>$ dd if=/dev/urandom of=/dev/hda1&lt;/code> &lt;br>
+利用随机的数据填充硬盘，在某些必要的场合可以用来销毁数据。执行此操作以后，/dev/hda1将无法挂载，创建和拷贝操作无法执行。&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category><category domain="https://blog.wxchat.xyz/tags/dd/">dd</category></item><item><title>Linux 加解密打包文件</title><link>https://blog.wxchat.xyz/posts/linux-%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%89%93%E5%8C%85%E6%96%87%E4%BB%B6/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/linux-%E5%8A%A0%E8%A7%A3%E5%AF%86%E6%89%93%E5%8C%85%E6%96%87%E4%BB%B6/</guid><pubDate>Thu, 30 Apr 2015 03:56:17 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="预备知识">预备知识&lt;/h2>
+&lt;blockquote>
+&lt;p>使用到的命令有tar,openssl,dd&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;code>$ mkdir test_dir; cd test_dir/ ; touch test.file; cd .. ; ll test_dir/&lt;/code>&lt;/p>
+&lt;p>-rw-r&amp;ndash;r&amp;ndash; 1 hcaijin hcaijin 0 4月 30 16:35 test.file&lt;/p>
+&lt;p>&lt;code>$ tar -zcvf - test_dir/ | openssl des3 -salt -k password | dd of=test_dir.tag&lt;/code>&lt;/p>
+&lt;p>test_dir/
+test_dir/test.file
+记录了0+1 的读入
+记录了0+1 的写出
+176字节(176 B)已复制，0.0114724 秒，15.3 kB/秒&lt;/p>
+&lt;p>&lt;code>$ dd if=test_dir.tag | openssl des3 -d -k password | tar -zxvf -&lt;/code>&lt;/p>
+&lt;p>记录了0+1 的读入
+记录了0+1 的写出
+176字节(176 B)已复制，0.000495166 秒，355 kB/秒
+test_dir/
+test_dir/test.file&lt;/p>
+&lt;blockquote>
+&lt;p>详细openssl 可查看帮助页&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;code>$ man openssl $ openssl enc -h &lt;/code>
+&lt;img src="https://blog.wxchat.xyz/content/images/2015/04/--_2015-04-30_17-51-29.png" alt="加密算法列表">&lt;/p>
+&lt;h2 id="openssl-命令详解">openssl 命令详解&lt;/h2>
+&lt;p>&lt;code> SYNOPSIS openssl enc -ciphername [-in filename] [-out filename] [-pass arg] [-e] [-d] [-a] [-A] [-k password] [-kfile filename] [-K key] [-iv IV] [-p] [-P] [-bufsize number] [-nopad] [-debug] 说明： -chipername选项：加密算法，Openssl支持的算法在上面已经列出了，你只需选择其中一种算法即可实现文件加密功能。 -in选项：输入文件，对于加密来说，输入的应该是明文文件；对于解密来说，输入的应该是加密的文件。该选项后面直接跟文件名。 -out选项：输出文件，对于加密来说，输出的应该是加密后的文件名；对于解密来说，输出的应该是明文文件名。 -pass选项：选择输入口令的方式，输入源可以是标准输入设备，命令行输入，文件、变量等。 -e选项：实现加密功能（不使用-d选项的话默认是加密选项）。 -d选项：实现解密功能。 -a和-A选项：对文件进行BASE64编解码操作。 -K选项：手动输入加密密钥（不使用该选项，Openssl会使用口令自动提取加密密钥）。 -IV选项：输入初始变量（不使用该选项，Openssl会使用口令自动提取初始变量）。 -salt选项：是否使用盐值，默认是使用的。 -p选项：打印出加密算法使用的加密密钥。&lt;/code>&lt;/p>
+&lt;h2 id="加密">加密&lt;/h2>
+&lt;blockquote>
+&lt;p>举例：&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;code>$ openssl enc -aes-128-cbc -in pacman.log -out pacman.log.aes &lt;/code> &lt;br>
+enter aes-128-cbc encryption password: **********************
+Verifying - enter aes-128-cbc encryption password: *************************
+&lt;em>以上执行成功，生成加密文件 pacman.log.base64，使用以下命令解密：&lt;/em>
+&lt;code>$ openssl enc -d -aes-128-cbc -in pacman.log.aes -out pacman.out.log &lt;/code>
+enter aes-128-cbc decryption password: ****************&lt;/p>
+&lt;blockquote>
+&lt;p>下面方法的好处是你可以把它写入到脚本中，自动完成加密功能，不使用pass选项默认系统会提示输入密码并且确认，是需要人工操作的。&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;code>$ openssl enc -aes-256-ecb -in pacman.log -out pacman.aes256.log -pass pass:123456 $ file pacman.aes256.log &lt;/code> &lt;br>
+&lt;em>pacman.aes256.log: data&lt;/em> &lt;br>
+&lt;code>$ openssl enc -d -aes-256-ecb -out pacman256.log -in pacman.aes256.log &lt;/code>&lt;br>
+enter aes-256-ecb decryption password:
+&lt;code>$ file pacman256.log &lt;/code> &lt;br>
+pacman256.log: UTF-8 Unicode text&lt;/p>
+&lt;p>&lt;em>&lt;strong>生成 pacman256.log 可以用file 看到文件解密为原来的类型了&lt;/strong>&lt;/em>&lt;/p></description><category domain="https://blog.wxchat.xyz/tags/openssl/">openssl</category><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category></item><item><title>安装 node.js ghost 相关总结</title><link>https://blog.wxchat.xyz/posts/%E5%AE%89%E8%A3%85-node-js-ghost-%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93/</link><guid isPermaLink="true">https://blog.wxchat.xyz/posts/%E5%AE%89%E8%A3%85-node-js-ghost-%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93/</guid><pubDate>Thu, 30 Apr 2015 02:49:04 +0000</pubDate><author>hcjonline@gmail.com (Vladimir)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright><description>&lt;h2 id="下载安装">下载安装&lt;/h2>
+&lt;blockquote>
+&lt;p>安装node.js 下载最新node.js 编译安装需要一段时间。&lt;/p>
+&lt;/blockquote>
+&lt;pre>&lt;code> $ wget http://nodejs.org/dist/node-latest.tar.gz
+$ tar -xzf node-latest.tar.gz
+$ cd node-v
+$ ./configure
+$ make
+$ sudo make install
+&lt;/code>&lt;/pre>
+&lt;h2 id="安装ghost">安装Ghost&lt;/h2>
+&lt;h3 id="安装扩展">安装扩展&lt;/h3>
+&lt;p>&lt;code>$ yum install gcc-c++&lt;/code>&lt;/p>
+&lt;h3 id="ghost下载安装">ghost下载，安装&lt;/h3>
+&lt;pre>&lt;code>$ sudo mkdir -p /data/www/
+$ cd /data/www/
+$ wget https://ghost.org/zip/ghost-latest.zip
+$ unzip -d ghost ghost-latest.zip
+$ cd /var/www/ghost
+$ sudo npm install --production
+&lt;/code>&lt;/pre>
+&lt;p>&lt;em>安装完成后用 npm start 命令启动开发者模式下的 Ghost，用于检查有没有安装成功。 成功了，Ghost会运行在本地局域网内 127.0.0.1:2368。如果是在电脑上安装的，用浏览器访问此地址即可预览 Ghost。&lt;/em>&lt;/p>
+&lt;h2 id="安装pm2">安装pm2&lt;/h2>
+&lt;blockquote>
+&lt;p>安装强大的进程守护程序“PM2”保证应用在开机以后自动启动&lt;/p>
+&lt;/blockquote>
+&lt;p>进入到/data/www/ghost，执行命令安装PM2：&lt;br>
+&lt;code>$ sudo npm install pm2 -g&lt;/code>&lt;/p>
+&lt;p>设置环境变量为“production”生产模式，“index.js”是程序启动的入口。最后给这个PM2的进程命名为&amp;quot;ghost&amp;rdquo; 执行下面的命令：&lt;br>
+&lt;code>$ NODE_ENV=production pm2 start index.js --name &amp;quot;ghost&amp;quot;&lt;/code>
+设置开机自动运行网站：&lt;br>
+&lt;code>$ pm2 startup centos $ pm2 save&lt;/code>&lt;br>
+&lt;em>可以执行 pm2 help 查看帮助。&lt;/em>&lt;/p>
+&lt;h2 id="配置nginx">配置nginx&lt;/h2>
+&lt;blockquote>
+&lt;p>配置 Nginx 的反向代理：新建一个 Nginx 代理配置文件,并将代理指向到本地的Ghost端口:&lt;/p>
+&lt;/blockquote>
+&lt;pre>&lt;code>$ sudo vim /etc/nginx/conf.d/ghost.conf`
+server {
+listen 80;
+server_name My-Ghost-Blog.com;
+location / {
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header Host $http_host;
+proxy_pass http://127.0.0.1:2368;
+}
+}
+&lt;/code>&lt;/pre>
+&lt;p>重新启动 Nginx 服务器.&lt;br>
+&lt;code>$ sudo service nginx restart&lt;/code>&lt;/p>
+&lt;h2 id="注意事项">注意事项&lt;/h2>
+&lt;blockquote>
+&lt;p>修改服务器时间，这样新增的文章才能显示正常的本地时间 。&lt;/p>
+&lt;/blockquote>
+&lt;pre>&lt;code>$ sudo yun install -y ntp
+$ sudo cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+&lt;/code>&lt;/pre></description><category domain="https://blog.wxchat.xyz/tags/nodejs/">nodejs</category><category domain="https://blog.wxchat.xyz/tags/ghost/">ghost</category><category domain="https://blog.wxchat.xyz/tags/linux/">linux</category></item></channel></rss>
